@@ -13,7 +13,7 @@ Agent 會：
 ## 方法摘要
 
 - **判斷與計算分離**：模型（或分析員）負責蒐集證據並對每個評估項目給出「機率 1–5」「衝擊 1–5」、建議等級與信心程度，**每則評估內容都須引用來源**；
-  程式以確定性規則計算 5×5 風險矩陣、對應至低／中／高三級、綜合研判、IHR 附件二計數與信心上限。
+  程式以確定性規則計算各項目結果（如原文章：境外移入、社區流行等列為**發生機率**之低／中／高，衝擊另列一列）、另列之「矩陣風險（機率×衝擊）」、綜合研判（取最高矩陣風險）、IHR 附件二計數與信心上限。
   建議與計算不一致時，報告**並列呈現**並提出警告，不會靜默覆寫。
 - **評估表格式**沿用疾管署《疫情報導》（茲卡 2016、SFTS 2023、COVID-19 2020）：評估項目／評估內容／風險等級定義／評估結果，含分層結果（如季節、地區、族群）。
 - **新聞查證**採事件型監測（EBS／EIOS）之分流與查證概念，來源分 4 級（官方衛生機關/國際組織 > 同儕審查文獻 > 主流媒體 > 社群/未知），並記錄每個來源之實際取得方式（全文／搜尋摘要／未取得）。
@@ -21,6 +21,16 @@ Agent 會：
 - **決策支援**：最佳／最可能／最壞情境、升降級觸發指標、決策選項比較（優缺點、主責單位、時程）、再評估日期。
 
 完整方法、各架構對應方式與引用見 [`docs/methodology.md`](docs/methodology.md)（含各參考文件是否實際取得原文之說明）。
+
+## 網路需求
+
+完整流程需能連線至：
+
+- Claude API：`api.anthropic.com`（API 路徑；查證與證據蒐集使用 Anthropic 伺服器端之 web_search／web_fetch，由 Anthropic 端代為連線）
+- Claude Code 技能路徑則由執行環境直接連線，建議允許：`www.cdc.gov.tw`、`nidss.cdc.gov.tw`、`www.who.int`、`cdn.who.int`、`iris.who.int`、`apps.who.int`、`www.ecdc.europa.eu`、`www.cdc.gov`、`www.gov.uk`、`assets.publishing.service.gov.uk`、`pubmed.ncbi.nlm.nih.gov`、`pmc.ncbi.nlm.nih.gov`、`doi.org`、`promedmail.org`，以及新聞來源網站
+- 輸入為網址時，`epi-risk assess` 會由本機下載該網址
+
+**開發環境說明**：本專案開發時之執行環境僅能連線 `who.int` 與 `cdc.gov.tw`。因此 ECDC 操作工具、UKHSA HAIRS、IHR 附件二原文、Nauta 等（2025）之定義未能取得原文，僅依搜尋結果摘要整理並改寫（見 `docs/methodology.md` 第 1 節），**正式採用前請以原文核對**。
 
 ## 安裝
 
@@ -74,7 +84,7 @@ epi-risk render assessment.json -o report.html
 epi-risk serve --port 8765                   # 本機網頁介面：上傳檔案／貼上文字或網址 → 進度 → 報告
 ```
 
-`serve` 亦可直接上傳已完成之 `assessment.json` 只產出報告（不需 API）。介面預設僅綁定 127.0.0.1，未設驗證機制，請勿開放於共用網路。
+`serve` 亦可直接上傳已完成之 `assessment.json` 只產出報告（不需 API）；單次上傳上限 20 MB。介面預設僅綁定 127.0.0.1，未設驗證機制，請勿開放於共用網路。
 
 ## 報告內容（依序）
 

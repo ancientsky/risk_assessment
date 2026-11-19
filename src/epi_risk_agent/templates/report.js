@@ -69,7 +69,7 @@
   });
 
   /* ---------- what-if (試算) -------------------------------------------- */
-  var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3;
+  var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3, P3 = data.probTo3;
   var ORDER = { "低": 0, "中": 1, "高": 2, "極高": 3 };
   var items = data.items;
   var trial = {};
@@ -85,7 +85,8 @@
       if (it.kind === "衝擊") { res[it.id] = { level: I3[String(s.i)], matrix: null, p: null, i: s.i }; return; }
       var ii = s.i == null ? shared : s.i;
       var m = M[String(s.p)][String(ii)];
-      res[it.id] = { level: M3[m], matrix: m, p: s.p, i: ii };
+      // item result = probability of occurrence alone (article convention); P x I kept as matrix risk
+      res[it.id] = { level: P3[String(s.p)], matrix: m, p: s.p, i: ii };
       if (!best || ORDER[m] > ORDER[best.matrix] || (ORDER[m] === ORDER[best.matrix] && s.p > best.p)) best = { matrix: m, p: s.p, i: ii, id: it.id };
     });
     return { items: res, overall: best ? { level: M3[best.matrix], matrix: best.matrix, from: best.id } : null };
@@ -143,17 +144,32 @@
     ["項目", "正式結果", "試算結果", "變化"].forEach(function (h) { var th = el("th", null, h); th.scope = "col"; hr.appendChild(th); });
     thead.appendChild(hr); tbl.appendChild(thead);
     var tb = el("tbody");
-    function row(name, offLv, trLv) {
+    function cell(r, label) {
+      var td = el("td");
+      if (label) td.appendChild(el("span", "small muted", label + " "));
+      td.appendChild(badge(r.level));
+      if (r.matrix) { td.appendChild(el("span", "small", " 矩陣風險 ")); td.appendChild(badge(r.matrix)); }
+      return td;
+    }
+    function change(a, b, what) {
+      var d = ORDER[b] - ORDER[a];
+      return d > 0 ? what + "▲" : d < 0 ? what + "▼" : "";
+    }
+    function row(name, off, trl, label) {
       var tr = el("tr");
       tr.appendChild(el("td", null, name));
-      var a = el("td"); a.appendChild(badge(offLv)); tr.appendChild(a);
-      var b = el("td"); b.appendChild(badge(trLv)); tr.appendChild(b);
-      var d = ORDER[trLv] - ORDER[offLv];
-      tr.appendChild(el("td", "delta", d > 0 ? "▲ 升高" : d < 0 ? "▼ 降低" : "＝ 不變"));
+      tr.appendChild(cell(off, label));
+      tr.appendChild(cell(trl, label));
+      var parts = [change(off.level, trl.level, label || "結果")];
+      if (off.matrix && trl.matrix) parts.push(change(off.matrix, trl.matrix, "矩陣風險"));
+      var txt = parts.filter(Boolean).join("　");
+      tr.appendChild(el("td", "delta", txt || "＝ 不變"));
       tb.appendChild(tr);
     }
-    items.forEach(function (it) { row(it.n + ". " + it.name, official.items[it.id].level, res.items[it.id].level); });
-    if (res.overall && official.overall) row("綜合研判", official.overall.level, res.overall.level);
+    items.forEach(function (it) {
+      row(it.n + ". " + it.name, official.items[it.id], res.items[it.id], it.kind === "衝擊" ? "衝擊" : "機率");
+    });
+    if (res.overall && official.overall) row("綜合研判", { level: official.overall.level }, { level: res.overall.level }, "");
     tbl.appendChild(tb);
     out.appendChild(el("p", "small", "以下為試算，非正式評估結果。正式結果請見上方風險評估表。"));
     out.appendChild(tbl);

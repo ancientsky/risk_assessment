@@ -61,7 +61,10 @@ def test_example_audit(data):
     assert [c.passes_rules for c in au.claims] == [True] * 5
     r1 = next(i for i in au.items if i.item_id == "R1")
     assert r1.impact_inherited and r1.impact == 4
-    assert r1.strata_computed[1]["computed_level"] == "中"
+    # high-exposure stratum: probability 2 -> 低, but matrix risk 2x4 -> 中 (surfaced, not hidden)
+    assert r1.strata_computed[1]["computed_level"] == "低"
+    assert r1.strata_computed[1]["matrix_level"] == "中" and r1.strata_computed[1]["matrix_level3"] == "中"
+    assert any(i.code == "stratum_higher" for i in au.issues)
     assert sum(1 for i in au.issues if i.severity == "error") == 0
 
 
@@ -79,6 +82,7 @@ def test_impact_change_propagates_to_inheriting_items(data):
     au = audit(Assessment.model_validate(data))
     r1 = next(i for i in au.items if i.item_id == "R1")
     assert (r1.probability, r1.impact, r1.matrix_level) == (3, 5, "高")
+    assert r1.computed_level == "中"  # item result = probability alone
 
 
 def test_mismatch_is_surfaced_not_overwritten(data):
@@ -204,3 +208,67 @@ def test_input_audit_is_ignored_and_recomputed(data):
 def test_reassessment_date_must_be_future(data):
     data["reassessment_date"] = "2026-11-01"
     assert any(i.code == "reassessment_past" for i in audit(Assessment.model_validate(data)).issues)
+
+
+# ---------------------------------------------------------------------------
+# Regression: the three Taiwan CDC 疫情報導 risk tables are reproduced.
+# Article 3-level judgments are encoded on the 1-5 scales as 低=2, 中=3, 高=4.
+# ---------------------------------------------------------------------------
+
+L = {"低": 2, "中": 3, "高": 4}
+
+
+def _prob_item(iid, name, level, strata=()):
+    return {"id": iid, "name": name, "kind": "機率", "question": name + "？",
+            "evidence": [{"text": "x", "source_ids": ["S2"]}],
+            "level_definitions": {"低": "a", "中": "b", "高": "c"},
+            "probability": L[level], "impact": None, "proposed_level": level,
+            "strata": [{"name": n, "probability": L[lv], "proposed_level": lv} for n, lv in strata],
+            "confidence": "中", "confidence_reason": "x"}
+
+
+def _impact_item(iid, level, strata=()):
+    return {"id": iid, "name": "衝擊", "kind": "衝擊", "question": "衝擊？",
+            "evidence": [{"text": "x", "source_ids": ["S2"]}],
+            "level_definitions": {"低": "a", "中": "b", "高": "c"},
+            "probability": None, "impact": L[level], "proposed_level": level,
+            "strata": [{"name": n, "impact": L[lv], "proposed_level": lv} for n, lv in strata],
+            "confidence": "中", "confidence_reason": "x"}
+
+
+def _run(data, items, overall):
+    data["risk_items"] = items
+    data["overall"]["proposed_level"] = overall
+    au = audit(Assessment.model_validate(data))
+    return au, {ia.item_id: ia for ia in au.items}
+
+
+def test_article_covid19_2020(data):
+    au, it = _run(data, [_prob_item("R1", "境外移入風險", "高"), _prob_item("R2", "國內社區流行風險", "中"),
+                         _impact_item("R3", "高")], "高")
+    assert [it[k].computed_level for k in ("R1", "R2", "R3")] == ["高", "中", "高"]
+    assert all(ia.agrees for ia in au.items)
+    assert au.overall_computed_level == "高" and au.overall_agrees
+
+
+def test_article_sfts_2023(data):
+    au, it = _run(data, [_prob_item("R1", "境外移入風險（人類病例）", "低"), _prob_item("R2", "境外移入風險（感染動物）", "中"),
+                         _prob_item("R3", "國內社區流行風險", "低"), _prob_item("R4", "國內野外感染風險", "中"),
+                         _impact_item("R5", "中")], "中")
+    assert [it[k].computed_level for k in ("R1", "R2", "R3", "R4", "R5")] == ["低", "中", "低", "中", "中"]
+    assert all(ia.agrees for ia in au.items)
+    assert au.overall_computed_level == "中" and au.overall_agrees
+
+
+def test_article_zika_2016_items_and_strata(data):
+    au, it = _run(data, [
+        _prob_item("R1", "境外移入風險", "高"),
+        _prob_item("R2", "社區流行風險", "中", strata=[("登革熱非流行季", "低"), ("南高屏地區登革熱流行季期間", "中"),
+                                                    ("中北部登革熱流行季期間", "低")]),
+        _impact_item("R3", "高", strata=[("孕婦、胎兒及新生兒", "高"), ("孩童及一般民眾", "低")]),
+    ], "高")
+    assert it["R1"].computed_level == "高"
+    assert [s["computed_level"] for s in it["R2"].strata_computed] == ["低", "中", "低"]
+    assert [s["computed_level"] for s in it["R3"].strata_computed] == ["高", "低"]
+    assert all(ia.agrees for ia in au.items)
+    assert not any(i.code == "stratum_mismatch" for i in au.issues)

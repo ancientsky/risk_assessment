@@ -35,3 +35,28 @@ def test_multipart_parser():
     f = parse_multipart("multipart/form-data; boundary=XX", body)
     assert f["text"][1].decode() == "新聞"
     assert f["file"] == ("a.json", b"{}")
+
+
+def test_serve_rejects_oversized_upload(tmp_path):
+    import http.client
+    import threading
+    from http.server import ThreadingHTTPServer
+
+    from epi_risk_agent.serve import MAX_UPLOAD, make_handler
+
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(tmp_path))
+    t = threading.Thread(target=httpd.serve_forever, daemon=True)
+    t.start()
+    try:
+        conn = http.client.HTTPConnection("127.0.0.1", httpd.server_address[1], timeout=10)
+        conn.putrequest("POST", "/api/jobs")
+        conn.putheader("Content-Type", "multipart/form-data; boundary=XX")
+        conn.putheader("Content-Length", str(MAX_UPLOAD + 1))
+        conn.endheaders()
+        r = conn.getresponse()
+        body = json.loads(r.read().decode("utf-8"))
+        assert r.status == 413
+        assert "上限為 20 MB" in body["error"]
+    finally:
+        httpd.shutdown()
+        httpd.server_close()

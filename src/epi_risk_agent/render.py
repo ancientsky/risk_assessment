@@ -24,6 +24,7 @@ from .scoring import (
     MATRIX_TO_LEVEL3,
     MATRIX_VERSION,
     P_LABELS,
+    PROBABILITY_TO_LEVEL3,
     RISK_MATRIX,
     TIER_LABELS,
     apply_audit,
@@ -109,14 +110,18 @@ def build_context(a: Assessment) -> dict[str, Any]:
         items_view.append({"item": r, "audit": ia, "n": idx})
 
     rec_option = next((o for o in a.decision.options if o.recommended), None)
+    # strata whose matrix risk (P x I) exceeds the overall level must be surfaced in the BLUF
     higher_strata = []
+    order3 = {"低": 0, "中": 1, "高": 2}
     for iv in items_view:
-        if iv["item"].kind != "機率":  # impact strata are consequence levels, not risk levels
+        if iv["item"].kind != "機率":
             continue
         for st in iv["audit"].strata_computed:
-            lvl = st.get("computed_level") or st.get("proposed_level")
-            if lvl and {"低": 0, "中": 1, "高": 2}[lvl] > {"低": 0, "中": 1, "高": 2}[au.overall_computed_level]:
-                higher_strata.append({"item": iv["item"].name, "name": st["name"], "level": lvl})
+            m3 = st.get("matrix_level3")
+            if m3 and order3[m3] > order3[au.overall_computed_level]:
+                higher_strata.append({"item": iv["item"].name, "name": st["name"], "prob_level": st["computed_level"],
+                                      "matrix_level": st["matrix_level"], "level": m3,
+                                      "p": st["probability"], "i": st["impact"]})
 
     # chart data -------------------------------------------------------------
     cc = [c for c in a.international.country_counts if c.cases is not None]
@@ -127,6 +132,7 @@ def build_context(a: Assessment) -> dict[str, Any]:
         "matrix": {str(p): {str(i): RISK_MATRIX[p][i] for i in RISK_MATRIX[p]} for p in RISK_MATRIX},
         "matrixTo3": MATRIX_TO_LEVEL3,
         "impactTo3": {str(k): v for k, v in IMPACT_TO_LEVEL3.items()},
+        "probTo3": {str(k): v for k, v in PROBABILITY_TO_LEVEL3.items()},
         "pLabels": {str(k): v for k, v in P_LABELS.items()},
         "iLabels": {str(k): v for k, v in I_LABELS.items()},
         "levelClass": LEVEL_CLASS,
@@ -141,6 +147,7 @@ def build_context(a: Assessment) -> dict[str, Any]:
                 "inherit": iv["audit"].impact_inherited,
                 "computed": iv["audit"].computed_level,
                 "matrix": iv["audit"].matrix_level,
+                "matrix3": iv["audit"].matrix_level3,
                 "proposed": iv["item"].proposed_level,
                 "confidence": iv["audit"].effective_confidence,
             }

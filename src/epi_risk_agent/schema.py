@@ -208,7 +208,7 @@ class Stratum(StrictModel):
     name: str = Field(description="分層名稱，如：南高屏登革熱流行季、孕婦/胎兒")
     probability: Optional[int] = Field(default=None, ge=1, le=5)
     impact: Optional[int] = Field(default=None, ge=1, le=5)
-    proposed_level: Level3
+    proposed_level: Level3 = Field(description="此分層之評估結果（機率類項目為發生機率；衝擊項目為衝擊）")
     note: Optional[str] = None
 
 
@@ -225,7 +225,7 @@ class RiskItem(StrictModel):
         default=None, ge=1, le=5, description="衝擊 1–5；機率類項目若為 null，計算時沿用衝擊項目之分數"
     )
     impact_rationale: Optional[str] = None
-    proposed_level: Level3 = Field(description="評估者（LLM）建議之三級結果；與計算結果比對")
+    proposed_level: Level3 = Field(description="評估者建議之評估結果：機率類項目為『發生機率』之低/中/高（不含衝擊），衝擊項目為衝擊之低/中/高")
     strata: list[Stratum] = Field(default_factory=list)
     confidence: Confidence
     confidence_reason: str
@@ -349,8 +349,9 @@ class ItemAudit(StrictModel):
     probability: Optional[int]
     impact: Optional[int]
     impact_inherited: bool = False
-    matrix_level: Optional[MatrixLevel]
-    computed_level: Level3
+    matrix_level: Optional[MatrixLevel] = Field(description="矩陣風險（機率×衝擊），四級")
+    matrix_level3: Optional[Level3] = Field(default=None, description="矩陣風險對應三級")
+    computed_level: Level3 = Field(description="評估結果：機率類項目＝發生機率之三級；衝擊項目＝衝擊之三級")
     proposed_level: Level3
     agrees: bool
     stated_confidence: Confidence

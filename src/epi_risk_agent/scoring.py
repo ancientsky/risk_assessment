@@ -44,7 +44,9 @@ RISK_MATRIX: dict[int, dict[int, str]] = {
 # 4-level matrix output -> 3-level scale used by the Taiwan CDC articles.
 MATRIX_TO_LEVEL3 = {"低": "低", "中": "中", "高": "高", "極高": "高"}
 
-# Impact-only items (the 衝擊 row of the article tables): 5 -> 3 mapping.
+# Item-level 評估結果 (as in the Taiwan CDC article tables): probability items
+# show the probability of occurrence alone, the 衝擊 row shows impact alone.
+PROBABILITY_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"}
 IMPACT_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"}
 
 LEVEL3_ORDER = {"低": 0, "中": 1, "高": 2}
@@ -64,6 +66,10 @@ def matrix_level(p: int, i: int) -> str:
 
 def level3_from_matrix(level: str) -> str:
     return MATRIX_TO_LEVEL3[level]
+
+
+def level3_from_probability(p: int) -> str:
+    return PROBABILITY_TO_LEVEL3[p]
 
 
 def level3_from_impact(i: int) -> str:
@@ -280,20 +286,22 @@ def audit_items(a: Assessment, sources: dict[str, Source]) -> tuple[list[ItemAud
         eff, caps, uncited = confidence_caps(r, sources)
         strata_out: list[dict] = []
         if r.kind == "機率":
+            # Article convention: a probability item's 評估結果 is the probability
+            # of occurrence alone; P x I is reported separately as 矩陣風險.
             p = r.probability
             i = r.impact if r.impact is not None else shared_impact
             inherited = r.impact is None
             mlev = matrix_level(p, i) if (p is not None and i is not None) else None
-            comp = level3_from_matrix(mlev) if mlev else r.proposed_level
+            comp = level3_from_probability(p)
             for s in r.strata:
                 sp = s.probability or p
                 si = s.impact or i
+                st = {"name": s.name, "probability": sp, "impact": si, "computed_level": level3_from_probability(sp),
+                      "proposed_level": s.proposed_level, "matrix_level": None, "matrix_level3": None}
                 if sp and si:
-                    sm = matrix_level(sp, si)
-                    strata_out.append({"name": s.name, "probability": sp, "impact": si, "matrix_level": sm,
-                                       "computed_level": level3_from_matrix(sm), "proposed_level": s.proposed_level})
-                else:
-                    strata_out.append({"name": s.name, "computed_level": None, "proposed_level": s.proposed_level})
+                    st["matrix_level"] = matrix_level(sp, si)
+                    st["matrix_level3"] = level3_from_matrix(st["matrix_level"])
+                strata_out.append(st)
         else:
             p = None
             i = r.impact
@@ -306,6 +314,7 @@ def audit_items(a: Assessment, sources: dict[str, Source]) -> tuple[list[ItemAud
                                    "proposed_level": s.proposed_level})
         out.append(ItemAudit(
             item_id=r.id, probability=p, impact=i, impact_inherited=inherited, matrix_level=mlev,
+            matrix_level3=level3_from_matrix(mlev) if mlev else None,
             computed_level=comp, proposed_level=r.proposed_level, agrees=(comp == r.proposed_level),
             stated_confidence=r.confidence, effective_confidence=eff, confidence_caps=caps,
             uncited_bullets=uncited, strata_computed=strata_out,
@@ -368,7 +377,7 @@ def audit(a: Assessment) -> Audit:
     for ia in item_audits:
         if not ia.agrees:
             issues.append(Issue(severity="warning", code="level_mismatch",
-                                message=f"{names[ia.item_id]}：評估者建議「{ia.proposed_level}」，矩陣計算「{ia.computed_level}」（P={ia.probability}, I={ia.impact}）",
+                                message=f"{names[ia.item_id]}：評估者建議「{ia.proposed_level}」，規則對應「{ia.computed_level}」（{'機率' if ia.probability is not None else '衝擊'} {ia.probability if ia.probability is not None else ia.impact}）",
                                 path=f"risk_items[{ia.item_id}]"))
         if ia.effective_confidence != ia.stated_confidence:
             issues.append(Issue(severity="info", code="confidence_capped",
@@ -379,11 +388,6 @@ def audit(a: Assessment) -> Audit:
                 issues.append(Issue(severity="warning", code="stratum_mismatch",
                                     message=f"{names[ia.item_id]}／{st['name']}：建議「{st['proposed_level']}」，計算「{st['computed_level']}」",
                                     path=f"risk_items[{ia.item_id}]"))
-            if st.get("computed_level") and LEVEL3_ORDER[st["computed_level"]] > LEVEL3_ORDER[ia.computed_level]:
-                issues.append(Issue(severity="info", code="stratum_higher",
-                                    message=f"{names[ia.item_id]}：分層「{st['name']}」高於整體（{st['computed_level']} > {ia.computed_level}），決策摘要應明列",
-                                    path=f"risk_items[{ia.item_id}]"))
-
     prob_audits = [ia for ia in item_audits if ia.matrix_level is not None]
     if prob_audits:
         driver = max(prob_audits, key=lambda ia: (MATRIX_ORDER[ia.matrix_level], ia.probability or 0))
@@ -396,6 +400,13 @@ def audit(a: Assessment) -> Audit:
         overall_m = overall_p = overall_i = overall_from = None
         overall_comp = a.overall.proposed_level
     overall_agrees = overall_comp == a.overall.proposed_level
+    for ia in item_audits:
+        for st in ia.strata_computed:
+            m3 = st.get("matrix_level3")
+            if m3 and LEVEL3_ORDER[m3] > LEVEL3_ORDER[overall_comp]:
+                issues.append(Issue(severity="info", code="stratum_higher",
+                                    message=f"{names[ia.item_id]}：分層「{st['name']}」之矩陣風險（{st['matrix_level']}→{m3}）高於整體（{overall_comp}），決策摘要應明列",
+                                    path=f"risk_items[{ia.item_id}]"))
     if not overall_agrees:
         issues.append(Issue(severity="warning", code="overall_mismatch",
                             message=f"綜合研判：評估者建議「{a.overall.proposed_level}」，矩陣計算「{overall_comp}」（取最高之機率項目 {overall_from}）"))

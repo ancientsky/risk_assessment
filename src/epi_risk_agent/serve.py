@@ -24,7 +24,8 @@ from .ingest import IngestedNews, ingest, ingest_bytes, ingest_text
 from .render import render_html
 from .schema import Assessment
 
-MAX_UPLOAD = 30 * 1024 * 1024
+MAX_UPLOAD = 20 * 1024 * 1024  # 20 MB
+MAX_UPLOAD_MB = MAX_UPLOAD // (1024 * 1024)
 
 PAGE = """<!doctype html><html lang="zh-Hant-TW"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>疫情風險評估 AI Agent</title>
@@ -42,7 +43,7 @@ textarea{min-height:140px} button{font:inherit;padding:8px 18px;border-radius:8p
 <h1>疫情風險評估 AI Agent</h1>
 <p class="warn">產出內容為 AI 草稿，須經流行病學專業人員審閱。本介面僅供本機使用。</p>
 <form class="card" id="f">
-<label for="file">上傳新聞檔案（txt／md／html／pdf／圖片），或已完成之 assessment.json（僅產出報告）</label>
+<label for="file">上傳新聞檔案（txt／md／html／pdf／圖片，上限 20 MB），或已完成之 assessment.json（僅產出報告）</label>
 <input type="file" id="file" name="file">
 <label for="text">或貼上新聞文字</label><textarea id="text" name="text"></textarea>
 <label for="url">或輸入新聞網址</label><input type="url" id="url" name="url" placeholder="https://">
@@ -53,6 +54,8 @@ textarea{min-height:140px} button{font:inherit;padding:8px 18px;border-radius:8p
 </main><script>
 const f=document.getElementById('f');
 f.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(f);
+ const fl=document.getElementById('file').files[0];
+ if(fl&&fl.size>20*1024*1024){alert('檔案超過 20 MB 上限，請縮小檔案或改貼新聞網址／文字');return;}
  const st=document.getElementById('status'),log=document.getElementById('log'),link=document.getElementById('link');
  st.hidden=false;log.textContent='送出中…';link.textContent='';
  const r=await fetch('/api/jobs',{method:'POST',body:fd});const j=await r.json();
@@ -146,9 +149,16 @@ def make_handler(workdir: Path):
         def do_POST(self) -> None:  # noqa: N802
             if self.path != "/api/jobs":
                 return self._json(404, {"error": "not found"})
-            length = int(self.headers.get("Content-Length") or 0)
-            if length <= 0 or length > MAX_UPLOAD:
-                return self._json(400, {"error": "請提供檔案、文字或網址（上限 30MB）"})
+            try:
+                length = int(self.headers.get("Content-Length") or 0)
+            except ValueError:
+                length = 0
+            if length > MAX_UPLOAD:
+                # do not read the body; tell the user the limit plainly
+                self.close_connection = True
+                return self._json(413, {"error": f"上傳內容過大（約 {length / 1048576:.1f} MB），上限為 {MAX_UPLOAD_MB} MB；請縮小檔案或改貼新聞網址／文字"})
+            if length <= 0:
+                return self._json(400, {"error": "請提供檔案、文字或網址"})
             fields = parse_multipart(self.headers.get("Content-Type", ""), self.rfile.read(length))
             news: Optional[IngestedNews] = None
             assessment_json: Optional[bytes] = None

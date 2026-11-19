@@ -78,8 +78,8 @@
       <div class="sub muted">評估者建議與規則計算一致（{{ au.overall_proposed_level }}）。</div>
       {% endif %}
       {% if higher_strata %}
-      <div class="strata-hl"><div class="label">高於整體之分層結果</div>
-        <ul>{% for s in higher_strata %}<li>{{ s.item }}／{{ s.name }}：{{ level_badge(s.level) }}</li>{% endfor %}</ul></div>
+      <div class="strata-hl"><div class="label">矩陣風險高於整體之分層</div>
+        <ul>{% for s in higher_strata %}<li>{{ s.item }}／{{ s.name }}：發生機率 {{ level_badge(s.prob_level) }}，惟矩陣風險（機率 {{ s.p }} × 衝擊 {{ s.i }}）{{ level_badge(s.matrix_level) }}</li>{% endfor %}</ul></div>
       {% endif %}
     </div>
     <div class="bluf-body">
@@ -292,7 +292,7 @@
 <!-- 5. Risk table + matrix ============================================= -->
 <section id="sec-risk" class="card" aria-labelledby="h-risk">
   <h2 id="h-risk"><span class="secno">5</span>風險評估表</h2>
-  <p class="muted">格式依疾管署《疫情報導》風險評估表（評估項目／評估內容／風險等級定義／評估結果）。評估結果由機率（1–5）× 衝擊（1–5）經風險矩陣計算，再對應為低／中／高三級；評估者原始建議並列。</p>
+  <p class="muted">格式依疾管署《疫情報導》風險評估表（評估項目／評估內容／風險等級定義／評估結果）。與原文章相同，機率類項目（如境外移入、社區流行）之「評估結果」為<strong>發生機率</strong>（1–5 對應低／中／高），「衝擊」另列一列；另附「矩陣風險（機率×衝擊）」供參考並標示於下方矩陣。「綜合研判」才合併機率與衝擊：取各機率類項目之最高矩陣風險，對應為三級。評估者原始建議並列。</p>
   <div class="table-wrap">
   <table class="tbl risk-table">
     <caption class="sr-only">我國風險評估表</caption>
@@ -308,13 +308,15 @@
           <li><strong>中：</strong>{{ r.level_definitions["中"] }}</li>
           <li><strong>高：</strong>{{ r.level_definitions["高"] }}</li></ul></td>
         <td data-th="評估結果" class="result">
+          <div class="small muted">{{ "發生機率" if r.kind == "機率" else "衝擊" }}</div>
           <div>{{ level_badge(ia.computed_level, "lv-lg") }}</div>
           <div class="small">
-            {% if r.kind == "機率" %}機率 {{ ia.probability }}（{{ p_labels[ia.probability] }}）× 衝擊 {{ ia.impact }}（{{ i_labels[ia.impact] }}{% if ia.impact_inherited %}，沿用衝擊項目{% endif %}）<br>矩陣：{{ ia.matrix_level }} → {{ ia.computed_level }}
+            {% if r.kind == "機率" %}機率 {{ ia.probability }}（{{ p_labels[ia.probability] }}）→ {{ ia.computed_level }}
+            <div class="mrisk">矩陣風險（機率×衝擊）：{{ ia.probability }}×{{ ia.impact }}{% if ia.impact_inherited %}（衝擊沿用衝擊項目）{% endif %} → {{ level_badge(ia.matrix_level) }}</div>
             {% else %}衝擊 {{ ia.impact }}（{{ i_labels[ia.impact] }}）→ {{ ia.computed_level }}{% endif %}
           </div>
           {% if not ia.agrees %}<div class="flag flag-warn small"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>評估者建議「{{ ia.proposed_level }}」</div>{% endif %}
-          {% if ia.strata_computed %}<ul class="strata">{% for st in ia.strata_computed %}<li>{{ st.name }}：{{ level_badge(st.computed_level or st.proposed_level) }}{% if st.computed_level and st.computed_level != st.proposed_level %}<span class="muted small">（建議 {{ st.proposed_level }}）</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
+          {% if ia.strata_computed %}<ul class="strata">{% for st in ia.strata_computed %}<li>{{ st.name }}：{{ level_badge(st.computed_level or st.proposed_level) }}{% if st.computed_level and st.computed_level != st.proposed_level %}<span class="muted small">（建議 {{ st.proposed_level }}）</span>{% endif %}{% if st.matrix_level %}<span class="small">｜矩陣風險 {{ st.probability }}×{{ st.impact }} {{ level_badge(st.matrix_level) }}</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
           <div class="small">信心：<strong>{{ ia.effective_confidence }}</strong>{% if ia.effective_confidence != ia.stated_confidence %}<span class="muted">（原 {{ ia.stated_confidence }}，經規則調降）</span>{% endif %}</div>
           <details class="why small"><summary>判斷依據</summary>
             {% if r.probability_rationale %}<p><strong>機率：</strong>{{ r.probability_rationale }}</p>{% endif %}
@@ -327,7 +329,7 @@
     {% endfor %}
       <tr class="overall-row">
         <th scope="row" data-th="評估項目">綜合研判</th>
-        <td data-th="評估內容" colspan="2">{{ a.overall.summary }}<div class="small muted">計算方式：取各機率類項目之最高矩陣等級（本次由「{{ (a.risk_items | selectattr("id", "equalto", au.overall_probability_from) | first).name if au.overall_probability_from else "—" }}」決定）。</div></td>
+        <td data-th="評估內容" colspan="2">{{ a.overall.summary }}<div class="small muted">計算方式：綜合研判＝各機率類項目「矩陣風險（機率×衝擊）」之最高者，再對應三級（本次由「{{ (a.risk_items | selectattr("id", "equalto", au.overall_probability_from) | first).name if au.overall_probability_from else "—" }}」決定）。</div></td>
         <td data-th="評估結果" class="result">{{ level_badge(au.overall_computed_level, "lv-lg") }}<div class="small">信心：<strong>{{ au.overall_confidence }}</strong></div>
           {% if not au.overall_agrees %}<div class="flag flag-warn small">評估者建議「{{ au.overall_proposed_level }}」</div>{% endif %}</td>
       </tr>
@@ -351,7 +353,7 @@
   {% endif %}
 
   <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
-  <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
+  <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。項目編號所在位置即該項目之「矩陣風險（機率×衝擊）」，格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
   <div class="matrix-layout">
     <div class="matrix-wrap">
       <table class="matrix" aria-labelledby="matrix-h" id="matrix">
@@ -385,7 +387,7 @@
     {% for iv in items_view %}
     <div data-item="{{ iv.item.id }}">
       <h4>{{ iv.n }}. {{ iv.item.name }}</h4>
-      <p>結果：{{ level_badge(iv.audit.computed_level) }}（P={{ iv.audit.probability or "—" }}，I={{ iv.audit.impact }}；信心 {{ iv.audit.effective_confidence }}）</p>
+      <p>{% if iv.audit.probability %}發生機率：{{ level_badge(iv.audit.computed_level) }}　矩陣風險（{{ iv.audit.probability }}×{{ iv.audit.impact }}）：{{ level_badge(iv.audit.matrix_level) }}{% else %}衝擊：{{ level_badge(iv.audit.computed_level) }}{% endif %}<span class="muted small">（信心 {{ iv.audit.effective_confidence }}）</span></p>
       <ul class="dash">{% for b in iv.item.evidence %}<li>{{ b.text }} {{ cite(b.source_ids) }}</li>{% endfor %}</ul>
       <p><a href="#item-{{ iv.item.id }}">至風險評估表該列</a></p>
     </div>
@@ -471,7 +473,7 @@
   <ol class="method">
     <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
     <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
-    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>每一機率類項目給予機率 1–5 與衝擊 1–5，以下表矩陣計算，再對應至三級；衝擊項目以衝擊分數對應三級（1–2 低、3 中、4–5 高）。綜合研判取各機率類項目之最高矩陣等級。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
+    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>如原文章，每一機率類項目之評估結果為發生機率（1–2 低、3 中、4–5 高），衝擊另列（1–2 低、3 中、4–5 高）；各機率類項目另以機率×衝擊查下表得「矩陣風險」。綜合研判取各機率類項目之最高矩陣風險，再對應三級（極高→高）。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
     <li><strong>升級篩檢：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另列參考 UKHSA HAIRS 流程之篩檢問題。</li>
     <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
   </ol>

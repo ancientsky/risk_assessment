@@ -59,10 +59,13 @@ python -c "import json; from epi_risk_agent.schema import llm_output_schema; pri
  "level_definitions": {"低": "…", "中": "…", "高": "…"},
  "probability": 1, "probability_rationale": "…", "impact": null,
  "proposed_level": "低",
- "strata": [{"name": "高暴露職業族群", "probability": 2, "proposed_level": "中"}],
+ "strata": [{"name": "高暴露職業族群", "probability": 2, "proposed_level": "低"}],
  "confidence": "中", "confidence_reason": "…", "hairs_questions": []}
 ```
 - `kind`：「機率」（需 `probability`；`impact` 留 null 時沿用衝擊項目）或「衝擊」（需 `impact`）。
+- `proposed_level`：機率類項目＝**發生機率**之低／中／高（1–2 低、3 中、4–5 高，與原文章一致，不含衝擊）；衝擊項目＝衝擊之低／中／高。
+- 程式另計算「矩陣風險（機率×衝擊）」與報告並列；綜合研判＝各機率類項目最高之矩陣風險。
+- 分層 `strata[].proposed_level` 同理：機率類項目之分層代表分層機率，衝擊項目之分層代表分層衝擊。
 - 至少一個機率類與一個衝擊項目。
 - `hairs_questions`：人畜共通／新興病原時填寫（question／answer 是‧否‧不確定／rationale／source_ids）。
 
