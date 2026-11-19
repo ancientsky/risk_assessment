@@ -57,3 +57,7 @@ epi-risk render   examples/<事件代稱>/assessment.json -o examples/<事件代
 - 改找可連線的官方替代來源；
 - 僅能取得搜尋結果摘要者，`retrieval` 填「搜尋摘要」並在 `note` 說明；
 - 在 `limitations` 與回報中列出無法連線之主機。
+
+## 實務提示
+- `www.cdc.gov` 會拒絕偽裝成瀏覽器的 User-Agent（回 403 Access Denied），請用 curl 預設 User-Agent。其頁面上的表格數字多由資料檔載入（例如麻疹：`/wcms/vizdata/measles/measles_hosp.json`），頁面文字抓不到時改讀資料檔。
+- 疾管署網站之 `/File/Get/...` 附件連結以 curl 下載可能回傳網頁而非檔案；取不到時來源標示為僅讀得清單頁，並列入限制。
