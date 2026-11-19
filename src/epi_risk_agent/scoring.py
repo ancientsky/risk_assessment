@@ -470,7 +470,7 @@ def audit(a: Assessment) -> Audit:
     for ia in item_audits:
         if not ia.agrees:
             issues.append(Issue(severity="warning", code="level_mismatch",
-                                message=f"{names[ia.item_id]}：評估者建議「{ia.proposed_level}」，規則對應「{ia.computed_level}」（{'機率' if ia.probability is not None else '衝擊'} {ia.probability if ia.probability is not None else ia.impact}）",
+                                message=f"{names[ia.item_id]}：評估者文章式判斷「{ia.proposed_level}」，{'ECDC 推導' if (ia.ecdc_probability if ia.probability is not None else ia.ecdc_impact) else '所填'}分數對應「{ia.computed_level}」（{'機率' if ia.probability is not None else '衝擊'} {ia.probability if ia.probability is not None else ia.impact}）；兩者並列",
                                 path=f"risk_items[{ia.item_id}]"))
         if ia.effective_confidence != ia.stated_confidence:
             issues.append(Issue(severity="info", code="confidence_capped",
@@ -479,7 +479,7 @@ def audit(a: Assessment) -> Audit:
         for st in ia.strata_computed:
             if st.get("computed_level") and st["computed_level"] != st["proposed_level"]:
                 issues.append(Issue(severity="warning", code="stratum_mismatch",
-                                    message=f"{names[ia.item_id]}／{st['name']}：建議「{st['proposed_level']}」，計算「{st['computed_level']}」",
+                                    message=f"{names[ia.item_id]}／{st['name']}：文章式判斷「{st['proposed_level']}」，分數對應「{st['computed_level']}」；兩者並列",
                                     path=f"risk_items[{ia.item_id}]"))
     prob_audits = [ia for ia in item_audits if ia.matrix_level is not None]
     if prob_audits:

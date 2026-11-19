@@ -6,4 +6,4 @@ deterministic scoring/validation -> self-contained HTML report.
 """
 
 __version__ = "0.1.0"
-METHODOLOGY_VERSION = "2026.11-v1"
+METHODOLOGY_VERSION = "2026.11-v2-ecdc"

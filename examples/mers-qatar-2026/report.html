@@ -1264,7 +1264,7 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
 
   <details class="issues" >
     <summary>自動檢核結果：錯誤 0、警告 4、提示 1</summary>
-    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。…」<code>taiwan.vectors_hosts</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊：評估者建議「高」，規則對應「低」（衝擊 2）<code>risk_items[R4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／長者及慢性病患者：建議「高」，計算「低」<code>risk_items[R4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／一般健康成人：建議「中」，計算「低」<code>risk_items[R4]</code></li><li class="iss iss-info"><span class="iss-sev">提示</span>境外移入風險：分層「赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者」之矩陣風險「中」（三級：中）高於整體（低），決策摘要應明列<code>risk_items[R1]</code></li></ul>
+    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。…」<code>taiwan.vectors_hosts</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊：評估者文章式判斷「高」，ECDC 推導分數對應「低」（衝擊 2）；兩者並列<code>risk_items[R4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／長者及慢性病患者：文章式判斷「高」，分數對應「低」；兩者並列<code>risk_items[R4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／一般健康成人：文章式判斷「中」，分數對應「低」；兩者並列<code>risk_items[R4]</code></li><li class="iss iss-info"><span class="iss-sev">提示</span>境外移入風險：分層「赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者」之矩陣風險「中」（三級：中）高於整體（低），決策摘要應明列<code>risk_items[R1]</code></li></ul>
   </details>
 
   <h3>方法說明</h3>
@@ -1283,7 +1283,7 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
     <tbody><tr><th scope="row">極低<span class="small muted"> Very low</span></th><td>無</td><td>極低</td><td>低</td><td>低</td><td>中</td></tr><tr><th scope="row">低<span class="small muted"> Low</span></th><td>無</td><td>低</td><td>低</td><td>中</td><td>中</td></tr><tr><th scope="row">中<span class="small muted"> Moderate</span></th><td>無</td><td>低</td><td>中</td><td>中</td><td>高</td></tr><tr><th scope="row">高<span class="small muted"> High</span></th><td>無</td><td>中</td><td>中</td><td>高</td><td>極高</td></tr></tbody>
   </table>
   </div>
-  <p class="small muted">工具版本 0.1.0｜方法版本 2026.11-v1｜產出模式：claude-code-skill（claude-opus-5-5）｜以 Claude Code 技能路徑產出；執行環境網路僅允許直接讀取 who.int 與 cdc.gov.tw，其餘來源僅取得搜尋摘要</p>
+  <p class="small muted">工具版本 0.1.0｜方法版本 2026.11-v2-ecdc｜產出模式：claude-code-skill（claude-opus-5-5）｜以 Claude Code 技能路徑產出；執行環境網路僅允許直接讀取 who.int 與 cdc.gov.tw，其餘來源僅取得搜尋摘要</p>
 
   <h3>參考資料</h3>
   <ol class="refs">
