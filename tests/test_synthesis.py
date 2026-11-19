@@ -101,13 +101,14 @@ def test_article_judgment_counts_and_direction(data):
     assert any(d.startswith("疫情報導式判斷：中") for d in sy.differences)
 
 
-def test_groups_are_cautions_not_consistency(data):
+def test_groups_raise_cap_but_not_consistency(data):
     _who(data, 1, 1, groups=[("孕婦", 2, 5)])  # group Unlikely x Severe = 高
     data.pop("hairs")
     for r in data["risk_items"]:
         r["strata"] = [s for s in r["strata"] if not s["name"].startswith("赴中東")]
     sy = _syn(data).synthesis
-    assert sy.consistency == "一致" and sy.cautious_cap == "低"
+    assert sy.consistency == "一致"
+    assert sy.cautious_cap == "高"  # risk groups count toward the cap
     assert sy.cautions == ["WHO 2012／孕婦：高（高風險）"]
     assert sy.note_required
 

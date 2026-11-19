@@ -487,7 +487,7 @@
     <dl class="synth-kv">
       <div><dt>綜合等級（ECDC 2019，主要方法）</dt><dd>{{ level_badge(sy.integrated_level, "lv-lg") }}</dd></div>
       <div><dt>一致性（一般民眾層級）</dt><dd><strong>{{ sy.consistency }}</strong>{% if sy.differences %}<ul>{% for d in sy.differences %}<li>{{ d }}</li>{% endfor %}</ul>{% endif %}</dd></div>
-      <div><dt>審慎上限（ECDC、WHO、文章式判斷之最高者）</dt><dd>{{ level_badge(sy.cautious_cap, "lv-lg") }}</dd></div>
+      <div><dt>審慎上限（ECDC、WHO、文章式判斷之最高者，含高風險族群）</dt><dd>{{ level_badge(sy.cautious_cap, "lv-lg") }}</dd></div>
       {% if sy.cautions %}<div><dt>注意事項（族群結果或 HAIRS 分項高於綜合等級）</dt><dd><ul>{% for c in sy.cautions %}<li>{{ c }}</li>{% endfor %}</ul></dd></div>{% endif %}
     </dl>
     {% if a.overall.synthesis_note %}<div class="synth-note"><strong>評估者說明：</strong>{{ a.overall.synthesis_note }}</div>

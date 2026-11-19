@@ -530,7 +530,8 @@ def synthesize(a: Assessment, item_audits: list[ItemAudit], overall_m: Optional[
         consistency = "不一致"
     else:
         consistency = "部分一致" if len(pop) >= 2 else "一致"
-    cap = max((r.level3 for r in pop), key=lambda x: LEVEL3_ORDER[x])
+    # Cap covers general-population AND risk-group rows (user decision); HAIRS has no combined level.
+    cap = max((r.level3 for r in rows if r.level3 is not None), key=lambda x: LEVEL3_ORDER[x])
     cautions = []
     for r in rows:
         if not r.is_population and r.level3 and LEVEL3_ORDER[r.level3] > LEVEL3_ORDER[integrated]:

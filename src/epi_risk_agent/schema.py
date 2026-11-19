@@ -494,7 +494,7 @@ class Synthesis(StrictModel):
     integrated_level: Level3 = Field(description="綜合等級＝ECDC 2019 結果（主要方法）")
     consistency: Literal["一致", "部分一致", "不一致"]
     differences: list[str] = Field(default_factory=list)
-    cautious_cap: Level3 = Field(description="審慎上限：ECDC、WHO、文章式判斷（一般民眾層級）之最高三級")
+    cautious_cap: Level3 = Field(description="審慎上限：ECDC、WHO、文章式判斷之最高三級（含一般民眾與高風險族群；不含 HAIRS）")
     cautions: list[str] = Field(default_factory=list, description="高於綜合等級之族群結果或 HAIRS 分項")
     note_required: bool
     compact: str

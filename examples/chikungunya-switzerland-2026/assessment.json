@@ -1,0 +1,1379 @@
+{
+ "schema_version": "1.0",
+ "report_title": "瑞士首見本土屈公病病例：WHO 疾病爆發新聞查證與我國快速風險評估",
+ "generated_at": "2026-11-19T16:30:00+08:00",
+ "data_cutoff": "2026-11-19T16:10:00+08:00",
+ "reassessment_date": "2026-12-17",
+ "generator": {
+  "mode": "claude-code-skill",
+  "model": "claude-fable-5-2",
+  "tool_version": "0.1.0",
+  "notes": "以 Claude Code 技能路徑產出。全文讀取：who.int、ecdc.europa.eu、cdc.gov.tw；瑞士聯邦公共衛生局（bag.admin.ch）、提契諾州政府（ti.ch）及瑞士媒體網站無法連線，僅取得搜尋摘要。"
+ },
+ "event": {
+  "title": "瑞士提契諾州通報 4 例本土屈公病（該國首見）",
+  "hazard": "屈公病毒（Chikungunya virus）",
+  "event_location": "瑞士提契諾州（Ticino）",
+  "event_type": [
+   "病媒傳播"
+  ],
+  "news_source_id": "S1",
+  "news_summary": "WHO 於 2026-11-17 發布：瑞士提契諾州 11/4 通報 4 例無旅遊史之本土屈公病，為該國首見；最早發病日 8/10，主動搜尋未發現新增病例，因蚊季將盡，WHO 研判進一步本土傳播風險低，不建議旅行或貿易限制。同期法國已有 207 例本土病例。",
+  "taiwan_relevance": "屈公病為我國第二類法定傳染病，我國有埃及斑蚊與白線斑蚊，歷年病例以境外移入為主（2025 年截至 10/20 為 28 例，創近 6 年同期新高）。本事件顯示病毒經旅客帶入後，可在有白線斑蚊之溫帶地區造成本土傳播。",
+  "triage_decision": "進行完整評估",
+  "triage_reason": "來源為 WHO 官方通報；我國具相同病媒且每年有境外移入病例，本事件對我國之直接移入風險雖低，但對本土傳播之整備具參考價值。"
+ },
+ "sources": [
+  {
+   "id": "S1",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON627",
+   "title": "Disease Outbreak News: Chikungunya in Switzerland",
+   "publisher": "World Health Organization",
+   "published_date": "2026-11-17",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": true,
+   "note": "被查證之新聞；本身為官方第一手來源"
+  },
+  {
+   "id": "S2",
+   "url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00016/2026-10-30",
+   "title": "Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)",
+   "publisher": "European Centre for Disease Prevention and Control",
+   "published_date": "2026-10-30",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": "資料截至 2026-10-28；瑞士非歐盟／歐洲經濟區成員，且事件於 11/4 才公布"
+  },
+  {
+   "id": "S3",
+   "url": "https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html",
+   "title": "Quattro casi di febbre Chikungunya in Ticino",
+   "publisher": "RSI（瑞士義語區廣播電視）",
+   "published_date": "2026-11-04",
+   "accessed_date": "2026-11-19",
+   "tier": 3,
+   "retrieval": "搜尋摘要",
+   "is_news_item": false,
+   "note": "僅取得搜尋摘要（彙整 RSI、Ticinonline、Ticinonews、bluewin 等瑞士媒體 11/4 報導）"
+  },
+  {
+   "id": "S4",
+   "url": "https://outbreaknewstoday.substack.com/p/switzerland-reports-4-locally-acquired",
+   "title": "Switzerland reports 4 locally acquired chikungunya cases in Ticino",
+   "publisher": "Outbreak News Today",
+   "published_date": null,
+   "accessed_date": "2026-11-19",
+   "tier": 3,
+   "retrieval": "搜尋摘要",
+   "is_news_item": false,
+   "note": "僅取得搜尋摘要"
+  },
+  {
+   "id": "S5",
+   "url": "https://www.cdt.ch/news/ticino/e-il-primo-caso-di-virus-trasmesso-dalle-zanzare-tigre-in-ticino-443688",
+   "title": "«È il primo caso di virus trasmesso dalle zanzare tigre in Ticino»",
+   "publisher": "Corriere del Ticino",
+   "published_date": null,
+   "accessed_date": "2026-11-19",
+   "tier": 3,
+   "retrieval": "搜尋摘要",
+   "is_news_item": false,
+   "note": "僅取得標題"
+  },
+  {
+   "id": "S6",
+   "url": "https://www.ecdc.europa.eu/en/chikungunya/facts/factsheet",
+   "title": "Factsheet for health professionals about chikungunya virus disease",
+   "publisher": "European Centre for Disease Prevention and Control",
+   "published_date": null,
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": null
+  },
+  {
+   "id": "S7",
+   "url": "https://www.who.int/news-room/fact-sheets/detail/chikungunya",
+   "title": "Chikungunya (fact sheet)",
+   "publisher": "World Health Organization",
+   "published_date": "2025-04-14",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": "與被查證新聞同一發布者，不作為獨立查證來源"
+  },
+  {
+   "id": "S8",
+   "url": "https://www.cdc.gov.tw/Category/Page/Q3Di-FMTXTOVvYkgyBoGbA",
+   "title": "屈公病－疾病介紹",
+   "publisher": "衛生福利部疾病管制署",
+   "published_date": "2025-05-19",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": "頁面標示最後更新日期 2025/5/19"
+  },
+  {
+   "id": "S9",
+   "url": "https://www.cdc.gov.tw/Bulletin/Detail/xhJieF2ViKgMBEBvMezUGA?typeid=9",
+   "title": "國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史",
+   "publisher": "衛生福利部疾病管制署",
+   "published_date": "2025-10-21",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": null
+  },
+  {
+   "id": "S10",
+   "url": "https://www.cdc.gov.tw/Bulletin/Detail/Vx4LVIacRCqG_j7VIJbMeQ?typeid=9",
+   "title": "疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全",
+   "publisher": "衛生福利部疾病管制署",
+   "published_date": "2025-08-10",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": null
+  },
+  {
+   "id": "S11",
+   "url": "https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON",
+   "title": "國際間旅遊疫情建議等級開放資料（JSON）",
+   "publisher": "衛生福利部疾病管制署",
+   "published_date": "2026-11-17",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": "下載全檔後以程式篩選「屈公病」紀錄；各國現行等級取最新一筆"
+  },
+  {
+   "id": "S12",
+   "url": "https://www.who.int/publications/m/item/who-rapid-risk-assessment---chikungunya-virus-disease--global-v.2",
+   "title": "WHO Rapid Risk Assessment: Chikungunya virus disease, Global, version 2",
+   "publisher": "World Health Organization",
+   "published_date": "2026-05-01",
+   "accessed_date": "2026-11-19",
+   "tier": 1,
+   "retrieval": "全文",
+   "is_news_item": false,
+   "note": "僅讀得出版品頁面之概述，評估全文 PDF 未下載；風險等級未取得"
+  }
+ ],
+ "claims": [
+  {
+   "id": "C1",
+   "text": "瑞士提契諾州於 2026-11-04 通報 4 例本土感染之屈公病。",
+   "importance": "關鍵",
+   "verdict": "已證實",
+   "verdict_reason": "多家瑞士媒體於 11/4 報導州與聯邦衛生單位確認 4 例本土病例（Piana di Magadino 地區）。",
+   "evidence": [
+    {
+     "source_id": "S3",
+     "stance": "支持",
+     "quote_or_summary": "搜尋摘要：州政府會同聯邦單位於 2026-11-04 確認 4 例本土屈公熱，位於 Piana di Magadino 地區。"
+    },
+    {
+     "source_id": "S1",
+     "stance": "背景",
+     "quote_or_summary": "\"On 4 November 2026, health authorities in the canton of Ticino, Switzerland, in coordination with federal authorities, reported four locally acquired cases of chikungunya virus disease.\""
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "text": "此為瑞士首見之本土屈公病病例。",
+   "importance": "關鍵",
+   "verdict": "部分證實",
+   "verdict_reason": "英文媒體稱為瑞士首見；義語媒體之說法為「提契諾州首次出現由白線斑蚊傳播之病毒」。ECDC 截至 10/28 之歐洲本土病例國家僅列法國與義大利，與瑞士先前無本土病例相符，但 ECDC 監測範圍不含瑞士。瑞士聯邦公共衛生局網站無法連線，未取得官方原文。",
+   "evidence": [
+    {
+     "source_id": "S4",
+     "stance": "支持",
+     "quote_or_summary": "搜尋摘要：稱此為瑞士首見之本土病例。"
+    },
+    {
+     "source_id": "S5",
+     "stance": "支持",
+     "quote_or_summary": "標題：「這是提契諾州首例由白線斑蚊傳播之病毒病例」。"
+    },
+    {
+     "source_id": "S2",
+     "stance": "背景",
+     "quote_or_summary": "\"as at 28 October 2026, two countries in Europe have reported locally acquired cases of chikungunya virus disease: France (204 cases) and Italy (one case).\""
+    }
+   ]
+  },
+  {
+   "id": "C3",
+   "text": "4 名個案近期均無前往屈公病流行地區之旅遊史，且居住於同一區域。",
+   "importance": "關鍵",
+   "verdict": "已證實",
+   "verdict_reason": "瑞士媒體報導個案近期未前往病毒流行地區，均位於 Piana di Magadino 地區。",
+   "evidence": [
+    {
+     "source_id": "S3",
+     "stance": "支持",
+     "quote_or_summary": "搜尋摘要：病人近期未曾前往病毒流行地區；病例集中於 Piana di Magadino。"
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "text": "4 名個案病程良好，部分仍有關節症狀。",
+   "importance": "次要",
+   "verdict": "已證實",
+   "verdict_reason": "瑞士媒體報導個案狀況良好，惟關節不適持續。",
+   "evidence": [
+    {
+     "source_id": "S3",
+     "stance": "支持",
+     "quote_or_summary": "搜尋摘要：病人狀況良好，僅持續有關節不適。"
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "text": "主動病例搜尋未發現新增病例，進一步本土傳播之風險低。",
+   "importance": "關鍵",
+   "verdict": "已證實",
+   "verdict_reason": "州衛生部門評估風險非常低（病例少、蚊季將盡），州醫官表示 10 月後未再出現新病例。",
+   "evidence": [
+    {
+     "source_id": "S3",
+     "stance": "支持",
+     "quote_or_summary": "搜尋摘要：州衛生部門評估風險非常低，理由包括病例數少及蚊子活動季節即將結束；10 月後未再登錄新病例。"
+    }
+   ]
+  },
+  {
+   "id": "C6",
+   "text": "截至 2026-11-04，法國通報 207 例本土屈公病，義大利通報 1 例。",
+   "importance": "關鍵",
+   "verdict": "部分證實",
+   "verdict_reason": "ECDC 截至 10/28 之數字為法國 204 例、義大利 1 例；一週後增至 207 例屬合理，但 11/4 之確切數字未取得獨立來源。",
+   "evidence": [
+    {
+     "source_id": "S2",
+     "stance": "支持",
+     "quote_or_summary": "\"France (204 cases) and Italy (one case)\"（截至 2026-10-28）"
+    }
+   ]
+  },
+  {
+   "id": "C7",
+   "text": "2026 年 1 月 1 日至 9 月 30 日全球通報 327,086 例屈公病（83,660 例確診）、98 例死亡。",
+   "importance": "次要",
+   "verdict": "無法證實",
+   "verdict_reason": "數字出自 WHO 全球屈公病監測儀表板，與本新聞同一發布者；本次未取得其他獨立來源之全球統計。",
+   "evidence": [
+    {
+     "source_id": "S1",
+     "stance": "背景",
+     "quote_or_summary": "\"From 1 January through 30 September 2026, 327 086 cases, including 83 660 confirmed cases and 98 deaths, were reported globally\""
+    }
+   ]
+  },
+  {
+   "id": "C8",
+   "text": "白線斑蚊已在提契諾州立足，為屈公病毒之有效病媒。",
+   "importance": "次要",
+   "verdict": "已證實",
+   "verdict_reason": "瑞士媒體以白線斑蚊（zanzara tigre）傳播報導本事件；ECDC 疾病說明亦載明白線斑蚊可傳播屈公病毒。",
+   "evidence": [
+    {
+     "source_id": "S5",
+     "stance": "支持",
+     "quote_or_summary": "標題提及病毒由白線斑蚊（zanzare tigre）於提契諾州傳播。"
+    },
+    {
+     "source_id": "S6",
+     "stance": "支持",
+     "quote_or_summary": "ECDC 說明屈公病毒由斑蚊屬（含 Ae. albopictus）傳播。"
+    }
+   ]
+  }
+ ],
+ "news_credibility": {
+  "proposed_level": "高",
+  "reason": "來源為 WHO 官方疾病爆發新聞（第一手、第 1 級），事件之病例數、無旅遊史、風險研判等關鍵內容均有瑞士媒體報導佐證，法國與義大利數字與 ECDC 相符；僅「瑞士首見」之措辭與全球統計未取得完全獨立之官方佐證。"
+ },
+ "pathogen": {
+  "summary": "屈公病由屈公病毒引起，經埃及斑蚊與白線斑蚊叮咬傳播，人不會直接傳染給人。多數感染者有症狀，以突發高燒與嚴重關節痛為特徵，關節痛可持續數週至數年；重症與死亡少見，但新生兒、長者及慢性病者風險較高。無特效藥，已有疫苗於部分國家核准。",
+  "facts": [
+   {
+    "label": "病原",
+    "value": "屈公病毒，Togaviridae 科 Alphavirus 屬，單股 RNA 病毒",
+    "source_ids": [
+     "S8",
+     "S1"
+    ]
+   },
+   {
+    "label": "病媒",
+    "value": "埃及斑蚊（Aedes aegypti）及白線斑蚊（Aedes albopictus）",
+    "source_ids": [
+     "S8",
+     "S10"
+    ]
+   },
+   {
+    "label": "傳染方式",
+    "value": "經病媒蚊叮咬（人－蚊－人）；人不會直接傳染給人。母親分娩時處於病毒血症期可發生周產期傳染",
+    "source_ids": [
+     "S8",
+     "S6"
+    ]
+   },
+   {
+    "label": "潛伏期",
+    "value": "1–12 天（平均 3–7 天）；WHO：一般 4–8 天，範圍 2–12 天",
+    "source_ids": [
+     "S6",
+     "S1"
+    ]
+   },
+   {
+    "label": "病毒血症期",
+    "value": "發病前 2 天至發病後 5 天；病毒於蚊體內增殖 2 至 9 天後具傳播力",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "label": "臨床表現",
+    "value": "突然發燒、關節疼痛或關節炎（約 70%）、皮疹（約半數）；關節痛可持續數週至數月甚至數年",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "label": "高風險族群",
+    "value": "出生時感染之新生兒、65 歲以上長者、高血壓、糖尿病或心血管疾病患者",
+    "source_ids": [
+     "S8",
+     "S7"
+    ]
+   },
+   {
+    "label": "治療",
+    "value": "無特效抗病毒藥物，以症狀及支持性治療為主",
+    "source_ids": [
+     "S7",
+     "S1"
+    ]
+   },
+   {
+    "label": "疫苗",
+    "value": "歐盟已核准 IXCHIQ（活性減毒）與 VIMKUNYA（類病毒顆粒），均適用 12 歲以上；WHO 指出疫苗尚未普及。我國疫苗核准與供應情形本次未查得",
+    "source_ids": [
+     "S6",
+     "S7"
+    ]
+   }
+  ]
+ },
+ "international": {
+  "summary": [
+   {
+    "text": "瑞士提契諾州 11/4 通報 4 例本土病例：最早發病日 8/10（回溯發現、感染源不明），其餘於 10/9、10/13、10/22、10/23 檢出或確認；均無流行區旅遊史、居住同一區域。",
+    "source_ids": [
+     "S1",
+     "S3"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "主動病例搜尋（含當地執業醫師與 2 家急診）未發現其他疑似病例；採集之白線斑蚊密度偏低且未檢出病毒 RNA。",
+    "source_ids": [
+     "S1"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "防治措施：10/22 啟動擴大疫調，10/26 起逐戶進行成蚊與幼蟲防治，並向全州醫師發函提高警覺。提契諾州自 2000 年起即有白線斑蚊監測與防治計畫。",
+    "source_ids": [
+     "S1"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "歐洲同期：ECDC 截至 10/28 為法國 204 例、義大利 1 例本土病例；WHO 截至 11/4 為法國 207 例。",
+    "source_ids": [
+     "S2",
+     "S1"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "全球：WHO 統計 2026 年 1–9 月共 327,086 例（83,660 例確診）、98 例死亡，以美洲區及東南亞區為多。",
+    "source_ids": [
+     "S1"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "WHO 指出，本事件顯示病毒經旅客帶入已有白線斑蚊之地區後，可發生本土傳播；長期而言氣候變化可能擴大適合傳播之地區與季節。",
+    "source_ids": [
+     "S1"
+    ],
+    "is_inference": false
+   }
+  ],
+  "stats": [
+   {
+    "label": "瑞士本土病例",
+    "value": "4 例",
+    "as_of": "2026-11-04",
+    "note": "該國首見；無新增疑似病例",
+    "source_ids": [
+     "S1",
+     "S3"
+    ]
+   },
+   {
+    "label": "法國 2026 年本土病例",
+    "value": "207 例",
+    "as_of": "2026-11-04",
+    "note": "ECDC 截至 10/28 為 204 例",
+    "source_ids": [
+     "S1",
+     "S2"
+    ]
+   },
+   {
+    "label": "義大利 2026 年本土病例",
+    "value": "1 例",
+    "as_of": "2026-10-28",
+    "note": "羅馬，8 月發病",
+    "source_ids": [
+     "S2",
+     "S1"
+    ]
+   },
+   {
+    "label": "全球 2026 年 1–9 月",
+    "value": "327,086 例",
+    "as_of": "2026-09-30",
+    "note": "98 例死亡；WHO 儀表板",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "label": "我國 2025 年病例",
+    "value": "28 例",
+    "as_of": "2025-10-20",
+    "note": "均為境外移入，近 6 年同期最高；2026 年數字未取得",
+    "source_ids": [
+     "S9"
+    ]
+   }
+  ],
+  "timeline": [
+   {
+    "date": "2026-08-10",
+    "label": "瑞士最早一例發病（回溯發現）",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "date": "2026-10-09",
+    "label": "瑞士首例實驗室陽性（IgM）",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "date": "2026-10-22",
+    "label": "第 3 例確認，啟動擴大疫調",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "date": "2026-10-26",
+    "label": "展開針對性病媒防治",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "date": "2026-11-04",
+    "label": "提契諾州與聯邦單位公布 4 例本土病例",
+    "source_ids": [
+     "S1",
+     "S3"
+    ]
+   },
+   {
+    "date": "2026-11-17",
+    "label": "WHO 發布 DON627",
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "time_series": [],
+  "country_counts": [
+   {
+    "country": "法國",
+    "cases": 207,
+    "deaths": null,
+    "period": "2026 年本土病例，截至 11/4",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "country": "瑞士",
+    "cases": 4,
+    "deaths": 0,
+    "period": "2026 年本土病例，截至 11/4",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "country": "義大利",
+    "cases": 1,
+    "deaths": null,
+    "period": "2026 年本土病例，截至 10/28",
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "external_assessments": [
+   {
+    "text": "WHO：本事件之公共衛生影響預期有限；在目前流行病學與季節條件下，進一步傳播風險低，不太可能再出現本土病例。",
+    "source_ids": [
+     "S1"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "WHO：依現有資訊，不建議對事件發生國採取任何旅行或貿易限制。",
+    "source_ids": [
+     "S1"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "WHO 於 2026-05-01 發布全球屈公病快速風險評估第 2 版；其風險等級本次未取得（僅讀得出版品頁面）。",
+    "source_ids": [
+     "S12"
+    ],
+    "is_inference": false
+   }
+  ]
+ },
+ "taiwan": {
+  "notifiable_category": "第二類法定傳染病",
+  "surveillance": [
+   {
+    "text": "屈公病為我國第二類法定傳染病。",
+    "source_ids": [
+     "S8"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "2025 年截至 10/20 累計 28 例確定病例，均為境外移入，感染國家以印尼（16 例）為多，其次為菲律賓（7 例）、中國廣東省（3 例）、斯里蘭卡及孟加拉（各 1 例），為近 6 年同期最高（2020–2024 年同期介於 1–15 例）。",
+    "source_ids": [
+     "S9"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "疾管署於 2025-08-10 說明當時國內並無本土疫情。",
+    "source_ids": [
+     "S10"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "我國 2026 年屈公病病例數與是否有本土病例，本次未取得（疾管署 2026 年無屈公病專稿、傳染病統計資料查詢系統無法連線）。",
+    "source_ids": [],
+    "is_inference": true
+   }
+  ],
+  "laboratory": [
+   {
+    "text": "疾管署對通報個案進行檢驗確診；檢驗方法與量能之最新資料本次未查。",
+    "source_ids": [
+     "S9"
+    ],
+    "is_inference": true
+   }
+  ],
+  "vectors_hosts": [
+   {
+    "text": "可傳播屈公病毒之病媒蚊為埃及斑蚊及白線斑蚊，兩者我國均有。",
+    "source_ids": [
+     "S8",
+     "S10"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "一旦病毒進入社區且周圍有病媒蚊孳生源，即有流行之可能。",
+    "source_ids": [
+     "S8"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "評估期間（11 月至翌年 2 月）為我國病媒蚊密度較低之季節；各縣市近期病媒蚊指數本次未取得。",
+    "source_ids": [],
+    "is_inference": true
+   }
+  ],
+  "border_travel": [
+   {
+    "text": "屈公病旅遊疫情建議現行等級：印度、巴西、阿根廷、玻利維亞為第二級警示；印尼、馬來西亞、菲律賓、蘇利南、法屬圭亞那為第一級注意。瑞士與義大利未列等級。",
+    "source_ids": [
+     "S11"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "法國之屈公病旅遊疫情建議已於 2026-02-03 解除，惟法國 2026 年已通報逾 200 例本土病例。",
+    "source_ids": [
+     "S11",
+     "S2"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "自流行地區入境後應自我健康監測 14 天，有疑似症狀應就醫並告知旅遊史。",
+    "source_ids": [
+     "S8"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "國人赴瑞士、法國、義大利之旅次本次未取得。",
+    "source_ids": [],
+    "is_inference": true
+   }
+  ],
+  "healthcare": [
+   {
+    "text": "通報個案由地方衛生局進行疫情調查，並於個案病毒血症期間之住處進行病媒蚊密度調查、孳生源清除與必要之化學防治，同時加強附近居民健康監測。",
+    "source_ids": [
+     "S9",
+     "S10"
+    ],
+    "is_inference": false
+   },
+   {
+    "text": "疾管署會發布新聞稿及致醫界通函，提醒民眾與醫療體系注意。",
+    "source_ids": [
+     "S10"
+    ],
+    "is_inference": false
+   }
+  ]
+ },
+ "risk_items": [
+  {
+   "id": "R1",
+   "name": "境外移入風險",
+   "kind": "機率",
+   "question": "未來 3 個月內，我國出現自瑞士（或歐洲本土傳播地區）移入之屈公病確定病例之可能性為何？",
+   "evidence": [
+    {
+     "text": "瑞士僅 4 例且 10 月後無新增，蚊季將盡，WHO 研判不太可能再出現本土病例。",
+     "source_ids": [
+      "S1",
+      "S3"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "法國 2026 年雖有逾 200 例本土病例，但歐洲之傳播具季節性，入冬後病媒活動下降。",
+     "source_ids": [
+      "S2",
+      "S1"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "我國 2025 年 28 例境外移入之感染地均為亞洲國家，無自歐洲移入者。",
+     "source_ids": [
+      "S9"
+     ],
+     "is_inference": false
+    }
+   ],
+   "level_definitions": {
+    "低": "事件地區病例少且傳播已因季節中止，我國無自該地區移入紀錄",
+    "中": "事件地區於傳播季出現持續本土傳播，或我國出現自該地區移入病例",
+    "高": "事件地區大規模流行且為國人常往返地區，我國接連出現自該地區移入病例"
+   },
+   "probability": 1,
+   "probability_rationale": "歐洲傳播季已近尾聲，瑞士無新增病例，國人於當地暴露之可能性極低。",
+   "impact": null,
+   "proposed_level": "低",
+   "ecdc": {
+    "algorithm": "2.2",
+    "answers": [
+     {
+      "q": "Q2",
+      "answer": "否",
+      "rationale": "瑞士僅 4 例、10 月後無新增，蚊季將盡",
+      "source_ids": [
+       "S1",
+       "S3"
+      ]
+     }
+    ]
+   },
+   "strata": [
+    {
+     "name": "自亞洲、美洲流行地區移入（任一來源，非本事件）",
+     "probability": 4,
+     "proposed_level": "高",
+     "note": "我國每年均有境外移入，2025 年創近 6 年同期新高",
+     "ecdc": {
+      "algorithm": "2.2",
+      "answers": [
+       {
+        "q": "Q2",
+        "answer": "是",
+        "rationale": "我國 2025 年截至 10/20 已有 28 例境外移入，以印尼、菲律賓為多",
+        "source_ids": [
+         "S9"
+        ]
+       },
+       {
+        "q": "Q3",
+        "answer": "是",
+        "rationale": "國人普遍無屈公病免疫力，疫苗尚未普及",
+        "source_ids": [
+         "S7"
+        ]
+       },
+       {
+        "q": "Q4",
+        "answer": "是",
+        "rationale": "流行地區病媒蚊傳播活躍，2026 年 1–9 月全球逾 32 萬例",
+        "source_ids": [
+         "S1"
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "confidence": "中",
+   "confidence_reason": "事件資訊來自 WHO 全文並有 ECDC 與瑞士媒體佐證；但缺我國 2026 年病例數與赴歐旅次資料。"
+  },
+  {
+   "id": "R2",
+   "name": "國內社區流行風險",
+   "kind": "機率",
+   "question": "未來 3 個月內，我國因境外移入個案而發生屈公病本土傳播之可能性為何？",
+   "evidence": [
+    {
+     "text": "我國有埃及斑蚊與白線斑蚊，病毒進入社區且有孳生源時即可能流行。",
+     "source_ids": [
+      "S8",
+      "S10"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "2025 年 28 例境外移入均未引起本土疫情；每例個案之住處均進行病媒調查與防治。",
+     "source_ids": [
+      "S9",
+      "S10"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "瑞士事件顯示：即使在長期實施白線斑蚊防治、蚊密度偏低之溫帶地區，夏季仍可能因移入而發生小規模本土傳播，且首例係回溯才發現。",
+     "source_ids": [
+      "S1"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "評估期間為冬季，病媒蚊活動較低。",
+     "source_ids": [],
+     "is_inference": true
+    }
+   ],
+   "level_definitions": {
+    "低": "僅有境外移入病例，無本土病例；或處於病媒蚊低密度季節",
+    "中": "流行季出現零星本土病例或單一侷限群聚",
+    "高": "出現多起本土群聚或跨縣市傳播"
+   },
+   "probability": 1,
+   "probability_rationale": "每年雖有移入個案，但評估期間為病媒蚊低密度季節，且近年移入個案均未引起本土傳播。",
+   "impact": null,
+   "proposed_level": "低",
+   "ecdc": {
+    "algorithm": "2.1",
+    "answers": [
+     {
+      "q": "Q1",
+      "answer": "是",
+      "rationale": "每年均有境外移入個案",
+      "source_ids": [
+       "S9"
+      ]
+     },
+     {
+      "q": "Q2",
+      "answer": "否",
+      "rationale": "評估期間為冬季，且 2025 年 28 例移入均未引起本土疫情",
+      "source_ids": [
+       "S9",
+       "S10"
+      ]
+     }
+    ]
+   },
+   "strata": [
+    {
+     "name": "翌年夏秋病媒蚊活躍季（評估期間之外）",
+     "probability": 2,
+     "proposed_level": "低",
+     "note": "未填演算法路徑：屬評估期間外之前瞻判斷。移入個案多且有病媒，但近年均未引起本土傳播；瑞士、法國經驗顯示無法排除"
+    }
+   ],
+   "confidence": "中",
+   "confidence_reason": "病媒與防治作法來自疾管署全文；但缺 2026 年病例數與近期病媒蚊指數，季節判斷屬推論。"
+  },
+  {
+   "id": "R3",
+   "name": "衝擊",
+   "kind": "衝擊",
+   "question": "若我國發生屈公病本土傳播，對國人健康、醫療體系及社會之衝擊為何？",
+   "evidence": [
+    {
+     "text": "嚴重程度不如登革熱重症，較少出現死亡；但關節痛可持續數週至數月甚至數年，影響行動。",
+     "source_ids": [
+      "S8"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "新生兒、65 歲以上長者及高血壓、糖尿病、心血管疾病患者較易重症。",
+     "source_ids": [
+      "S8",
+      "S7"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "無特效抗病毒藥物；疫苗已於部分國家核准但尚未普及。",
+     "source_ids": [
+      "S7",
+      "S6"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "我國已有登革熱防治體系可沿用之病媒防治與個案處置流程。",
+     "source_ids": [
+      "S10"
+     ],
+     "is_inference": false
+    },
+    {
+     "text": "2025 年曾因社群媒體謠傳國內恐大規模流行，疾管署需發稿澄清，顯示本土病例可能引起民眾疑慮。",
+     "source_ids": [
+      "S10"
+     ],
+     "is_inference": false
+    }
+   ],
+   "level_definitions": {
+    "低": "多為自限性疾病、死亡罕見，既有病媒防治量能可因應",
+    "中": "高風險族群出現重症，或群聚需投入額外病媒防治與醫療資源",
+    "高": "大規模流行造成醫療與病媒防治量能吃緊，並有死亡病例"
+   },
+   "probability": null,
+   "impact": 1,
+   "impact_rationale": "一般民眾不太會重症，死亡罕見。",
+   "proposed_level": "低",
+   "ecdc": {
+    "algorithm": "3",
+    "answers": [
+     {
+      "q": "Q5",
+      "answer": "否",
+      "rationale": "重症與死亡少見，多數病人完全康復",
+      "source_ids": [
+       "S1",
+       "S8"
+      ]
+     }
+    ]
+   },
+   "strata": [
+    {
+     "name": "新生兒、65 歲以上長者及慢性病患者",
+     "impact": 2,
+     "proposed_level": "中",
+     "ecdc": {
+      "algorithm": "3",
+      "answers": [
+       {
+        "q": "Q5",
+        "answer": "是",
+        "rationale": "此族群較易重症",
+        "source_ids": [
+         "S8",
+         "S7"
+        ]
+       },
+       {
+        "q": "Q6",
+        "answer": "否",
+        "rationale": "預期受影響人數不多",
+        "source_ids": [
+         "S9"
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "confidence": "高",
+   "confidence_reason": "嚴重度與高風險族群有 WHO、ECDC 與疾管署多個官方來源一致描述。"
+  }
+ ],
+ "who_rra": {
+  "risk_question": "未來 3 個月內，我國因境外移入個案而發生屈公病本土傳播之可能性與後果為何？",
+  "likelihood": 1,
+  "likelihood_rationale": "極不可能（<5%）：評估期間為冬季，近年移入個案均未引起本土傳播。",
+  "consequences": 2,
+  "consequences_rationale": "輕微：若發生，預期為小範圍群聚，需少量額外之病媒防治與疫調資源，既有量能可支應。",
+  "source_ids": [
+   "S9",
+   "S10",
+   "S8"
+  ],
+  "groups": [
+   {
+    "name": "新生兒、65 歲以上長者及慢性病患者",
+    "likelihood": 1,
+    "consequences": 2,
+    "rationale": "極不可能；此族群較易重症，但預期人數少、額外措施有限，取輕微。",
+    "source_ids": [
+     "S8",
+     "S7"
+    ]
+   }
+  ]
+ },
+ "hairs": {
+  "perspective": "以我國人口為評估對象（原文之 UK 換為我國）；HAIRS 不限定評估期間，僅供交叉核對，不併入 ECDC 矩陣",
+  "probability": [
+   {
+    "q": "Q1",
+    "answer": "是",
+    "rationale": "屈公病為已知之人類疾病",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q3",
+    "answer": "否",
+    "rationale": "我國病例均為境外移入，無本土流行",
+    "source_ids": [
+     "S9",
+     "S10"
+    ]
+   },
+   {
+    "q": "Q4",
+    "answer": "否",
+    "rationale": "我國無動物間流行（城市循環為人－蚊－人）",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q5",
+    "answer": "是",
+    "rationale": "每年均有處於病毒血症期之旅客入境",
+    "source_ids": [
+     "S9"
+    ]
+   },
+   {
+    "q": "Q6",
+    "answer": "不確定",
+    "rationale": "入境檢疫與個案住處病媒防治可降低風險，但瑞士首例係回溯發現，顯示無法完全阻絕",
+    "source_ids": [
+     "S9",
+     "S1"
+    ]
+   },
+   {
+    "q": "Q7",
+    "answer": "是",
+    "rationale": "我國有埃及斑蚊與白線斑蚊",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q8",
+    "answer": "是",
+    "rationale": "病媒蚊叮咬對象無選擇性，病毒進入社區即可能暴露",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q9",
+    "answer": "是",
+    "rationale": "國人普遍無免疫力，疫苗尚未普及",
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "q": "Q10",
+    "answer": "否",
+    "rationale": "人不會直接傳染給人，須經病媒蚊",
+    "source_ids": [
+     "S8"
+    ]
+   }
+  ],
+  "impact": [
+   {
+    "q": "Q1",
+    "answer": "否",
+    "rationale": "非人傳人",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q2",
+    "answer": "是",
+    "rationale": "病媒傳播",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q3",
+    "answer": "是",
+    "rationale": "我國有埃及斑蚊與白線斑蚊",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q4",
+    "answer": "是",
+    "rationale": "國人普遍無免疫力",
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "q": "Q5",
+    "answer": "是",
+    "rationale": "新生兒、長者及慢性病者可能重症",
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "q": "Q8",
+    "answer": "否",
+    "rationale": "預期受影響人數不多",
+    "source_ids": [
+     "S9"
+    ]
+   },
+   {
+    "q": "Q9",
+    "answer": "是",
+    "rationale": "病媒防治與個案處置流程已建立",
+    "source_ids": [
+     "S10"
+    ]
+   }
+  ]
+ },
+ "overall": {
+  "proposed_level": "低",
+  "summary": "瑞士首見之 4 例本土屈公病為已受控之小規模事件，蚊季將盡且無新增病例；未來 3 個月我國自瑞士或歐洲移入之機率極低，冬季發生本土傳播之機率亦極低，一般民眾衝擊極低。綜合研判我國整體風險為低。惟我國每年自亞洲流行地區移入之機率高，且具相同病媒；本事件之意義在於提醒流行季前之整備，而非當前之直接威脅。",
+  "key_findings": [
+   "WHO DON627 之關鍵內容（4 例本土病例、無旅遊史、風險低）經瑞士媒體與 ECDC 資料查證相符，新聞可信度高。",
+   "未來 3 個月自瑞士或歐洲移入我國之機率極低：歐洲傳播具季節性且已近尾聲，我國 2025 年移入病例均來自亞洲。",
+   "我國每年自亞洲、美洲流行地區移入之機率高（2025 年截至 10/20 為 28 例，近 6 年同期最高），與本事件無關但為主要風險來源。",
+   "瑞士首例係回溯發現，且發生於長期實施白線斑蚊防治、蚊密度偏低之地區，顯示移入後之小規模本土傳播不易及早察覺。",
+   "法國 2026 年已逾 200 例本土病例，但我國對法國之屈公病旅遊疫情建議已於 2026-02-03 解除；我國 2026 年病例數本次未取得。"
+  ],
+  "synthesis_note": "ECDC、WHO 與文章式判斷對本事件及一般民眾均為低。審慎上限為中，來自「任一來源之境外移入」分層（機率高 × 衝擊極低）與 HAIRS 機率（中）；兩者反映的是我國全年、所有來源之背景風險，而非瑞士事件本身。建議以低作為本事件之因應等級，並將背景風險納入翌年流行季前之整備。"
+ },
+ "ihr_annex2": {
+  "perspective": "以事件發生國（瑞士）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定。",
+  "always_notifiable_disease": false,
+  "questions": [
+   {
+    "key": "serious_impact",
+    "answer": "否",
+    "rationale": "僅 4 例且病程良好，WHO 研判公共衛生影響有限。",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "key": "unusual_unexpected",
+    "answer": "是",
+    "rationale": "為該國首見之本土病例。",
+    "source_ids": [
+     "S1",
+     "S4"
+    ]
+   },
+   {
+    "key": "international_spread",
+    "answer": "否",
+    "rationale": "無新增病例、蚊季將盡，無持續本土傳播證據。",
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "key": "travel_trade_restriction",
+    "answer": "否",
+    "rationale": "WHO 不建議任何旅行或貿易限制。",
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ]
+ },
+ "scenarios": [
+  {
+   "kind": "最佳",
+   "description": "瑞士與歐洲入冬後無新增本土病例；我國冬季僅有零星自亞洲移入個案，均未引起本土傳播。",
+   "assumptions": [
+    "歐洲病媒活動隨氣溫下降而中止",
+    "我國移入個案均於病毒血症期內完成病媒防治"
+   ],
+   "implied_level": "低",
+   "implications": "維持例行監測與旅遊衛教即可。"
+  },
+  {
+   "kind": "最可能",
+   "description": "歐洲傳播季結束；我國持續有自印尼、菲律賓等地移入之個案，冬季不致引起本土傳播，但翌年夏秋移入壓力與病媒密度同時升高。",
+   "assumptions": [
+    "亞洲、美洲流行地區疫情持續",
+    "我國移入病例數維持 2025 年水準"
+   ],
+   "implied_level": "低",
+   "implications": "當前無需升級；應於翌年流行季前完成醫界提醒、病媒孳生源清除與歐洲旅遊疫情建議之檢視。"
+  },
+  {
+   "kind": "最壞",
+   "description": "翌年流行季有移入個案未及時診斷（如症狀不典型或未告知旅遊史），於病媒蚊密度高之地區引起本土群聚，回溯才發現。",
+   "assumptions": [
+    "個案於病毒血症期在社區活動",
+    "當地孳生源未清除"
+   ],
+   "implied_level": "中",
+   "implications": "需啟動群聚疫調與緊急病媒防治，並對高風險族群加強衛教。"
+  }
+ ],
+ "recommendations": [
+  {
+   "id": "A1",
+   "category": "監測通報",
+   "text": "將瑞士首見本土屈公病事件登錄國際重要疫情，並於翌年 5 月歐洲傳播季開始後，每週追蹤 ECDC 之歐盟／歐洲經濟區季節性監測。",
+   "priority": "中",
+   "timeframe": "1週",
+   "owner": "疾管署（建議：疫情中心）",
+   "rationale": "歐洲本土傳播地區逐年擴大，瑞士為新增國家",
+   "source_ids": [
+    "S1",
+    "S2"
+   ]
+  },
+  {
+   "id": "A2",
+   "category": "邊境檢疫",
+   "text": "於翌年流行季前檢視法國、義大利、瑞士之屈公病旅遊疫情建議等級；法國 2026 年逾 200 例本土病例而我國已於 2 月解除，建議訂定歐洲季節性傳播地區之列等與解除原則。",
+   "priority": "中",
+   "timeframe": "1個月",
+   "owner": "疾管署（建議：疫情中心）",
+   "rationale": "現行等級與歐洲 2026 年疫情規模不一致",
+   "source_ids": [
+    "S11",
+    "S2"
+   ]
+  },
+  {
+   "id": "A3",
+   "category": "醫療整備",
+   "text": "於翌年流行季前發布致醫界通函：發燒合併關節痛之病人應詢問旅遊史，並說明夏秋赴歐洲（法國、義大利、瑞士）亦有感染可能。",
+   "priority": "中",
+   "timeframe": "1個月",
+   "owner": "疾管署（建議：急性傳染病組）",
+   "rationale": "瑞士首例係回溯發現，顯示非傳統流行區之病例易被忽略",
+   "source_ids": [
+    "S1"
+   ]
+  },
+  {
+   "id": "A4",
+   "category": "病媒或動物防治",
+   "text": "維持境外移入個案病毒血症期間住處之病媒蚊密度調查、孳生源清除與必要之化學防治，並於流行季前加強社區「巡、倒、清、刷」。",
+   "priority": "高",
+   "timeframe": "1個月",
+   "owner": "地方衛生局、環保局；疾管署督導",
+   "rationale": "瑞士於蚊密度偏低地區仍發生本土傳播；我國病媒密度更高",
+   "source_ids": [
+    "S9",
+    "S10",
+    "S1"
+   ]
+  },
+  {
+   "id": "A5",
+   "category": "風險溝通",
+   "text": "於旅遊衛教中納入：夏秋前往南歐及瑞士南部亦應防蚊；自流行地區返國後 14 天內自我健康監測並避免被蚊蟲叮咬，以免將病毒帶入社區。",
+   "priority": "中",
+   "timeframe": "1個月",
+   "owner": "疾管署（建議：公關室）",
+   "rationale": "與 WHO 對返國旅客之建議一致",
+   "source_ids": [
+    "S1",
+    "S8"
+   ]
+  },
+  {
+   "id": "A6",
+   "category": "跨部會與國際合作",
+   "text": "蒐集歐盟與瑞士之屈公病疫苗使用建議，評估我國旅遊醫學門診提供疫苗之需求與可行性。",
+   "priority": "低",
+   "timeframe": "1個月",
+   "owner": "疾管署（建議：預防接種單位會同食藥署）",
+   "rationale": "歐盟已核准 2 種疫苗，瑞士建議前往疫情地區之旅客接種；我國情形本次未查得",
+   "source_ids": [
+    "S6",
+    "S1"
+   ]
+  }
+ ],
+ "decision": {
+  "question": "是否因瑞士首見本土屈公病，調整我國對瑞士之旅遊疫情建議或國內防治作為？",
+  "options": [
+   {
+    "id": "D1",
+    "title": "維持現狀，僅例行監測",
+    "description": "不調整旅遊疫情建議，持續例行國際疫情監測。",
+    "pros": [
+     "與 WHO 不建議旅行限制及風險低之研判一致",
+     "不需額外資源"
+    ],
+    "cons": [
+     "未處理歐洲旅遊疫情建議與實際疫情不一致之問題",
+     "未利用冬季空檔進行流行季前整備"
+    ],
+    "recommended": false,
+    "owner": "疾管署（建議：疫情中心）",
+    "timeframe": "1週"
+   },
+   {
+    "id": "D2",
+    "title": "不對瑞士列等，但啟動流行季前整備",
+    "description": "瑞士不列旅遊疫情建議等級；利用冬季完成歐洲列等原則檢視、致醫界通函與病媒防治整備（建議事項 A2、A3、A4）。",
+    "pros": [
+     "措施強度與當前低風險相稱",
+     "針對真正之風險來源（全年移入與翌年流行季）預作準備",
+     "成本低，既有人力可執行"
+    ],
+    "cons": [
+     "效益於翌年流行季才顯現",
+     "需跨單位協調地方政府"
+    ],
+    "recommended": true,
+    "owner": "疾管署（建議：疫情中心會同急性傳染病組）",
+    "timeframe": "1個月",
+    "resources": "致醫界通函 1 則、列等原則檢視 1 次；既有人力可支應"
+   },
+   {
+    "id": "D3",
+    "title": "將瑞士列為第一級注意",
+    "description": "比照其他有本土病例之國家，將瑞士列為屈公病第一級注意。",
+    "pros": [
+     "提醒赴瑞士旅客防蚊"
+    ],
+    "cons": [
+     "僅 4 例且傳播季已結束，強度與證據不相稱",
+     "WHO 研判不太可能再出現本土病例",
+     "冬季列等對旅客無實質防護效益"
+    ],
+    "recommended": false,
+    "owner": "疾管署（建議：疫情中心）",
+    "timeframe": "1週"
+   }
+  ],
+  "recommendation_reason": "本事件對我國之直接風險低，無需調整對瑞士之旅遊建議；其價值在於顯示有病媒之溫帶地區亦可發生不易察覺之本土傳播。D2 以低成本措施把握冬季空檔，處理我國真正之風險來源。",
+  "triggers": [
+   {
+    "indicator": "瑞士或鄰近歐洲國家於冬季仍出現新增本土病例",
+    "direction": "升級",
+    "threshold": "任一起經官方證實",
+    "monitoring_source": "WHO DON、ECDC 監測、瑞士聯邦公共衛生局",
+    "current_status": "10 月後無新增"
+   },
+   {
+    "indicator": "我國出現屈公病本土病例",
+    "direction": "升級",
+    "threshold": "1 例",
+    "monitoring_source": "法定傳染病通報",
+    "current_status": "2025 年無本土疫情；2026 年資料未取得"
+   },
+   {
+    "indicator": "我國境外移入病例數",
+    "direction": "升級",
+    "threshold": "單月病例數高於近 5 年同期最高值",
+    "monitoring_source": "法定傳染病通報、疾管署新聞稿",
+    "current_status": "2025 年截至 10/20 為 28 例，近 6 年同期最高"
+   },
+   {
+    "indicator": "歐洲傳播季結束且無新增病例",
+    "direction": "降級",
+    "threshold": "ECDC 季節性監測結束且瑞士、法國連續 8 週無新增",
+    "monitoring_source": "ECDC 季節性監測",
+    "current_status": "傳播季接近尾聲"
+   }
+  ]
+ },
+ "limitations": [
+  "被查證之新聞本身即為 WHO 官方第一手來源，獨立佐證主要來自瑞士媒體之搜尋摘要；瑞士聯邦公共衛生局（bag.admin.ch）、提契諾州政府（ti.ch）及瑞士媒體網站無法連線，未讀得官方原文。",
+  "我國 2026 年屈公病病例數、是否有本土病例、近期病媒蚊指數及赴歐旅次均未取得；國內傳播機率之季節判斷屬推論。",
+  "ECDC 監測資料截至 2026-10-28 且範圍不含瑞士；法國 11/4 之 207 例僅見於 WHO。",
+  "WHO 全球屈公病快速風險評估第 2 版之風險等級未取得；我國屈公病疫苗核准與供應情形未查。",
+  "ECDC 演算法之是／否提問較粗略；「任一來源移入」分層依演算法推導為機率高，反映全年背景風險，不代表本事件。",
+  "WHO 2012 矩陣之可能性與後果為評估者依其表 7、表 8 定義所作判斷。",
+  "本評估依現有資訊判定，將視新增實證適時調整。"
+ ]
+}

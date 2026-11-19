@@ -1,0 +1,1761 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="epi-risk-agent 0.1.0">
+<title>瑞士首見本土屈公病病例：WHO 疾病爆發新聞查證與我國快速風險評估</title>
+<style>/* ---------- tokens --------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f2f1ed;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6b6a66;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.12);
+  --accent: #2a78d6;
+  --accent-ink: #1c5cab;
+  --focus: #2a78d6;
+  /* status palette: level colours (always paired with icon + text) */
+  --lv-none: #898781;
+  --lv-vlow: #0ca30c;
+  --lv-low: #6aa84f;
+  --lv-mod: #fab219;
+  --lv-high: #ec835a;
+  --lv-vhigh: #d03b3b;
+  --lv-none-bg: #f2f1ed;
+  --lv-vlow-bg: #e3f4e3;
+  --lv-low-bg: #eef6dc;
+  --lv-mod-bg: #fdf1d3;
+  --lv-high-bg: #fde6d2;
+  --lv-vhigh-bg: #f5c6c6;
+  --lv-none-ink: #52514e;
+  --lv-vlow-ink: #0a5c0a;
+  --lv-low-ink: #3d6b1e;
+  --lv-mod-ink: #6b4a00;
+  --lv-high-ink: #8a3412;
+  --lv-vhigh-ink: #8f1f1f;
+  --ok: #006300;
+  --bad: #b02a2a;
+  --warn-bg: #fff6dc;
+  --warn-border: #e7b84a;
+  --err-bg: #fbe5e5;
+  --bar: #2a78d6;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #a3a29a;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.12);
+    --accent: #3987e5;
+    --accent-ink: #86b6ef;
+    --focus: #86b6ef;
+    --lv-none-bg: #232321;
+    --lv-vlow-bg: #15301a;
+    --lv-none-ink: #c3c2b7;
+    --lv-vlow-ink: #9be09b;
+    --lv-low-bg: #26331a;
+    --lv-mod-bg: #3a2f10;
+    --lv-high-bg: #3d2614;
+    --lv-vhigh-bg: #521c1c;
+    --lv-low-ink: #c5e3a0;
+    --lv-mod-ink: #ffd77a;
+    --lv-high-ink: #f6b496;
+    --lv-vhigh-ink: #f3a3a3;
+    --ok: #0ca30c;
+    --bad: #e66767;
+    --warn-bg: #33290f;
+    --warn-border: #a7811f;
+    --err-bg: #3a1a1a;
+    --bar: #3987e5;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #232321;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #a3a29a;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #3987e5;
+  --accent-ink: #86b6ef;
+  --focus: #86b6ef;
+  --lv-none-bg: #232321;
+  --lv-vlow-bg: #15301a;
+  --lv-none-ink: #c3c2b7;
+  --lv-vlow-ink: #9be09b;
+  --lv-low-bg: #26331a;
+  --lv-mod-bg: #3a2f10;
+  --lv-high-bg: #3d2614;
+  --lv-vhigh-bg: #521c1c;
+  --lv-low-ink: #c5e3a0;
+  --lv-mod-ink: #ffd77a;
+  --lv-high-ink: #f6b496;
+  --lv-vhigh-ink: #f3a3a3;
+  --ok: #0ca30c;
+  --bad: #e66767;
+  --warn-bg: #33290f;
+  --warn-border: #a7811f;
+  --err-bg: #3a1a1a;
+  --bar: #3987e5;
+  --shadow: none;
+}
+
+/* ---------- base ------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+a { color: var(--accent-ink); }
+a:hover { text-decoration-thickness: 2px; }
+[id] { scroll-margin-top: 72px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3, h4 { line-height: 1.35; }
+h2 { font-size: 1.35rem; margin: 0 0 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+h3 { font-size: 1.1rem; margin: 1.4rem 0 0.6rem; }
+h4 { font-size: 1rem; margin: 0.8rem 0 0.4rem; }
+p { margin: 0.4rem 0 0.7rem; }
+ul, ol { padding-left: 1.3rem; margin: 0.3rem 0 0.8rem; }
+code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border-radius: 4px; margin-left: 0.4em; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.86rem; }
+.strong { font-weight: 600; }
+.label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.02em; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--surface); padding: 0.5rem 1rem; z-index: 10; }
+.skip:focus { left: 8px; top: 8px; }
+.ic { width: 1em; height: 1em; flex: none; vertical-align: -0.12em; }
+
+/* ---------- header ---------------------------------------------------- */
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 52px; flex-wrap: wrap; }
+.brand { font-weight: 700; }
+.brand-sub { font-weight: 500; font-size: 0.78rem; margin-left: 0.6rem; padding: 0.05rem 0.5rem; border: 1px solid var(--warn-border); background: var(--warn-bg); border-radius: 999px; }
+.toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn { font: inherit; font-size: 0.88rem; color: var(--ink); background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 0.8rem; cursor: pointer; min-height: 36px; }
+.btn:hover { border-color: var(--axis); }
+.disclaimer { display: flex; gap: 0.7rem; align-items: flex-start; background: var(--warn-bg); border: 1px solid var(--warn-border); border-radius: 10px; padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.92rem; }
+.disclaimer .ic { width: 1.4em; height: 1.4em; margin-top: 0.1em; }
+.toc ol { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; list-style: decimal inside; padding: 0; font-size: 0.9rem; }
+.report-title { font-size: 1.65rem; margin: 0.6rem 0 0.2rem; }
+.meta-line { color: var(--ink-2); margin-top: 0; }
+
+/* ---------- cards ----------------------------------------------------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.4rem; margin: 1.1rem 0; box-shadow: var(--shadow); }
+.secno { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); font-size: 0.9rem; }
+
+/* ---------- level badges & chips ------------------------------------- */
+.lv { display: inline-flex; align-items: center; gap: 0.35em; font-weight: 700; padding: 0.05em 0.6em; border-radius: 999px; border: 1.5px solid; line-height: 1.6; white-space: nowrap; }
+.lv-none { color: var(--lv-none-ink); background: var(--lv-none-bg); border-color: var(--lv-none); border-style: dashed; }
+.lv-none .ic { color: var(--lv-none); }
+.lv-vlow { color: var(--lv-vlow-ink); background: var(--lv-vlow-bg); border-color: var(--lv-vlow); }
+.lv-vlow .ic { color: var(--lv-vlow); }
+.lv-low { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
+.lv-low .ic { color: var(--lv-low); }
+.lv-mod { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
+.lv-mod .ic { color: var(--lv-mod); }
+.lv-high { color: var(--lv-high-ink); background: var(--lv-high-bg); border-color: var(--lv-high); }
+.lv-high .ic { color: var(--lv-high); }
+.lv-vhigh { color: var(--lv-vhigh-ink); background: var(--lv-vhigh-bg); border-color: var(--lv-vhigh); }
+.lv-vhigh .ic { color: var(--lv-vhigh); }
+.lv-na { color: var(--muted); border-color: var(--axis); }
+.lv-lg { font-size: 1.1rem; }
+.lv-xl { font-size: 2.6rem; padding: 0.05em 0.5em; border-width: 3px; }
+.chip { display: inline-block; font-size: 0.78rem; padding: 0 0.5em; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--ink-2); margin-left: 0.25em; white-space: nowrap; }
+.chip-uncited { background: var(--warn-bg); border-color: var(--warn-border); color: var(--ink); }
+.chip-err { background: var(--err-bg); border-color: var(--bad); color: var(--ink); }
+.cites { white-space: nowrap; }
+.cite { font-size: 0.78em; vertical-align: super; text-decoration: none; margin-left: 0.1em; }
+.vd { display: inline-flex; align-items: center; gap: 0.3em; font-size: 0.85rem; font-weight: 600; padding: 0.05em 0.55em; border-radius: 6px; border: 1.5px solid; white-space: nowrap; }
+.vd-ok { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
+.vd-partial { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
+.vd-unk { color: var(--ink-2); background: var(--surface-2); border-color: var(--axis); border-style: dashed; }
+.vd-bad { color: var(--lv-vhigh-ink); background: var(--lv-vhigh-bg); border-color: var(--lv-vhigh); }
+.vd-old { color: var(--ink-2); background: var(--surface-2); border-color: var(--axis); }
+.legend-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0; }
+.flag { display: flex; gap: 0.4rem; align-items: flex-start; padding: 0.45rem 0.65rem; border-radius: 8px; margin: 0.5rem 0; }
+.flag .ic { margin-top: 0.25em; }
+.flag-warn { background: var(--warn-bg); border: 1px solid var(--warn-border); }
+
+/* ---------- BLUF ------------------------------------------------------ */
+.bluf { border-width: 2px; }
+.bluf-grid { display: grid; grid-template-columns: minmax(240px, 320px) 1fr; gap: 1.5rem; }
+.bluf-level { border-right: 1px solid var(--grid); padding-right: 1.2rem; }
+.hero-level { margin: 0.3rem 0 0.6rem; }
+.bluf-level .sub { margin: 0.35rem 0; font-size: 0.92rem; }
+.lead { font-size: 1.05rem; }
+.findings li { margin-bottom: 0.35rem; }
+.bluf-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem 1.2rem; margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--grid); }
+.star { color: #c98500; margin-right: 0.25em; }
+.strata-hl ul { padding-left: 1rem; }
+
+/* ---------- decision -------------------------------------------------- */
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.9rem; }
+.option { border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; background: var(--surface); }
+.option header { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.option h3 { margin: 0; font-size: 1.02rem; flex: 1 1 auto; }
+.opt-id { font-weight: 700; color: var(--ink-2); }
+.option-rec { border: 2.5px solid var(--accent); background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+.rec-tag { display: inline-flex; gap: 0.3em; align-items: center; font-size: 0.82rem; font-weight: 700; padding: 0.05em 0.55em; border-radius: 999px; background: var(--accent); color: #fff; }
+.proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.92rem; }
+.proscons h4 { margin: 0.3rem 0; font-size: 0.88rem; color: var(--ink-2); }
+.kv { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.5rem 0 0; font-size: 0.9rem; }
+.kv dt { display: inline; color: var(--muted); }
+.kv dt::after { content: "："; }
+.kv dd { display: inline; margin: 0; font-weight: 600; }
+.question { font-size: 1.02rem; }
+.dir { font-weight: 700; white-space: nowrap; }
+.dir-up { color: var(--bad); }
+.dir-down { color: var(--ok); }
+
+/* ---------- tables ---------------------------------------------------- */
+.table-wrap { width: 100%; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+.tbl th, .tbl td { border-bottom: 1px solid var(--grid); padding: 0.55rem 0.6rem; text-align: left; vertical-align: top; }
+.tbl thead th { font-size: 0.82rem; color: var(--ink-2); border-bottom: 1.5px solid var(--axis); background: var(--surface-2); }
+.tbl caption { text-align: left; font-weight: 600; padding: 0.3rem 0; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl-kv th { width: 26%; color: var(--ink-2); font-weight: 600; }
+.risk-table th[scope="row"] { width: 17%; font-weight: 700; }
+.risk-table td.result { width: 21%; }
+.risk-table td ul { margin: 0; padding-left: 1rem; }
+.risk-table .defs { list-style: none; padding-left: 0; font-size: 0.88rem; }
+.risk-table .defs li { margin-bottom: 0.3rem; }
+.dash { list-style: none; padding-left: 0 !important; }
+.dash > li { position: relative; padding-left: 0.9rem; margin-bottom: 0.3rem; }
+.dash > li::before { content: "-"; position: absolute; left: 0; color: var(--muted); }
+.item-n { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: 0.8rem; margin-right: 0.4rem; }
+.algpath { font-size: 0.8rem; color: var(--ink-2); background: var(--surface-2); border-radius: 6px; padding: 0.15rem 0.45rem; margin: 0.25rem 0; }
+.hairs-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.6rem 1.2rem; margin: 0.6rem 0 0.9rem; }
+.compact-line { font-size: 0.86rem; font-weight: 600; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.3rem 0.5rem; margin: 0.2rem 0 0.4rem; }
+.who, .synthesis { margin-top: 1.6rem; padding-top: 0.6rem; border-top: 2px solid var(--grid); }
+.who-matrix { max-width: 560px; margin-top: 0.6rem; }
+.who-matrix .cell { height: 3.2rem; }
+.marker.static { display: inline-grid; place-items: center; cursor: default; font-size: 0.75rem; width: auto; min-width: 1.9rem; padding: 0 0.3rem; border-radius: 999px; }
+.row-group td { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+.synth-kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.6rem 1.2rem; margin: 0.9rem 0; }
+.synth-kv dt { font-size: 0.82rem; color: var(--muted); }
+.synth-kv dd { margin: 0.2rem 0 0; }
+.synth-kv ul { margin: 0.2rem 0; padding-left: 1.1rem; font-size: 0.9rem; }
+.synth-note { background: var(--warn-bg); border: 1px solid var(--warn-border); border-radius: 10px; padding: 0.6rem 0.9rem; }
+.mrisk { margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px dashed var(--grid); }
+.strata { list-style: none; padding: 0; margin: 0.4rem 0; font-size: 0.86rem; }
+.strata li { margin: 0.2rem 0; }
+.overall-row { background: var(--surface-2); }
+.why summary { cursor: pointer; color: var(--accent-ink); }
+.ans { font-weight: 700; padding: 0 0.5em; border-radius: 6px; border: 1.5px solid var(--axis); white-space: nowrap; }
+.ans-y { border-color: var(--lv-high); background: var(--lv-high-bg); color: var(--lv-high-ink); }
+.ans-n { border-color: var(--lv-low); background: var(--lv-low-bg); color: var(--lv-low-ink); }
+.ans-u { border-style: dashed; }
+.ans-y::before { content: "● "; }
+.ans-n::before { content: "○ "; }
+.ans-u::before { content: "? "; }
+
+/* ---------- claims ---------------------------------------------------- */
+.newsbox { background: var(--surface-2); border-radius: 10px; padding: 0.8rem 1rem; }
+.cred { margin: 0.9rem 0; }
+.claims { list-style: none; padding: 0; }
+.claim { border: 1px solid var(--border); border-radius: 10px; margin: 0.5rem 0; background: var(--surface); }
+.claim summary { cursor: pointer; padding: 0.6rem 0.8rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; list-style: none; }
+.claim summary::-webkit-details-marker { display: none; }
+.claim summary::before { content: "▸"; color: var(--muted); }
+.claim details[open] summary::before { content: "▾"; }
+.claim-id { font-weight: 700; color: var(--ink-2); }
+.claim-text { flex: 1 1 100%; }
+.claim-body { padding: 0 0.9rem 0.8rem; border-top: 1px solid var(--grid); }
+.evlist { list-style: none; padding: 0; }
+.ev { border-left: 3px solid var(--axis); padding: 0.3rem 0 0.3rem 0.7rem; margin: 0.5rem 0; }
+.ev-sup { border-left-color: var(--lv-low); }
+.ev-con { border-left-color: var(--lv-vhigh); }
+.stance { font-weight: 700; font-size: 0.82rem; margin-right: 0.3rem; }
+.ev blockquote { margin: 0.25rem 0 0; color: var(--ink-2); font-size: 0.92rem; }
+
+/* ---------- situation ------------------------------------------------- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.7rem; margin-bottom: 1rem; }
+.tile { border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 0.9rem; background: var(--surface); }
+.tile-label { font-size: 0.84rem; color: var(--ink-2); }
+.tile-value { font-size: 1.7rem; font-weight: 650; line-height: 1.3; margin: 0.15rem 0; }
+.tile-meta, .tile-note { font-size: 0.78rem; color: var(--muted); }
+.two-col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.4rem; }
+.bullets li { margin-bottom: 0.35rem; }
+.timeline { list-style: none; padding: 0; border-left: 2px solid var(--axis); margin-left: 0.4rem; }
+.timeline li { position: relative; padding: 0 0 0.7rem 1rem; display: grid; grid-template-columns: 6.2rem 1fr; gap: 0.5rem; font-size: 0.92rem; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 0.45rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.timeline time { font-variant-numeric: tabular-nums; color: var(--ink-2); font-weight: 600; }
+.tw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.4rem 1.4rem; }
+.chart { margin: 1rem 0; }
+.chart figcaption { margin-bottom: 0.5rem; }
+.bars { display: grid; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: minmax(5rem, 9rem) 1fr 4rem; align-items: center; gap: 0.5rem; padding: 2px 0; border-radius: 4px; }
+.bar-row:hover, .bar-row:focus { background: var(--surface-2); }
+.bar-label { font-size: 0.9rem; }
+.bar-track { height: 18px; }
+.bar { display: block; height: 100%; max-width: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-val { font-variant-numeric: tabular-nums; font-size: 0.9rem; }
+.tableview summary { cursor: pointer; color: var(--accent-ink); font-size: 0.9rem; margin-top: 0.4rem; }
+.ts-chart svg { width: 100%; height: auto; display: block; }
+.tooltip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--surface); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.85rem; max-width: 260px; }
+
+/* ---------- matrix ---------------------------------------------------- */
+.matrix-layout { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+.matrix-wrap { position: relative; }
+.matrix .corner { font-size: 0.7rem; color: var(--muted); line-height: 1.3; vertical-align: bottom; }
+.matrix .corner span { display: block; }
+.matrix .corner span:first-child { text-align: right; }
+.matrix { border-collapse: separate; border-spacing: 2px; width: 100%; table-layout: fixed; }
+.matrix th { font-size: 0.78rem; color: var(--ink-2); font-weight: 600; text-align: center; padding: 2px; }
+.matrix thead td { width: 3.4rem; }
+.matrix th[scope="row"] { width: 3.4rem; }
+.matrix .ax { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
+.cell { height: 4.4rem; border-radius: 4px; vertical-align: top; padding: 3px 4px; position: relative; }
+.cell-none { background: var(--lv-none-bg); }
+.cell-vlow { background: var(--lv-vlow-bg); }
+.cell-low { background: var(--lv-low-bg); }
+.cell-mod { background: var(--lv-mod-bg); }
+.cell-high { background: var(--lv-high-bg); background-image: repeating-linear-gradient(45deg, transparent 0 7px, color-mix(in srgb, var(--lv-high) 18%, transparent) 7px 8px); }
+.cell-vhigh { background: var(--lv-vhigh-bg); background-image: repeating-linear-gradient(135deg, transparent 0 5px, color-mix(in srgb, var(--lv-vhigh) 22%, transparent) 5px 6px); }
+.cell-lv { font-size: 0.72rem; color: var(--ink-2); font-weight: 600; }
+.markers { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
+.marker { font: inherit; font-size: 0.85rem; font-weight: 700; width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 2px solid var(--surface); background: var(--ink); color: var(--surface); cursor: pointer; box-shadow: 0 0 0 1px var(--ink); }
+.marker:hover, .marker[aria-pressed="true"] { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.marker.ghost { background: transparent; color: var(--ink); border: 2px dashed var(--ink); box-shadow: none; }
+.matrix-detail { border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; min-height: 8rem; background: var(--surface-2); }
+.matrix-detail h4 { margin-top: 0; }
+.matrix-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.7rem 0; }
+.whatif { margin-top: 1.4rem; border: 2px dashed var(--axis); border-radius: 12px; padding: 0.9rem 1rem; }
+.whatif h3 { margin-top: 0; }
+.trial-tag { display: inline-block; font-size: 0.8rem; background: var(--ink); color: var(--surface); padding: 0 0.5em; border-radius: 4px; margin-right: 0.4rem; vertical-align: 0.1em; }
+.wi-controls, .filters { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: flex-end; }
+.wi-controls label, .filters label { display: flex; flex-direction: column; font-size: 0.82rem; color: var(--ink-2); gap: 0.2rem; }
+select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(--surface); border: 1px solid var(--axis); border-radius: 8px; padding: 0.3rem 0.5rem; min-height: 36px; max-width: 100%; }
+.wi-out { margin-top: 0.8rem; }
+.wi-out .delta { font-weight: 700; }
+
+/* ---------- scenarios / recs / refs ---------------------------------- */
+.scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; }
+.scn { border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; border-top-width: 4px; }
+.scn h3 { margin-top: 0.2rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.scn-best { border-top-color: var(--lv-low); }
+.scn-likely { border-top-color: var(--accent); }
+.scn-worst { border-top-color: var(--lv-vhigh); }
+.ihr-result { font-size: 1.02rem; }
+.recs { list-style: none; padding: 0; display: grid; gap: 0.6rem; margin-top: 0.8rem; }
+.rec { border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.9rem; }
+.rec-head { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.rec-head .chip { margin-left: 0; }
+.pri { font-size: 0.78rem; font-weight: 700; padding: 0 0.5em; border-radius: 6px; border: 1.5px solid; }
+.pri-h { color: var(--lv-vhigh-ink); border-color: var(--lv-vhigh); background: var(--lv-vhigh-bg); }
+.pri-m { color: var(--lv-mod-ink); border-color: var(--lv-mod); background: var(--lv-mod-bg); }
+.pri-l { color: var(--ink-2); border-color: var(--axis); }
+.issues summary { cursor: pointer; font-weight: 600; }
+.issues ul { list-style: none; padding: 0; font-size: 0.9rem; }
+.iss { padding: 0.3rem 0.5rem; border-left: 3px solid var(--axis); margin: 0.25rem 0; }
+.iss-error { border-left-color: var(--lv-vhigh); background: var(--err-bg); }
+.iss-warning { border-left-color: var(--warn-border); background: var(--warn-bg); }
+.iss-sev { font-weight: 700; margin-right: 0.5rem; }
+.method li { margin-bottom: 0.4rem; }
+.mini-matrix { max-width: 640px; text-align: center; }
+.mini-matrix td { text-align: center; }
+.refs { padding-left: 1.6rem; }
+.refs li { margin-bottom: 0.55rem; }
+.ref-id { font-size: 0.75rem; color: var(--muted); margin-right: 0.3rem; }
+.url { color: var(--muted); word-break: break-all; }
+.refs li:target { background: var(--warn-bg); outline: 2px solid var(--warn-border); border-radius: 4px; }
+.disclaimer.final { margin-top: 1.4rem; }
+
+/* ---------- responsive ------------------------------------------------ */
+@media (max-width: 860px) {
+  .bluf-grid, .two-col, .matrix-layout { grid-template-columns: 1fr; }
+  .bluf-level { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--grid); padding-bottom: 1rem; }
+}
+@media (max-width: 700px) {
+  .topbar { position: static; }
+  .card { padding: 1rem; border-radius: 12px; }
+  .report-title { font-size: 1.35rem; }
+  .bluf-facts, .proscons { grid-template-columns: 1fr; }
+  .lv-xl { font-size: 2.1rem; }
+  /* stacked tables: each row becomes a card, header text shown inline */
+  .risk-table, .risk-table tbody, .risk-table tr, .risk-table th, .risk-table td,
+  .tbl-stack, .tbl-stack tbody, .tbl-stack tr, .tbl-stack td { display: block; width: 100% !important; }
+  .risk-table thead, .tbl-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .risk-table tr, .tbl-stack tr { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.8rem; padding: 0.3rem 0.2rem; }
+  .risk-table td[data-th]::before, .tbl-stack td[data-th]::before { content: attr(data-th); display: block; font-size: 0.76rem; color: var(--muted); font-weight: 600; margin-bottom: 0.15rem; }
+  .risk-table th, .risk-table td, .tbl-stack td { border-bottom: 1px dashed var(--grid); }
+  .timeline li { grid-template-columns: 1fr; gap: 0; }
+  .bar-row { grid-template-columns: 5.5rem 1fr 3rem; }
+  .cell { height: 3.6rem; padding: 2px; }
+  .matrix thead td, .matrix th[scope="row"] { width: 2.6rem; }
+  .marker { width: 1.7rem; height: 1.7rem; font-size: 0.78rem; }
+  .marker.static { width: auto; min-width: 1.6rem; }
+}
+
+/* ---------- print (A4) ----------------------------------------------- */
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    color-scheme: light;
+    --page: #fff; --surface: #fff; --surface-2: #f4f4f2; --ink: #000; --ink-2: #333; --muted: #555;
+    --grid: #ccc; --axis: #999; --border: #bbb; --accent: #1c5cab; --accent-ink: #1c5cab;
+    --lv-none-bg: #f2f1ed; --lv-vlow-bg: #e3f4e3; --lv-low-bg: #eef6dc; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
+    --lv-none-ink: #52514e; --lv-vlow-ink: #0a5c0a; --lv-low-ink: #3d6b1e; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
+    --warn-bg: #fff6dc; --err-bg: #fbe5e5;
+  }
+  body { font-size: 10.5pt; background: #fff; }
+  .topbar, .toc, .whatif, .filters, .skip, .tooltip { display: none !important; }
+  .marker { background: #000 !important; color: #fff !important; }
+  .card { border: 1px solid #bbb; box-shadow: none; break-inside: auto; padding: 0.8rem 1rem; }
+  .option, .scn, .tile, .claim, .rec, tr { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  a { color: #000; }
+  .refs a::after { content: ""; }
+  .matrix-layout { grid-template-columns: 1fr; }
+  .matrix-detail { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (forced-colors: active) {
+  .lv, .vd, .ans, .pri { border: 2px solid CanvasText; }
+  .marker { forced-color-adjust: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lvicon-none" viewBox="0 0 16 16"><rect x="2" y="7" width="12" height="2.4" rx="1" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vlow" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+  <symbol id="lvicon-low" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></symbol>
+  <symbol id="lvicon-mod" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-high" viewBox="0 0 16 16"><path d="M8 .8 15.2 8 8 15.2.8 8z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vhigh" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2" fill="currentColor"/><rect x="7" y="3.8" width="2" height="5.6" fill="#fff"/><rect x="7" y="10.6" width="2" height="2" fill="#fff"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-half" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></symbol>
+  <symbol id="i-question" viewBox="0 0 16 16"><path d="M5.5 6a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5V10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="8" cy="13" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 4.5V8l2.5 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="7.2" y="6" width="1.6" height="4.4" fill="currentColor"/><rect x="7.2" y="11.4" width="1.6" height="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1.2l2 4.3 4.7.6-3.4 3.2.9 4.6L8 11.6 3.8 13.9l.9-4.6L1.3 6.1 6 5.5z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#main">跳至主要內容</a>
+
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <div class="brand">疫情風險評估報告<span class="brand-sub">AI 草稿・待審</span></div>
+    <div class="toolbar">
+      <button type="button" class="btn" id="themeBtn" aria-label="切換顯示主題">主題：自動</button>
+      <button type="button" class="btn" id="printBtn">列印／存 PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="disclaimer" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>本報告為 AI 產生之草稿，尚未經流行病學專業人員審閱，不得逕作為正式決策依據。</strong>
+    資料截止：2026-11-19 16:10（UTC+08:00）；產出：2026-11-19 16:30（UTC+08:00）。
+</div>
+  </div>
+
+  <nav class="toc" aria-label="報告目錄">
+    <ol>
+      <li><a href="#sec-bluf">決策摘要</a></li>
+      <li><a href="#sec-decision">長官下一步決策建議</a></li>
+      <li><a href="#sec-verify">新聞查證</a></li>
+      <li><a href="#sec-situation">疫情概況</a></li>
+      <li><a href="#sec-risk">風險評估表</a></li>
+      <li><a href="#sec-scenario">情境分析與 IHR</a></li>
+      <li><a href="#sec-recs">建議事項</a></li>
+      <li><a href="#sec-limits">限制、方法與參考資料</a></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" class="wrap">
+<h1 class="report-title">瑞士首見本土屈公病病例：WHO 疾病爆發新聞查證與我國快速風險評估</h1>
+<p class="meta-line">事件：瑞士提契諾州通報 4 例本土屈公病（該國首見）｜地點：瑞士提契諾州（Ticino）｜危害：屈公病毒（Chikungunya virus）</p>
+
+<!-- 1. BLUF ============================================================ -->
+<section id="sec-bluf" class="card bluf" aria-labelledby="h-bluf">
+  <h2 id="h-bluf"><span class="secno">1</span>決策摘要</h2>
+  <div class="bluf-grid">
+    <div class="bluf-level">
+      <div class="label">綜合等級（ECDC 2019 為主要方法）</div>
+      <div class="hero-level"><span class="lv lv-low lv-xl"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+<div class="compact-line" aria-label="各架構結果">ECDC 低｜WHO 低｜HAIRS 機率中・衝擊低｜文章式判斷 低｜審慎上限 中</div>
+      <div class="sub">各架構一致性：<strong>一致</strong>　<a href="#synthesis-h">見綜合評估</a></div>      <div class="sub">矩陣等級：<span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span>
+        <span class="muted">（ECDC 圖 4：機率 極低 × 衝擊 極低）</span></div>
+      <div class="sub">信心程度：<strong>中（尚可）</strong>
+<span class="muted">（受「境外移入風險」信心程度「中」限制）</span></div>
+      <div class="sub muted">評估者建議與規則計算一致（低）。</div>
+      <div class="strata-hl"><div class="label">矩陣風險高於整體之分層</div>
+        <ul><li>境外移入風險／自亞洲、美洲流行地區移入（任一來源，非本事件）：發生機率 <span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span>；矩陣風險（機率 4 × 衝擊 1）<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul></div>
+    </div>
+    <div class="bluf-body">
+      <p class="lead">瑞士首見之 4 例本土屈公病為已受控之小規模事件，蚊季將盡且無新增病例；未來 3 個月我國自瑞士或歐洲移入之機率極低，冬季發生本土傳播之機率亦極低，一般民眾衝擊極低。綜合研判我國整體風險為低。惟我國每年自亞洲流行地區移入之機率高，且具相同病媒；本事件之意義在於提醒流行季前之整備，而非當前之直接威脅。</p>
+      <h3>重點發現</h3>
+      <ol class="findings"><li>WHO DON627 之關鍵內容（4 例本土病例、無旅遊史、風險低）經瑞士媒體與 ECDC 資料查證相符，新聞可信度高。</li><li>未來 3 個月自瑞士或歐洲移入我國之機率極低：歐洲傳播具季節性且已近尾聲，我國 2025 年移入病例均來自亞洲。</li><li>我國每年自亞洲、美洲流行地區移入之機率高（2025 年截至 10/20 為 28 例，近 6 年同期最高），與本事件無關但為主要風險來源。</li><li>瑞士首例係回溯發現，且發生於長期實施白線斑蚊防治、蚊密度偏低之地區，顯示移入後之小規模本土傳播不易及早察覺。</li><li>法國 2026 年已逾 200 例本土病例，但我國對法國之屈公病旅遊疫情建議已於 2026-02-03 解除；我國 2026 年病例數本次未取得。</li></ol>
+      <div class="bluf-facts">
+        <div><div class="label">建議決策</div>
+<div class="strong"><svg class="ic star" aria-hidden="true"><use href="#i-star"/></svg>不對瑞士列等，但啟動流行季前整備</div>
+          <div class="muted">主責：疾管署（建議：疫情中心會同急性傳染病組）｜時程：1個月</div></div>
+        <div><div class="label">新聞可信度</div>
+          <div><span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span> <span class="muted">（規則計算；評估者建議：高）</span></div></div>
+        <div><div class="label">建議再評估日期</div><div class="strong">2026-12-17</div>
+          <div class="muted">或任一觸發指標出現時立即再評估</div></div>
+        <div><div class="label">IHR 附件二篩檢</div>
+          <div>1／4 項「是」（未達門檻）</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Decision ======================================================== -->
+<section id="sec-decision" class="card" aria-labelledby="h-decision">
+  <h2 id="h-decision"><span class="secno">2</span>長官下一步決策建議</h2>
+  <p class="question"><strong>決策問題：</strong>是否因瑞士首見本土屈公病，調整我國對瑞士之旅遊疫情建議或國內防治作為？</p>
+  <div class="options">
+    <article class="option" aria-label="選項 D1：維持現狀，僅例行監測">
+      <header>
+        <span class="opt-id">D1</span>
+        <h3>維持現狀，僅例行監測</h3>
+      </header>
+      <p>不調整旅遊疫情建議，持續例行國際疫情監測。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>與 WHO 不建議旅行限制及風險低之研判一致</li><li>不需額外資源</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>未處理歐洲旅遊疫情建議與實際疫情不一致之問題</li><li>未利用冬季空檔進行流行季前整備</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：疫情中心）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+      </dl>
+    </article>
+    <article class="option option-rec" aria-label="選項 D2：不對瑞士列等，但啟動流行季前整備（建議方案）">
+      <header>
+        <span class="opt-id">D2</span>
+        <h3>不對瑞士列等，但啟動流行季前整備</h3>
+<span class="rec-tag"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>建議方案</span>      </header>
+      <p>瑞士不列旅遊疫情建議等級；利用冬季完成歐洲列等原則檢視、致醫界通函與病媒防治整備（建議事項 A2、A3、A4）。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>措施強度與當前低風險相稱</li><li>針對真正之風險來源（全年移入與翌年流行季）預作準備</li><li>成本低，既有人力可執行</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>效益於翌年流行季才顯現</li><li>需跨單位協調地方政府</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：疫情中心會同急性傳染病組）</dd></div>
+        <div><dt>時程</dt><dd>1個月</dd></div>
+<div><dt>所需資源</dt><dd>致醫界通函 1 則、列等原則檢視 1 次；既有人力可支應</dd></div>      </dl>
+    </article>
+    <article class="option" aria-label="選項 D3：將瑞士列為第一級注意">
+      <header>
+        <span class="opt-id">D3</span>
+        <h3>將瑞士列為第一級注意</h3>
+      </header>
+      <p>比照其他有本土病例之國家，將瑞士列為屈公病第一級注意。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>提醒赴瑞士旅客防蚊</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>僅 4 例且傳播季已結束，強度與證據不相稱</li><li>WHO 研判不太可能再出現本土病例</li><li>冬季列等對旅客無實質防護效益</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：疫情中心）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+      </dl>
+    </article>
+  </div>
+  <p class="rec-reason"><strong>建議理由：</strong>本事件對我國之直接風險低，無需調整對瑞士之旅遊建議；其價值在於顯示有病媒之溫帶地區亦可發生不易察覺之本土傳播。D2 以低成本措施把握冬季空檔，處理我國真正之風險來源。</p>
+
+  <h3>觸發指標（出現時應調整風險等級並再評估）</h3>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">方向</th><th scope="col">觀察指標</th><th scope="col">門檻</th><th scope="col">監測來源</th><th scope="col">目前狀態</th></tr></thead>
+    <tbody>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">瑞士或鄰近歐洲國家於冬季仍出現新增本土病例</td>
+        <td data-th="門檻">任一起經官方證實</td>
+        <td data-th="監測來源">WHO DON、ECDC 監測、瑞士聯邦公共衛生局</td>
+        <td data-th="目前狀態">10 月後無新增</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">我國出現屈公病本土病例</td>
+        <td data-th="門檻">1 例</td>
+        <td data-th="監測來源">法定傳染病通報</td>
+        <td data-th="目前狀態">2025 年無本土疫情；2026 年資料未取得</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">我國境外移入病例數</td>
+        <td data-th="門檻">單月病例數高於近 5 年同期最高值</td>
+        <td data-th="監測來源">法定傳染病通報、疾管署新聞稿</td>
+        <td data-th="目前狀態">2025 年截至 10/20 為 28 例，近 6 年同期最高</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-down">▼ 降級</span></td>
+        <td data-th="觀察指標">歐洲傳播季結束且無新增病例</td>
+        <td data-th="門檻">ECDC 季節性監測結束且瑞士、法國連續 8 週無新增</td>
+        <td data-th="監測來源">ECDC 季節性監測</td>
+        <td data-th="目前狀態">傳播季接近尾聲</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 3. Verification ==================================================== -->
+<section id="sec-verify" class="card" aria-labelledby="h-verify">
+  <h2 id="h-verify"><span class="secno">3</span>新聞查證</h2>
+  <div class="newsbox">
+    <div class="label">被查證之新聞</div>
+<div class="strong"><a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON627" rel="noopener noreferrer">Disease Outbreak News: Chikungunya in Switzerland</a></div>
+    <div class="muted">World Health Organization｜2026-11-17｜官方衛生機關/國際組織｜取得方式：全文</div>    <p>WHO 於 2026-11-17 發布：瑞士提契諾州 11/4 通報 4 例無旅遊史之本土屈公病，為該國首見；最早發病日 8/10，主動搜尋未發現新增病例，因蚊季將盡，WHO 研判進一步本土傳播風險低，不建議旅行或貿易限制。同期法國已有 207 例本土病例。</p>
+    <p class="muted">分流（triage）：<strong>進行完整評估</strong>——來源為 WHO 官方通報；我國具相同病媒且每年有境外移入病例，本事件對我國之直接移入風險雖低，但對本土傳播之整備具參考價值。</p>
+  </div>
+  <div class="cred">
+    <div><span class="label">整體新聞可信度</span> <span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></div>
+    <div class="muted">規則：關鍵陳述平均查證分數 0.84（已證實=1、部分證實=0.6、過時=0.4、無法證實=0.25、不符=0）</div>
+    <div class="muted">評估者說明（建議「高」）：來源為 WHO 官方疾病爆發新聞（第一手、第 1 級），事件之病例數、無旅遊史、風險研判等關鍵內容均有瑞士媒體報導佐證，法國與義大利數字與 ECDC 相符；僅「瑞士首見」之措辭與全球統計未取得完全獨立之官方佐證。</div>
+  </div>
+  <div class="legend-row" aria-label="查證結果圖例">
+<span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span><span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span><span class="vd vd-unk"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>無法證實</span><span class="vd vd-bad"><svg class="ic" aria-hidden="true"><use href="#i-cross"/></svg>與官方資訊不符</span><span class="vd vd-old"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>過時</span>  </div>
+  <ol class="claims">
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C1</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">瑞士提契諾州於 2026-11-04 通報 4 例本土感染之屈公病。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>多家瑞士媒體於 11/4 報導州與聯邦衛生單位確認 4 例本土病例（Piana di Magadino 地區）。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S3" class="cite">[3]</a>
+<a href="https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html" rel="noopener noreferrer">RSI（瑞士義語區廣播電視）</a>              <span class="muted">｜2026-11-04｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：州政府會同聯邦單位於 2026-11-04 確認 4 例本土屈公熱，位於 Piana di Magadino 地區。</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S1" class="cite">[1]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON627" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-17｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;On 4 November 2026, health authorities in the canton of Ticino, Switzerland, in coordination with federal authorities, reported four locally acquired cases of chikungunya virus disease.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C2</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">此為瑞士首見之本土屈公病病例。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>英文媒體稱為瑞士首見；義語媒體之說法為「提契諾州首次出現由白線斑蚊傳播之病毒」。ECDC 截至 10/28 之歐洲本土病例國家僅列法國與義大利，與瑞士先前無本土病例相符，但 ECDC 監測範圍不含瑞士。瑞士聯邦公共衛生局網站無法連線，未取得官方原文。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：2｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S4" class="cite">[4]</a>
+<a href="https://outbreaknewstoday.substack.com/p/switzerland-reports-4-locally-acquired" rel="noopener noreferrer">Outbreak News Today</a>              <span class="muted">｜日期不明｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：稱此為瑞士首見之本土病例。</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S5" class="cite">[5]</a>
+<a href="https://www.cdt.ch/news/ticino/e-il-primo-caso-di-virus-trasmesso-dalle-zanzare-tigre-in-ticino-443688" rel="noopener noreferrer">Corriere del Ticino</a>              <span class="muted">｜日期不明｜主流媒體｜搜尋摘要</span>              <blockquote>標題：「這是提契諾州首例由白線斑蚊傳播之病毒病例」。</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00016/2026-10-30" rel="noopener noreferrer">European Centre for Disease Prevention and Control</a>              <span class="muted">｜2026-10-30｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;as at 28 October 2026, two countries in Europe have reported locally acquired cases of chikungunya virus disease: France (204 cases) and Italy (one case).&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C3</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">4 名個案近期均無前往屈公病流行地區之旅遊史，且居住於同一區域。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>瑞士媒體報導個案近期未前往病毒流行地區，均位於 Piana di Magadino 地區。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S3" class="cite">[3]</a>
+<a href="https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html" rel="noopener noreferrer">RSI（瑞士義語區廣播電視）</a>              <span class="muted">｜2026-11-04｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：病人近期未曾前往病毒流行地區；病例集中於 Piana di Magadino。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C4</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+          <span class="claim-text">4 名個案病程良好，部分仍有關節症狀。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>瑞士媒體報導個案狀況良好，惟關節不適持續。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S3" class="cite">[3]</a>
+<a href="https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html" rel="noopener noreferrer">RSI（瑞士義語區廣播電視）</a>              <span class="muted">｜2026-11-04｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：病人狀況良好，僅持續有關節不適。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C5</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">主動病例搜尋未發現新增病例，進一步本土傳播之風險低。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>州衛生部門評估風險非常低（病例少、蚊季將盡），州醫官表示 10 月後未再出現新病例。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S3" class="cite">[3]</a>
+<a href="https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html" rel="noopener noreferrer">RSI（瑞士義語區廣播電視）</a>              <span class="muted">｜2026-11-04｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：州衛生部門評估風險非常低，理由包括病例數少及蚊子活動季節即將結束；10 月後未再登錄新病例。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C6</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">截至 2026-11-04，法國通報 207 例本土屈公病，義大利通報 1 例。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>ECDC 截至 10/28 之數字為法國 204 例、義大利 1 例；一週後增至 207 例屬合理，但 11/4 之確切數字未取得獨立來源。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00016/2026-10-30" rel="noopener noreferrer">European Centre for Disease Prevention and Control</a>              <span class="muted">｜2026-10-30｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;France (204 cases) and Italy (one case)&#34;（截至 2026-10-28）</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C7</span>
+          <span class="vd vd-unk"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>無法證實</span>
+          <span class="claim-text">2026 年 1 月 1 日至 9 月 30 日全球通報 327,086 例屈公病（83,660 例確診）、98 例死亡。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>數字出自 WHO 全球屈公病監測儀表板，與本新聞同一發布者；本次未取得其他獨立來源之全球統計。</p>
+          <p class="muted">獨立來源數：0</p>
+          <ul class="evlist">
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S1" class="cite">[1]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON627" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-17｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;From 1 January through 30 September 2026, 327 086 cases, including 83 660 confirmed cases and 98 deaths, were reported globally&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C8</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+          <span class="claim-text">白線斑蚊已在提契諾州立足，為屈公病毒之有效病媒。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>瑞士媒體以白線斑蚊（zanzara tigre）傳播報導本事件；ECDC 疾病說明亦載明白線斑蚊可傳播屈公病毒。</p>
+          <p class="muted">獨立來源數：2｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S5" class="cite">[5]</a>
+<a href="https://www.cdt.ch/news/ticino/e-il-primo-caso-di-virus-trasmesso-dalle-zanzare-tigre-in-ticino-443688" rel="noopener noreferrer">Corriere del Ticino</a>              <span class="muted">｜日期不明｜主流媒體｜搜尋摘要</span>              <blockquote>標題提及病毒由白線斑蚊（zanzare tigre）於提契諾州傳播。</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S6" class="cite">[6]</a>
+<a href="https://www.ecdc.europa.eu/en/chikungunya/facts/factsheet" rel="noopener noreferrer">European Centre for Disease Prevention and Control</a>              <span class="muted">｜日期不明｜官方衛生機關/國際組織｜全文</span>              <blockquote>ECDC 說明屈公病毒由斑蚊屬（含 Ae. albopictus）傳播。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+  </ol>
+</section>
+
+<!-- 4. Situation ======================================================= -->
+<section id="sec-situation" class="card" aria-labelledby="h-sit">
+  <h2 id="h-sit"><span class="secno">4</span>疫情概況</h2>
+  <div class="tiles">
+    <div class="tile">
+      <div class="tile-label">瑞士本土病例</div>
+      <div class="tile-value">4 例</div>
+      <div class="tile-meta">截至 2026-11-04 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S3" title="RSI（瑞士義語區廣播電視）：Quattro casi di febbre Chikungunya in Ticino">[3]</a></span></div>
+<div class="tile-note">該國首見；無新增疑似病例</div>    </div>
+    <div class="tile">
+      <div class="tile-label">法國 2026 年本土病例</div>
+      <div class="tile-value">207 例</div>
+      <div class="tile-meta">截至 2026-11-04 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a></span></div>
+<div class="tile-note">ECDC 截至 10/28 為 204 例</div>    </div>
+    <div class="tile">
+      <div class="tile-label">義大利 2026 年本土病例</div>
+      <div class="tile-value">1 例</div>
+      <div class="tile-meta">截至 2026-10-28 <span class="cites"><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></div>
+<div class="tile-note">羅馬，8 月發病</div>    </div>
+    <div class="tile">
+      <div class="tile-label">全球 2026 年 1–9 月</div>
+      <div class="tile-value">327,086 例</div>
+      <div class="tile-meta">截至 2026-09-30 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></div>
+<div class="tile-note">98 例死亡；WHO 儀表板</div>    </div>
+    <div class="tile">
+      <div class="tile-label">我國 2025 年病例</div>
+      <div class="tile-value">28 例</div>
+      <div class="tile-meta">截至 2025-10-20 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span></div>
+<div class="tile-note">均為境外移入，近 6 年同期最高；2026 年數字未取得</div>    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>國際疫情概況</h3>
+      <ul class="bullets"><li>瑞士提契諾州 11/4 通報 4 例本土病例：最早發病日 8/10（回溯發現、感染源不明），其餘於 10/9、10/13、10/22、10/23 檢出或確認；均無流行區旅遊史、居住同一區域。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S3" title="RSI（瑞士義語區廣播電視）：Quattro casi di febbre Chikungunya in Ticino">[3]</a></span></li><li>主動病例搜尋（含當地執業醫師與 2 家急診）未發現其他疑似病例；採集之白線斑蚊密度偏低且未檢出病毒 RNA。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>防治措施：10/22 啟動擴大疫調，10/26 起逐戶進行成蚊與幼蟲防治，並向全州醫師發函提高警覺。提契諾州自 2000 年起即有白線斑蚊監測與防治計畫。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>歐洲同期：ECDC 截至 10/28 為法國 204 例、義大利 1 例本土病例；WHO 截至 11/4 為法國 207 例。 <span class="cites"><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>全球：WHO 統計 2026 年 1–9 月共 327,086 例（83,660 例確診）、98 例死亡，以美洲區及東南亞區為多。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>WHO 指出，本事件顯示病毒經旅客帶入已有白線斑蚊之地區後，可發生本土傳播；長期而言氣候變化可能擴大適合傳播之地區與季節。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li></ul>
+      <h3>國際機構既有評估</h3>
+      <ul class="bullets"><li>WHO：本事件之公共衛生影響預期有限；在目前流行病學與季節條件下，進一步傳播風險低，不太可能再出現本土病例。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>WHO：依現有資訊，不建議對事件發生國採取任何旅行或貿易限制。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>WHO 於 2026-05-01 發布全球屈公病快速風險評估第 2 版；其風險等級本次未取得（僅讀得出版品頁面）。 <span class="cites"><a class="cite" href="#ref-S12" title="World Health Organization：WHO Rapid Risk Assessment: Chikungunya virus disease, Global, version 2">[12]</a></span></li></ul>
+    </div>
+    <div>
+      <h3>事件時序</h3>
+      <ol class="timeline">
+        <li><time datetime="2026-08-10">2026-08-10</time><span>瑞士最早一例發病（回溯發現） <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></span></li>
+        <li><time datetime="2026-10-09">2026-10-09</time><span>瑞士首例實驗室陽性（IgM） <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></span></li>
+        <li><time datetime="2026-10-22">2026-10-22</time><span>第 3 例確認，啟動擴大疫調 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></span></li>
+        <li><time datetime="2026-10-26">2026-10-26</time><span>展開針對性病媒防治 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></span></li>
+        <li><time datetime="2026-11-04">2026-11-04</time><span>提契諾州與聯邦單位公布 4 例本土病例 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S3" title="RSI（瑞士義語區廣播電視）：Quattro casi di febbre Chikungunya in Ticino">[3]</a></span></span></li>
+        <li><time datetime="2026-11-17">2026-11-17</time><span>WHO 發布 DON627 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></span></li>
+      </ol>
+    </div>
+  </div>
+
+  <figure class="chart" aria-labelledby="cc-title">
+    <figcaption id="cc-title"><strong>各國病例數</strong>（2026 年本土病例，截至 11/4）</figcaption>
+    <div class="bars" role="list">
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="法國：207 例（2026 年本土病例，截至 11/4）">
+        <span class="bar-label">法國</span>
+        <span class="bar-track"><span class="bar" style="width: 100.0%"></span></span>
+        <span class="bar-val">207</span>
+      </div>
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="瑞士：4 例，死亡 0（2026 年本土病例，截至 11/4）">
+        <span class="bar-label">瑞士</span>
+        <span class="bar-track"><span class="bar" style="width: 1.9%"></span></span>
+        <span class="bar-val">4</span>
+      </div>
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="義大利：1 例（2026 年本土病例，截至 10/28）">
+        <span class="bar-label">義大利</span>
+        <span class="bar-track"><span class="bar" style="width: 0.5%"></span></span>
+        <span class="bar-val">1</span>
+      </div>
+    </div>
+    <details class="tableview"><summary>表格檢視</summary>
+      <table class="tbl"><thead><tr><th scope="col">國家</th><th scope="col">病例</th><th scope="col">死亡</th><th scope="col">期間</th><th scope="col">來源</th></tr></thead>
+      <tbody><tr><td>法國</td><td class="num">207</td><td class="num">—</td><td>2026 年本土病例，截至 11/4</td><td><span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr><tr><td>瑞士</td><td class="num">4</td><td class="num">0</td><td>2026 年本土病例，截至 11/4</td><td><span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr><tr><td>義大利</td><td class="num">1</td><td class="num">—</td><td>2026 年本土病例，截至 10/28</td><td><span class="cites"><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a></span></td></tr></tbody></table>
+    </details>
+  </figure>
+
+
+  <h3>病原與傳播特性</h3>
+  <p>屈公病由屈公病毒引起，經埃及斑蚊與白線斑蚊叮咬傳播，人不會直接傳染給人。多數感染者有症狀，以突發高燒與嚴重關節痛為特徵，關節痛可持續數週至數年；重症與死亡少見，但新生兒、長者及慢性病者風險較高。無特效藥，已有疫苗於部分國家核准。</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-kv">
+    <tbody><tr><th scope="row">病原</th><td>屈公病毒，Togaviridae 科 Alphavirus 屬，單股 RNA 病毒 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr><tr><th scope="row">病媒</th><td>埃及斑蚊（Aedes aegypti）及白線斑蚊（Aedes albopictus） <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></td></tr><tr><th scope="row">傳染方式</th><td>經病媒蚊叮咬（人－蚊－人）；人不會直接傳染給人。母親分娩時處於病毒血症期可發生周產期傳染 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S6" title="European Centre for Disease Prevention and Control：Factsheet for health professionals about chikungunya virus disease">[6]</a></span></td></tr><tr><th scope="row">潛伏期</th><td>1–12 天（平均 3–7 天）；WHO：一般 4–8 天，範圍 2–12 天 <span class="cites"><a class="cite" href="#ref-S6" title="European Centre for Disease Prevention and Control：Factsheet for health professionals about chikungunya virus disease">[6]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr><tr><th scope="row">病毒血症期</th><td>發病前 2 天至發病後 5 天；病毒於蚊體內增殖 2 至 9 天後具傳播力 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><th scope="row">臨床表現</th><td>突然發燒、關節疼痛或關節炎（約 70%）、皮疹（約半數）；關節痛可持續數週至數月甚至數年 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><th scope="row">高風險族群</th><td>出生時感染之新生兒、65 歲以上長者、高血壓、糖尿病或心血管疾病患者 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></td></tr><tr><th scope="row">治療</th><td>無特效抗病毒藥物，以症狀及支持性治療為主 <span class="cites"><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr><tr><th scope="row">疫苗</th><td>歐盟已核准 IXCHIQ（活性減毒）與 VIMKUNYA（類病毒顆粒），均適用 12 歲以上；WHO 指出疫苗尚未普及。我國疫苗核准與供應情形本次未查得 <span class="cites"><a class="cite" href="#ref-S6" title="European Centre for Disease Prevention and Control：Factsheet for health professionals about chikungunya virus disease">[6]</a><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></td></tr></tbody>
+  </table>
+  </div>
+
+  <h3>我國現況</h3>
+<p><strong>法定傳染病分類：</strong>第二類法定傳染病</p>  <div class="tw-grid">
+    <div class="tw-block"><h4>監測與通報</h4>
+      <ul class="bullets"><li>屈公病為我國第二類法定傳染病。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></li><li>2025 年截至 10/20 累計 28 例確定病例，均為境外移入，感染國家以印尼（16 例）為多，其次為菲律賓（7 例）、中國廣東省（3 例）、斯里蘭卡及孟加拉（各 1 例），為近 6 年同期最高（2020–2024 年同期介於 1–15 例）。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span></li><li>疾管署於 2025-08-10 說明當時國內並無本土疫情。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>我國 2026 年屈公病病例數與是否有本土病例，本次未取得（疾管署 2026 年無屈公病專稿、傳染病統計資料查詢系統無法連線）。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>檢驗量能</h4>
+      <ul class="bullets"><li>疾管署對通報個案進行檢驗確診；檢驗方法與量能之最新資料本次未查。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>病媒／宿主分布</h4>
+      <ul class="bullets"><li>可傳播屈公病毒之病媒蚊為埃及斑蚊及白線斑蚊，兩者我國均有。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>一旦病毒進入社區且周圍有病媒蚊孳生源，即有流行之可能。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></li><li>評估期間（11 月至翌年 2 月）為我國病媒蚊密度較低之季節；各縣市近期病媒蚊指數本次未取得。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>邊境檢疫與旅遊疫情建議</h4>
+      <ul class="bullets"><li>屈公病旅遊疫情建議現行等級：印度、巴西、阿根廷、玻利維亞為第二級警示；印尼、馬來西亞、菲律賓、蘇利南、法屬圭亞那為第一級注意。瑞士與義大利未列等級。 <span class="cites"><a class="cite" href="#ref-S11" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[11]</a></span></li><li>法國之屈公病旅遊疫情建議已於 2026-02-03 解除，惟法國 2026 年已通報逾 200 例本土病例。 <span class="cites"><a class="cite" href="#ref-S11" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[11]</a><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a></span></li><li>自流行地區入境後應自我健康監測 14 天，有疑似症狀應就醫並告知旅遊史。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></li><li>國人赴瑞士、法國、義大利之旅次本次未取得。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>醫療與感染管制</h4>
+      <ul class="bullets"><li>通報個案由地方衛生局進行疫情調查，並於個案病毒血症期間之住處進行病媒蚊密度調查、孳生源清除與必要之化學防治，同時加強附近居民健康監測。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>疾管署會發布新聞稿及致醫界通函，提醒民眾與醫療體系注意。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li></ul></div>
+  </div>
+</section>
+
+<!-- 5. Risk table + matrix ============================================= -->
+<section id="sec-risk" class="card" aria-labelledby="h-risk">
+  <h2 id="h-risk"><span class="secno">5</span>風險評估表</h2>
+  <p class="muted">格式依疾管署《疫情報導》風險評估表（評估項目／評估內容／風險等級定義／評估結果）。與原文章相同，機率類項目（如境外移入、社區流行）之「評估結果」為<strong>發生機率</strong>（1–5 對應低／中／高），「衝擊」另列一列；另附「矩陣風險（機率×衝擊）」供參考並標示於下方矩陣。「綜合研判」才合併機率與衝擊：取各機率類項目之最高矩陣風險，對應為三級。評估者原始建議並列。</p>
+  <div class="table-wrap">
+  <table class="tbl risk-table">
+    <caption class="sr-only">我國風險評估表</caption>
+    <thead><tr><th scope="col">評估項目</th><th scope="col">評估內容</th><th scope="col">風險等級定義</th><th scope="col">評估結果</th></tr></thead>
+    <tbody>
+      <tr id="item-R1">
+        <th scope="row" data-th="評估項目"><span class="item-n">1</span>境外移入風險<div class="muted small">未來 3 個月內，我國出現自瑞士（或歐洲本土傳播地區）移入之屈公病確定病例之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>瑞士僅 4 例且 10 月後無新增，蚊季將盡，WHO 研判不太可能再出現本土病例。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S3" title="RSI（瑞士義語區廣播電視）：Quattro casi di febbre Chikungunya in Ticino">[3]</a></span></li><li>法國 2026 年雖有逾 200 例本土病例，但歐洲之傳播具季節性，入冬後病媒活動下降。 <span class="cites"><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>我國 2025 年 28 例境外移入之感染地均為亞洲國家，無自歐洲移入者。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>事件地區病例少且傳播已因季節中止，我國無自該地區移入紀錄</li>
+          <li><strong>中：</strong>事件地區於傳播季出現持續本土傳播，或我國出現自該地區移入病例</li>
+          <li><strong>高：</strong>事件地區大規模流行且為國人常往返地區，我國接連出現自該地區移入病例</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">發生機率</div>
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 1（極低）→ 低
+<div class="algpath">ECDC 圖 2.2：Q2 否 ⇒ 極低</div>            <div class="mrisk">矩陣風險（機率×衝擊）：1×1（衝擊沿用衝擊項目） → <span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span></div>
+          </div>
+<ul class="strata"><li>自亞洲、美洲流行地區移入（任一來源，非本事件）：<span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="small">｜矩陣風險 4×1 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></span><div class="algpath">ECDC 圖 2.2：Q2 是 → Q3 是 → Q4 是 ⇒ 高</div></li></ul>          <div class="small">信心：<strong>中（尚可）</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>歐洲傳播季已近尾聲，瑞士無新增病例，國人於當地暴露之可能性極低。</p>            <p><strong>信心程度理由：</strong>事件資訊來自 WHO 全文並有 ECDC 與瑞士媒體佐證；但缺我國 2026 年病例數與赴歐旅次資料。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R2">
+        <th scope="row" data-th="評估項目"><span class="item-n">2</span>國內社區流行風險<div class="muted small">未來 3 個月內，我國因境外移入個案而發生屈公病本土傳播之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>我國有埃及斑蚊與白線斑蚊，病毒進入社區且有孳生源時即可能流行。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>2025 年 28 例境外移入均未引起本土疫情；每例個案之住處均進行病媒調查與防治。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>瑞士事件顯示：即使在長期實施白線斑蚊防治、蚊密度偏低之溫帶地區，夏季仍可能因移入而發生小規模本土傳播，且首例係回溯才發現。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>評估期間為冬季，病媒蚊活動較低。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>僅有境外移入病例，無本土病例；或處於病媒蚊低密度季節</li>
+          <li><strong>中：</strong>流行季出現零星本土病例或單一侷限群聚</li>
+          <li><strong>高：</strong>出現多起本土群聚或跨縣市傳播</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">發生機率</div>
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 1（極低）→ 低
+<div class="algpath">ECDC 圖 2.1：Q1 是 → Q2 否 ⇒ 極低</div>            <div class="mrisk">矩陣風險（機率×衝擊）：1×1（衝擊沿用衝擊項目） → <span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span></div>
+          </div>
+<ul class="strata"><li>翌年夏秋病媒蚊活躍季（評估期間之外）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="small">｜矩陣風險 2×1 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></span></li></ul>          <div class="small">信心：<strong>中（尚可）</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>每年雖有移入個案，但評估期間為病媒蚊低密度季節，且近年移入個案均未引起本土傳播。</p>            <p><strong>信心程度理由：</strong>病媒與防治作法來自疾管署全文；但缺 2026 年病例數與近期病媒蚊指數，季節判斷屬推論。</p>
+<p class="muted">規則上限：僅單一發布者之來源 → 上限「中」</p>          </details>
+        </td>
+      </tr>
+      <tr id="item-R3">
+        <th scope="row" data-th="評估項目"><span class="item-n">3</span>衝擊<div class="muted small">若我國發生屈公病本土傳播，對國人健康、醫療體系及社會之衝擊為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>嚴重程度不如登革熱重症，較少出現死亡；但關節痛可持續數週至數月甚至數年，影響行動。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></li><li>新生兒、65 歲以上長者及高血壓、糖尿病、心血管疾病患者較易重症。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></li><li>無特效抗病毒藥物；疫苗已於部分國家核准但尚未普及。 <span class="cites"><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a><a class="cite" href="#ref-S6" title="European Centre for Disease Prevention and Control：Factsheet for health professionals about chikungunya virus disease">[6]</a></span></li><li>我國已有登革熱防治體系可沿用之病媒防治與個案處置流程。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>2025 年曾因社群媒體謠傳國內恐大規模流行，疾管署需發稿澄清，顯示本土病例可能引起民眾疑慮。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>多為自限性疾病、死亡罕見，既有病媒防治量能可因應</li>
+          <li><strong>中：</strong>高風險族群出現重症，或群聚需投入額外病媒防治與醫療資源</li>
+          <li><strong>高：</strong>大規模流行造成醫療與病媒防治量能吃緊，並有死亡病例</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">衝擊</div>
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+衝擊 1（極低）→ 低
+<div class="algpath">ECDC 圖 3：Q5 否 ⇒ 極低</div>          </div>
+<ul class="strata"><li>新生兒、65 歲以上長者及慢性病患者：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（建議 中）</span><div class="algpath">ECDC 圖 3：Q5 是 → Q6 否 ⇒ 低</div></li></ul>          <div class="small">信心：<strong>高（良好）</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>衝擊：</strong>一般民眾不太會重症，死亡罕見。</p>            <p><strong>信心程度理由：</strong>嚴重度與高風險族群有 WHO、ECDC 與疾管署多個官方來源一致描述。</p>
+          </details>
+        </td>
+      </tr>
+      <tr class="overall-row">
+        <th scope="row" data-th="評估項目">綜合研判</th>
+        <td data-th="評估內容" colspan="2">瑞士首見之 4 例本土屈公病為已受控之小規模事件，蚊季將盡且無新增病例；未來 3 個月我國自瑞士或歐洲移入之機率極低，冬季發生本土傳播之機率亦極低，一般民眾衝擊極低。綜合研判我國整體風險為低。惟我國每年自亞洲流行地區移入之機率高，且具相同病媒；本事件之意義在於提醒流行季前之整備，而非當前之直接威脅。<div class="small muted">計算方式：綜合研判＝各機率類項目「矩陣風險（機率×衝擊）」之最高者，再對應三級（本次由「境外移入風險」決定）。</div></td>
+        <td data-th="評估結果" class="result"><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="small">信心：<strong>中（尚可）</strong></div>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">註：本評估依據現有資訊判定風險等級，將視新增實證適時調整。</p>
+
+  <section class="hairs" aria-labelledby="hairs-h">
+  <h3 id="hairs-h">交叉核對：UKHSA HAIRS 演算法（不併入矩陣）</h3>
+  <p class="small muted">以我國人口為評估對象（原文之 UK 換為我國）；HAIRS 不限定評估期間，僅供交叉核對，不併入 ECDC 矩陣。HAIRS 分別報告機率與衝擊，不以矩陣合併；「不確定」依預防原則取較高風險分支。</p>
+  <div class="hairs-summary">
+    <div><span class="label">HAIRS 機率</span> <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><div class="algpath">HAIRS：我國人口感染機率：Q1 是 → Q3 否 → Q4 否 → Q5 是 → Q6 不確定（預防原則取「否」） → Q7 是 → Q8 是 → Q9 是 → Q10 否 ⇒ 中</div></div>
+    <div><span class="label">HAIRS 衝擊</span> <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="algpath">HAIRS：對我國人群健康之衝擊：Q1 否 → Q2 是 → Q3 是 → Q4 是 → Q5 是 → Q8 否 → Q9 是 ⇒ 低</div></div>
+    <div><span class="label">對照：ECDC（綜合研判之決定項目）</span> 機率 極低、衝擊 極低</div>
+  </div>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <caption>HAIRS：我國人口感染機率：機率問題</caption>
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
+    <tbody><tr><td data-th="問題"><strong>Q1</strong> 是否為已知之人類疾病？<div class="small muted">Is this a recognised human disease?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">屈公病為已知之人類疾病 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q3</strong> 此疾病是否於我國人類中呈地方性流行？<div class="small muted">Is this disease endemic in humans within the UK?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">我國病例均為境外移入，無本土流行 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></td></tr><tr><td data-th="問題"><strong>Q4</strong> 此疾病是否於我國動物中呈地方性流行？<div class="small muted">Is this disease endemic in animals in the UK?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">我國無動物間流行（城市循環為人－蚊－人） <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q5</strong> 是否有傳入我國動物之途徑？<div class="small muted">Are there routes of introduction into animals in the UK?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">每年均有處於病毒血症期之旅客入境 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span></td></tr><tr><td data-th="問題"><strong>Q6</strong> 是否已有有效措施可減緩這些途徑？<div class="small muted">Are effective measures in place to mitigate against these?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">入境檢疫與個案住處病媒防治可降低風險，但瑞士首例係回溯發現，顯示無法完全阻絕 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr><tr><td data-th="問題"><strong>Q7</strong> 我國環境條件是否支持該疾病之自然病媒？<div class="small muted">Do environmental conditions in the UK support the natural vectors of disease?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">我國有埃及斑蚊與白線斑蚊 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q8</strong> 是否會有人類暴露？<div class="small muted">Will there be human exposure?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">病媒蚊叮咬對象無選擇性，病毒進入社區即可能暴露 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q9</strong> 人類是否高度易感？<div class="small muted">Are humans highly susceptible?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">國人普遍無免疫力，疫苗尚未普及 <span class="cites"><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></td></tr><tr><td data-th="問題"><strong>Q10</strong> 此疾病於人類間是否具高度傳染力？<div class="small muted">Is the disease highly infectious in humans?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">人不會直接傳染給人，須經病媒蚊 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr></tbody>
+  </table>
+  </div>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <caption>HAIRS：對我國人群健康之衝擊：衝擊問題</caption>
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
+    <tbody><tr><td data-th="問題"><strong>Q1</strong> 是否有人傳人？<div class="small muted">Is there human-to-human spread?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">非人傳人 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q2</strong> 是否有人畜共通或病媒傳播？<div class="small muted">Is there zoonotic or vector-borne spread?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">病媒傳播 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q3</strong> （人畜共通或病媒傳播者）動物宿主或病媒是否存在於我國？<div class="small muted">For zoonoses or vector-borne disease, is the animal host or vector present in the UK?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">我國有埃及斑蚊與白線斑蚊 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q4</strong> 人群是否易感？<div class="small muted">Is the human population susceptible?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">國人普遍無免疫力 <span class="cites"><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></td></tr><tr><td data-th="問題"><strong>Q5</strong> 是否造成人類重症？<div class="small muted">Does it cause severe disease in humans?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">新生兒、長者及慢性病者可能重症 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></td></tr><tr><td data-th="問題"><strong>Q8</strong> 是否會有相當多人受影響？<div class="small muted">Would a substantial number of people be affected?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">預期受影響人數不多 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span></td></tr><tr><td data-th="問題"><strong>Q9</strong> 是否有有效介入措施？<div class="small muted">Are effective interventions available?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">病媒防治與個案處置流程已建立 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></td></tr></tbody>
+  </table>
+  </div>
+  </section>
+
+  <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
+  <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。項目編號所在位置即該項目之「矩陣風險（機率×衝擊）」，格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
+  <div class="matrix-layout">
+    <div class="matrix-wrap">
+      <table class="matrix" aria-labelledby="matrix-h" id="matrix">
+        <thead><tr><td class="corner"><span>機率→</span><span>衝擊↓</span></td><th scope="col">0<span class="ax">無</span></th><th scope="col">1<span class="ax">極低</span></th><th scope="col">2<span class="ax">低</span></th><th scope="col">3<span class="ax">中</span></th><th scope="col">4<span class="ax">高</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1<span class="ax">極低</span></th>
+            <td class="cell cell-none" data-p="0" data-i="1">
+              <span class="cell-lv">無</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vlow" data-p="1" data-i="1">
+              <span class="cell-lv">極低</span>
+              <span class="markers">
+<button type="button" class="marker" data-item="R1" aria-label="1. 境外移入風險：機率 極低、衝擊 極低、矩陣等級 極低">1</button><button type="button" class="marker" data-item="R2" aria-label="2. 國內社區流行風險：機率 極低、衝擊 極低、矩陣等級 極低">2</button>              </span>
+            </td>
+            <td class="cell cell-low" data-p="2" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="3" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="4" data-i="1">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">2<span class="ax">低</span></th>
+            <td class="cell cell-none" data-p="0" data-i="2">
+              <span class="cell-lv">無</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="2" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="3" data-i="2">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="4" data-i="2">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">3<span class="ax">中</span></th>
+            <td class="cell cell-none" data-p="0" data-i="3">
+              <span class="cell-lv">無</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="3">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="3">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="3" data-i="3">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="4" data-i="3">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">4<span class="ax">高</span></th>
+            <td class="cell cell-none" data-p="0" data-i="4">
+              <span class="cell-lv">無</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="1" data-i="4">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="4">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="3" data-i="4">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="4" data-i="4">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="matrix-detail" id="matrixDetail" aria-live="polite">
+      <p class="muted">請點選矩陣中的項目編號。</p>
+    </div>
+  </div>
+  <div class="matrix-legend">
+<span class="lv lv-none "><svg class="ic" aria-hidden="true"><use href="#lvicon-none"/></svg><span>無</span></span><span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="lv lv-vhigh "><svg class="ic" aria-hidden="true"><use href="#lvicon-vhigh"/></svg><span>極高</span></span>    <span class="muted small">依 ECDC 2019 圖 4 排列（列＝衝擊、欄＝機率）。本工具對應三級：無／極低／低→低、中→中、高／極高→高</span>
+  </div>
+  <template id="itemDetails">
+    <div data-item="R1">
+      <h4>1. 境外移入風險</h4>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×1）：<span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span><span class="muted small">（信心 中，尚可）</span></p>
+<p class="algpath">ECDC 圖 2.2：Q2 否 ⇒ 極低</p>      <ul class="dash"><li>瑞士僅 4 例且 10 月後無新增，蚊季將盡，WHO 研判不太可能再出現本土病例。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S3" title="RSI（瑞士義語區廣播電視）：Quattro casi di febbre Chikungunya in Ticino">[3]</a></span></li><li>法國 2026 年雖有逾 200 例本土病例，但歐洲之傳播具季節性，入冬後病媒活動下降。 <span class="cites"><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>我國 2025 年 28 例境外移入之感染地均為亞洲國家，無自歐洲移入者。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a></span></li></ul>
+      <p><a href="#item-R1">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R2">
+      <h4>2. 國內社區流行風險</h4>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×1）：<span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span><span class="muted small">（信心 中，尚可）</span></p>
+<p class="algpath">ECDC 圖 2.1：Q1 是 → Q2 否 ⇒ 極低</p>      <ul class="dash"><li>我國有埃及斑蚊與白線斑蚊，病毒進入社區且有孳生源時即可能流行。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>2025 年 28 例境外移入均未引起本土疫情；每例個案之住處均進行病媒調查與防治。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>瑞士事件顯示：即使在長期實施白線斑蚊防治、蚊密度偏低之溫帶地區，夏季仍可能因移入而發生小規模本土傳播，且首例係回溯才發現。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></li><li>評估期間為冬季，病媒蚊活動較低。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span></li></ul>
+      <p><a href="#item-R2">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R3">
+      <h4>3. 衝擊</h4>
+      <p>衝擊：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 高，良好）</span></p>
+<p class="algpath">ECDC 圖 3：Q5 否 ⇒ 極低</p>      <ul class="dash"><li>嚴重程度不如登革熱重症，較少出現死亡；但關節痛可持續數週至數月甚至數年，影響行動。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></li><li>新生兒、65 歲以上長者及高血壓、糖尿病、心血管疾病患者較易重症。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></li><li>無特效抗病毒藥物；疫苗已於部分國家核准但尚未普及。 <span class="cites"><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a><a class="cite" href="#ref-S6" title="European Centre for Disease Prevention and Control：Factsheet for health professionals about chikungunya virus disease">[6]</a></span></li><li>我國已有登革熱防治體系可沿用之病媒防治與個案處置流程。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li><li>2025 年曾因社群媒體謠傳國內恐大規模流行，疾管署需發稿澄清，顯示本土病例可能引起民眾疑慮。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a></span></li></ul>
+      <p><a href="#item-R3">至風險評估表該列</a></p>
+    </div>
+  </template>
+
+  <div class="whatif" id="whatif" role="region" aria-labelledby="wi-h">
+    <h3 id="wi-h"><span class="trial-tag">試算</span>情境試算（非正式結果）</h3>
+    <p class="small">調整任一項目之機率（0–4）或衝擊（1–4），查看依同一 ECDC 圖 4 矩陣計算之結果變化（試算直接改分數，不經演算法問題）。<strong>試算不會改變本報告之正式評估結果。</strong></p>
+    <div class="wi-controls">
+      <label>項目<select id="wiItem"></select></label>
+      <label>機率<select id="wiP"></select></label>
+      <label>衝擊<select id="wiI"></select></label>
+      <button type="button" class="btn" id="wiReset">重設</button>
+    </div>
+    <div class="wi-out" aria-live="polite" id="wiOut"></div>
+  </div>
+
+  <section class="who" aria-labelledby="who-h">
+    <h3 id="who-h">並行評估：WHO 2012 風險矩陣</h3>
+    <p class="small muted">依 WHO《Rapid Risk Assessment of Acute Public Health Events》（2012）圖 3a。WHO 未提供題目樹：可能性與後果為<strong>評估者依其表 7、表 8 定義之判斷</strong>（WHO 註明定義可依國情調整）。</p>
+    <p><strong>風險問題：</strong>未來 3 個月內，我國因境外移入個案而發生屈公病本土傳播之可能性與後果為何？</p>
+    <div class="table-wrap">
+    <table class="tbl tbl-stack">
+      <thead><tr><th scope="col">對象</th><th scope="col">可能性（表 7）</th><th scope="col">後果（表 8）</th><th scope="col">WHO 風險等級</th><th scope="col">表 6 對應行動</th></tr></thead>
+      <tbody>
+      <tr><td data-th="對象">一般民眾</td>
+        <td data-th="可能性（表 7）">1 極不可能<div class="small muted">極不可能（&lt;5%）：評估期間為冬季，近年移入個案均未引起本土傳播。</div></td>
+        <td data-th="後果（表 8）">2 輕微<div class="small muted">輕微：若發生，預期為小範圍群聚，需少量額外之病媒防治與疫調資源，既有量能可支應。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></div></td>
+        <td data-th="WHO 風險等級"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="small">三級：低</div></td>
+        <td data-th="表 6 對應行動" class="small">依標準應變程序、例行防治計畫與法規管理（例：以例行監測系統監測）</td></tr>
+      <tr><td data-th="對象">新生兒、65 歲以上長者及慢性病患者</td>
+        <td data-th="可能性（表 7）">1 極不可能</td>
+        <td data-th="後果（表 8）">2 輕微<div class="small muted">極不可能；此族群較易重症，但預期人數少、額外措施有限，取輕微。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a><a class="cite" href="#ref-S7" title="World Health Organization：Chikungunya (fact sheet)">[7]</a></span></div></td>
+        <td data-th="WHO 風險等級"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="small">三級：低</div></td>
+        <td data-th="表 6 對應行動" class="small">依標準應變程序、例行防治計畫與法規管理（例：以例行監測系統監測）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-wrap">
+    <table class="matrix who-matrix" aria-label="WHO 2012 圖 3a 風險矩陣（本評估位置以 W／G 標示）">
+      <thead><tr><td class="corner"><span>後果→</span><span>可能性↓</span></td><th scope="col">1<span class="ax">極輕微</span></th><th scope="col">2<span class="ax">輕微</span></th><th scope="col">3<span class="ax">中度</span></th><th scope="col">4<span class="ax">重大</span></th><th scope="col">5<span class="ax">嚴重</span></th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5<span class="ax">幾乎確定</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">4<span class="ax">很可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">3<span class="ax">可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">2<span class="ax">不太可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">1<span class="ax">極不可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+<span class="marker static" title="一般民眾">W</span><span class="marker static" title="新生兒、65 歲以上長者及慢性病患者">G1</span>          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+</tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small muted">W＝一般民眾；G1＝新生兒、65 歲以上長者及慢性病患者。版面依 WHO 圖 3a（列＝可能性、欄＝後果）；顏色依表 6（綠＝低、黃＝中、橙＝高、紅＝極高），格內文字為等級。</p>
+  </section>
+
+  <section class="synthesis" aria-labelledby="synthesis-h">
+    <h3 id="synthesis-h">綜合評估：各架構結果比較</h3>
+    <div class="table-wrap">
+    <table class="tbl tbl-stack">
+      <thead><tr><th scope="col">架構</th><th scope="col">對象</th><th scope="col">原生結果</th><th scope="col">三級對應</th><th scope="col">取得方式</th><th scope="col">主要決定因素</th></tr></thead>
+      <tbody>
+      <tr>
+        <td data-th="架構">ECDC 2019（主要）</td><td data-th="對象">一般民眾</td><td data-th="原生結果">極低風險</td>
+        <td data-th="三級對應"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></td>
+        <td data-th="取得方式" class="small">演算法推導（圖 2.1／2.2／3）＋圖 4 矩陣</td><td data-th="主要決定因素" class="small">境外移入風險：機率 極低 × 衝擊 極低</td>
+      </tr>
+      <tr class="row-group">
+        <td data-th="架構">ECDC 2019（主要）</td><td data-th="對象">自亞洲、美洲流行地區移入（任一來源，非本事件）</td><td data-th="原生結果">中風險</td>
+        <td data-th="三級對應"><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></td>
+        <td data-th="取得方式" class="small">圖 4 矩陣（分層）</td><td data-th="主要決定因素" class="small">境外移入風險：機率 高 × 衝擊 極低</td>
+      </tr>
+      <tr>
+        <td data-th="架構">WHO 2012</td><td data-th="對象">一般民眾</td><td data-th="原生結果">低風險</td>
+        <td data-th="三級對應"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></td>
+        <td data-th="取得方式" class="small">評估者依表 7／表 8 判斷＋圖 3a 矩陣</td><td data-th="主要決定因素" class="small">可能性 極不可能 × 後果 輕微</td>
+      </tr>
+      <tr class="row-group">
+        <td data-th="架構">WHO 2012</td><td data-th="對象">新生兒、65 歲以上長者及慢性病患者</td><td data-th="原生結果">低風險</td>
+        <td data-th="三級對應"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></td>
+        <td data-th="取得方式" class="small">評估者依表 7／表 8 判斷＋圖 3a 矩陣</td><td data-th="主要決定因素" class="small">可能性 極不可能 × 後果 輕微</td>
+      </tr>
+      <tr>
+        <td data-th="架構">UKHSA HAIRS（交叉核對）</td><td data-th="對象">一般民眾</td><td data-th="原生結果">機率 中・衝擊 低（無合併等級）</td>
+        <td data-th="三級對應"><span class="muted">無合併等級</span></td>
+        <td data-th="取得方式" class="small">演算法推導（機率 Q1–Q10、衝擊 Q1–Q12）</td><td data-th="主要決定因素" class="small">不確定題：機率 Q6；衝擊 無</td>
+      </tr>
+      <tr>
+        <td data-th="架構">疫情報導式判斷</td><td data-th="對象">一般民眾</td><td data-th="原生結果">低</td>
+        <td data-th="三級對應"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></td>
+        <td data-th="取得方式" class="small">評估者依各項目風險等級定義之文章式綜合判斷</td><td data-th="主要決定因素" class="small">overall.proposed_level</td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+    <dl class="synth-kv">
+      <div><dt>綜合等級（ECDC 2019，主要方法）</dt><dd><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></dd></div>
+      <div><dt>一致性（一般民眾層級）</dt><dd><strong>一致</strong></dd></div>
+      <div><dt>審慎上限（ECDC、WHO、文章式判斷之最高者，含高風險族群）</dt><dd><span class="lv lv-mod lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></dd></div>
+<div><dt>注意事項（族群結果或 HAIRS 分項高於綜合等級）</dt><dd><ul><li>ECDC 2019（主要）／自亞洲、美洲流行地區移入（任一來源，非本事件）：中（中風險）</li><li>HAIRS 機率：中（對應 中，高於綜合等級）</li></ul></dd></div>    </dl>
+<div class="synth-note"><strong>評估者說明：</strong>ECDC、WHO 與文章式判斷對本事件及一般民眾均為低。審慎上限為中，來自「任一來源之境外移入」分層（機率高 × 衝擊極低）與 HAIRS 機率（中）；兩者反映的是我國全年、所有來源之背景風險，而非瑞士事件本身。建議以低作為本事件之因應等級，並將背景風險納入翌年流行季前之整備。</div>
+    <p class="small muted">綜合等級依使用單位決定採 ECDC 2019 結果；WHO 2012 為評估者判斷之並行矩陣；HAIRS 分別報告機率與衝擊，無合併等級，僅作交叉核對；三級對應與審慎上限為本工具之規則。</p>
+  </section>
+</section>
+
+<!-- 6. Scenarios + IHR ================================================= -->
+<section id="sec-scenario" class="card" aria-labelledby="h-scn">
+  <h2 id="h-scn"><span class="secno">6</span>情境分析與 IHR 附件二篩檢</h2>
+  <div class="scenarios">
+    <article class="scn scn-best">
+      <h3>最佳情境 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></h3>
+      <p>瑞士與歐洲入冬後無新增本土病例；我國冬季僅有零星自亞洲移入個案，均未引起本土傳播。</p>
+<h4>假設</h4><ul><li>歐洲病媒活動隨氣溫下降而中止</li><li>我國移入個案均於病毒血症期內完成病媒防治</li></ul>      <h4>對我國的意涵</h4><p>維持例行監測與旅遊衛教即可。</p>
+    </article>
+    <article class="scn scn-likely">
+      <h3>最可能情境 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></h3>
+      <p>歐洲傳播季結束；我國持續有自印尼、菲律賓等地移入之個案，冬季不致引起本土傳播，但翌年夏秋移入壓力與病媒密度同時升高。</p>
+<h4>假設</h4><ul><li>亞洲、美洲流行地區疫情持續</li><li>我國移入病例數維持 2025 年水準</li></ul>      <h4>對我國的意涵</h4><p>當前無需升級；應於翌年流行季前完成醫界提醒、病媒孳生源清除與歐洲旅遊疫情建議之檢視。</p>
+    </article>
+    <article class="scn scn-worst">
+      <h3>最壞情境 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></h3>
+      <p>翌年流行季有移入個案未及時診斷（如症狀不典型或未告知旅遊史），於病媒蚊密度高之地區引起本土群聚，回溯才發現。</p>
+<h4>假設</h4><ul><li>個案於病毒血症期在社區活動</li><li>當地孳生源未清除</li></ul>      <h4>對我國的意涵</h4><p>需啟動群聚疫調與緊急病媒防治，並對高風險族群加強衛教。</p>
+    </article>
+  </div>
+
+  <h3>IHR（2005）附件二決策工具篩檢</h3>
+  <p class="small muted">以事件發生國（瑞士）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定。</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">理由</th></tr></thead>
+    <tbody>
+      <tr><td data-th="問題">一、事件對公共衛生的影響是否嚴重？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">僅 4 例且病程良好，WHO 研判公共衛生影響有限。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr>
+      <tr><td data-th="問題">二、事件是否不尋常或非預期？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="理由">為該國首見之本土病例。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S4" title="Outbreak News Today：Switzerland reports 4 locally acquired chikungunya cases in Ticino">[4]</a></span></td></tr>
+      <tr><td data-th="問題">三、是否有國際傳播的顯著風險？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">無新增病例、蚊季將盡，無持續本土傳播證據。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr>
+      <tr><td data-th="問題">四、是否有限制國際旅行或貿易的顯著風險？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">WHO 不建議任何旅行或貿易限制。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="ihr-result"><strong>篩檢結果：</strong>四問題中 1 項為「是」（&lt;2），未達附件二通報門檻。</p>
+</section>
+
+<!-- 7. Recommendations ================================================= -->
+<section id="sec-recs" class="card" aria-labelledby="h-recs">
+  <h2 id="h-recs"><span class="secno">7</span>建議事項</h2>
+  <div class="filters" role="group" aria-label="篩選建議事項">
+    <label>類別<select id="fCat"><option value="">全部</option><option>監測通報</option><option>邊境檢疫</option><option>醫療整備</option><option>病媒或動物防治</option><option>風險溝通</option><option>跨部會與國際合作</option></select></label>
+    <label>優先順序<select id="fPri"><option value="">全部</option><option>高</option><option>中</option><option>低</option></select></label>
+    <label>時程<select id="fTime"><option value="">全部</option><option>24小時</option><option>1週</option><option>1個月</option></select></label>
+    <span class="muted small" id="fCount" aria-live="polite">共 6 項</span>
+  </div>
+  <ul class="recs" id="recList">
+    <li class="rec" data-cat="監測通報" data-pri="中" data-time="1週">
+      <div class="rec-head"><span class="chip">監測通報</span><span class="pri pri-m">優先：中</span><span class="chip">1週</span><span class="muted small">A1</span></div>
+      <p>將瑞士首見本土屈公病事件登錄國際重要疫情，並於翌年 5 月歐洲傳播季開始後，每週追蹤 ECDC 之歐盟／歐洲經濟區季節性監測。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心）｜理由：歐洲本土傳播地區逐年擴大，瑞士為新增國家</div>
+    </li>
+    <li class="rec" data-cat="邊境檢疫" data-pri="中" data-time="1個月">
+      <div class="rec-head"><span class="chip">邊境檢疫</span><span class="pri pri-m">優先：中</span><span class="chip">1個月</span><span class="muted small">A2</span></div>
+      <p>於翌年流行季前檢視法國、義大利、瑞士之屈公病旅遊疫情建議等級；法國 2026 年逾 200 例本土病例而我國已於 2 月解除，建議訂定歐洲季節性傳播地區之列等與解除原則。 <span class="cites"><a class="cite" href="#ref-S11" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[11]</a><a class="cite" href="#ref-S2" title="European Centre for Disease Prevention and Control：Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)">[2]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心）｜理由：現行等級與歐洲 2026 年疫情規模不一致</div>
+    </li>
+    <li class="rec" data-cat="醫療整備" data-pri="中" data-time="1個月">
+      <div class="rec-head"><span class="chip">醫療整備</span><span class="pri pri-m">優先：中</span><span class="chip">1個月</span><span class="muted small">A3</span></div>
+      <p>於翌年流行季前發布致醫界通函：發燒合併關節痛之病人應詢問旅遊史，並說明夏秋赴歐洲（法國、義大利、瑞士）亦有感染可能。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：急性傳染病組）｜理由：瑞士首例係回溯發現，顯示非傳統流行區之病例易被忽略</div>
+    </li>
+    <li class="rec" data-cat="病媒或動物防治" data-pri="高" data-time="1個月">
+      <div class="rec-head"><span class="chip">病媒或動物防治</span><span class="pri pri-h">優先：高</span><span class="chip">1個月</span><span class="muted small">A4</span></div>
+      <p>維持境外移入個案病毒血症期間住處之病媒蚊密度調查、孳生源清除與必要之化學防治，並於流行季前加強社區「巡、倒、清、刷」。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史">[9]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全">[10]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></p>
+      <div class="small muted">主責：地方衛生局、環保局；疾管署督導｜理由：瑞士於蚊密度偏低地區仍發生本土傳播；我國病媒密度更高</div>
+    </li>
+    <li class="rec" data-cat="風險溝通" data-pri="中" data-time="1個月">
+      <div class="rec-head"><span class="chip">風險溝通</span><span class="pri pri-m">優先：中</span><span class="chip">1個月</span><span class="muted small">A5</span></div>
+      <p>於旅遊衛教中納入：夏秋前往南歐及瑞士南部亦應防蚊；自流行地區返國後 14 天內自我健康監測並避免被蚊蟲叮咬，以免將病毒帶入社區。 <span class="cites"><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：屈公病－疾病介紹">[8]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：公關室）｜理由：與 WHO 對返國旅客之建議一致</div>
+    </li>
+    <li class="rec" data-cat="跨部會與國際合作" data-pri="低" data-time="1個月">
+      <div class="rec-head"><span class="chip">跨部會與國際合作</span><span class="pri pri-l">優先：低</span><span class="chip">1個月</span><span class="muted small">A6</span></div>
+      <p>蒐集歐盟與瑞士之屈公病疫苗使用建議，評估我國旅遊醫學門診提供疫苗之需求與可行性。 <span class="cites"><a class="cite" href="#ref-S6" title="European Centre for Disease Prevention and Control：Factsheet for health professionals about chikungunya virus disease">[6]</a><a class="cite" href="#ref-S1" title="World Health Organization：Disease Outbreak News: Chikungunya in Switzerland">[1]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：預防接種單位會同食藥署）｜理由：歐盟已核准 2 種疫苗，瑞士建議前往疫情地區之旅客接種；我國情形本次未查得</div>
+    </li>
+  </ul>
+  <p class="muted" id="recEmpty" hidden>沒有符合篩選條件的建議事項。</p>
+</section>
+
+<!-- 8. Limitations / method / refs ===================================== -->
+<section id="sec-limits" class="card" aria-labelledby="h-lim">
+  <h2 id="h-lim"><span class="secno">8</span>限制與不確定性、方法說明、參考資料</h2>
+  <h3>限制與不確定性</h3>
+  <ul class="bullets"><li>被查證之新聞本身即為 WHO 官方第一手來源，獨立佐證主要來自瑞士媒體之搜尋摘要；瑞士聯邦公共衛生局（bag.admin.ch）、提契諾州政府（ti.ch）及瑞士媒體網站無法連線，未讀得官方原文。</li><li>我國 2026 年屈公病病例數、是否有本土病例、近期病媒蚊指數及赴歐旅次均未取得；國內傳播機率之季節判斷屬推論。</li><li>ECDC 監測資料截至 2026-10-28 且範圍不含瑞士；法國 11/4 之 207 例僅見於 WHO。</li><li>WHO 全球屈公病快速風險評估第 2 版之風險等級未取得；我國屈公病疫苗核准與供應情形未查。</li><li>ECDC 演算法之是／否提問較粗略；「任一來源移入」分層依演算法推導為機率高，反映全年背景風險，不代表本事件。</li><li>WHO 2012 矩陣之可能性與後果為評估者依其表 7、表 8 定義所作判斷。</li><li>本評估依現有資訊判定，將視新增實證適時調整。</li></ul>
+  <p>本風險評估係依據現有資訊判定風險等級，將視新增實證適時調整判定。</p>
+
+  <details class="issues" >
+    <summary>自動檢核結果：錯誤 0、警告 10、提示 1</summary>
+    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「我國 2026 年屈公病病例數與是否有本土病例，本次未取得（疾管署 2026 年…」<code>taiwan.surveillance</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「評估期間（11 月至翌年 2 月）為我國病媒蚊密度較低之季節；各縣市近期病媒蚊指…」<code>taiwan.vectors_hosts</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「國人赴瑞士、法國、義大利之旅次本次未取得。…」<code>taiwan.border_travel</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「評估期間為冬季，病媒蚊活動較低。…」<code>risk_items[R2]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C1：已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文<code>claims[C1]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C2：支持來源僅取得搜尋摘要，未讀取全文<code>claims[C2]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C3：已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文<code>claims[C3]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C4：已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文<code>claims[C4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C5：已證實僅由媒體或未知來源支持；建議以官方或文獻來源再確認；支持來源僅取得搜尋摘要，未讀取全文<code>claims[C5]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／新生兒、65 歲以上長者及慢性病患者：文章式判斷「中」，分數對應「低」；兩者並列<code>risk_items[R3]</code></li><li class="iss iss-info"><span class="iss-sev">提示</span>境外移入風險：分層「自亞洲、美洲流行地區移入（任一來源，非本事件）」之矩陣風險「中」（三級：中）高於整體（低），決策摘要應明列<code>risk_items[R1]</code></li></ul>
+  </details>
+
+  <h3>方法說明</h3>
+  <ol class="method">
+    <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
+    <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
+    <li><strong>風險估計（ECDC 2019《Operational tool on rapid risk assessment methodology》）：</strong>機率依圖 2.1（國內感染／傳播）或圖 2.2（國人境外感染，本工具用於「境外移入」）之問題推導為無／極低／低／中／高；衝擊依圖 3 推導為極低／低／中／高；「不確定」依 ECDC 預防原則取較高風險分支。機率×衝擊依圖 4 得「矩陣風險」（無～極高）。如疾管署原文章，機率類項目之評估結果為發生機率，衝擊另列；綜合研判取各機率類項目之最高矩陣風險。三級對應（機率 0–2 低、3 中、4 高；衝擊 1–2 低、3 中、4 高；矩陣 無／極低／低→低、中→中、高／極高→高）為本工具之調整。</li>
+    <li><strong>信心程度（ECDC Box 2／HAIRS 附錄 B）：</strong>低＝不足、中＝尚可、高＝良好；依來源數量、等級與取得方式自動設上限之規則為本工具自訂。</li>
+    <li><strong>並行評估與綜合評估：</strong>WHO 2012《Rapid Risk Assessment of Acute Public Health Events》圖 3a 矩陣（可能性 5 級 × 後果 5 級，依表 7、表 8 由評估者判斷；表 6 對應行動）與 ECDC 結果並列；綜合等級採 ECDC 2019，另列一致性、審慎上限與評估者說明。</li>
+    <li><strong>升級篩檢與交叉核對：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另以 UKHSA HAIRS 機率與衝擊演算法交叉核對（分別報告，不併入矩陣）。</li>
+    <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
+  </ol>
+  <div class="table-wrap">
+  <table class="tbl mini-matrix">
+    <caption>ECDC 2019 圖 4 風險排序矩陣（ecdc-2019-fig4）：列＝衝擊，欄＝機率</caption>
+    <thead><tr><th scope="col">衝擊＼機率</th><th scope="col">無<span class="small muted"> None</span></th><th scope="col">極低<span class="small muted"> Very low</span></th><th scope="col">低<span class="small muted"> Low</span></th><th scope="col">中<span class="small muted"> Moderate</span></th><th scope="col">高<span class="small muted"> High</span></th></tr></thead>
+    <tbody><tr><th scope="row">極低<span class="small muted"> Very low</span></th><td>無</td><td>極低</td><td>低</td><td>低</td><td>中</td></tr><tr><th scope="row">低<span class="small muted"> Low</span></th><td>無</td><td>低</td><td>低</td><td>中</td><td>中</td></tr><tr><th scope="row">中<span class="small muted"> Moderate</span></th><td>無</td><td>低</td><td>中</td><td>中</td><td>高</td></tr><tr><th scope="row">高<span class="small muted"> High</span></th><td>無</td><td>中</td><td>中</td><td>高</td><td>極高</td></tr></tbody>
+  </table>
+  </div>
+  <p class="small muted">工具版本 0.1.0｜方法版本 2026.11-v2-ecdc｜產出模式：claude-code-skill（claude-fable-5-2）｜以 Claude Code 技能路徑產出。全文讀取：who.int、ecdc.europa.eu、cdc.gov.tw；瑞士聯邦公共衛生局（bag.admin.ch）、提契諾州政府（ti.ch）及瑞士媒體網站無法連線，僅取得搜尋摘要。</p>
+
+  <h3>參考資料</h3>
+  <ol class="refs">
+    <li id="ref-S1">
+      <span class="ref-id">S1</span>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON627" rel="noopener noreferrer">Disease Outbreak News: Chikungunya in Switzerland</a>.
+      World Health Organization. 2026-11-17.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜被查證之新聞｜被查證之新聞；本身為官方第一手來源</span>
+<div class="url small">https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON627</div>    </li>
+    <li id="ref-S2">
+      <span class="ref-id">S2</span>
+<a href="https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00016/2026-10-30" rel="noopener noreferrer">Seasonal surveillance of chikungunya virus disease in the EU/EEA – 2026 (weekly)</a>.
+      European Centre for Disease Prevention and Control. 2026-10-30.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜資料截至 2026-10-28；瑞士非歐盟／歐洲經濟區成員，且事件於 11/4 才公布</span>
+<div class="url small">https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00016/2026-10-30</div>    </li>
+    <li id="ref-S3">
+      <span class="ref-id">S3</span>
+<a href="https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html" rel="noopener noreferrer">Quattro casi di febbre Chikungunya in Ticino</a>.
+      RSI（瑞士義語區廣播電視）. 2026-11-04.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得搜尋摘要（彙整 RSI、Ticinonline、Ticinonews、bluewin 等瑞士媒體 11/4 報導）</span>
+<div class="url small">https://www.rsi.ch/info/ticino-grigioni-e-insubria/Quattro-casi-di-febbre-Chikungunya-in-Ticino--4216098.html</div>    </li>
+    <li id="ref-S4">
+      <span class="ref-id">S4</span>
+<a href="https://outbreaknewstoday.substack.com/p/switzerland-reports-4-locally-acquired" rel="noopener noreferrer">Switzerland reports 4 locally acquired chikungunya cases in Ticino</a>.
+      Outbreak News Today.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得搜尋摘要</span>
+<div class="url small">https://outbreaknewstoday.substack.com/p/switzerland-reports-4-locally-acquired</div>    </li>
+    <li id="ref-S5">
+      <span class="ref-id">S5</span>
+<a href="https://www.cdt.ch/news/ticino/e-il-primo-caso-di-virus-trasmesso-dalle-zanzare-tigre-in-ticino-443688" rel="noopener noreferrer">«È il primo caso di virus trasmesso dalle zanzare tigre in Ticino»</a>.
+      Corriere del Ticino.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得標題</span>
+<div class="url small">https://www.cdt.ch/news/ticino/e-il-primo-caso-di-virus-trasmesso-dalle-zanzare-tigre-in-ticino-443688</div>    </li>
+    <li id="ref-S6">
+      <span class="ref-id">S6</span>
+<a href="https://www.ecdc.europa.eu/en/chikungunya/facts/factsheet" rel="noopener noreferrer">Factsheet for health professionals about chikungunya virus disease</a>.
+      European Centre for Disease Prevention and Control.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.ecdc.europa.eu/en/chikungunya/facts/factsheet</div>    </li>
+    <li id="ref-S7">
+      <span class="ref-id">S7</span>
+<a href="https://www.who.int/news-room/fact-sheets/detail/chikungunya" rel="noopener noreferrer">Chikungunya (fact sheet)</a>.
+      World Health Organization. 2025-04-14.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜與被查證新聞同一發布者，不作為獨立查證來源</span>
+<div class="url small">https://www.who.int/news-room/fact-sheets/detail/chikungunya</div>    </li>
+    <li id="ref-S8">
+      <span class="ref-id">S8</span>
+<a href="https://www.cdc.gov.tw/Category/Page/Q3Di-FMTXTOVvYkgyBoGbA" rel="noopener noreferrer">屈公病－疾病介紹</a>.
+      衛生福利部疾病管制署. 2025-05-19.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜頁面標示最後更新日期 2025/5/19</span>
+<div class="url small">https://www.cdc.gov.tw/Category/Page/Q3Di-FMTXTOVvYkgyBoGbA</div>    </li>
+    <li id="ref-S9">
+      <span class="ref-id">S9</span>
+<a href="https://www.cdc.gov.tw/Bulletin/Detail/xhJieF2ViKgMBEBvMezUGA?typeid=9" rel="noopener noreferrer">國內新增2例境外移入屈公病個案，籲請民眾前往流行地區落實防蚊措施，有疑似症狀請儘速就醫並告知旅遊史</a>.
+      衛生福利部疾病管制署. 2025-10-21.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.cdc.gov.tw/Bulletin/Detail/xhJieF2ViKgMBEBvMezUGA?typeid=9</div>    </li>
+    <li id="ref-S10">
+      <span class="ref-id">S10</span>
+<a href="https://www.cdc.gov.tw/Bulletin/Detail/Vx4LVIacRCqG_j7VIJbMeQ?typeid=9" rel="noopener noreferrer">疾管署澄清，屈公病為蚊媒傳播疾病，不會人傳人，呼籲國人共同落實「巡、倒、清、刷」，共同守護社區安全</a>.
+      衛生福利部疾病管制署. 2025-08-10.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.cdc.gov.tw/Bulletin/Detail/Vx4LVIacRCqG_j7VIJbMeQ?typeid=9</div>    </li>
+    <li id="ref-S11">
+      <span class="ref-id">S11</span>
+<a href="https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON" rel="noopener noreferrer">國際間旅遊疫情建議等級開放資料（JSON）</a>.
+      衛生福利部疾病管制署. 2026-11-17.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜下載全檔後以程式篩選「屈公病」紀錄；各國現行等級取最新一筆</span>
+<div class="url small">https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON</div>    </li>
+    <li id="ref-S12">
+      <span class="ref-id">S12</span>
+<a href="https://www.who.int/publications/m/item/who-rapid-risk-assessment---chikungunya-virus-disease--global-v.2" rel="noopener noreferrer">WHO Rapid Risk Assessment: Chikungunya virus disease, Global, version 2</a>.
+      World Health Organization. 2026-05-01.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜僅讀得出版品頁面之概述，評估全文 PDF 未下載；風險等級未取得</span>
+<div class="url small">https://www.who.int/publications/m/item/who-rapid-risk-assessment---chikungunya-virus-disease--global-v.2</div>    </li>
+  </ol>
+
+  <div class="disclaimer final" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>免責聲明：</strong>本報告由 AI 協助蒐集證據並產生草稿，風險等級由確定性規則計算；所有內容須經流行病學專業人員審閱、確認來源後方可使用。資料截止時間：2026-11-19 16:10（UTC+08:00）。</div>
+  </div>
+</section>
+</main>
+
+<div class="tooltip" id="tip" role="tooltip" hidden></div>
+<script type="application/json" id="report-data">{"matrix":{"0":{"1":"無","2":"無","3":"無","4":"無"},"1":{"1":"極低","2":"低","3":"低","4":"中"},"2":{"1":"低","2":"低","3":"中","4":"中"},"3":{"1":"低","2":"中","3":"中","4":"高"},"4":{"1":"中","2":"中","3":"高","4":"極高"}},"matrixTo3":{"無":"低","極低":"低","低":"低","中":"中","高":"高","極高":"高"},"impactTo3":{"1":"低","2":"低","3":"中","4":"高"},"probTo3":{"0":"低","1":"低","2":"低","3":"中","4":"高"},"pLabels":{"0":"無","1":"極低","2":"低","3":"中","4":"高"},"iLabels":{"1":"極低","2":"低","3":"中","4":"高"},"levelClass":{"無":"none","極低":"vlow","低":"low","中":"mod","高":"high","極高":"vhigh"},"items":[{"id":"R1","n":1,"name":"境外移入風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"極低","matrix3":"低","proposed":"低","confidence":"中"},{"id":"R2","n":2,"name":"國內社區流行風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"極低","matrix3":"低","proposed":"低","confidence":"中"},{"id":"R3","n":3,"name":"衝擊","kind":"衝擊","p":null,"i":1,"inherit":false,"computed":"低","matrix":null,"matrix3":null,"proposed":"低","confidence":"高"}],"overall":{"computed":"低","matrix":"極低","p":1,"i":1,"from":"R1"},"timeseries":[]}</script>
+<script>(function () {
+  "use strict";
+  var data;
+  try { data = JSON.parse(document.getElementById("report-data").textContent); } catch (e) { data = null; }
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  /* ---------- theme ---------------------------------------------------- */
+  var THEMES = ["auto", "light", "dark"];
+  var THEME_LABEL = { auto: "主題：自動", light: "主題：淺色", dark: "主題：深色" };
+  function applyTheme(t) {
+    if (t === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+    var b = $("themeBtn"); if (b) b.textContent = THEME_LABEL[t];
+  }
+  var theme = "auto";
+  try { theme = localStorage.getItem("epi-risk-theme") || "auto"; } catch (e) { /* storage unavailable */ }
+  if (THEMES.indexOf(theme) < 0) theme = "auto";
+  applyTheme(theme);
+  if ($("themeBtn")) $("themeBtn").addEventListener("click", function () {
+    theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+    applyTheme(theme);
+    try { localStorage.setItem("epi-risk-theme", theme); } catch (e) { /* ignore */ }
+  });
+
+  /* ---------- print: expand all <details> ------------------------------- */
+  var reopened = [];
+  window.addEventListener("beforeprint", function () {
+    reopened = [];
+    document.querySelectorAll("details:not([open])").forEach(function (d) { d.open = true; reopened.push(d); });
+  });
+  window.addEventListener("afterprint", function () { reopened.forEach(function (d) { d.open = false; }); reopened = []; });
+  if ($("printBtn")) $("printBtn").addEventListener("click", function () { window.print(); });
+
+  /* ---------- tooltip --------------------------------------------------- */
+  var tip = $("tip");
+  function showTip(text, x, y) {
+    if (!tip) return;
+    tip.textContent = text; tip.hidden = false;
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(Math.max(8, x + 12), window.innerWidth - w - 8);
+    var top = y - h - 10; if (top < 8) top = y + 16;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+  function hideTip() { if (tip) tip.hidden = true; }
+  document.querySelectorAll(".bar-row[data-tip]").forEach(function (row) {
+    row.addEventListener("pointermove", function (ev) { showTip(row.getAttribute("data-tip"), ev.clientX, ev.clientY); });
+    row.addEventListener("pointerleave", hideTip);
+    row.addEventListener("focus", function () { var r = row.getBoundingClientRect(); showTip(row.getAttribute("data-tip"), r.left + r.width / 2, r.top); });
+    row.addEventListener("blur", hideTip);
+  });
+
+  if (!data) return;
+
+  /* ---------- matrix detail -------------------------------------------- */
+  var detail = $("matrixDetail");
+  var tpl = $("itemDetails");
+  function showItem(id, btn) {
+    if (!detail || !tpl) return;
+    var src = tpl.content.querySelector('[data-item="' + CSS.escape(id) + '"]');
+    detail.innerHTML = "";
+    if (src) detail.appendChild(src.cloneNode(true));
+    document.querySelectorAll(".marker[data-item]").forEach(function (m) { m.setAttribute("aria-pressed", m === btn ? "true" : "false"); });
+  }
+  document.querySelectorAll(".marker[data-item]").forEach(function (m) {
+    m.setAttribute("aria-pressed", "false");
+    m.addEventListener("click", function () { showItem(m.getAttribute("data-item"), m); });
+  });
+
+  /* ---------- what-if (試算) -------------------------------------------- */
+  var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3, P3 = data.probTo3;
+  var ORDER = { "無": 0, "極低": 1, "低": 2, "中": 3, "高": 4, "極高": 5 };
+  var items = data.items;
+  var trial = {};
+  function resetTrial() { trial = {}; items.forEach(function (it) { trial[it.id] = { p: it.p, i: it.inherit ? null : it.i }; }); }
+  resetTrial();
+
+  function compute(state) {
+    var shared = null;
+    items.forEach(function (it) { if (it.kind === "衝擊") { var v = state[it.id].i; if (shared === null || v > shared) shared = v; } });
+    var res = {}, best = null;
+    items.forEach(function (it) {
+      var s = state[it.id];
+      if (it.kind === "衝擊") { res[it.id] = { level: I3[String(s.i)], matrix: null, p: null, i: s.i }; return; }
+      var ii = s.i == null ? shared : s.i;
+      var m = M[String(s.p)][String(ii)];
+      // item result = probability of occurrence alone (article convention); P x I kept as matrix risk
+      res[it.id] = { level: P3[String(s.p)], matrix: m, p: s.p, i: ii };
+      if (!best || ORDER[m] > ORDER[best.matrix] || (ORDER[m] === ORDER[best.matrix] && s.p > best.p)) best = { matrix: m, p: s.p, i: ii, id: it.id };
+    });
+    return { items: res, overall: best ? { level: M3[best.matrix], matrix: best.matrix, from: best.id } : null };
+  }
+  var official = compute(trial);
+
+  var selItem = $("wiItem"), selP = $("wiP"), selI = $("wiI"), out = $("wiOut");
+  function opt(sel, value, label) { var o = el("option", null, label); o.value = value; sel.appendChild(o); }
+  function fillScores(sel, labels, allowInherit) {
+    sel.innerHTML = "";
+    if (allowInherit) opt(sel, "", "沿用衝擊項目");
+    Object.keys(labels).map(Number).sort(function (a, b) { return a - b; })
+      .forEach(function (k) { opt(sel, String(k), k + "（" + labels[String(k)] + "）"); });
+  }
+  function itemById(id) { for (var k = 0; k < items.length; k++) if (items[k].id === id) return items[k]; return null; }
+
+  function syncControls() {
+    var it = itemById(selItem.value); if (!it) return;
+    var s = trial[it.id];
+    fillScores(selP, data.pLabels, false);
+    fillScores(selI, data.iLabels, it.kind === "機率" && it.inherit);
+    selP.disabled = it.kind === "衝擊";
+    selP.value = s.p == null ? "" : String(s.p);
+    selI.value = s.i == null ? "" : String(s.i);
+  }
+
+  function badge(level) {
+    var span = el("span", "lv lv-" + data.levelClass[level]);
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "ic"); svg.setAttribute("aria-hidden", "true");
+    var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "#lvicon-" + data.levelClass[level]);
+    svg.appendChild(use); span.appendChild(svg); span.appendChild(el("span", null, level));
+    return span;
+  }
+
+  function placeGhost(res) {
+    document.querySelectorAll(".marker.ghost").forEach(function (g) { g.remove(); });
+    items.forEach(function (it) {
+      var r = res.items[it.id], o = official.items[it.id];
+      if (it.kind !== "機率" || (r.p === o.p && r.i === o.i)) return;
+      var cell = document.querySelector('.cell[data-p="' + r.p + '"][data-i="' + r.i + '"] .markers');
+      if (!cell) return;
+      var g = el("span", "marker ghost", String(it.n));
+      g.setAttribute("title", "試算位置：" + it.name); g.setAttribute("aria-hidden", "true");
+      g.style.display = "inline-grid"; g.style.placeItems = "center";
+      cell.appendChild(g);
+    });
+  }
+
+  function renderTrial() {
+    var res = compute(trial);
+    out.innerHTML = "";
+    var tbl = el("table", "tbl");
+    var thead = el("thead"); var hr = el("tr");
+    ["項目", "正式結果", "試算結果", "變化"].forEach(function (h) { var th = el("th", null, h); th.scope = "col"; hr.appendChild(th); });
+    thead.appendChild(hr); tbl.appendChild(thead);
+    var tb = el("tbody");
+    function cell(r, label) {
+      var td = el("td");
+      if (label) td.appendChild(el("span", "small muted", label + " "));
+      td.appendChild(badge(r.level));
+      if (r.matrix) { td.appendChild(el("span", "small", " 矩陣風險 ")); td.appendChild(badge(r.matrix)); }
+      return td;
+    }
+    function change(a, b, what) {
+      var d = ORDER[b] - ORDER[a];
+      return d > 0 ? what + "▲" : d < 0 ? what + "▼" : "";
+    }
+    function row(name, off, trl, label) {
+      var tr = el("tr");
+      tr.appendChild(el("td", null, name));
+      tr.appendChild(cell(off, label));
+      tr.appendChild(cell(trl, label));
+      var parts = [change(off.level, trl.level, label || "結果")];
+      if (off.matrix && trl.matrix) parts.push(change(off.matrix, trl.matrix, "矩陣風險"));
+      var txt = parts.filter(Boolean).join("　");
+      tr.appendChild(el("td", "delta", txt || "＝ 不變"));
+      tb.appendChild(tr);
+    }
+    items.forEach(function (it) {
+      row(it.n + ". " + it.name, official.items[it.id], res.items[it.id], it.kind === "衝擊" ? "衝擊" : "機率");
+    });
+    if (res.overall && official.overall) row("綜合研判", { level: official.overall.level }, { level: res.overall.level }, "");
+    tbl.appendChild(tb);
+    out.appendChild(el("p", "small", "以下為試算，非正式評估結果。正式結果請見上方風險評估表。"));
+    out.appendChild(tbl);
+    placeGhost(res);
+  }
+
+  if (selItem && selP && selI && out) {
+    items.forEach(function (it) { opt(selItem, it.id, it.n + ". " + it.name); });
+    syncControls(); renderTrial();
+    selItem.addEventListener("change", syncControls);
+    selP.addEventListener("change", function () { trial[selItem.value].p = selP.value ? Number(selP.value) : null; renderTrial(); });
+    selI.addEventListener("change", function () { trial[selItem.value].i = selI.value ? Number(selI.value) : null; renderTrial(); });
+    $("wiReset").addEventListener("click", function () { resetTrial(); syncControls(); renderTrial(); });
+  }
+
+  /* ---------- recommendation filters ----------------------------------- */
+  var fCat = $("fCat"), fPri = $("fPri"), fTime = $("fTime");
+  function filterRecs() {
+    var c = fCat.value, p = fPri.value, t = fTime.value, n = 0;
+    document.querySelectorAll("#recList .rec").forEach(function (li) {
+      var ok = (!c || li.dataset.cat === c) && (!p || li.dataset.pri === p) && (!t || li.dataset.time === t);
+      li.hidden = !ok; if (ok) n++;
+    });
+    $("fCount").textContent = "顯示 " + n + " 項";
+    $("recEmpty").hidden = n !== 0;
+  }
+  if (fCat && fPri && fTime) [fCat, fPri, fTime].forEach(function (s) { s.addEventListener("change", filterRecs); });
+
+  /* ---------- optional time-series chart -------------------------------- */
+  var ts = data.timeseries || [];
+  var host = $("tsChart");
+  if (host && ts.length) {
+    var series = {}; ts.forEach(function (p) { (series[p.series] = series[p.series] || []).push(p); });
+    var names = Object.keys(series).slice(0, 3);
+    var colors = ["var(--accent)", "#eb6834", "#1baf7a"];
+    var dates = Array.from(new Set(ts.map(function (p) { return p.date; }))).sort();
+    var maxV = Math.max.apply(null, ts.map(function (p) { return p.value; })) || 1;
+    var W = 640, H = 240, L = 44, R = 12, T = 12, B = 30;
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "病例數時間序列，資料見表格檢視");
+    function x(d) { return L + (dates.length < 2 ? 0 : (W - L - R) * dates.indexOf(d) / (dates.length - 1)); }
+    function y(v) { return T + (H - T - B) * (1 - v / maxV); }
+    function line(x1, y1, x2, y2, stroke) { var l = document.createElementNS(NS, "line"); l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2); l.setAttribute("stroke", stroke); l.setAttribute("stroke-width", "1"); return l; }
+    function text(xx, yy, s, anchor) { var t = document.createElementNS(NS, "text"); t.setAttribute("x", xx); t.setAttribute("y", yy); t.setAttribute("font-size", "11"); t.setAttribute("fill", "var(--muted)"); t.setAttribute("text-anchor", anchor || "start"); t.textContent = s; return t; }
+    for (var g = 0; g <= 4; g++) { var vv = maxV * g / 4; svg.appendChild(line(L, y(vv), W - R, y(vv), "var(--grid)")); svg.appendChild(text(L - 6, y(vv) + 4, String(Math.round(vv)), "end")); }
+    svg.appendChild(text(L, H - 8, dates[0])); svg.appendChild(text(W - R, H - 8, dates[dates.length - 1], "end"));
+    names.forEach(function (nm, k) {
+      var pts = series[nm].slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+      var path = document.createElementNS(NS, "path");
+      path.setAttribute("d", pts.map(function (p, j) { return (j ? "L" : "M") + x(p.date) + "," + y(p.value); }).join(""));
+      path.setAttribute("fill", "none"); path.setAttribute("stroke", colors[k]); path.setAttribute("stroke-width", "2"); path.setAttribute("stroke-linejoin", "round");
+      svg.appendChild(path);
+    });
+    var cross = line(0, T, 0, H - B, "var(--axis)"); cross.style.display = "none"; svg.appendChild(cross);
+    svg.addEventListener("pointermove", function (ev) {
+      var r = svg.getBoundingClientRect(); var px = (ev.clientX - r.left) * W / r.width;
+      var best = dates[0], bd = 1e9; dates.forEach(function (d) { var dd = Math.abs(x(d) - px); if (dd < bd) { bd = dd; best = d; } });
+      cross.setAttribute("x1", x(best)); cross.setAttribute("x2", x(best)); cross.style.display = "";
+      var parts = names.map(function (nm) { var p = series[nm].filter(function (q) { return q.date === best; })[0]; return (p ? p.value : "—") + " " + nm; });
+      showTip(best + "：" + parts.join("；"), ev.clientX, ev.clientY);
+    });
+    svg.addEventListener("pointerleave", function () { cross.style.display = "none"; hideTip(); });
+    host.appendChild(svg);
+    if (names.length > 1) {
+      var lg = el("div", "matrix-legend");
+      names.forEach(function (nm, k) { var s = el("span", "small"); var sw = el("span"); sw.style.cssText = "display:inline-block;width:16px;height:2px;vertical-align:middle;margin-right:4px;background:" + colors[k]; s.appendChild(sw); s.appendChild(document.createTextNode(nm)); lg.appendChild(s); });
+      host.appendChild(lg);
+    }
+  }
+})();
+</script>
+</body>
+</html>
