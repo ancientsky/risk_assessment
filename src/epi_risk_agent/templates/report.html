@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="epi-risk-agent {{ tool_version }}">
+<title>{{ a.report_title }}</title>
+<style>{{ css }}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lvicon-low" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></symbol>
+  <symbol id="lvicon-mod" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-high" viewBox="0 0 16 16"><path d="M8 .8 15.2 8 8 15.2.8 8z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vhigh" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2" fill="currentColor"/><rect x="7" y="3.8" width="2" height="5.6" fill="#fff"/><rect x="7" y="10.6" width="2" height="2" fill="#fff"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-half" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></symbol>
+  <symbol id="i-question" viewBox="0 0 16 16"><path d="M5.5 6a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5V10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="8" cy="13" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 4.5V8l2.5 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="7.2" y="6" width="1.6" height="4.4" fill="currentColor"/><rect x="7.2" y="11.4" width="1.6" height="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1.2l2 4.3 4.7.6-3.4 3.2.9 4.6L8 11.6 3.8 13.9l.9-4.6L1.3 6.1 6 5.5z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#main">跳至主要內容</a>
+
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <div class="brand">疫情風險評估報告<span class="brand-sub">AI 草稿・待審</span></div>
+    <div class="toolbar">
+      <button type="button" class="btn" id="themeBtn" aria-label="切換顯示主題">主題：自動</button>
+      <button type="button" class="btn" id="printBtn">列印／存 PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="disclaimer" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>本報告為 AI 產生之草稿，尚未經流行病學專業人員審閱，不得逕作為正式決策依據。</strong>
+    資料截止：{{ fmt_dt(a.data_cutoff) }}；產出：{{ fmt_dt(a.generated_at) }}。
+    {% if n_err %}<br><strong>自動檢核發現 {{ n_err }} 項錯誤</strong>，詳見「限制與不確定性」之自動檢核結果。{% endif %}</div>
+  </div>
+
+  <nav class="toc" aria-label="報告目錄">
+    <ol>
+      <li><a href="#sec-bluf">決策摘要</a></li>
+      <li><a href="#sec-decision">長官下一步決策建議</a></li>
+      <li><a href="#sec-verify">新聞查證</a></li>
+      <li><a href="#sec-situation">疫情概況</a></li>
+      <li><a href="#sec-risk">風險評估表</a></li>
+      <li><a href="#sec-scenario">情境分析與 IHR</a></li>
+      <li><a href="#sec-recs">建議事項</a></li>
+      <li><a href="#sec-limits">限制、方法與參考資料</a></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" class="wrap">
+<h1 class="report-title">{{ a.report_title }}</h1>
+<p class="meta-line">事件：{{ a.event.title }}｜地點：{{ a.event.event_location }}｜危害：{{ a.event.hazard }}</p>
+
+<!-- 1. BLUF ============================================================ -->
+<section id="sec-bluf" class="card bluf" aria-labelledby="h-bluf">
+  <h2 id="h-bluf"><span class="secno">1</span>決策摘要</h2>
+  <div class="bluf-grid">
+    <div class="bluf-level">
+      <div class="label">我國整體風險（計算結果）</div>
+      <div class="hero-level">{{ level_badge(au.overall_computed_level, "lv-xl") }}</div>
+      <div class="sub">矩陣等級：{{ level_badge(au.overall_matrix_level) }}
+        <span class="muted">（機率 {{ p_labels[au.overall_probability] if au.overall_probability else "—" }} × 衝擊 {{ i_labels[au.overall_impact] if au.overall_impact else "—" }}）</span></div>
+      <div class="sub">信心程度：<strong>{{ au.overall_confidence }}</strong>
+        {% if au.overall_confidence_caps %}<span class="muted">（{{ au.overall_confidence_caps | join("；") }}）</span>{% endif %}</div>
+      {% if not au.overall_agrees %}
+      <div class="flag flag-warn" role="status"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+        評估者建議為「{{ au.overall_proposed_level }}」，與規則計算「{{ au.overall_computed_level }}」不一致；兩者並列，請審閱者裁定。</div>
+      {% else %}
+      <div class="sub muted">評估者建議與規則計算一致（{{ au.overall_proposed_level }}）。</div>
+      {% endif %}
+      {% if higher_strata %}
+      <div class="strata-hl"><div class="label">高於整體之分層結果</div>
+        <ul>{% for s in higher_strata %}<li>{{ s.item }}／{{ s.name }}：{{ level_badge(s.level) }}</li>{% endfor %}</ul></div>
+      {% endif %}
+    </div>
+    <div class="bluf-body">
+      <p class="lead">{{ a.overall.summary }}</p>
+      <h3>重點發現</h3>
+      <ol class="findings">{% for f in a.overall.key_findings %}<li>{{ f }}</li>{% endfor %}</ol>
+      <div class="bluf-facts">
+        <div><div class="label">建議決策</div>
+          {% if rec_option %}<div class="strong"><svg class="ic star" aria-hidden="true"><use href="#i-star"/></svg>{{ rec_option.title }}</div>
+          <div class="muted">主責：{{ rec_option.owner }}｜時程：{{ rec_option.timeframe }}</div>{% else %}<div>（未指定）</div>{% endif %}</div>
+        <div><div class="label">新聞可信度</div>
+          <div>{{ level_badge(au.credibility_computed) }} <span class="muted">（規則計算；評估者建議：{{ au.credibility_proposed }}）</span></div></div>
+        <div><div class="label">建議再評估日期</div><div class="strong">{{ a.reassessment_date }}</div>
+          <div class="muted">或任一觸發指標出現時立即再評估</div></div>
+        <div><div class="label">IHR 附件二篩檢</div>
+          <div>{{ au.ihr_yes_count }}／4 項「是」{% if au.ihr_meets_threshold %}（達門檻）{% else %}（未達門檻）{% endif %}</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Decision ======================================================== -->
+<section id="sec-decision" class="card" aria-labelledby="h-decision">
+  <h2 id="h-decision"><span class="secno">2</span>長官下一步決策建議</h2>
+  <p class="question"><strong>決策問題：</strong>{{ a.decision.question }}</p>
+  <div class="options">
+    {% for o in a.decision.options %}
+    <article class="option{% if o.recommended %} option-rec{% endif %}" aria-label="選項 {{ o.id }}：{{ o.title }}{% if o.recommended %}（建議方案）{% endif %}">
+      <header>
+        <span class="opt-id">{{ o.id }}</span>
+        <h3>{{ o.title }}</h3>
+        {% if o.recommended %}<span class="rec-tag"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>建議方案</span>{% endif %}
+      </header>
+      <p>{{ o.description }}</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul>{% for x in o.pros %}<li>{{ x }}</li>{% endfor %}</ul></div>
+        <div><h4>缺點／代價</h4><ul>{% for x in o.cons %}<li>{{ x }}</li>{% endfor %}</ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>{{ o.owner }}</dd></div>
+        <div><dt>時程</dt><dd>{{ o.timeframe }}</dd></div>
+        {% if o.resources %}<div><dt>所需資源</dt><dd>{{ o.resources }}</dd></div>{% endif %}
+      </dl>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="rec-reason"><strong>建議理由：</strong>{{ a.decision.recommendation_reason }}</p>
+
+  <h3>觸發指標（出現時應調整風險等級並再評估）</h3>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">方向</th><th scope="col">觀察指標</th><th scope="col">門檻</th><th scope="col">監測來源</th><th scope="col">目前狀態</th></tr></thead>
+    <tbody>
+    {% for t in a.decision.triggers %}
+      <tr>
+        <td data-th="方向"><span class="dir dir-{{ 'up' if t.direction == '升級' else 'down' }}">{{ '▲' if t.direction == '升級' else '▼' }} {{ t.direction }}</span></td>
+        <td data-th="觀察指標">{{ t.indicator }}</td>
+        <td data-th="門檻">{{ t.threshold }}</td>
+        <td data-th="監測來源">{{ t.monitoring_source }}</td>
+        <td data-th="目前狀態">{{ t.current_status }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 3. Verification ==================================================== -->
+<section id="sec-verify" class="card" aria-labelledby="h-verify">
+  <h2 id="h-verify"><span class="secno">3</span>新聞查證</h2>
+  {% set ns = src_by_id.get(a.event.news_source_id) %}
+  <div class="newsbox">
+    <div class="label">被查證之新聞</div>
+    {% if ns %}<div class="strong">{% if ns.url %}<a href="{{ ns.url }}" rel="noopener noreferrer">{{ ns.title }}</a>{% else %}{{ ns.title }}{% endif %}</div>
+    <div class="muted">{{ ns.publisher }}{% if ns.published_date %}｜{{ ns.published_date }}{% endif %}｜{{ tier_labels[ns.tier] }}｜取得方式：{{ ns.retrieval }}</div>{% endif %}
+    <p>{{ a.event.news_summary }}</p>
+    <p class="muted">分流（triage）：<strong>{{ a.event.triage_decision }}</strong>{% if a.event.triage_reason %}——{{ a.event.triage_reason }}{% endif %}</p>
+  </div>
+  <div class="cred">
+    <div><span class="label">整體新聞可信度</span> {{ level_badge(au.credibility_computed) }}</div>
+    <div class="muted">規則：{{ au.credibility_reason }}</div>
+    <div class="muted">評估者說明（建議「{{ a.news_credibility.proposed_level }}」）：{{ a.news_credibility.reason }}</div>
+  </div>
+  <div class="legend-row" aria-label="查證結果圖例">
+    {% for v in ["已證實", "部分證實", "無法證實", "與官方資訊不符", "過時"] %}{{ verdict_chip(v) }}{% endfor %}
+  </div>
+  <ol class="claims">
+  {% for c in a.claims %}
+    {% set ca = claim_audit[c.id] %}
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">{{ c.id }}</span>
+          {{ verdict_chip(c.verdict) }}
+          {% if c.importance == "關鍵" %}<span class="chip">關鍵</span>{% endif %}
+          {% if not ca.passes_rules %}<span class="chip chip-err" title="{{ ca.reasons | join('；') }}">規則未通過→應為「{{ ca.suggested_verdict }}」</span>{% endif %}
+          <span class="claim-text">{{ c.text }}</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>{{ c.verdict_reason }}</p>
+          {% if ca.reasons %}<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>{{ ca.reasons | join("；") }}</p>{% endif %}
+          <p class="muted">獨立來源數：{{ ca.independent_sources }}{% if ca.best_tier %}｜最佳支持來源等級：{{ tier_labels[ca.best_tier] }}{% endif %}</p>
+          <ul class="evlist">
+          {% for e in c.evidence %}
+            {% set s = src_by_id.get(e.source_id) %}
+            <li class="ev ev-{{ stance_class[e.stance] }}">
+              <span class="stance">{{ e.stance }}</span>
+              {% if s %}<a href="#ref-{{ s.id }}" class="cite">[{{ src_num[s.id] }}]</a>
+              {% if s.url %}<a href="{{ s.url }}" rel="noopener noreferrer">{{ s.publisher }}</a>{% else %}{{ s.publisher }}{% endif %}
+              <span class="muted">｜{{ s.published_date or "日期不明" }}｜{{ tier_labels[s.tier] }}｜{{ s.retrieval }}</span>{% else %}<span class="chip chip-err">{{ e.source_id }}?</span>{% endif %}
+              <blockquote>{{ e.quote_or_summary }}</blockquote>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </details>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+
+<!-- 4. Situation ======================================================= -->
+<section id="sec-situation" class="card" aria-labelledby="h-sit">
+  <h2 id="h-sit"><span class="secno">4</span>疫情概況</h2>
+  {% if a.international.stats %}
+  <div class="tiles">
+    {% for t in a.international.stats %}
+    <div class="tile">
+      <div class="tile-label">{{ t.label }}</div>
+      <div class="tile-value">{{ t.value }}</div>
+      <div class="tile-meta">{% if t.as_of %}截至 {{ t.as_of }} {% endif %}{{ cite(t.source_ids) }}</div>
+      {% if t.note %}<div class="tile-note">{{ t.note }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="two-col">
+    <div>
+      <h3>國際疫情概況</h3>
+      <ul class="bullets">{% for b in a.international.summary %}<li>{{ b.text }} {{ cite(b.source_ids) }}{% if b.is_inference %}<span class="chip">推論</span>{% endif %}</li>{% endfor %}</ul>
+      {% if a.international.external_assessments %}
+      <h3>國際機構既有評估</h3>
+      <ul class="bullets">{% for b in a.international.external_assessments %}<li>{{ b.text }} {{ cite(b.source_ids) }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+    <div>
+      {% if a.international.timeline %}
+      <h3>事件時序</h3>
+      <ol class="timeline">
+        {% for e in a.international.timeline %}
+        <li><time datetime="{{ e.date }}">{{ e.date }}</time><span>{{ e.label }} {{ cite(e.source_ids) }}</span></li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if country_bars %}
+  <figure class="chart" aria-labelledby="cc-title">
+    <figcaption id="cc-title"><strong>各國病例數</strong>{% if country_bars[0].c.period %}（{{ country_bars[0].c.period }}）{% endif %}</figcaption>
+    <div class="bars" role="list">
+      {% for b in country_bars %}
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="{{ b.c.country }}：{{ '%g' % b.c.cases }} 例{% if b.c.deaths is not none %}，死亡 {{ '%g' % b.c.deaths }}{% endif %}{% if b.c.period %}（{{ b.c.period }}）{% endif %}">
+        <span class="bar-label">{{ b.c.country }}</span>
+        <span class="bar-track"><span class="bar" style="width: {{ '%.1f' % b.pct }}%"></span></span>
+        <span class="bar-val">{{ '%g' % b.c.cases }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <details class="tableview"><summary>表格檢視</summary>
+      <table class="tbl"><thead><tr><th scope="col">國家</th><th scope="col">病例</th><th scope="col">死亡</th><th scope="col">期間</th><th scope="col">來源</th></tr></thead>
+      <tbody>{% for b in country_bars %}<tr><td>{{ b.c.country }}</td><td class="num">{{ '%g' % b.c.cases }}</td><td class="num">{{ '%g' % b.c.deaths if b.c.deaths is not none else '—' }}</td><td>{{ b.c.period or '—' }}</td><td>{{ cite(b.c.source_ids) }}</td></tr>{% endfor %}</tbody></table>
+    </details>
+  </figure>
+  {% endif %}
+
+  {% if a.international.time_series %}
+  <figure class="chart" aria-labelledby="ts-title">
+    <figcaption id="ts-title"><strong>病例數時間序列</strong></figcaption>
+    <div id="tsChart" class="ts-chart"></div>
+    <details class="tableview"><summary>表格檢視</summary>
+      <table class="tbl"><thead><tr><th scope="col">日期</th><th scope="col">序列</th><th scope="col">數值</th></tr></thead>
+      <tbody>{% for p in a.international.time_series %}<tr><td>{{ p.date }}</td><td>{{ p.series }}</td><td class="num">{{ '%g' % p.value }}</td></tr>{% endfor %}</tbody></table>
+    </details>
+  </figure>
+  {% endif %}
+
+  <h3>病原與傳播特性</h3>
+  <p>{{ a.pathogen.summary }}</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-kv">
+    <tbody>{% for f in a.pathogen.facts %}<tr><th scope="row">{{ f.label }}</th><td>{{ f.value }} {{ cite(f.source_ids) }}</td></tr>{% endfor %}</tbody>
+  </table>
+  </div>
+
+  <h3>我國現況</h3>
+  {% if a.taiwan.notifiable_category %}<p><strong>法定傳染病分類：</strong>{{ a.taiwan.notifiable_category }}</p>{% endif %}
+  <div class="tw-grid">
+    {% for key, label in [("surveillance", "監測與通報"), ("laboratory", "檢驗量能"), ("vectors_hosts", "病媒／宿主分布"), ("border_travel", "邊境檢疫與旅遊疫情建議"), ("healthcare", "醫療與感染管制")] %}
+    {% set lst = a.taiwan[key] %}
+    {% if lst %}
+    <div class="tw-block"><h4>{{ label }}</h4>
+      <ul class="bullets">{% for b in lst %}<li>{{ b.text }} {{ cite(b.source_ids) }}{% if b.is_inference %}<span class="chip">推論</span>{% endif %}</li>{% endfor %}</ul></div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- 5. Risk table + matrix ============================================= -->
+<section id="sec-risk" class="card" aria-labelledby="h-risk">
+  <h2 id="h-risk"><span class="secno">5</span>風險評估表</h2>
+  <p class="muted">格式依疾管署《疫情報導》風險評估表（評估項目／評估內容／風險等級定義／評估結果）。評估結果由機率（1–5）× 衝擊（1–5）經風險矩陣計算，再對應為低／中／高三級；評估者原始建議並列。</p>
+  <div class="table-wrap">
+  <table class="tbl risk-table">
+    <caption class="sr-only">我國風險評估表</caption>
+    <thead><tr><th scope="col">評估項目</th><th scope="col">評估內容</th><th scope="col">風險等級定義</th><th scope="col">評估結果</th></tr></thead>
+    <tbody>
+    {% for iv in items_view %}
+      {% set r = iv.item %}{% set ia = iv.audit %}
+      <tr id="item-{{ r.id }}">
+        <th scope="row" data-th="評估項目"><span class="item-n">{{ iv.n }}</span>{{ r.name }}<div class="muted small">{{ r.question }}</div></th>
+        <td data-th="評估內容"><ul class="dash">{% for b in r.evidence %}<li>{{ b.text }} {{ cite(b.source_ids) }}{% if b.is_inference %}<span class="chip">推論</span>{% endif %}</li>{% endfor %}</ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>{{ r.level_definitions["低"] }}</li>
+          <li><strong>中：</strong>{{ r.level_definitions["中"] }}</li>
+          <li><strong>高：</strong>{{ r.level_definitions["高"] }}</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div>{{ level_badge(ia.computed_level, "lv-lg") }}</div>
+          <div class="small">
+            {% if r.kind == "機率" %}機率 {{ ia.probability }}（{{ p_labels[ia.probability] }}）× 衝擊 {{ ia.impact }}（{{ i_labels[ia.impact] }}{% if ia.impact_inherited %}，沿用衝擊項目{% endif %}）<br>矩陣：{{ ia.matrix_level }} → {{ ia.computed_level }}
+            {% else %}衝擊 {{ ia.impact }}（{{ i_labels[ia.impact] }}）→ {{ ia.computed_level }}{% endif %}
+          </div>
+          {% if not ia.agrees %}<div class="flag flag-warn small"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>評估者建議「{{ ia.proposed_level }}」</div>{% endif %}
+          {% if ia.strata_computed %}<ul class="strata">{% for st in ia.strata_computed %}<li>{{ st.name }}：{{ level_badge(st.computed_level or st.proposed_level) }}{% if st.computed_level and st.computed_level != st.proposed_level %}<span class="muted small">（建議 {{ st.proposed_level }}）</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
+          <div class="small">信心：<strong>{{ ia.effective_confidence }}</strong>{% if ia.effective_confidence != ia.stated_confidence %}<span class="muted">（原 {{ ia.stated_confidence }}，經規則調降）</span>{% endif %}</div>
+          <details class="why small"><summary>判斷依據</summary>
+            {% if r.probability_rationale %}<p><strong>機率：</strong>{{ r.probability_rationale }}</p>{% endif %}
+            {% if r.impact_rationale %}<p><strong>衝擊：</strong>{{ r.impact_rationale }}</p>{% endif %}
+            <p><strong>信心程度理由：</strong>{{ r.confidence_reason }}</p>
+            {% if ia.confidence_caps %}<p class="muted">規則上限：{{ ia.confidence_caps | join("；") }}</p>{% endif %}
+          </details>
+        </td>
+      </tr>
+    {% endfor %}
+      <tr class="overall-row">
+        <th scope="row" data-th="評估項目">綜合研判</th>
+        <td data-th="評估內容" colspan="2">{{ a.overall.summary }}<div class="small muted">計算方式：取各機率類項目之最高矩陣等級（本次由「{{ (a.risk_items | selectattr("id", "equalto", au.overall_probability_from) | first).name if au.overall_probability_from else "—" }}」決定）。</div></td>
+        <td data-th="評估結果" class="result">{{ level_badge(au.overall_computed_level, "lv-lg") }}<div class="small">信心：<strong>{{ au.overall_confidence }}</strong></div>
+          {% if not au.overall_agrees %}<div class="flag flag-warn small">評估者建議「{{ au.overall_proposed_level }}」</div>{% endif %}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">註：本評估依據現有資訊判定風險等級，將視新增實證適時調整。</p>
+
+  {% set hairs_items = items_view | selectattr("item.hairs_questions") | list %}
+  {% if hairs_items %}
+  <h3>人畜共通／新興病原篩檢問題（參考 UKHSA HAIRS 流程）</h3>
+  {% for iv in hairs_items %}
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <caption>{{ iv.item.name }}</caption>
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
+    <tbody>{% for h in iv.item.hairs_questions %}<tr><td data-th="問題">{{ h.question }}</td><td data-th="回答"><span class="ans ans-{{ {'是':'y','否':'n','不確定':'u'}[h.answer] }}">{{ h.answer }}</span></td><td data-th="說明">{{ h.rationale }} {{ cite(h.source_ids) }}</td></tr>{% endfor %}</tbody>
+  </table>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
+  <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
+  <div class="matrix-layout">
+    <div class="matrix-wrap">
+      <table class="matrix" aria-labelledby="matrix-h" id="matrix">
+        <thead><tr><td class="corner"><span>衝擊→</span><span>機率↓</span></td>{% for i in range(1, 6) %}<th scope="col">{{ i }}<span class="ax">{{ i_labels[i] }}</span></th>{% endfor %}</tr></thead>
+        <tbody>
+        {% for p in range(5, 0, -1) %}
+          <tr><th scope="row">{{ p }}<span class="ax">{{ p_labels[p] }}</span></th>
+          {% for i in range(1, 6) %}
+            {% set m = matrix[p][i] %}
+            <td class="cell cell-{{ level_class[m] }}" data-p="{{ p }}" data-i="{{ i }}">
+              <span class="cell-lv">{{ m }}</span>
+              <span class="markers">
+              {% for iv in items_view %}{% set ia = iv.audit %}{% if ia.matrix_level and ia.probability == p and ia.impact == i %}<button type="button" class="marker" data-item="{{ iv.item.id }}" aria-label="{{ iv.n }}. {{ iv.item.name }}：機率 {{ p_labels[p] }}、衝擊 {{ i_labels[i] }}、矩陣等級 {{ m }}">{{ iv.n }}</button>{% endif %}{% endfor %}
+              </span>
+            </td>
+          {% endfor %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="matrix-detail" id="matrixDetail" aria-live="polite">
+      <p class="muted">請點選矩陣中的項目編號。</p>
+    </div>
+  </div>
+  <div class="matrix-legend">
+    {% for lv in ["低", "中", "高", "極高"] %}{{ level_badge(lv) }}{% endfor %}
+    <span class="muted small">矩陣等級 → 三級：低→低、中→中、高→高、極高→高</span>
+  </div>
+  <template id="itemDetails">
+    {% for iv in items_view %}
+    <div data-item="{{ iv.item.id }}">
+      <h4>{{ iv.n }}. {{ iv.item.name }}</h4>
+      <p>結果：{{ level_badge(iv.audit.computed_level) }}（P={{ iv.audit.probability or "—" }}，I={{ iv.audit.impact }}；信心 {{ iv.audit.effective_confidence }}）</p>
+      <ul class="dash">{% for b in iv.item.evidence %}<li>{{ b.text }} {{ cite(b.source_ids) }}</li>{% endfor %}</ul>
+      <p><a href="#item-{{ iv.item.id }}">至風險評估表該列</a></p>
+    </div>
+    {% endfor %}
+  </template>
+
+  <div class="whatif" id="whatif" role="region" aria-labelledby="wi-h">
+    <h3 id="wi-h"><span class="trial-tag">試算</span>情境試算（非正式結果）</h3>
+    <p class="small">調整任一項目之機率或衝擊，查看依同一矩陣計算之結果變化。<strong>試算不會改變本報告之正式評估結果。</strong></p>
+    <div class="wi-controls">
+      <label>項目<select id="wiItem"></select></label>
+      <label>機率<select id="wiP"></select></label>
+      <label>衝擊<select id="wiI"></select></label>
+      <button type="button" class="btn" id="wiReset">重設</button>
+    </div>
+    <div class="wi-out" aria-live="polite" id="wiOut"></div>
+  </div>
+</section>
+
+<!-- 6. Scenarios + IHR ================================================= -->
+<section id="sec-scenario" class="card" aria-labelledby="h-scn">
+  <h2 id="h-scn"><span class="secno">6</span>情境分析與 IHR 附件二篩檢</h2>
+  <div class="scenarios">
+    {% for s in scenarios %}
+    <article class="scn scn-{{ {'最佳':'best','最可能':'likely','最壞':'worst'}[s.kind] }}">
+      <h3>{{ s.kind }}情境 {{ level_badge(s.implied_level) }}</h3>
+      <p>{{ s.description }}</p>
+      {% if s.assumptions %}<h4>假設</h4><ul>{% for x in s.assumptions %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+      <h4>對我國的意涵</h4><p>{{ s.implications }}</p>
+    </article>
+    {% endfor %}
+  </div>
+
+  <h3>IHR（2005）附件二決策工具篩檢</h3>
+  <p class="small muted">{{ a.ihr_annex2.perspective }}</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">理由</th></tr></thead>
+    <tbody>
+    {% for q in a.ihr_annex2.questions %}
+      <tr><td data-th="問題">{{ ihr_labels[q.key] }}</td><td data-th="回答"><span class="ans ans-{{ {'是':'y','否':'n','不確定':'u'}[q.answer] }}">{{ q.answer }}</span></td><td data-th="理由">{{ q.rationale }} {{ cite(q.source_ids) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="ihr-result"><strong>篩檢結果：</strong>{{ au.ihr_note }}。</p>
+</section>
+
+<!-- 7. Recommendations ================================================= -->
+<section id="sec-recs" class="card" aria-labelledby="h-recs">
+  <h2 id="h-recs"><span class="secno">7</span>建議事項</h2>
+  <div class="filters" role="group" aria-label="篩選建議事項">
+    <label>類別<select id="fCat"><option value="">全部</option>{% for c in rec_categories %}<option>{{ c }}</option>{% endfor %}</select></label>
+    <label>優先順序<select id="fPri"><option value="">全部</option><option>高</option><option>中</option><option>低</option></select></label>
+    <label>時程<select id="fTime"><option value="">全部</option><option>24小時</option><option>1週</option><option>1個月</option></select></label>
+    <span class="muted small" id="fCount" aria-live="polite">共 {{ a.recommendations | length }} 項</span>
+  </div>
+  <ul class="recs" id="recList">
+    {% for r in a.recommendations %}
+    <li class="rec" data-cat="{{ r.category }}" data-pri="{{ r.priority }}" data-time="{{ r.timeframe }}">
+      <div class="rec-head"><span class="chip">{{ r.category }}</span><span class="pri pri-{{ {'高':'h','中':'m','低':'l'}[r.priority] }}">優先：{{ r.priority }}</span><span class="chip">{{ r.timeframe }}</span><span class="muted small">{{ r.id }}</span></div>
+      <p>{{ r.text }} {% if r.source_ids %}{{ cite(r.source_ids) }}{% endif %}</p>
+      <div class="small muted">主責：{{ r.owner }}{% if r.rationale %}｜理由：{{ r.rationale }}{% endif %}</div>
+    </li>
+    {% endfor %}
+  </ul>
+  <p class="muted" id="recEmpty" hidden>沒有符合篩選條件的建議事項。</p>
+</section>
+
+<!-- 8. Limitations / method / refs ===================================== -->
+<section id="sec-limits" class="card" aria-labelledby="h-lim">
+  <h2 id="h-lim"><span class="secno">8</span>限制與不確定性、方法說明、參考資料</h2>
+  <h3>限制與不確定性</h3>
+  <ul class="bullets">{% for l in a.limitations %}<li>{{ l }}</li>{% endfor %}</ul>
+  <p>本風險評估係依據現有資訊判定風險等級，將視新增實證適時調整判定。</p>
+
+  <details class="issues" {% if n_err %}open{% endif %}>
+    <summary>自動檢核結果：錯誤 {{ n_err }}、警告 {{ n_warn }}、提示 {{ issues | length - n_err - n_warn }}</summary>
+    <ul>{% for i in issues %}<li class="iss iss-{{ i.severity }}"><span class="iss-sev">{{ {'error':'錯誤','warning':'警告','info':'提示'}[i.severity] }}</span>{{ i.message }}{% if i.path %}<code>{{ i.path }}</code>{% endif %}</li>{% endfor %}</ul>
+  </details>
+
+  <h3>方法說明</h3>
+  <ol class="method">
+    <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
+    <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
+    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>每一機率類項目給予機率 1–5 與衝擊 1–5，以下表矩陣計算，再對應至三級；衝擊項目以衝擊分數對應三級（1–2 低、3 中、4–5 高）。綜合研判取各機率類項目之最高矩陣等級。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
+    <li><strong>升級篩檢：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另列參考 UKHSA HAIRS 流程之篩檢問題。</li>
+    <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
+  </ol>
+  <div class="table-wrap">
+  <table class="tbl mini-matrix">
+    <caption>風險矩陣（{{ matrix_version }}）：列＝機率，欄＝衝擊</caption>
+    <thead><tr><th scope="col">機率＼衝擊</th>{% for i in range(1, 6) %}<th scope="col">{{ i }} {{ i_labels[i] }}</th>{% endfor %}</tr></thead>
+    <tbody>{% for p in range(5, 0, -1) %}<tr><th scope="row">{{ p }} {{ p_labels[p] }}</th>{% for i in range(1, 6) %}<td>{{ matrix[p][i] }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table>
+  </div>
+  <p class="small muted">工具版本 {{ tool_version }}｜方法版本 {{ methodology_version }}｜產出模式：{{ a.generator.mode }}{% if a.generator.model %}（{{ a.generator.model }}）{% endif %}{% if a.generator.notes %}｜{{ a.generator.notes }}{% endif %}</p>
+
+  <h3>參考資料</h3>
+  <ol class="refs">
+    {% for s in a.sources %}
+    <li id="ref-{{ s.id }}">
+      <span class="ref-id">{{ s.id }}</span>
+      {% if s.url %}<a href="{{ s.url }}" rel="noopener noreferrer">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}.
+      {{ s.publisher }}.{% if s.published_date %} {{ s.published_date }}.{% endif %}
+      <span class="muted small">{{ tier_labels[s.tier] }}｜取得方式：{{ s.retrieval }}{% if s.accessed_date %}｜取用 {{ s.accessed_date }}{% endif %}{% if s.is_news_item %}｜被查證之新聞{% endif %}{% if s.note %}｜{{ s.note }}{% endif %}</span>
+      {% if s.url %}<div class="url small">{{ s.url }}</div>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+
+  <div class="disclaimer final" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>免責聲明：</strong>本報告由 AI 協助蒐集證據並產生草稿，風險等級由確定性規則計算；所有內容須經流行病學專業人員審閱、確認來源後方可使用。資料截止時間：{{ fmt_dt(a.data_cutoff) }}。</div>
+  </div>
+</section>
+</main>
+
+<div class="tooltip" id="tip" role="tooltip" hidden></div>
+<script type="application/json" id="report-data">{{ payload }}</script>
+<script>{{ js }}</script>
+</body>
+</html>

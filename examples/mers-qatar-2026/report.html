@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="epi-risk-agent 0.1.0">
+<title>卡達中東呼吸症候群冠狀病毒感染症（MERS）散發病例：新聞查證與我國快速風險評估</title>
+<style>/* ---------- tokens --------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f2f1ed;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6b6a66;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.12);
+  --accent: #2a78d6;
+  --accent-ink: #1c5cab;
+  --focus: #2a78d6;
+  /* status palette: level colours (always paired with icon + text) */
+  --lv-low: #0ca30c;
+  --lv-mod: #fab219;
+  --lv-high: #ec835a;
+  --lv-vhigh: #d03b3b;
+  --lv-low-bg: #e3f4e3;
+  --lv-mod-bg: #fdf1d3;
+  --lv-high-bg: #fde6d2;
+  --lv-vhigh-bg: #f5c6c6;
+  --lv-low-ink: #0a5c0a;
+  --lv-mod-ink: #6b4a00;
+  --lv-high-ink: #8a3412;
+  --lv-vhigh-ink: #8f1f1f;
+  --ok: #006300;
+  --bad: #b02a2a;
+  --warn-bg: #fff6dc;
+  --warn-border: #e7b84a;
+  --err-bg: #fbe5e5;
+  --bar: #2a78d6;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #a3a29a;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.12);
+    --accent: #3987e5;
+    --accent-ink: #86b6ef;
+    --focus: #86b6ef;
+    --lv-low-bg: #15301a;
+    --lv-mod-bg: #3a2f10;
+    --lv-high-bg: #3d2614;
+    --lv-vhigh-bg: #521c1c;
+    --lv-low-ink: #9be09b;
+    --lv-mod-ink: #ffd77a;
+    --lv-high-ink: #f6b496;
+    --lv-vhigh-ink: #f3a3a3;
+    --ok: #0ca30c;
+    --bad: #e66767;
+    --warn-bg: #33290f;
+    --warn-border: #a7811f;
+    --err-bg: #3a1a1a;
+    --bar: #3987e5;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #232321;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #a3a29a;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #3987e5;
+  --accent-ink: #86b6ef;
+  --focus: #86b6ef;
+  --lv-low-bg: #15301a;
+  --lv-mod-bg: #3a2f10;
+  --lv-high-bg: #3d2614;
+  --lv-vhigh-bg: #521c1c;
+  --lv-low-ink: #9be09b;
+  --lv-mod-ink: #ffd77a;
+  --lv-high-ink: #f6b496;
+  --lv-vhigh-ink: #f3a3a3;
+  --ok: #0ca30c;
+  --bad: #e66767;
+  --warn-bg: #33290f;
+  --warn-border: #a7811f;
+  --err-bg: #3a1a1a;
+  --bar: #3987e5;
+  --shadow: none;
+}
+
+/* ---------- base ------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+a { color: var(--accent-ink); }
+a:hover { text-decoration-thickness: 2px; }
+[id] { scroll-margin-top: 72px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3, h4 { line-height: 1.35; }
+h2 { font-size: 1.35rem; margin: 0 0 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+h3 { font-size: 1.1rem; margin: 1.4rem 0 0.6rem; }
+h4 { font-size: 1rem; margin: 0.8rem 0 0.4rem; }
+p { margin: 0.4rem 0 0.7rem; }
+ul, ol { padding-left: 1.3rem; margin: 0.3rem 0 0.8rem; }
+code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border-radius: 4px; margin-left: 0.4em; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.86rem; }
+.strong { font-weight: 600; }
+.label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.02em; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--surface); padding: 0.5rem 1rem; z-index: 10; }
+.skip:focus { left: 8px; top: 8px; }
+.ic { width: 1em; height: 1em; flex: none; vertical-align: -0.12em; }
+
+/* ---------- header ---------------------------------------------------- */
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 52px; flex-wrap: wrap; }
+.brand { font-weight: 700; }
+.brand-sub { font-weight: 500; font-size: 0.78rem; margin-left: 0.6rem; padding: 0.05rem 0.5rem; border: 1px solid var(--warn-border); background: var(--warn-bg); border-radius: 999px; }
+.toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn { font: inherit; font-size: 0.88rem; color: var(--ink); background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 0.8rem; cursor: pointer; min-height: 36px; }
+.btn:hover { border-color: var(--axis); }
+.disclaimer { display: flex; gap: 0.7rem; align-items: flex-start; background: var(--warn-bg); border: 1px solid var(--warn-border); border-radius: 10px; padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.92rem; }
+.disclaimer .ic { width: 1.4em; height: 1.4em; margin-top: 0.1em; }
+.toc ol { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; list-style: decimal inside; padding: 0; font-size: 0.9rem; }
+.report-title { font-size: 1.65rem; margin: 0.6rem 0 0.2rem; }
+.meta-line { color: var(--ink-2); margin-top: 0; }
+
+/* ---------- cards ----------------------------------------------------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.4rem; margin: 1.1rem 0; box-shadow: var(--shadow); }
+.secno { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); font-size: 0.9rem; }
+
+/* ---------- level badges & chips ------------------------------------- */
+.lv { display: inline-flex; align-items: center; gap: 0.35em; font-weight: 700; padding: 0.05em 0.6em; border-radius: 999px; border: 1.5px solid; line-height: 1.6; white-space: nowrap; }
+.lv-low { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
+.lv-low .ic { color: var(--lv-low); }
+.lv-mod { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
+.lv-mod .ic { color: var(--lv-mod); }
+.lv-high { color: var(--lv-high-ink); background: var(--lv-high-bg); border-color: var(--lv-high); }
+.lv-high .ic { color: var(--lv-high); }
+.lv-vhigh { color: var(--lv-vhigh-ink); background: var(--lv-vhigh-bg); border-color: var(--lv-vhigh); }
+.lv-vhigh .ic { color: var(--lv-vhigh); }
+.lv-na { color: var(--muted); border-color: var(--axis); }
+.lv-lg { font-size: 1.1rem; }
+.lv-xl { font-size: 2.6rem; padding: 0.05em 0.5em; border-width: 3px; }
+.chip { display: inline-block; font-size: 0.78rem; padding: 0 0.5em; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--ink-2); margin-left: 0.25em; white-space: nowrap; }
+.chip-uncited { background: var(--warn-bg); border-color: var(--warn-border); color: var(--ink); }
+.chip-err { background: var(--err-bg); border-color: var(--bad); color: var(--ink); }
+.cites { white-space: nowrap; }
+.cite { font-size: 0.78em; vertical-align: super; text-decoration: none; margin-left: 0.1em; }
+.vd { display: inline-flex; align-items: center; gap: 0.3em; font-size: 0.85rem; font-weight: 600; padding: 0.05em 0.55em; border-radius: 6px; border: 1.5px solid; white-space: nowrap; }
+.vd-ok { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
+.vd-partial { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
+.vd-unk { color: var(--ink-2); background: var(--surface-2); border-color: var(--axis); border-style: dashed; }
+.vd-bad { color: var(--lv-vhigh-ink); background: var(--lv-vhigh-bg); border-color: var(--lv-vhigh); }
+.vd-old { color: var(--ink-2); background: var(--surface-2); border-color: var(--axis); }
+.legend-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0; }
+.flag { display: flex; gap: 0.4rem; align-items: flex-start; padding: 0.45rem 0.65rem; border-radius: 8px; margin: 0.5rem 0; }
+.flag .ic { margin-top: 0.25em; }
+.flag-warn { background: var(--warn-bg); border: 1px solid var(--warn-border); }
+
+/* ---------- BLUF ------------------------------------------------------ */
+.bluf { border-width: 2px; }
+.bluf-grid { display: grid; grid-template-columns: minmax(240px, 320px) 1fr; gap: 1.5rem; }
+.bluf-level { border-right: 1px solid var(--grid); padding-right: 1.2rem; }
+.hero-level { margin: 0.3rem 0 0.6rem; }
+.bluf-level .sub { margin: 0.35rem 0; font-size: 0.92rem; }
+.lead { font-size: 1.05rem; }
+.findings li { margin-bottom: 0.35rem; }
+.bluf-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem 1.2rem; margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--grid); }
+.star { color: #c98500; margin-right: 0.25em; }
+.strata-hl ul { padding-left: 1rem; }
+
+/* ---------- decision -------------------------------------------------- */
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.9rem; }
+.option { border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; background: var(--surface); }
+.option header { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.option h3 { margin: 0; font-size: 1.02rem; flex: 1 1 auto; }
+.opt-id { font-weight: 700; color: var(--ink-2); }
+.option-rec { border: 2.5px solid var(--accent); background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+.rec-tag { display: inline-flex; gap: 0.3em; align-items: center; font-size: 0.82rem; font-weight: 700; padding: 0.05em 0.55em; border-radius: 999px; background: var(--accent); color: #fff; }
+.proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.92rem; }
+.proscons h4 { margin: 0.3rem 0; font-size: 0.88rem; color: var(--ink-2); }
+.kv { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.5rem 0 0; font-size: 0.9rem; }
+.kv dt { display: inline; color: var(--muted); }
+.kv dt::after { content: "："; }
+.kv dd { display: inline; margin: 0; font-weight: 600; }
+.question { font-size: 1.02rem; }
+.dir { font-weight: 700; white-space: nowrap; }
+.dir-up { color: var(--bad); }
+.dir-down { color: var(--ok); }
+
+/* ---------- tables ---------------------------------------------------- */
+.table-wrap { width: 100%; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+.tbl th, .tbl td { border-bottom: 1px solid var(--grid); padding: 0.55rem 0.6rem; text-align: left; vertical-align: top; }
+.tbl thead th { font-size: 0.82rem; color: var(--ink-2); border-bottom: 1.5px solid var(--axis); background: var(--surface-2); }
+.tbl caption { text-align: left; font-weight: 600; padding: 0.3rem 0; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl-kv th { width: 26%; color: var(--ink-2); font-weight: 600; }
+.risk-table th[scope="row"] { width: 17%; font-weight: 700; }
+.risk-table td.result { width: 21%; }
+.risk-table td ul { margin: 0; padding-left: 1rem; }
+.risk-table .defs { list-style: none; padding-left: 0; font-size: 0.88rem; }
+.risk-table .defs li { margin-bottom: 0.3rem; }
+.dash { list-style: none; padding-left: 0 !important; }
+.dash > li { position: relative; padding-left: 0.9rem; margin-bottom: 0.3rem; }
+.dash > li::before { content: "-"; position: absolute; left: 0; color: var(--muted); }
+.item-n { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: 0.8rem; margin-right: 0.4rem; }
+.strata { list-style: none; padding: 0; margin: 0.4rem 0; font-size: 0.86rem; }
+.strata li { margin: 0.2rem 0; }
+.overall-row { background: var(--surface-2); }
+.why summary { cursor: pointer; color: var(--accent-ink); }
+.ans { font-weight: 700; padding: 0 0.5em; border-radius: 6px; border: 1.5px solid var(--axis); white-space: nowrap; }
+.ans-y { border-color: var(--lv-high); background: var(--lv-high-bg); color: var(--lv-high-ink); }
+.ans-n { border-color: var(--lv-low); background: var(--lv-low-bg); color: var(--lv-low-ink); }
+.ans-u { border-style: dashed; }
+.ans-y::before { content: "● "; }
+.ans-n::before { content: "○ "; }
+.ans-u::before { content: "? "; }
+
+/* ---------- claims ---------------------------------------------------- */
+.newsbox { background: var(--surface-2); border-radius: 10px; padding: 0.8rem 1rem; }
+.cred { margin: 0.9rem 0; }
+.claims { list-style: none; padding: 0; }
+.claim { border: 1px solid var(--border); border-radius: 10px; margin: 0.5rem 0; background: var(--surface); }
+.claim summary { cursor: pointer; padding: 0.6rem 0.8rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; list-style: none; }
+.claim summary::-webkit-details-marker { display: none; }
+.claim summary::before { content: "▸"; color: var(--muted); }
+.claim details[open] summary::before { content: "▾"; }
+.claim-id { font-weight: 700; color: var(--ink-2); }
+.claim-text { flex: 1 1 100%; }
+.claim-body { padding: 0 0.9rem 0.8rem; border-top: 1px solid var(--grid); }
+.evlist { list-style: none; padding: 0; }
+.ev { border-left: 3px solid var(--axis); padding: 0.3rem 0 0.3rem 0.7rem; margin: 0.5rem 0; }
+.ev-sup { border-left-color: var(--lv-low); }
+.ev-con { border-left-color: var(--lv-vhigh); }
+.stance { font-weight: 700; font-size: 0.82rem; margin-right: 0.3rem; }
+.ev blockquote { margin: 0.25rem 0 0; color: var(--ink-2); font-size: 0.92rem; }
+
+/* ---------- situation ------------------------------------------------- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.7rem; margin-bottom: 1rem; }
+.tile { border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 0.9rem; background: var(--surface); }
+.tile-label { font-size: 0.84rem; color: var(--ink-2); }
+.tile-value { font-size: 1.7rem; font-weight: 650; line-height: 1.3; margin: 0.15rem 0; }
+.tile-meta, .tile-note { font-size: 0.78rem; color: var(--muted); }
+.two-col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.4rem; }
+.bullets li { margin-bottom: 0.35rem; }
+.timeline { list-style: none; padding: 0; border-left: 2px solid var(--axis); margin-left: 0.4rem; }
+.timeline li { position: relative; padding: 0 0 0.7rem 1rem; display: grid; grid-template-columns: 6.2rem 1fr; gap: 0.5rem; font-size: 0.92rem; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 0.45rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.timeline time { font-variant-numeric: tabular-nums; color: var(--ink-2); font-weight: 600; }
+.tw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.4rem 1.4rem; }
+.chart { margin: 1rem 0; }
+.chart figcaption { margin-bottom: 0.5rem; }
+.bars { display: grid; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: minmax(5rem, 9rem) 1fr 4rem; align-items: center; gap: 0.5rem; padding: 2px 0; border-radius: 4px; }
+.bar-row:hover, .bar-row:focus { background: var(--surface-2); }
+.bar-label { font-size: 0.9rem; }
+.bar-track { height: 18px; }
+.bar { display: block; height: 100%; max-width: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-val { font-variant-numeric: tabular-nums; font-size: 0.9rem; }
+.tableview summary { cursor: pointer; color: var(--accent-ink); font-size: 0.9rem; margin-top: 0.4rem; }
+.ts-chart svg { width: 100%; height: auto; display: block; }
+.tooltip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--surface); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.85rem; max-width: 260px; }
+
+/* ---------- matrix ---------------------------------------------------- */
+.matrix-layout { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+.matrix-wrap { position: relative; }
+.matrix .corner { font-size: 0.7rem; color: var(--muted); line-height: 1.3; vertical-align: bottom; }
+.matrix .corner span { display: block; }
+.matrix .corner span:first-child { text-align: right; }
+.matrix { border-collapse: separate; border-spacing: 2px; width: 100%; table-layout: fixed; }
+.matrix th { font-size: 0.78rem; color: var(--ink-2); font-weight: 600; text-align: center; padding: 2px; }
+.matrix thead td { width: 3.4rem; }
+.matrix th[scope="row"] { width: 3.4rem; }
+.matrix .ax { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
+.cell { height: 4.4rem; border-radius: 4px; vertical-align: top; padding: 3px 4px; position: relative; }
+.cell-low { background: var(--lv-low-bg); }
+.cell-mod { background: var(--lv-mod-bg); }
+.cell-high { background: var(--lv-high-bg); background-image: repeating-linear-gradient(45deg, transparent 0 7px, color-mix(in srgb, var(--lv-high) 18%, transparent) 7px 8px); }
+.cell-vhigh { background: var(--lv-vhigh-bg); background-image: repeating-linear-gradient(135deg, transparent 0 5px, color-mix(in srgb, var(--lv-vhigh) 22%, transparent) 5px 6px); }
+.cell-lv { font-size: 0.72rem; color: var(--ink-2); font-weight: 600; }
+.markers { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
+.marker { font: inherit; font-size: 0.85rem; font-weight: 700; width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 2px solid var(--surface); background: var(--ink); color: var(--surface); cursor: pointer; box-shadow: 0 0 0 1px var(--ink); }
+.marker:hover, .marker[aria-pressed="true"] { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.marker.ghost { background: transparent; color: var(--ink); border: 2px dashed var(--ink); box-shadow: none; }
+.matrix-detail { border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; min-height: 8rem; background: var(--surface-2); }
+.matrix-detail h4 { margin-top: 0; }
+.matrix-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.7rem 0; }
+.whatif { margin-top: 1.4rem; border: 2px dashed var(--axis); border-radius: 12px; padding: 0.9rem 1rem; }
+.whatif h3 { margin-top: 0; }
+.trial-tag { display: inline-block; font-size: 0.8rem; background: var(--ink); color: var(--surface); padding: 0 0.5em; border-radius: 4px; margin-right: 0.4rem; vertical-align: 0.1em; }
+.wi-controls, .filters { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: flex-end; }
+.wi-controls label, .filters label { display: flex; flex-direction: column; font-size: 0.82rem; color: var(--ink-2); gap: 0.2rem; }
+select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(--surface); border: 1px solid var(--axis); border-radius: 8px; padding: 0.3rem 0.5rem; min-height: 36px; max-width: 100%; }
+.wi-out { margin-top: 0.8rem; }
+.wi-out .delta { font-weight: 700; }
+
+/* ---------- scenarios / recs / refs ---------------------------------- */
+.scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; }
+.scn { border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; border-top-width: 4px; }
+.scn h3 { margin-top: 0.2rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.scn-best { border-top-color: var(--lv-low); }
+.scn-likely { border-top-color: var(--accent); }
+.scn-worst { border-top-color: var(--lv-vhigh); }
+.ihr-result { font-size: 1.02rem; }
+.recs { list-style: none; padding: 0; display: grid; gap: 0.6rem; margin-top: 0.8rem; }
+.rec { border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.9rem; }
+.rec-head { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.rec-head .chip { margin-left: 0; }
+.pri { font-size: 0.78rem; font-weight: 700; padding: 0 0.5em; border-radius: 6px; border: 1.5px solid; }
+.pri-h { color: var(--lv-vhigh-ink); border-color: var(--lv-vhigh); background: var(--lv-vhigh-bg); }
+.pri-m { color: var(--lv-mod-ink); border-color: var(--lv-mod); background: var(--lv-mod-bg); }
+.pri-l { color: var(--ink-2); border-color: var(--axis); }
+.issues summary { cursor: pointer; font-weight: 600; }
+.issues ul { list-style: none; padding: 0; font-size: 0.9rem; }
+.iss { padding: 0.3rem 0.5rem; border-left: 3px solid var(--axis); margin: 0.25rem 0; }
+.iss-error { border-left-color: var(--lv-vhigh); background: var(--err-bg); }
+.iss-warning { border-left-color: var(--warn-border); background: var(--warn-bg); }
+.iss-sev { font-weight: 700; margin-right: 0.5rem; }
+.method li { margin-bottom: 0.4rem; }
+.mini-matrix { max-width: 640px; text-align: center; }
+.mini-matrix td { text-align: center; }
+.refs { padding-left: 1.6rem; }
+.refs li { margin-bottom: 0.55rem; }
+.ref-id { font-size: 0.75rem; color: var(--muted); margin-right: 0.3rem; }
+.url { color: var(--muted); word-break: break-all; }
+.refs li:target { background: var(--warn-bg); outline: 2px solid var(--warn-border); border-radius: 4px; }
+.disclaimer.final { margin-top: 1.4rem; }
+
+/* ---------- responsive ------------------------------------------------ */
+@media (max-width: 860px) {
+  .bluf-grid, .two-col, .matrix-layout { grid-template-columns: 1fr; }
+  .bluf-level { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--grid); padding-bottom: 1rem; }
+}
+@media (max-width: 700px) {
+  .topbar { position: static; }
+  .card { padding: 1rem; border-radius: 12px; }
+  .report-title { font-size: 1.35rem; }
+  .bluf-facts, .proscons { grid-template-columns: 1fr; }
+  .lv-xl { font-size: 2.1rem; }
+  /* stacked tables: each row becomes a card, header text shown inline */
+  .risk-table, .risk-table tbody, .risk-table tr, .risk-table th, .risk-table td,
+  .tbl-stack, .tbl-stack tbody, .tbl-stack tr, .tbl-stack td { display: block; width: 100% !important; }
+  .risk-table thead, .tbl-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .risk-table tr, .tbl-stack tr { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.8rem; padding: 0.3rem 0.2rem; }
+  .risk-table td[data-th]::before, .tbl-stack td[data-th]::before { content: attr(data-th); display: block; font-size: 0.76rem; color: var(--muted); font-weight: 600; margin-bottom: 0.15rem; }
+  .risk-table th, .risk-table td, .tbl-stack td { border-bottom: 1px dashed var(--grid); }
+  .timeline li { grid-template-columns: 1fr; gap: 0; }
+  .bar-row { grid-template-columns: 5.5rem 1fr 3rem; }
+  .cell { height: 3.6rem; padding: 2px; }
+  .matrix thead td, .matrix th[scope="row"] { width: 2.6rem; }
+  .marker { width: 1.7rem; height: 1.7rem; font-size: 0.78rem; }
+}
+
+/* ---------- print (A4) ----------------------------------------------- */
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    color-scheme: light;
+    --page: #fff; --surface: #fff; --surface-2: #f4f4f2; --ink: #000; --ink-2: #333; --muted: #555;
+    --grid: #ccc; --axis: #999; --border: #bbb; --accent: #1c5cab; --accent-ink: #1c5cab;
+    --lv-low-bg: #e3f4e3; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
+    --lv-low-ink: #0a5c0a; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
+    --warn-bg: #fff6dc; --err-bg: #fbe5e5;
+  }
+  body { font-size: 10.5pt; background: #fff; }
+  .topbar, .toc, .whatif, .filters, .skip, .tooltip { display: none !important; }
+  .marker { background: #000 !important; color: #fff !important; }
+  .card { border: 1px solid #bbb; box-shadow: none; break-inside: auto; padding: 0.8rem 1rem; }
+  .option, .scn, .tile, .claim, .rec, tr { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  a { color: #000; }
+  .refs a::after { content: ""; }
+  .matrix-layout { grid-template-columns: 1fr; }
+  .matrix-detail { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (forced-colors: active) {
+  .lv, .vd, .ans, .pri { border: 2px solid CanvasText; }
+  .marker { forced-color-adjust: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lvicon-low" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></symbol>
+  <symbol id="lvicon-mod" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-high" viewBox="0 0 16 16"><path d="M8 .8 15.2 8 8 15.2.8 8z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vhigh" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2" fill="currentColor"/><rect x="7" y="3.8" width="2" height="5.6" fill="#fff"/><rect x="7" y="10.6" width="2" height="2" fill="#fff"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-half" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></symbol>
+  <symbol id="i-question" viewBox="0 0 16 16"><path d="M5.5 6a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5V10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="8" cy="13" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 4.5V8l2.5 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="7.2" y="6" width="1.6" height="4.4" fill="currentColor"/><rect x="7.2" y="11.4" width="1.6" height="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1.2l2 4.3 4.7.6-3.4 3.2.9 4.6L8 11.6 3.8 13.9l.9-4.6L1.3 6.1 6 5.5z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#main">跳至主要內容</a>
+
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <div class="brand">疫情風險評估報告<span class="brand-sub">AI 草稿・待審</span></div>
+    <div class="toolbar">
+      <button type="button" class="btn" id="themeBtn" aria-label="切換顯示主題">主題：自動</button>
+      <button type="button" class="btn" id="printBtn">列印／存 PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="disclaimer" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>本報告為 AI 產生之草稿，尚未經流行病學專業人員審閱，不得逕作為正式決策依據。</strong>
+    資料截止：2026-11-19 11:10（UTC+08:00）；產出：2026-11-19 11:40（UTC+08:00）。
+</div>
+  </div>
+
+  <nav class="toc" aria-label="報告目錄">
+    <ol>
+      <li><a href="#sec-bluf">決策摘要</a></li>
+      <li><a href="#sec-decision">長官下一步決策建議</a></li>
+      <li><a href="#sec-verify">新聞查證</a></li>
+      <li><a href="#sec-situation">疫情概況</a></li>
+      <li><a href="#sec-risk">風險評估表</a></li>
+      <li><a href="#sec-scenario">情境分析與 IHR</a></li>
+      <li><a href="#sec-recs">建議事項</a></li>
+      <li><a href="#sec-limits">限制、方法與參考資料</a></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" class="wrap">
+<h1 class="report-title">卡達中東呼吸症候群冠狀病毒感染症（MERS）散發病例：新聞查證與我國快速風險評估</h1>
+<p class="meta-line">事件：卡達通報 2 例 MERS 確定病例（2022 年以來首見）｜地點：卡達｜危害：中東呼吸症候群冠狀病毒（MERS-CoV）</p>
+
+<!-- 1. BLUF ============================================================ -->
+<section id="sec-bluf" class="card bluf" aria-labelledby="h-bluf">
+  <h2 id="h-bluf"><span class="secno">1</span>決策摘要</h2>
+  <div class="bluf-grid">
+    <div class="bluf-level">
+      <div class="label">我國整體風險（計算結果）</div>
+      <div class="hero-level"><span class="lv lv-low lv-xl"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+      <div class="sub">矩陣等級：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>
+        <span class="muted">（機率 極低 × 衝擊 高）</span></div>
+      <div class="sub">信心程度：<strong>中</strong>
+<span class="muted">（受「境外移入風險」信心程度「中」限制）</span></div>
+      <div class="sub muted">評估者建議與規則計算一致（低）。</div>
+      <div class="strata-hl"><div class="label">高於整體之分層結果</div>
+        <ul><li>境外移入風險／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul></div>
+    </div>
+    <div class="bluf-body">
+      <p class="lead">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；境外移入、社區流行及院內感染之機率皆極低，惟一旦出現病例衝擊高。綜合研判我國 MERS 整體疫情風險為低，其中赴中東接觸駱駝或於當地醫療院所工作者之移入風險為中。</p>
+      <h3>重點發現</h3>
+      <ol class="findings"><li>新聞所述事實經 WHO DON626 查證大致正確；「屬散發人畜共通傳播」一點 WHO 用語較保守（感染源未確定），新聞來源可靠度未知，整體可信度為中。</li><li>卡達 2 例分別於 2026 年 7、8 月發病，均已康復；99 名接觸者全數陰性，無續發病例，事件已結束 14 天監測期。</li><li>我國迄今無 MERS 確定病例；境外移入、社區流行與院內感染之機率皆評為極低，整體風險為低；高暴露職業族群之移入風險為中。</li><li>疾病本身衝擊高（致死率約 37%、無疫苗與特效藥），院內感染為主要擴大途徑，第 1 例上呼吸道檢體曾偽陰性。</li><li>卡達目前無我國 MERS 旅遊疫情建議等級；2022 年卡達出現病例時我國曾列第一級注意，可作為調整先例。</li></ol>
+      <div class="bluf-facts">
+        <div><div class="label">建議決策</div>
+<div class="strong"><svg class="ic star" aria-hidden="true"><use href="#i-star"/></svg>恢復卡達第一級注意（Watch）＋致醫界通函＋旅遊衛教</div>
+          <div class="muted">主責：疾管署（建議：疫情中心會同急性傳染病組）｜時程：1週</div></div>
+        <div><div class="label">新聞可信度</div>
+          <div><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span> <span class="muted">（規則計算；評估者建議：中）</span></div></div>
+        <div><div class="label">建議再評估日期</div><div class="strong">2026-12-17</div>
+          <div class="muted">或任一觸發指標出現時立即再評估</div></div>
+        <div><div class="label">IHR 附件二篩檢</div>
+          <div>1／4 項「是」（未達門檻）</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Decision ======================================================== -->
+<section id="sec-decision" class="card" aria-labelledby="h-decision">
+  <h2 id="h-decision"><span class="secno">2</span>長官下一步決策建議</h2>
+  <p class="question"><strong>決策問題：</strong>是否因卡達 2026 年 MERS 散發病例，調整我國對卡達之旅遊疫情建議等級與相關防疫作為？</p>
+  <div class="options">
+    <article class="option" aria-label="選項 D1：維持現狀：卡達不列等級，僅例行監測">
+      <header>
+        <span class="opt-id">D1</span>
+        <h3>維持現狀：卡達不列等級，僅例行監測</h3>
+      </header>
+      <p>不發布卡達 MERS 旅遊疫情建議，持續例行國際疫情監測。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>與 WHO 不建議旅行／貿易限制之立場一致</li><li>不需額外行政資源</li><li>避免被解讀為風險升高</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>卡達已有確定病例卻無等級，與 2022 年處理方式不一致</li><li>旅遊醫學門診與民眾較難獲得針對卡達之提醒</li><li>醫界對卡達旅遊史之警覺可能不足</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：疫情中心）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+      </dl>
+    </article>
+    <article class="option option-rec" aria-label="選項 D2：恢復卡達第一級注意（Watch）＋致醫界通函＋旅遊衛教（建議方案）">
+      <header>
+        <span class="opt-id">D2</span>
+        <h3>恢復卡達第一級注意（Watch）＋致醫界通函＋旅遊衛教</h3>
+<span class="rec-tag"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>建議方案</span>      </header>
+      <p>比照 2022 年作法將卡達列為 MERS 第一級注意，同步發布致醫界通函（TOCC、下呼吸道檢體）與旅遊衛教；以 3–6 個月無新增病例為解除檢討條件。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>第一級僅提醒遵守一般預防措施，屬與證據相稱之最低強度措施</li><li>與我國 2022 年卡達病例之處理一致</li><li>強化醫界與旅遊醫學門診之警覺，針對最壞情境之關鍵環節（延遲辨識）</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>病例發病已逾 2 個月且已無續發，時效性有限</li><li>需設定並追蹤解除時點</li><li>可能引起少量媒體關注</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：疫情中心會同急性傳染病組）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+<div><dt>所需資源</dt><dd>公告與新聞稿各 1 則、致醫界通函 1 則，既有人力可支應</dd></div>      </dl>
+    </article>
+    <article class="option" aria-label="選項 D3：提升為第二級警示並加強邊境檢疫">
+      <header>
+        <span class="opt-id">D3</span>
+        <h3>提升為第二級警示並加強邊境檢疫</h3>
+      </header>
+      <p>將卡達列為第二級警示，並對自卡達入境旅客加強健康聲明與篩檢。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>預警強度最高</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>與證據不相稱：無人傳人、無續發病例</li><li>與 WHO 不建議旅行限制之精神不符</li><li>耗用邊境檢疫資源，並可能影響雙邊交流</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：檢疫組）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+      </dl>
+    </article>
+  </div>
+  <p class="rec-reason"><strong>建議理由：</strong>整體風險為低，但卡達已有確定病例而我國目前未列等級，且院內感染（延遲辨識）為唯一可導致高衝擊之途徑。D2 以最低強度措施提高醫界與旅客警覺，並與 2022 年先例一致；D3 與證據不相稱，D1 則留下警覺缺口。</p>
+
+  <h3>觸發指標（出現時應調整風險等級並再評估）</h3>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">方向</th><th scope="col">觀察指標</th><th scope="col">門檻</th><th scope="col">監測來源</th><th scope="col">目前狀態</th></tr></thead>
+    <tbody>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">卡達或中東出現人傳人續發病例或醫療機構群聚</td>
+        <td data-th="門檻">任一起經 WHO 或當地衛生部證實</td>
+        <td data-th="監測來源">WHO DON、ECDC 月報、當地衛生部</td>
+        <td data-th="目前狀態">未出現（99 名接觸者均陰性）</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">亞洲（含我國）出現 MERS 移入病例</td>
+        <td data-th="門檻">1 例</td>
+        <td data-th="監測來源">WHO DON、各國衛生部、我國法定傳染病通報</td>
+        <td data-th="目前狀態">我國 0 例；本次查詢未見亞洲移入</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">病毒序列顯示傳播力增加之變異，或 WHO 調升風險等級</td>
+        <td data-th="門檻">WHO 風險評估由「中等」調升</td>
+        <td data-th="監測來源">WHO RRA、DON</td>
+        <td data-th="目前狀態">WHO 全球／區域風險：中等</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">國人赴中東之大型活動（如朝覲）或高暴露族群出國人數顯著增加</td>
+        <td data-th="門檻">由主管機關判定</td>
+        <td data-th="監測來源">旅遊醫學門診諮詢量、相關部會統計</td>
+        <td data-th="目前狀態">2026 年朝覲已於 5 月舉行；旅次資料未取得</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-down">▼ 降級</span></td>
+        <td data-th="觀察指標">卡達自最後 1 例確診後持續無新增病例</td>
+        <td data-th="門檻">3–6 個月無新增病例</td>
+        <td data-th="監測來源">WHO DON、ECDC 月報</td>
+        <td data-th="目前狀態">最後確診日 2026-08-25，已近 3 個月</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 3. Verification ==================================================== -->
+<section id="sec-verify" class="card" aria-labelledby="h-verify">
+  <h2 id="h-verify"><span class="secno">3</span>新聞查證</h2>
+  <div class="newsbox">
+    <div class="label">被查證之新聞</div>
+<div class="strong"><a href="https://www.archyde.com/who-reports-first-mers-cases-in-qatar-since-2022/" rel="noopener noreferrer">WHO Reports First MERS Cases in Qatar Since 2022</a></div>
+    <div class="muted">Archyde｜社群/未知｜取得方式：搜尋摘要</div>    <p>新聞指出卡達出現 2 例 MERS 確定病例，為 2022 年以來首見；兩名患者均為 50 歲以上具慢性病男性，分別於 2026 年 7 月下旬及 8 月下旬發病，感染地點為彼此無流行病學關聯的駱駝場，屬散發性人畜共通傳播。新聞稱資訊來自 WHO。</p>
+    <p class="muted">分流（triage）：<strong>進行完整評估</strong>——高致死率之法定傳染病、事件已由 WHO 公布、涉及我國旅遊疫情建議等級之調整，故進入查證與完整評估。</p>
+  </div>
+  <div class="cred">
+    <div><span class="label">整體新聞可信度</span> <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+    <div class="muted">規則：關鍵陳述平均查證分數 0.87（已證實=1、部分證實=0.6、過時=0.4、無法證實=0.25、不符=0）；新聞來源屬社群/未知等級，上限為「中」</div>
+    <div class="muted">評估者說明（建議「中」）：新聞所述事實與 WHO 原始通報大致相符，僅對傳播型態之陳述較 WHO 確定；惟新聞來源為可靠度未知之彙整網站，且本次未能開啟原文全文，故整體可信度列為中。實際引用應以 WHO DON626 為準。</div>
+  </div>
+  <div class="legend-row" aria-label="查證結果圖例">
+<span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span><span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span><span class="vd vd-unk"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>無法證實</span><span class="vd vd-bad"><svg class="ic" aria-hidden="true"><use href="#i-cross"/></svg>與官方資訊不符</span><span class="vd vd-old"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>過時</span>  </div>
+  <ol class="claims">
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C1</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">WHO 公布卡達出現 2 例 MERS 確定病例。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>WHO 疾病爆發新聞（DON626，2026-11-13）載明卡達 IHR 國家對口單位於 2026-10-29 通報 2 例實驗室確診病例。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;the National IHR Focal Point of Qatar notified WHO of two laboratory-confirmed cases of Middle East respiratory syndrome (MERS)&#34;</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S1" class="cite">[1]</a>
+<a href="https://www.archyde.com/who-reports-first-mers-cases-in-qatar-since-2022/" rel="noopener noreferrer">Archyde</a>              <span class="muted">｜日期不明｜社群/未知｜搜尋摘要</span>              <blockquote>被查證之新聞（搜尋摘要）：稱 WHO 報告卡達 2 例 MERS 確定病例。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C2</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">此為卡達自 2022 年以來首見之 MERS 病例。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>WHO DON626 原文明確敘述為卡達 2022 年以來首次通報之 MERS 病例；我國疾管署國際重要疫情列表亦可見 2022 年 3–4 月之卡達條目，之後至 2026 年 6 月均無卡達條目，與此敘述一致。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;These are the first MERS cases reported from Qatar since 2022.&#34;</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S7" class="cite">[7]</a>
+<a href="https://www.cdc.gov.tw/TravelEpidemic/List/dmFxNlZsaC9qdDd1emp2dGVYUUFoUT09?diseaseId=QW84UU90SlhOK0JUaFMzTVBwS1M4UT09" rel="noopener noreferrer">衛生福利部疾病管制署</a>              <span class="muted">｜日期不明｜官方衛生機關/國際組織｜全文</span>              <blockquote>國際重要疫情列表第 1 頁：卡達條目日期為 2022-03-28、2022-04-07；最新條目為 2026-06-10 沙烏地阿拉伯。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C3</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+          <span class="claim-text">兩名患者均為 50 歲以上、具慢性病之男性。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>WHO DON626 原文相符，並補充兩人皆有職業性單峰駱駝暴露。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;Both patients were men aged over 50 years with underlying medical conditions and occupational exposure to dromedary camels.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C4</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+          <span class="claim-text">一名患者於 2026 年 7 月下旬發病，另一名於 8 月下旬發病。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>WHO DON626 記載發病日分別為 2026-07-22 與 2026-08-23；確診日為 08-05 與 08-25。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;He developed symptoms on 22 July 2026 and was admitted to hospital on 25 July.&#34;</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;He developed symptoms on 23 August 2026.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C5</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">兩例感染發生於地理位置分開、彼此無流行病學關聯的駱駝場，屬散發性人畜共通傳播。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>「駱駝場分開、無流行病學關聯」與 WHO 原文相符；但 WHO 對傳播型態之用語為「看似」散發性人畜共通感染，且明言確切感染源仍未確定（僅推定為可能之人畜共通感染），新聞以肯定語氣陳述，故判定為部分證實。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;The cases were exposed at geographically separate farms, with no epidemiological link identified between them.&#34;</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;The cases appear to represent sporadic infections associated with zoonotic transmission from dromedary camels&#34;</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S2" class="cite">[2]</a>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-11-13｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;The precise sources of infection remain undetermined.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+  </ol>
+</section>
+
+<!-- 4. Situation ======================================================= -->
+<section id="sec-situation" class="card" aria-labelledby="h-sit">
+  <h2 id="h-sit"><span class="secno">4</span>疫情概況</h2>
+  <div class="tiles">
+    <div class="tile">
+      <div class="tile-label">卡達 2026 年確定病例</div>
+      <div class="tile-value">2 例</div>
+      <div class="tile-meta">截至 2026-11-13 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></div>
+<div class="tile-note">均已康復；無續發病例</div>    </div>
+    <div class="tile">
+      <div class="tile-label">接觸者檢驗陰性</div>
+      <div class="tile-value">99／99 人</div>
+      <div class="tile-meta">截至 2026-11-13 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">確定病例致死率</div>
+      <div class="tile-value">約 37%</div>
+      <div class="tile-meta"><span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></div>
+<div class="tile-note">可能高估（輕症易漏報）</div>    </div>
+    <div class="tile">
+      <div class="tile-label">全球累計（2012 年起）</div>
+      <div class="tile-value">2,655 例／960 死</div>
+      <div class="tile-meta">截至 2026-11-09 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></div>
+<div class="tile-note">ECDC，僅取得搜尋摘要；疾管署 2026-01 資料為 2,635 例／964 死</div>    </div>
+    <div class="tile">
+      <div class="tile-label">我國確定病例</div>
+      <div class="tile-value">0 例</div>
+      <div class="tile-meta"><span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></div>
+<div class="tile-note">臺灣迄今無確定病例</div>    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>國際疫情概況</h3>
+      <ul class="bullets"><li>卡達 IHR 國家對口單位於 2026-10-29 通報 2 例確定病例（確診日 2026-08-05、08-25），為卡達 2022 年以來首見；兩例均有職業性單峰駱駝暴露，其中 1 例曾照顧生病幼駝並生飲駱駝乳。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>兩例均已康復出院；第 2 例曾發生重度肺炎併急性低血氧性呼吸衰竭，需高流量鼻導管氧氣及非侵襲性呼吸器。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>兩例共 99 名接觸者（含 84 名醫療照護人員）均檢驗陰性並完成 14 天監測，未發現續發病例。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>第 1 例上呼吸道檢體 RT-PCR 初次陰性，後續下呼吸道檢體始確診，顯示僅採上呼吸道檢體可能漏診。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>依 ECDC 月報（搜尋摘要），截至 2026-11-09，2026 年沙烏地阿拉伯共報告 8 例（1 例死亡）；2012 年 4 月起全球累計 2,655 例、960 例死亡。該期數據未含卡達 2 例（WHO 於 11-13 才公布）。 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a></span></li><li>截至 2026 年 1 月，全球 27 國累計 2,635 例確診、964 例死亡，沙烏地阿拉伯占 84%（2,224 例）；2022 年 11 月至 2026 年 1 月全球 36 例（14 例死亡），巴基斯坦及法國於 2024、2025 年通報境外移入個案。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>中東以外最大規模疫情為 2015 年 5 月韓國院內感染群聚，造成 186 人感染、39 人死亡。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li></ul>
+      <h3>國際機構既有評估</h3>
+      <ul class="bullets"><li>WHO：依 2026-01-29 之快速風險評估，MERS-CoV 之區域及全球整體風險維持「中等」，理由為持續之零星人畜共通外溢、院內傳播及移入非流行國家之可能。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S12" title="World Health Organization：WHO Rapid Risk Assessment – MERS-CoV, Eastern Mediterranean Region v.2">[12]</a></span></li><li>WHO：依現有資訊，不建議對卡達採取任何旅行或貿易限制。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>ECDC：目前 MERS-CoV 情勢未變，對歐盟/歐洲經濟區之風險為低（搜尋摘要）。 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a></span></li></ul>
+    </div>
+    <div>
+      <h3>事件時序</h3>
+      <ol class="timeline">
+        <li><time datetime="2024-04-19">2024-04-19</time><span>我國解除卡達 MERS 旅遊疫情建議 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span></span></li>
+        <li><time datetime="2026-02-03">2026-02-03</time><span>WHO 發布東地中海區 MERS-CoV 快速風險評估 v.2 <span class="cites"><a class="cite" href="#ref-S12" title="World Health Organization：WHO Rapid Risk Assessment – MERS-CoV, Eastern Mediterranean Region v.2">[12]</a></span></span></li>
+        <li><time datetime="2026-07-22">2026-07-22</time><span>卡達第 1 例發病（7/25 住院） <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></span></li>
+        <li><time datetime="2026-08-05">2026-08-05</time><span>第 1 例經下呼吸道檢體確診 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></span></li>
+        <li><time datetime="2026-08-23">2026-08-23</time><span>卡達第 2 例發病 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></span></li>
+        <li><time datetime="2026-08-25">2026-08-25</time><span>第 2 例鼻咽檢體確診 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></span></li>
+        <li><time datetime="2026-10-29">2026-10-29</time><span>卡達 IHR 國家對口單位通報 WHO <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></span></li>
+        <li><time datetime="2026-11-13">2026-11-13</time><span>WHO 發布疾病爆發新聞 DON626 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></span></li>
+      </ol>
+    </div>
+  </div>
+
+  <figure class="chart" aria-labelledby="cc-title">
+    <figcaption id="cc-title"><strong>各國病例數</strong>（2026 年 1 月至 11 月 9 日）</figcaption>
+    <div class="bars" role="list">
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="沙烏地阿拉伯：8 例，死亡 1（2026 年 1 月至 11 月 9 日）">
+        <span class="bar-label">沙烏地阿拉伯</span>
+        <span class="bar-track"><span class="bar" style="width: 100.0%"></span></span>
+        <span class="bar-val">8</span>
+      </div>
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="卡達：2 例，死亡 0（2026 年 1 月至 11 月 9 日）">
+        <span class="bar-label">卡達</span>
+        <span class="bar-track"><span class="bar" style="width: 25.0%"></span></span>
+        <span class="bar-val">2</span>
+      </div>
+    </div>
+    <details class="tableview"><summary>表格檢視</summary>
+      <table class="tbl"><thead><tr><th scope="col">國家</th><th scope="col">病例</th><th scope="col">死亡</th><th scope="col">期間</th><th scope="col">來源</th></tr></thead>
+      <tbody><tr><td>沙烏地阿拉伯</td><td class="num">8</td><td class="num">1</td><td>2026 年 1 月至 11 月 9 日</td><td><span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a></span></td></tr><tr><td>卡達</td><td class="num">2</td><td class="num">0</td><td>2026 年 1 月至 11 月 9 日</td><td><span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr></tbody></table>
+    </details>
+  </figure>
+
+
+  <h3>病原與傳播特性</h3>
+  <p>MERS-CoV 為 beta 冠狀病毒，單峰駱駝為主要宿主；人類主要經直接或間接接觸受感染駱駝而感染，人傳人以醫療機構院內感染為主，流行地區社區中尚無持續性人傳人。確定病例致死率約 37%，目前無核准之疫苗與特效治療。</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-kv">
+    <tbody><tr><th scope="row">病原</th><td>中東呼吸症候群冠狀病毒（MERS-CoV），beta 冠狀病毒 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr><tr><th scope="row">主要宿主</th><td>單峰駱駝；卡達等多國單峰駱駝曾檢出病毒，並在中東、非洲及南亞部分國家駱駝間呈地區性流行 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><th scope="row">傳播途徑</th><td>直接或間接接觸受感染單峰駱駝（含生飲駱駝乳）；人與人間主要為醫療機構院內感染及少數密切接觸者 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr><tr><th scope="row">潛伏期</th><td>2–14 天（中位數 5–6 天） <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><th scope="row">可傳染期</th><td>尚無明確證據；一般而言發病 4–10 天時傳染力最強，下呼吸道分泌物病毒量最高 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><th scope="row">致死率</th><td>確定病例約 37%（可能高估）；具共病者約 50%，入住加護病房者約 67% <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><th scope="row">高風險族群</th><td>65 歲以上長者及糖尿病、高血壓、心血管疾病、慢性肺病、腎病、癌症、免疫力缺陷者 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><th scope="row">治療</th><td>目前無核准治療方法，以症狀治療及支持性療法為主 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><th scope="row">疫苗</th><td>目前無核准疫苗；ChAdOx1-MERS、GLS-5300 等候選疫苗發展中 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr></tbody>
+  </table>
+  </div>
+
+  <h3>我國現況</h3>
+<p><strong>法定傳染病分類：</strong>第五類法定傳染病（2012-10-03 公告列入；2013 年更名），醫師應於 24 小時內通報</p>  <div class="tw-grid">
+    <div class="tw-block"><h4>監測與通報</h4>
+      <ul class="bullets"><li>MERS 於 2012-10-03 以「新型冠狀病毒呼吸道重症」之名公告列為第五類法定傳染病，醫師應於 24 小時內通報。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症（疾病專區）">[4]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>臺灣迄今無 MERS 確定病例。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>臨床醫師遇不明原因嚴重肺炎、不明原因肺炎群聚、醫護人員不明原因肺炎，或發病前 14 日內具流行地區旅遊史之急性呼吸道症狀者，應於「其他傳染病」項下通報 MERS-CoV 並送驗。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>疾管署「國際重要疫情」MERS 列表第 1 頁最新條目為 2026-06-10（沙烏地阿拉伯），截至取用日尚未見本次卡達事件條目。 <span class="cites"><a class="cite" href="#ref-S7" title="衛生福利部疾病管制署：國際重要疫情－中東呼吸症候群冠狀病毒感染症（列表第 1 頁）">[7]</a></span></li><li>疾管署 2026-11-02 至 11-17 新聞稿（列表第 1 頁）未見 MERS 相關新聞稿；最近一則 MERS 相關新聞稿為 2026-04-28 麥加朝覲行前提醒。 <span class="cites"><a class="cite" href="#ref-S13" title="衛生福利部疾病管制署：疾管署新聞稿列表（第 1 頁，2026-11-02 至 2026-11-17）">[13]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></li></ul></div>
+    <div class="tw-block"><h4>檢驗量能</h4>
+      <ul class="bullets"><li>依工作手冊，應採集咽喉擦拭液、痰液或下呼吸道抽取液（為佳）及血清，送疾管署研究檢驗及疫苗研製中心實驗室檢驗。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>本次卡達第 1 例上呼吸道檢體初次陰性、下呼吸道檢體陽性，佐證我國手冊「下呼吸道檢體為佳」之要求。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>病媒／宿主分布</h4>
+      <ul class="bullets"><li>主要宿主為單峰駱駝，卡達單峰駱駝曾檢出 MERS-CoV；病毒可經駱駝分泌物、乳汁、尿液排出。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>邊境檢疫與旅遊疫情建議</h4>
+      <ul class="bullets"><li>卡達 MERS 旅遊疫情建議已於 2024-04-19 解除，目前無等級；前次為 2022-04-12 因卡達病例列為第一級注意（Watch）。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span></li><li>沙烏地阿拉伯 MERS 旅遊疫情建議最新紀錄為 2022-04-12 第一級注意（Watch）。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span></li><li>旅遊疫情建議分三級：第一級注意（遵守當地一般預防措施）、第二級警示（對當地採取加強防護）、第三級警告（避免所有非必要旅遊）。 <span class="cites"><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：國際旅遊疫情建議等級表（等級定義）">[6]</a></span></li><li>自流行地區入境者如有發燒或急性呼吸道症狀應主動通報港埠檢疫人員；返國 14 天內出現症狀應戴外科口罩就醫並告知旅遊史。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li></ul></div>
+    <div class="tw-block"><h4>醫療與感染管制</h4>
+      <ul class="bullets"><li>疾管署 MERS 感染管制指引頁面於 2026-07-30 更新醫療機構、門急診及緊急醫療救護三份指引。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a></span></li><li>疑似個案以傳染病隔離醫院就地收治為原則；密切接觸者實施健康監測至最後接觸後 14 天。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>現行工作手冊為 2015 年 6 月修訂版，與 2026 年更新之感染管制指引版本不同步。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a></span><span class="chip">推論</span></li></ul></div>
+  </div>
+</section>
+
+<!-- 5. Risk table + matrix ============================================= -->
+<section id="sec-risk" class="card" aria-labelledby="h-risk">
+  <h2 id="h-risk"><span class="secno">5</span>風險評估表</h2>
+  <p class="muted">格式依疾管署《疫情報導》風險評估表（評估項目／評估內容／風險等級定義／評估結果）。評估結果由機率（1–5）× 衝擊（1–5）經風險矩陣計算，再對應為低／中／高三級；評估者原始建議並列。</p>
+  <div class="table-wrap">
+  <table class="tbl risk-table">
+    <caption class="sr-only">我國風險評估表</caption>
+    <thead><tr><th scope="col">評估項目</th><th scope="col">評估內容</th><th scope="col">風險等級定義</th><th scope="col">評估結果</th></tr></thead>
+    <tbody>
+      <tr id="item-R1">
+        <th scope="row" data-th="評估項目"><span class="item-n">1</span>境外移入風險<div class="muted small">未來 3 個月內，我國出現 MERS 境外移入確定病例之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>卡達 2 例為散發人畜共通感染、無續發病例、99 名接觸者全數陰性，且兩例皆無旅遊史。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>2026 年病例仍以沙烏地阿拉伯為主（8 例），疫情高度集中於阿拉伯半島。 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>臺灣自 2012 年迄今無確定病例；國際間近年仍有巴基斯坦、法國等境外移入個案，顯示移入非流行國家之可能持續存在。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>感染者多具職業性駱駝暴露；一般旅客暴露機會低，但從事畜牧、照顧駱駝、生飲駱駝乳或於當地醫療院所工作者風險較高。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>卡達目前無我國 MERS 旅遊疫情建議等級，出國民眾與旅遊醫學門診可能較少獲得針對卡達之提醒。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span><span class="chip">推論</span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>病例侷限於中東流行區之散發人畜共通感染，無持續人傳人，國際間移入病例罕見</li>
+          <li><strong>中：</strong>流行區病例明顯增加或出現醫院群聚，或亞洲鄰近國家出現移入病例</li>
+          <li><strong>高：</strong>我國或鄰近國家出現移入／本土病例，或國人常往返地區出現持續人傳人</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 1（極低）× 衝擊 4（高，沿用衝擊項目）<br>矩陣：低 → 低
+          </div>
+<ul class="strata"><li>一般旅客（含轉機）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></li><li>赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul>          <div class="small">信心：<strong>中</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>全球累計逾 2,600 例、我國 14 年來零病例；本次卡達事件無人傳人且已結束追蹤，評估期間內移入機率極低（&lt;1%）。</p><p><strong>衝擊：</strong>沿用「衝擊」項目（若出現 1 例移入之衝擊）。</p>            <p><strong>信心程度理由：</strong>疫情與我國病例資料來自 WHO 與疾管署全文；但缺乏國人赴卡達／中東之旅次與航班資料，且 ECDC 最新數據僅取得搜尋摘要。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R2">
+        <th scope="row" data-th="評估項目"><span class="item-n">2</span>國內社區流行風險<div class="muted small">未來 3 個月內，我國發生 MERS 社區傳播（含家戶群聚）之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>人與人傳播主要發生於醫療機構，流行地區社區中尚無持續性人傳人。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>本事件 99 名接觸者均陰性，無任何續發病例。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國對密切接觸者實施 14 天健康監測，疑似個案以隔離醫院收治。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>我國尚無任何確定病例，社區傳播之前提（移入病例）本身機率極低。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span><span class="chip">推論</span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>無移入病例，或移入病例皆於隔離下確診且無續發</li>
+          <li><strong>中：</strong>出現移入病例且有家戶或醫院內續發病例</li>
+          <li><strong>高：</strong>出現多起續發或無法追溯感染源之本土病例</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 1（極低）× 衝擊 4（高，沿用衝擊項目）<br>矩陣：低 → 低
+          </div>
+          <div class="small">信心：<strong>高</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>需先有移入病例且於社區中傳播，兩者皆極不可能。</p>            <p><strong>信心程度理由：</strong>傳播特性有多個官方來源一致描述，且本事件無續發病例。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R3">
+        <th scope="row" data-th="評估項目"><span class="item-n">3</span>院內感染風險<div class="muted small">若出現未及時辨識之移入個案，未來 3 個月內我國發生 MERS 院內傳播之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>2015 年韓國單一移入個案引發院內感染群聚（186 人感染、39 人死亡），主因包括認知不足、感管未落實、急診擁擠與跨院就醫。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>本事件第 1 例上呼吸道檢體初次陰性，病例辨識可能延遲。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>WHO 建議對疑似／確定個案採傳染途徑防護，執行產生氣膠之處置時採空氣傳染防護。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國感染管制指引已於 2026-07-30 更新，並要求看診時詢問 TOCC（旅遊史、職業史、接觸史、群聚史）。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>無移入病例，或醫療機構能於就醫時即辨識並隔離</li>
+          <li><strong>中：</strong>出現移入病例且曾於未防護下就醫，但無續發</li>
+          <li><strong>高：</strong>出現醫療機構內續發病例或群聚</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 1（極低）× 衝擊 4（高，沿用衝擊項目）<br>矩陣：低 → 低
+          </div>
+          <div class="small">信心：<strong>中</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>以移入病例極不可能為前提，且我國有更新之感管指引與 TOCC 機制。</p>            <p><strong>信心程度理由：</strong>未讀取 2026 年感管指引 PDF 內文，亦無醫院整備查核結果，僅能依指引存在與既有手冊判斷。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R4">
+        <th scope="row" data-th="評估項目"><span class="item-n">4</span>衝擊<div class="muted small">若我國出現 MERS 病例，對國人健康、醫療體系與社會之衝擊為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>確定病例致死率約 37%，具共病者約 50%，入住加護病房者約 67%；本事件 1 例需非侵襲性呼吸器支持。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>長者及具慢性病者為重症高風險族群。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>目前無核准之疫苗與特效治療，以支持性療法為主。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>人傳人主要限於醫療機構與密切接觸者，社區無持續傳播，防治策略（隔離、接觸者追蹤、感管）可行。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>2015 年韓國疫情期間，我國曾多次發布新聞稿澄清 MERS 不實訊息，顯示病例或傳聞即可能引發民眾關注與恐慌。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>致死率或疾病嚴重性低，具可行之防治策略</li>
+          <li><strong>中：</strong>部分族群可能重症，無疫苗或特效藥，但防治策略可行且醫療量能足以因應</li>
+          <li><strong>高：</strong>致死率或重症比例高，無疫苗及特效治療，且可能造成院內傳播或明顯社會衝擊</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div><span class="lv lv-high lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></div>
+          <div class="small">
+衝擊 4（高）→ 高          </div>
+<ul class="strata"><li>長者及慢性病患者：<span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></li><li>一般健康成人：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul>          <div class="small">信心：<strong>高</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>衝擊：</strong>單一病例即具高致死率與院內傳播潛勢，且可能引發社會關注；但人傳人有限、防治策略可行，未達「極高」。</p>            <p><strong>信心程度理由：</strong>疾病嚴重度與治療現況有 WHO 與疾管署全文一致資料。</p>
+          </details>
+        </td>
+      </tr>
+      <tr class="overall-row">
+        <th scope="row" data-th="評估項目">綜合研判</th>
+        <td data-th="評估內容" colspan="2">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；境外移入、社區流行及院內感染之機率皆極低，惟一旦出現病例衝擊高。綜合研判我國 MERS 整體疫情風險為低，其中赴中東接觸駱駝或於當地醫療院所工作者之移入風險為中。<div class="small muted">計算方式：取各機率類項目之最高矩陣等級（本次由「境外移入風險」決定）。</div></td>
+        <td data-th="評估結果" class="result"><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="small">信心：<strong>中</strong></div>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">註：本評估依據現有資訊判定風險等級，將視新增實證適時調整。</p>
+
+  <h3>人畜共通／新興病原篩檢問題（參考 UKHSA HAIRS 流程）</h3>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <caption>衝擊</caption>
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
+    <tbody><tr><td data-th="問題">病原是否為已知可感染人類之人畜共通病原？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">MERS-CoV 為人畜共通病原，單峰駱駝為主要宿主。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題">本事件是否有人類感染證據？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">2 例實驗室確診。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr><tr><td data-th="問題">是否有持續人傳人之證據？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">99 名接觸者均陰性；流行地區社區無持續人傳人。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題">主要宿主或病媒是否存在於我國？</td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">本次未查得我國單峰駱駝飼養或輸入資料。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span></td></tr><tr><td data-th="問題">我國民眾是否有暴露途徑？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">赴中東旅遊、朝覲或工作時接觸駱駝、生飲駱駝乳或前往當地醫療院所。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></td></tr><tr><td data-th="問題">是否有有效疫苗或特效治療可降低衝擊？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">目前無核准疫苗與治療。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr></tbody>
+  </table>
+  </div>
+
+  <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
+  <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
+  <div class="matrix-layout">
+    <div class="matrix-wrap">
+      <table class="matrix" aria-labelledby="matrix-h" id="matrix">
+        <thead><tr><td class="corner"><span>衝擊→</span><span>機率↓</span></td><th scope="col">1<span class="ax">極低</span></th><th scope="col">2<span class="ax">低</span></th><th scope="col">3<span class="ax">中</span></th><th scope="col">4<span class="ax">高</span></th><th scope="col">5<span class="ax">極高</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">5<span class="ax">極高</span></th>
+            <td class="cell cell-mod" data-p="5" data-i="1">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="5" data-i="2">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="5" data-i="3">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="5" data-i="4">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="5" data-i="5">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">4<span class="ax">高</span></th>
+            <td class="cell cell-low" data-p="4" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="4" data-i="2">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="4" data-i="3">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="4" data-i="4">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="4" data-i="5">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">3<span class="ax">中</span></th>
+            <td class="cell cell-low" data-p="3" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="3" data-i="2">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="3" data-i="3">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="3" data-i="4">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="3" data-i="5">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">2<span class="ax">低</span></th>
+            <td class="cell cell-low" data-p="2" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="2" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="3">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="4">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="2" data-i="5">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">1<span class="ax">極低</span></th>
+            <td class="cell cell-low" data-p="1" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="3">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="4">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+<button type="button" class="marker" data-item="R1" aria-label="1. 境外移入風險：機率 極低、衝擊 高、矩陣等級 低">1</button><button type="button" class="marker" data-item="R2" aria-label="2. 國內社區流行風險：機率 極低、衝擊 高、矩陣等級 低">2</button><button type="button" class="marker" data-item="R3" aria-label="3. 院內感染風險：機率 極低、衝擊 高、矩陣等級 低">3</button>              </span>
+            </td>
+            <td class="cell cell-mod" data-p="1" data-i="5">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="matrix-detail" id="matrixDetail" aria-live="polite">
+      <p class="muted">請點選矩陣中的項目編號。</p>
+    </div>
+  </div>
+  <div class="matrix-legend">
+<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="lv lv-vhigh "><svg class="ic" aria-hidden="true"><use href="#lvicon-vhigh"/></svg><span>極高</span></span>    <span class="muted small">矩陣等級 → 三級：低→低、中→中、高→高、極高→高</span>
+  </div>
+  <template id="itemDetails">
+    <div data-item="R1">
+      <h4>1. 境外移入風險</h4>
+      <p>結果：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>（P=1，I=4；信心 中）</p>
+      <ul class="dash"><li>卡達 2 例為散發人畜共通感染、無續發病例、99 名接觸者全數陰性，且兩例皆無旅遊史。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>2026 年病例仍以沙烏地阿拉伯為主（8 例），疫情高度集中於阿拉伯半島。 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>臺灣自 2012 年迄今無確定病例；國際間近年仍有巴基斯坦、法國等境外移入個案，顯示移入非流行國家之可能持續存在。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>感染者多具職業性駱駝暴露；一般旅客暴露機會低，但從事畜牧、照顧駱駝、生飲駱駝乳或於當地醫療院所工作者風險較高。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>卡達目前無我國 MERS 旅遊疫情建議等級，出國民眾與旅遊醫學門診可能較少獲得針對卡達之提醒。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span></li></ul>
+      <p><a href="#item-R1">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R2">
+      <h4>2. 國內社區流行風險</h4>
+      <p>結果：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>（P=1，I=4；信心 高）</p>
+      <ul class="dash"><li>人與人傳播主要發生於醫療機構，流行地區社區中尚無持續性人傳人。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>本事件 99 名接觸者均陰性，無任何續發病例。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國對密切接觸者實施 14 天健康監測，疑似個案以隔離醫院收治。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>我國尚無任何確定病例，社區傳播之前提（移入病例）本身機率極低。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li></ul>
+      <p><a href="#item-R2">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R3">
+      <h4>3. 院內感染風險</h4>
+      <p>結果：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>（P=1，I=4；信心 中）</p>
+      <ul class="dash"><li>2015 年韓國單一移入個案引發院內感染群聚（186 人感染、39 人死亡），主因包括認知不足、感管未落實、急診擁擠與跨院就醫。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>本事件第 1 例上呼吸道檢體初次陰性，病例辨識可能延遲。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>WHO 建議對疑似／確定個案採傳染途徑防護，執行產生氣膠之處置時採空氣傳染防護。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國感染管制指引已於 2026-07-30 更新，並要求看診時詢問 TOCC（旅遊史、職業史、接觸史、群聚史）。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li></ul>
+      <p><a href="#item-R3">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R4">
+      <h4>4. 衝擊</h4>
+      <p>結果：<span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span>（P=—，I=4；信心 高）</p>
+      <ul class="dash"><li>確定病例致死率約 37%，具共病者約 50%，入住加護病房者約 67%；本事件 1 例需非侵襲性呼吸器支持。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>長者及具慢性病者為重症高風險族群。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>目前無核准之疫苗與特效治療，以支持性療法為主。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>人傳人主要限於醫療機構與密切接觸者，社區無持續傳播，防治策略（隔離、接觸者追蹤、感管）可行。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>2015 年韓國疫情期間，我國曾多次發布新聞稿澄清 MERS 不實訊息，顯示病例或傳聞即可能引發民眾關注與恐慌。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></li></ul>
+      <p><a href="#item-R4">至風險評估表該列</a></p>
+    </div>
+  </template>
+
+  <div class="whatif" id="whatif" role="region" aria-labelledby="wi-h">
+    <h3 id="wi-h"><span class="trial-tag">試算</span>情境試算（非正式結果）</h3>
+    <p class="small">調整任一項目之機率或衝擊，查看依同一矩陣計算之結果變化。<strong>試算不會改變本報告之正式評估結果。</strong></p>
+    <div class="wi-controls">
+      <label>項目<select id="wiItem"></select></label>
+      <label>機率<select id="wiP"></select></label>
+      <label>衝擊<select id="wiI"></select></label>
+      <button type="button" class="btn" id="wiReset">重設</button>
+    </div>
+    <div class="wi-out" aria-live="polite" id="wiOut"></div>
+  </div>
+</section>
+
+<!-- 6. Scenarios + IHR ================================================= -->
+<section id="sec-scenario" class="card" aria-labelledby="h-scn">
+  <h2 id="h-scn"><span class="secno">6</span>情境分析與 IHR 附件二篩檢</h2>
+  <div class="scenarios">
+    <article class="scn scn-best">
+      <h3>最佳情境 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></h3>
+      <p>卡達事件維持 2 例散發病例，中東地區未出現醫院群聚，國際間無新的移入病例。</p>
+<h4>假設</h4><ul><li>卡達與沙烏地阿拉伯未再出現續發或群聚</li><li>WHO／ECDC 月報持續顯示零星病例</li></ul>      <h4>對我國的意涵</h4><p>維持例行監測與旅遊衛教即可；若採行恢復卡達第一級注意，可於 3–6 個月無新病例後檢討解除。</p>
+    </article>
+    <article class="scn scn-likely">
+      <h3>最可能情境 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></h3>
+      <p>中東持續出現零星人畜共通病例（以沙烏地阿拉伯為主），偶有小型醫療機構群聚；我國可能出現少數具中東旅遊史之疑似通報，經檢驗排除。</p>
+<h4>假設</h4><ul><li>病例數維持近年水準（2022-11 至 2026-01 全球 36 例）</li><li>我國醫師對 TOCC 詢問與通報維持敏感度</li></ul>      <h4>對我國的意涵</h4><p>重點在醫界警覺、下呼吸道檢體採檢與旅遊醫學衛教；無需邊境管制加嚴。</p>
+    </article>
+    <article class="scn scn-worst">
+      <h3>最壞情境 <span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></h3>
+      <p>中東出現較大規模醫院群聚並有移入亞洲之病例；我國出現 1 例移入個案，因上呼吸道檢體偽陰性或未詢問旅遊史而延誤辨識，造成醫療機構內續發病例（類似 2015 年韓國）。</p>
+<h4>假設</h4><ul><li>移入個案於未防護下多次就醫</li><li>醫療機構感管落實不足</li></ul>      <h4>對我國的意涵</h4><p>需啟動應變機制、擴大接觸者追蹤、醫院感管稽核與每日風險溝通，並重新評估旅遊疫情建議等級。</p>
+    </article>
+  </div>
+
+  <h3>IHR（2005）附件二決策工具篩檢</h3>
+  <p class="small muted">以事件發生國（卡達）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定。</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">理由</th></tr></thead>
+    <tbody>
+      <tr><td data-th="問題">一、事件對公共衛生的影響是否嚴重？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="理由">MERS 確定病例致死率約 37%，本事件 1 例發生重度肺炎併呼吸衰竭；以病原嚴重度而言屬嚴重。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr>
+      <tr><td data-th="問題">二、事件是否不尋常或非預期？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">單峰駱駝間 MERS-CoV 於卡達等地呈地區性流行，職業暴露者之零星感染屬可預期；雖為 2022 年後首見，但型態與既往相同。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr>
+      <tr><td data-th="問題">三、是否有國際傳播的顯著風險？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">兩例皆無旅遊史、無續發病例，99 名接觸者均陰性。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr>
+      <tr><td data-th="問題">四、是否有限制國際旅行或貿易的顯著風險？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">WHO 明確不建議對卡達採取任何旅行或貿易限制。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="ihr-result"><strong>篩檢結果：</strong>四問題中 1 項為「是」（&lt;2），未達附件二通報門檻。</p>
+</section>
+
+<!-- 7. Recommendations ================================================= -->
+<section id="sec-recs" class="card" aria-labelledby="h-recs">
+  <h2 id="h-recs"><span class="secno">7</span>建議事項</h2>
+  <div class="filters" role="group" aria-label="篩選建議事項">
+    <label>類別<select id="fCat"><option value="">全部</option><option>監測通報</option><option>實驗室檢驗</option><option>邊境檢疫</option><option>醫療整備</option><option>病媒或動物防治</option><option>風險溝通</option><option>跨部會與國際合作</option></select></label>
+    <label>優先順序<select id="fPri"><option value="">全部</option><option>高</option><option>中</option><option>低</option></select></label>
+    <label>時程<select id="fTime"><option value="">全部</option><option>24小時</option><option>1週</option><option>1個月</option></select></label>
+    <span class="muted small" id="fCount" aria-live="polite">共 11 項</span>
+  </div>
+  <ul class="recs" id="recList">
+    <li class="rec" data-cat="監測通報" data-pri="高" data-time="1週">
+      <div class="rec-head"><span class="chip">監測通報</span><span class="pri pri-h">優先：高</span><span class="chip">1週</span><span class="muted small">A1</span></div>
+      <p>發布致醫界通函：對發病前 14 日內具中東（含卡達）旅遊、駱駝接觸、生飲駱駝乳或當地醫療院所就醫史之急性呼吸道症狀者，落實 TOCC 詢問並依規通報送驗。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：急性傳染病組）｜理由：提高辨識敏感度，降低院內感染風險</div>
+    </li>
+    <li class="rec" data-cat="監測通報" data-pri="中" data-time="24小時">
+      <div class="rec-head"><span class="chip">監測通報</span><span class="pri pri-m">優先：中</span><span class="chip">24小時</span><span class="muted small">A2</span></div>
+      <p>將卡達 2026 年 MERS 事件登錄「國際重要疫情」，並每週追蹤 WHO DON、ECDC 月報與沙烏地阿拉伯通報。 <span class="cites"><a class="cite" href="#ref-S7" title="衛生福利部疾病管制署：國際重要疫情－中東呼吸症候群冠狀病毒感染症（列表第 1 頁）">[7]</a><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心）｜理由：目前列表尚無本事件條目</div>
+    </li>
+    <li class="rec" data-cat="實驗室檢驗" data-pri="高" data-time="1週">
+      <div class="rec-head"><span class="chip">實驗室檢驗</span><span class="pri pri-h">優先：高</span><span class="chip">1週</span><span class="muted small">A3</span></div>
+      <p>提醒醫療院所疑似個案優先採集下呼吸道檢體；上呼吸道檢體陰性但臨床高度懷疑者應再採下呼吸道檢體送驗。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：研究檢驗及疫苗研製中心）｜理由：卡達第 1 例上呼吸道檢體曾偽陰性</div>
+    </li>
+    <li class="rec" data-cat="邊境檢疫" data-pri="中" data-time="1週">
+      <div class="rec-head"><span class="chip">邊境檢疫</span><span class="pri pri-m">優先：中</span><span class="chip">1週</span><span class="muted small">A4</span></div>
+      <p>依決策建議 D2 評估恢復卡達 MERS 旅遊疫情建議第一級注意（Watch），並於公告中載明解除條件。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：國際旅遊疫情建議等級表（等級定義）">[6]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心會同檢疫組）｜理由：2022 年卡達病例時曾列第一級注意</div>
+    </li>
+    <li class="rec" data-cat="邊境檢疫" data-pri="低" data-time="1個月">
+      <div class="rec-head"><span class="chip">邊境檢疫</span><span class="pri pri-l">優先：低</span><span class="chip">1個月</span><span class="muted small">A5</span></div>
+      <p>檢視自中東入境旅客之衛教與主動通報提醒（入境時如有發燒或急性呼吸道症狀主動告知港埠檢疫人員）。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：檢疫組）</div>
+    </li>
+    <li class="rec" data-cat="醫療整備" data-pri="中" data-time="1個月">
+      <div class="rec-head"><span class="chip">醫療整備</span><span class="pri pri-m">優先：中</span><span class="chip">1個月</span><span class="muted small">A6</span></div>
+      <p>請醫院依 2026-07-30 版感染管制指引自我查檢門急診分流、隔離病室與產生氣膠處置之防護。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：感染管制及生物安全組）</div>
+    </li>
+    <li class="rec" data-cat="醫療整備" data-pri="低" data-time="1個月">
+      <div class="rec-head"><span class="chip">醫療整備</span><span class="pri pri-l">優先：低</span><span class="chip">1個月</span><span class="muted small">A7</span></div>
+      <p>檢討更新 2015 年版 MERS 工作手冊，使其與 2026 年感染管制指引及現行檢驗作業一致。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：急性傳染病組）</div>
+    </li>
+    <li class="rec" data-cat="病媒或動物防治" data-pri="低" data-time="1個月">
+      <div class="rec-head"><span class="chip">病媒或動物防治</span><span class="pri pri-l">優先：低</span><span class="chip">1個月</span><span class="muted small">A8</span></div>
+      <p>與農業主管機關確認我國單峰駱駝飼養、活體及產品輸入情形與規範，補足 HAIRS 宿主問題之資料缺口。 </p>
+      <div class="small muted">主責：疾管署會同農業部動植物防疫檢疫署｜理由：本次未查得相關資料</div>
+    </li>
+    <li class="rec" data-cat="風險溝通" data-pri="中" data-time="1週">
+      <div class="rec-head"><span class="chip">風險溝通</span><span class="pri pri-m">優先：中</span><span class="chip">1週</span><span class="muted small">A9</span></div>
+      <p>更新旅遊衛教：赴中東避免接觸駱駝、生飲駱駝乳或食用未熟肉品，避免非必要前往當地醫療院所；返國 14 天內出現症狀應戴口罩就醫並告知旅遊史。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心／旅遊醫學門診網絡）</div>
+    </li>
+    <li class="rec" data-cat="風險溝通" data-pri="中" data-time="24小時">
+      <div class="rec-head"><span class="chip">風險溝通</span><span class="pri pri-m">優先：中</span><span class="chip">24小時</span><span class="muted small">A10</span></div>
+      <p>備妥媒體問答：說明卡達病例屬散發人畜共通感染、無人傳人、我國迄今無病例且整體風險低，並引用 WHO 原始資料澄清轉述差異。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：新聞聯絡窗口）</div>
+    </li>
+    <li class="rec" data-cat="跨部會與國際合作" data-pri="低" data-time="1週">
+      <div class="rec-head"><span class="chip">跨部會與國際合作</span><span class="pri pri-l">優先：低</span><span class="chip">1週</span><span class="muted small">A11</span></div>
+      <p>透過既有國際衛生資訊管道取得 WHO 2026 年 MERS 快速風險評估全文與 ECDC 月報原文，以補足本次僅取得摘要之資料。 <span class="cites"><a class="cite" href="#ref-S12" title="World Health Organization：WHO Rapid Risk Assessment – MERS-CoV, Eastern Mediterranean Region v.2">[12]</a><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心）</div>
+    </li>
+  </ul>
+  <p class="muted" id="recEmpty" hidden>沒有符合篩選條件的建議事項。</p>
+</section>
+
+<!-- 8. Limitations / method / refs ===================================== -->
+<section id="sec-limits" class="card" aria-labelledby="h-lim">
+  <h2 id="h-lim"><span class="secno">8</span>限制與不確定性、方法說明、參考資料</h2>
+  <h3>限制與不確定性</h3>
+  <ul class="bullets"><li>網路限制：本次執行環境僅能直接讀取 who.int 與 cdc.gov.tw；ecdc.europa.eu、archyde.com、gov.uk、cdn.who.int、iris.who.int 等無法連線，ECDC 數據與新聞內容僅取得搜尋結果摘要，WHO 快速風險評估全文 PDF 未能讀取。</li><li>被查證之新聞原文未能開啟，新聞陳述係依搜尋結果摘要擷取，可能遺漏原文其他陳述。</li><li>未取得國人赴卡達／中東之旅次、航班與朝覲人數資料，境外移入機率之判斷主要依病例分布與我國歷史零病例。</li><li>未查得我國單峰駱駝飼養及活體／產品輸入資料，動物傳播途徑無法評估。</li><li>全球累計數字於不同來源間不一致（疾管署 2026-01：2,635 例／964 死；ECDC 2026-11-09：2,655 例／960 死，後者為搜尋摘要），且 ECDC 該期數據尚未納入卡達 2 例。</li><li>我國 MERS 工作手冊為 2015 年版，感染管制指引 PDF 內文未逐一讀取；建議事項之主責單位為建議，需依實際分工調整。</li><li>機率與衝擊分數為評估者判斷，依本工具定義之 1–5 級量表給分；矩陣與三級對應為確定性規則，非 ECDC 原表之逐字重現。</li><li>本報告為 AI 協助產生之草稿，須經流行病學專業人員審閱。</li></ul>
+  <p>本風險評估係依據現有資訊判定風險等級，將視新增實證適時調整判定。</p>
+
+  <details class="issues" >
+    <summary>自動檢核結果：錯誤 0、警告 1、提示 1</summary>
+    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。…」<code>taiwan.vectors_hosts</code></li><li class="iss iss-info"><span class="iss-sev">提示</span>境外移入風險：分層「赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者」高於整體（中 &gt; 低），決策摘要應明列<code>risk_items[R1]</code></li></ul>
+  </details>
+
+  <h3>方法說明</h3>
+  <ol class="method">
+    <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
+    <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
+    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>每一機率類項目給予機率 1–5 與衝擊 1–5，以下表矩陣計算，再對應至三級；衝擊項目以衝擊分數對應三級（1–2 低、3 中、4–5 高）。綜合研判取各機率類項目之最高矩陣等級。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
+    <li><strong>升級篩檢：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另列參考 UKHSA HAIRS 流程之篩檢問題。</li>
+    <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
+  </ol>
+  <div class="table-wrap">
+  <table class="tbl mini-matrix">
+    <caption>風險矩陣（epi-risk-5x5-v1）：列＝機率，欄＝衝擊</caption>
+    <thead><tr><th scope="col">機率＼衝擊</th><th scope="col">1 極低</th><th scope="col">2 低</th><th scope="col">3 中</th><th scope="col">4 高</th><th scope="col">5 極高</th></tr></thead>
+    <tbody><tr><th scope="row">5 極高</th><td>中</td><td>高</td><td>高</td><td>極高</td><td>極高</td></tr><tr><th scope="row">4 高</th><td>低</td><td>中</td><td>高</td><td>極高</td><td>極高</td></tr><tr><th scope="row">3 中</th><td>低</td><td>中</td><td>中</td><td>高</td><td>高</td></tr><tr><th scope="row">2 低</th><td>低</td><td>低</td><td>中</td><td>中</td><td>高</td></tr><tr><th scope="row">1 極低</th><td>低</td><td>低</td><td>低</td><td>低</td><td>中</td></tr></tbody>
+  </table>
+  </div>
+  <p class="small muted">工具版本 0.1.0｜方法版本 2026.11-v1｜產出模式：claude-code-skill（claude-opus-5-5）｜以 Claude Code 技能路徑產出；執行環境網路僅允許直接讀取 who.int 與 cdc.gov.tw，其餘來源僅取得搜尋摘要</p>
+
+  <h3>參考資料</h3>
+  <ol class="refs">
+    <li id="ref-S1">
+      <span class="ref-id">S1</span>
+<a href="https://www.archyde.com/who-reports-first-mers-cases-in-qatar-since-2022/" rel="noopener noreferrer">WHO Reports First MERS Cases in Qatar Since 2022</a>.
+      Archyde.      <span class="muted small">社群/未知｜取得方式：搜尋摘要｜取用 2026-11-19｜被查證之新聞｜被查證之新聞；網站屬新聞彙整站，可靠度未知。原文因網路限制未能開啟，內容取自搜尋結果摘要</span>
+<div class="url small">https://www.archyde.com/who-reports-first-mers-cases-in-qatar-since-2022/</div>    </li>
+    <li id="ref-S2">
+      <span class="ref-id">S2</span>
+<a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626" rel="noopener noreferrer">Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar</a>.
+      World Health Organization. 2026-11-13.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626</div>    </li>
+    <li id="ref-S3">
+      <span class="ref-id">S3</span>
+<a href="https://www.cdc.gov.tw/Category/Page/gVEmUF0UzFMFcsMeTn_bHg" rel="noopener noreferrer">疾病介紹－中東呼吸症候群冠狀病毒感染症</a>.
+      衛生福利部疾病管制署. 2026-08-20.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜頁面標示最後更新日期 2026/8/20</span>
+<div class="url small">https://www.cdc.gov.tw/Category/Page/gVEmUF0UzFMFcsMeTn_bHg</div>    </li>
+    <li id="ref-S4">
+      <span class="ref-id">S4</span>
+<a href="https://www.cdc.gov.tw/Disease/SubIndex/Ao8QOtJXN-BThS3MPpKS8Q" rel="noopener noreferrer">中東呼吸症候群冠狀病毒感染症（疾病專區）</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.cdc.gov.tw/Disease/SubIndex/Ao8QOtJXN-BThS3MPpKS8Q</div>    </li>
+    <li id="ref-S5">
+      <span class="ref-id">S5</span>
+<a href="https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON" rel="noopener noreferrer">國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜歷史紀錄共 2,506 筆，其中 MERS 18 筆；各國現行等級以最新一筆為準</span>
+<div class="url small">https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON</div>    </li>
+    <li id="ref-S6">
+      <span class="ref-id">S6</span>
+<a href="https://www.cdc.gov.tw/CountryEpidLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09?diseaseId=Ao8QOtJXN-BThS3MPpKS8Q" rel="noopener noreferrer">國際旅遊疫情建議等級表（等級定義）</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.cdc.gov.tw/CountryEpidLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09?diseaseId=Ao8QOtJXN-BThS3MPpKS8Q</div>    </li>
+    <li id="ref-S7">
+      <span class="ref-id">S7</span>
+<a href="https://www.cdc.gov.tw/TravelEpidemic/List/dmFxNlZsaC9qdDd1emp2dGVYUUFoUT09?diseaseId=QW84UU90SlhOK0JUaFMzTVBwS1M4UT09" rel="noopener noreferrer">國際重要疫情－中東呼吸症候群冠狀病毒感染症（列表第 1 頁）</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜僅讀取列表第 1 頁（標題與日期）</span>
+<div class="url small">https://www.cdc.gov.tw/TravelEpidemic/List/dmFxNlZsaC9qdDd1emp2dGVYUUFoUT09?diseaseId=QW84UU90SlhOK0JUaFMzTVBwS1M4UT09</div>    </li>
+    <li id="ref-S8">
+      <span class="ref-id">S8</span>
+<a href="https://www.cdc.gov.tw/Category/ListContent/NO6oWHDwvVfwb2sbWzvHWQ?uaid=K_ncaDj7qusIGJgfJX2Nvw" rel="noopener noreferrer">中東呼吸症候群冠狀病毒感染症之感染管制指引</a>.
+      衛生福利部疾病管制署. 2026-07-30.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜頁面最後更新日期 2026/7/30；僅讀取頁面與檔案清單，未讀取各指引 PDF 內文</span>
+<div class="url small">https://www.cdc.gov.tw/Category/ListContent/NO6oWHDwvVfwb2sbWzvHWQ?uaid=K_ncaDj7qusIGJgfJX2Nvw</div>    </li>
+    <li id="ref-S9">
+      <span class="ref-id">S9</span>
+<a href="https://www.cdc.gov.tw/uploads/files/066e20f4-94e1-4ae5-a989-8475158ddee5.pdf" rel="noopener noreferrer">傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）</a>.
+      衛生福利部疾病管制署. 2015-06-01.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜2015 年 6 月修訂版，未確認是否有更新版本；出版日以修訂月份記載</span>
+<div class="url small">https://www.cdc.gov.tw/uploads/files/066e20f4-94e1-4ae5-a989-8475158ddee5.pdf</div>    </li>
+    <li id="ref-S10">
+      <span class="ref-id">S10</span>
+<a href="https://www.cdc.gov.tw/Category/NewsPage/dQEFG4IXV5c44qbgU4jHlA" rel="noopener noreferrer">中東呼吸症候群冠狀病毒感染症新聞稿列表</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜僅讀取列表標題與日期</span>
+<div class="url small">https://www.cdc.gov.tw/Category/NewsPage/dQEFG4IXV5c44qbgU4jHlA</div>    </li>
+    <li id="ref-S11">
+      <span class="ref-id">S11</span>
+<a href="https://www.ecdc.europa.eu/en/public-health-events/2012-EIP-00049" rel="noopener noreferrer">Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update</a>.
+      European Centre for Disease Prevention and Control.      <span class="muted small">官方衛生機關/國際組織｜取得方式：搜尋摘要｜取用 2026-11-19｜ecdc.europa.eu 於本執行環境無法連線；數據取自 2026-11-19 搜尋結果摘要，未讀取原頁</span>
+<div class="url small">https://www.ecdc.europa.eu/en/public-health-events/2012-EIP-00049</div>    </li>
+    <li id="ref-S12">
+      <span class="ref-id">S12</span>
+<a href="https://www.who.int/publications/m/item/who-rapid-risk-assessment-mers-cov--eastern-mediterranean-region-v.2" rel="noopener noreferrer">WHO Rapid Risk Assessment – MERS-CoV, Eastern Mediterranean Region v.2</a>.
+      World Health Organization. 2026-02-03.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜僅讀取出版品頁面；評估全文 PDF 位於 cdn.who.int，本環境無法連線</span>
+<div class="url small">https://www.who.int/publications/m/item/who-rapid-risk-assessment-mers-cov--eastern-mediterranean-region-v.2</div>    </li>
+    <li id="ref-S13">
+      <span class="ref-id">S13</span>
+<a href="https://www.cdc.gov.tw/Bulletin/List/MmgtpeidAR5Ooai4-fgHzQ" rel="noopener noreferrer">疾管署新聞稿列表（第 1 頁，2026-11-02 至 2026-11-17）</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜僅讀取列表標題與日期</span>
+<div class="url small">https://www.cdc.gov.tw/Bulletin/List/MmgtpeidAR5Ooai4-fgHzQ</div>    </li>
+  </ol>
+
+  <div class="disclaimer final" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>免責聲明：</strong>本報告由 AI 協助蒐集證據並產生草稿，風險等級由確定性規則計算；所有內容須經流行病學專業人員審閱、確認來源後方可使用。資料截止時間：2026-11-19 11:10（UTC+08:00）。</div>
+  </div>
+</section>
+</main>
+
+<div class="tooltip" id="tip" role="tooltip" hidden></div>
+<script type="application/json" id="report-data">{"matrix":{"1":{"1":"低","2":"低","3":"低","4":"低","5":"中"},"2":{"1":"低","2":"低","3":"中","4":"中","5":"高"},"3":{"1":"低","2":"中","3":"中","4":"高","5":"高"},"4":{"1":"低","2":"中","3":"高","4":"極高","5":"極高"},"5":{"1":"中","2":"高","3":"高","4":"極高","5":"極高"}},"matrixTo3":{"低":"低","中":"中","高":"高","極高":"高"},"impactTo3":{"1":"低","2":"低","3":"中","4":"高","5":"高"},"pLabels":{"1":"極低","2":"低","3":"中","4":"高","5":"極高"},"iLabels":{"1":"極低","2":"低","3":"中","4":"高","5":"極高"},"levelClass":{"低":"low","中":"mod","高":"high","極高":"vhigh"},"items":[{"id":"R1","n":1,"name":"境外移入風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","proposed":"低","confidence":"中"},{"id":"R2","n":2,"name":"國內社區流行風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","proposed":"低","confidence":"高"},{"id":"R3","n":3,"name":"院內感染風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","proposed":"低","confidence":"中"},{"id":"R4","n":4,"name":"衝擊","kind":"衝擊","p":null,"i":4,"inherit":false,"computed":"高","matrix":null,"proposed":"高","confidence":"高"}],"overall":{"computed":"低","matrix":"低","p":1,"i":4,"from":"R1"},"timeseries":[]}</script>
+<script>(function () {
+  "use strict";
+  var data;
+  try { data = JSON.parse(document.getElementById("report-data").textContent); } catch (e) { data = null; }
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  /* ---------- theme ---------------------------------------------------- */
+  var THEMES = ["auto", "light", "dark"];
+  var THEME_LABEL = { auto: "主題：自動", light: "主題：淺色", dark: "主題：深色" };
+  function applyTheme(t) {
+    if (t === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+    var b = $("themeBtn"); if (b) b.textContent = THEME_LABEL[t];
+  }
+  var theme = "auto";
+  try { theme = localStorage.getItem("epi-risk-theme") || "auto"; } catch (e) { /* storage unavailable */ }
+  if (THEMES.indexOf(theme) < 0) theme = "auto";
+  applyTheme(theme);
+  if ($("themeBtn")) $("themeBtn").addEventListener("click", function () {
+    theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+    applyTheme(theme);
+    try { localStorage.setItem("epi-risk-theme", theme); } catch (e) { /* ignore */ }
+  });
+
+  /* ---------- print: expand all <details> ------------------------------- */
+  var reopened = [];
+  window.addEventListener("beforeprint", function () {
+    reopened = [];
+    document.querySelectorAll("details:not([open])").forEach(function (d) { d.open = true; reopened.push(d); });
+  });
+  window.addEventListener("afterprint", function () { reopened.forEach(function (d) { d.open = false; }); reopened = []; });
+  if ($("printBtn")) $("printBtn").addEventListener("click", function () { window.print(); });
+
+  /* ---------- tooltip --------------------------------------------------- */
+  var tip = $("tip");
+  function showTip(text, x, y) {
+    if (!tip) return;
+    tip.textContent = text; tip.hidden = false;
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(Math.max(8, x + 12), window.innerWidth - w - 8);
+    var top = y - h - 10; if (top < 8) top = y + 16;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+  function hideTip() { if (tip) tip.hidden = true; }
+  document.querySelectorAll(".bar-row[data-tip]").forEach(function (row) {
+    row.addEventListener("pointermove", function (ev) { showTip(row.getAttribute("data-tip"), ev.clientX, ev.clientY); });
+    row.addEventListener("pointerleave", hideTip);
+    row.addEventListener("focus", function () { var r = row.getBoundingClientRect(); showTip(row.getAttribute("data-tip"), r.left + r.width / 2, r.top); });
+    row.addEventListener("blur", hideTip);
+  });
+
+  if (!data) return;
+
+  /* ---------- matrix detail -------------------------------------------- */
+  var detail = $("matrixDetail");
+  var tpl = $("itemDetails");
+  function showItem(id, btn) {
+    if (!detail || !tpl) return;
+    var src = tpl.content.querySelector('[data-item="' + CSS.escape(id) + '"]');
+    detail.innerHTML = "";
+    if (src) detail.appendChild(src.cloneNode(true));
+    document.querySelectorAll(".marker[data-item]").forEach(function (m) { m.setAttribute("aria-pressed", m === btn ? "true" : "false"); });
+  }
+  document.querySelectorAll(".marker[data-item]").forEach(function (m) {
+    m.setAttribute("aria-pressed", "false");
+    m.addEventListener("click", function () { showItem(m.getAttribute("data-item"), m); });
+  });
+
+  /* ---------- what-if (試算) -------------------------------------------- */
+  var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3;
+  var ORDER = { "低": 0, "中": 1, "高": 2, "極高": 3 };
+  var items = data.items;
+  var trial = {};
+  function resetTrial() { trial = {}; items.forEach(function (it) { trial[it.id] = { p: it.p, i: it.inherit ? null : it.i }; }); }
+  resetTrial();
+
+  function compute(state) {
+    var shared = null;
+    items.forEach(function (it) { if (it.kind === "衝擊") { var v = state[it.id].i; if (shared === null || v > shared) shared = v; } });
+    var res = {}, best = null;
+    items.forEach(function (it) {
+      var s = state[it.id];
+      if (it.kind === "衝擊") { res[it.id] = { level: I3[String(s.i)], matrix: null, p: null, i: s.i }; return; }
+      var ii = s.i == null ? shared : s.i;
+      var m = M[String(s.p)][String(ii)];
+      res[it.id] = { level: M3[m], matrix: m, p: s.p, i: ii };
+      if (!best || ORDER[m] > ORDER[best.matrix] || (ORDER[m] === ORDER[best.matrix] && s.p > best.p)) best = { matrix: m, p: s.p, i: ii, id: it.id };
+    });
+    return { items: res, overall: best ? { level: M3[best.matrix], matrix: best.matrix, from: best.id } : null };
+  }
+  var official = compute(trial);
+
+  var selItem = $("wiItem"), selP = $("wiP"), selI = $("wiI"), out = $("wiOut");
+  function opt(sel, value, label) { var o = el("option", null, label); o.value = value; sel.appendChild(o); }
+  function fillScores(sel, labels, allowInherit) {
+    sel.innerHTML = "";
+    if (allowInherit) opt(sel, "", "沿用衝擊項目");
+    for (var k = 1; k <= 5; k++) opt(sel, String(k), k + "（" + labels[String(k)] + "）");
+  }
+  function itemById(id) { for (var k = 0; k < items.length; k++) if (items[k].id === id) return items[k]; return null; }
+
+  function syncControls() {
+    var it = itemById(selItem.value); if (!it) return;
+    var s = trial[it.id];
+    fillScores(selP, data.pLabels, false);
+    fillScores(selI, data.iLabels, it.kind === "機率" && it.inherit);
+    selP.disabled = it.kind === "衝擊";
+    selP.value = s.p == null ? "" : String(s.p);
+    selI.value = s.i == null ? "" : String(s.i);
+  }
+
+  function badge(level) {
+    var span = el("span", "lv lv-" + data.levelClass[level]);
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "ic"); svg.setAttribute("aria-hidden", "true");
+    var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "#lvicon-" + data.levelClass[level]);
+    svg.appendChild(use); span.appendChild(svg); span.appendChild(el("span", null, level));
+    return span;
+  }
+
+  function placeGhost(res) {
+    document.querySelectorAll(".marker.ghost").forEach(function (g) { g.remove(); });
+    items.forEach(function (it) {
+      var r = res.items[it.id], o = official.items[it.id];
+      if (it.kind !== "機率" || (r.p === o.p && r.i === o.i)) return;
+      var cell = document.querySelector('.cell[data-p="' + r.p + '"][data-i="' + r.i + '"] .markers');
+      if (!cell) return;
+      var g = el("span", "marker ghost", String(it.n));
+      g.setAttribute("title", "試算位置：" + it.name); g.setAttribute("aria-hidden", "true");
+      g.style.display = "inline-grid"; g.style.placeItems = "center";
+      cell.appendChild(g);
+    });
+  }
+
+  function renderTrial() {
+    var res = compute(trial);
+    out.innerHTML = "";
+    var tbl = el("table", "tbl");
+    var thead = el("thead"); var hr = el("tr");
+    ["項目", "正式結果", "試算結果", "變化"].forEach(function (h) { var th = el("th", null, h); th.scope = "col"; hr.appendChild(th); });
+    thead.appendChild(hr); tbl.appendChild(thead);
+    var tb = el("tbody");
+    function row(name, offLv, trLv) {
+      var tr = el("tr");
+      tr.appendChild(el("td", null, name));
+      var a = el("td"); a.appendChild(badge(offLv)); tr.appendChild(a);
+      var b = el("td"); b.appendChild(badge(trLv)); tr.appendChild(b);
+      var d = ORDER[trLv] - ORDER[offLv];
+      tr.appendChild(el("td", "delta", d > 0 ? "▲ 升高" : d < 0 ? "▼ 降低" : "＝ 不變"));
+      tb.appendChild(tr);
+    }
+    items.forEach(function (it) { row(it.n + ". " + it.name, official.items[it.id].level, res.items[it.id].level); });
+    if (res.overall && official.overall) row("綜合研判", official.overall.level, res.overall.level);
+    tbl.appendChild(tb);
+    out.appendChild(el("p", "small", "以下為試算，非正式評估結果。正式結果請見上方風險評估表。"));
+    out.appendChild(tbl);
+    placeGhost(res);
+  }
+
+  if (selItem && selP && selI && out) {
+    items.forEach(function (it) { opt(selItem, it.id, it.n + ". " + it.name); });
+    syncControls(); renderTrial();
+    selItem.addEventListener("change", syncControls);
+    selP.addEventListener("change", function () { trial[selItem.value].p = selP.value ? Number(selP.value) : null; renderTrial(); });
+    selI.addEventListener("change", function () { trial[selItem.value].i = selI.value ? Number(selI.value) : null; renderTrial(); });
+    $("wiReset").addEventListener("click", function () { resetTrial(); syncControls(); renderTrial(); });
+  }
+
+  /* ---------- recommendation filters ----------------------------------- */
+  var fCat = $("fCat"), fPri = $("fPri"), fTime = $("fTime");
+  function filterRecs() {
+    var c = fCat.value, p = fPri.value, t = fTime.value, n = 0;
+    document.querySelectorAll("#recList .rec").forEach(function (li) {
+      var ok = (!c || li.dataset.cat === c) && (!p || li.dataset.pri === p) && (!t || li.dataset.time === t);
+      li.hidden = !ok; if (ok) n++;
+    });
+    $("fCount").textContent = "顯示 " + n + " 項";
+    $("recEmpty").hidden = n !== 0;
+  }
+  if (fCat && fPri && fTime) [fCat, fPri, fTime].forEach(function (s) { s.addEventListener("change", filterRecs); });
+
+  /* ---------- optional time-series chart -------------------------------- */
+  var ts = data.timeseries || [];
+  var host = $("tsChart");
+  if (host && ts.length) {
+    var series = {}; ts.forEach(function (p) { (series[p.series] = series[p.series] || []).push(p); });
+    var names = Object.keys(series).slice(0, 3);
+    var colors = ["var(--accent)", "#eb6834", "#1baf7a"];
+    var dates = Array.from(new Set(ts.map(function (p) { return p.date; }))).sort();
+    var maxV = Math.max.apply(null, ts.map(function (p) { return p.value; })) || 1;
+    var W = 640, H = 240, L = 44, R = 12, T = 12, B = 30;
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "病例數時間序列，資料見表格檢視");
+    function x(d) { return L + (dates.length < 2 ? 0 : (W - L - R) * dates.indexOf(d) / (dates.length - 1)); }
+    function y(v) { return T + (H - T - B) * (1 - v / maxV); }
+    function line(x1, y1, x2, y2, stroke) { var l = document.createElementNS(NS, "line"); l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2); l.setAttribute("stroke", stroke); l.setAttribute("stroke-width", "1"); return l; }
+    function text(xx, yy, s, anchor) { var t = document.createElementNS(NS, "text"); t.setAttribute("x", xx); t.setAttribute("y", yy); t.setAttribute("font-size", "11"); t.setAttribute("fill", "var(--muted)"); t.setAttribute("text-anchor", anchor || "start"); t.textContent = s; return t; }
+    for (var g = 0; g <= 4; g++) { var vv = maxV * g / 4; svg.appendChild(line(L, y(vv), W - R, y(vv), "var(--grid)")); svg.appendChild(text(L - 6, y(vv) + 4, String(Math.round(vv)), "end")); }
+    svg.appendChild(text(L, H - 8, dates[0])); svg.appendChild(text(W - R, H - 8, dates[dates.length - 1], "end"));
+    names.forEach(function (nm, k) {
+      var pts = series[nm].slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+      var path = document.createElementNS(NS, "path");
+      path.setAttribute("d", pts.map(function (p, j) { return (j ? "L" : "M") + x(p.date) + "," + y(p.value); }).join(""));
+      path.setAttribute("fill", "none"); path.setAttribute("stroke", colors[k]); path.setAttribute("stroke-width", "2"); path.setAttribute("stroke-linejoin", "round");
+      svg.appendChild(path);
+    });
+    var cross = line(0, T, 0, H - B, "var(--axis)"); cross.style.display = "none"; svg.appendChild(cross);
+    svg.addEventListener("pointermove", function (ev) {
+      var r = svg.getBoundingClientRect(); var px = (ev.clientX - r.left) * W / r.width;
+      var best = dates[0], bd = 1e9; dates.forEach(function (d) { var dd = Math.abs(x(d) - px); if (dd < bd) { bd = dd; best = d; } });
+      cross.setAttribute("x1", x(best)); cross.setAttribute("x2", x(best)); cross.style.display = "";
+      var parts = names.map(function (nm) { var p = series[nm].filter(function (q) { return q.date === best; })[0]; return (p ? p.value : "—") + " " + nm; });
+      showTip(best + "：" + parts.join("；"), ev.clientX, ev.clientY);
+    });
+    svg.addEventListener("pointerleave", function () { cross.style.display = "none"; hideTip(); });
+    host.appendChild(svg);
+    if (names.length > 1) {
+      var lg = el("div", "matrix-legend");
+      names.forEach(function (nm, k) { var s = el("span", "small"); var sw = el("span"); sw.style.cssText = "display:inline-block;width:16px;height:2px;vertical-align:middle;margin-right:4px;background:" + colors[k]; s.appendChild(sw); s.appendChild(document.createTextNode(nm)); lg.appendChild(s); });
+      host.appendChild(lg);
+    }
+  }
+})();
+</script>
+</body>
+</html>

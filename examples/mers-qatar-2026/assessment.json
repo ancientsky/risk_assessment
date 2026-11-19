@@ -1,0 +1,550 @@
+{
+  "schema_version": "1.0",
+  "report_title": "卡達中東呼吸症候群冠狀病毒感染症（MERS）散發病例：新聞查證與我國快速風險評估",
+  "generated_at": "2026-11-19T11:40:00+08:00",
+  "data_cutoff": "2026-11-19T11:10:00+08:00",
+  "reassessment_date": "2026-12-17",
+  "generator": {
+    "mode": "claude-code-skill",
+    "model": "claude-opus-5-5",
+    "tool_version": "0.1.0",
+    "notes": "以 Claude Code 技能路徑產出；執行環境網路僅允許直接讀取 who.int 與 cdc.gov.tw，其餘來源僅取得搜尋摘要"
+  },
+  "event": {
+    "title": "卡達通報 2 例 MERS 確定病例（2022 年以來首見）",
+    "hazard": "中東呼吸症候群冠狀病毒（MERS-CoV）",
+    "event_location": "卡達",
+    "event_type": ["人畜共通", "呼吸道"],
+    "news_source_id": "S1",
+    "news_summary": "新聞指出卡達出現 2 例 MERS 確定病例，為 2022 年以來首見；兩名患者均為 50 歲以上具慢性病男性，分別於 2026 年 7 月下旬及 8 月下旬發病，感染地點為彼此無流行病學關聯的駱駝場，屬散發性人畜共通傳播。新聞稱資訊來自 WHO。",
+    "taiwan_relevance": "MERS 為我國第五類法定傳染病，國人赴中東旅遊、朝覲、工作仍有暴露機會；卡達目前無我國 MERS 旅遊疫情建議等級。",
+    "triage_decision": "進行完整評估",
+    "triage_reason": "高致死率之法定傳染病、事件已由 WHO 公布、涉及我國旅遊疫情建議等級之調整，故進入查證與完整評估。"
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.archyde.com/who-reports-first-mers-cases-in-qatar-since-2022/",
+      "title": "WHO Reports First MERS Cases in Qatar Since 2022",
+      "publisher": "Archyde",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 4,
+      "retrieval": "搜尋摘要",
+      "is_news_item": true,
+      "note": "被查證之新聞；網站屬新聞彙整站，可靠度未知。原文因網路限制未能開啟，內容取自搜尋結果摘要"
+    },
+    {
+      "id": "S2",
+      "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON626",
+      "title": "Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar",
+      "publisher": "World Health Organization",
+      "published_date": "2026-11-13",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false
+    },
+    {
+      "id": "S3",
+      "url": "https://www.cdc.gov.tw/Category/Page/gVEmUF0UzFMFcsMeTn_bHg",
+      "title": "疾病介紹－中東呼吸症候群冠狀病毒感染症",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "頁面標示最後更新日期 2026/8/20"
+    },
+    {
+      "id": "S4",
+      "url": "https://www.cdc.gov.tw/Disease/SubIndex/Ao8QOtJXN-BThS3MPpKS8Q",
+      "title": "中東呼吸症候群冠狀病毒感染症（疾病專區）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false
+    },
+    {
+      "id": "S5",
+      "url": "https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON",
+      "title": "國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "歷史紀錄共 2,506 筆，其中 MERS 18 筆；各國現行等級以最新一筆為準"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.cdc.gov.tw/CountryEpidLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09?diseaseId=Ao8QOtJXN-BThS3MPpKS8Q",
+      "title": "國際旅遊疫情建議等級表（等級定義）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false
+    },
+    {
+      "id": "S7",
+      "url": "https://www.cdc.gov.tw/TravelEpidemic/List/dmFxNlZsaC9qdDd1emp2dGVYUUFoUT09?diseaseId=QW84UU90SlhOK0JUaFMzTVBwS1M4UT09",
+      "title": "國際重要疫情－中東呼吸症候群冠狀病毒感染症（列表第 1 頁）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "僅讀取列表第 1 頁（標題與日期）"
+    },
+    {
+      "id": "S8",
+      "url": "https://www.cdc.gov.tw/Category/ListContent/NO6oWHDwvVfwb2sbWzvHWQ?uaid=K_ncaDj7qusIGJgfJX2Nvw",
+      "title": "中東呼吸症候群冠狀病毒感染症之感染管制指引",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2026-07-30",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "頁面最後更新日期 2026/7/30；僅讀取頁面與檔案清單，未讀取各指引 PDF 內文"
+    },
+    {
+      "id": "S9",
+      "url": "https://www.cdc.gov.tw/uploads/files/066e20f4-94e1-4ae5-a989-8475158ddee5.pdf",
+      "title": "傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2015-06-01",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "2015 年 6 月修訂版，未確認是否有更新版本；出版日以修訂月份記載"
+    },
+    {
+      "id": "S10",
+      "url": "https://www.cdc.gov.tw/Category/NewsPage/dQEFG4IXV5c44qbgU4jHlA",
+      "title": "中東呼吸症候群冠狀病毒感染症新聞稿列表",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "僅讀取列表標題與日期"
+    },
+    {
+      "id": "S11",
+      "url": "https://www.ecdc.europa.eu/en/public-health-events/2012-EIP-00049",
+      "title": "Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update",
+      "publisher": "European Centre for Disease Prevention and Control",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "ecdc.europa.eu 於本執行環境無法連線；數據取自 2026-11-19 搜尋結果摘要，未讀取原頁"
+    },
+    {
+      "id": "S12",
+      "url": "https://www.who.int/publications/m/item/who-rapid-risk-assessment-mers-cov--eastern-mediterranean-region-v.2",
+      "title": "WHO Rapid Risk Assessment – MERS-CoV, Eastern Mediterranean Region v.2",
+      "publisher": "World Health Organization",
+      "published_date": "2026-02-03",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "僅讀取出版品頁面；評估全文 PDF 位於 cdn.who.int，本環境無法連線"
+    },
+    {
+      "id": "S13",
+      "url": "https://www.cdc.gov.tw/Bulletin/List/MmgtpeidAR5Ooai4-fgHzQ",
+      "title": "疾管署新聞稿列表（第 1 頁，2026-11-02 至 2026-11-17）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "僅讀取列表標題與日期"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "WHO 公布卡達出現 2 例 MERS 確定病例。",
+      "importance": "關鍵",
+      "verdict": "已證實",
+      "verdict_reason": "WHO 疾病爆發新聞（DON626，2026-11-13）載明卡達 IHR 國家對口單位於 2026-10-29 通報 2 例實驗室確診病例。",
+      "evidence": [
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"the National IHR Focal Point of Qatar notified WHO of two laboratory-confirmed cases of Middle East respiratory syndrome (MERS)\""},
+        {"source_id": "S1", "stance": "背景", "quote_or_summary": "被查證之新聞（搜尋摘要）：稱 WHO 報告卡達 2 例 MERS 確定病例。"}
+      ]
+    },
+    {
+      "id": "C2",
+      "text": "此為卡達自 2022 年以來首見之 MERS 病例。",
+      "importance": "關鍵",
+      "verdict": "已證實",
+      "verdict_reason": "WHO DON626 原文明確敘述為卡達 2022 年以來首次通報之 MERS 病例；我國疾管署國際重要疫情列表亦可見 2022 年 3–4 月之卡達條目，之後至 2026 年 6 月均無卡達條目，與此敘述一致。",
+      "evidence": [
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"These are the first MERS cases reported from Qatar since 2022.\""},
+        {"source_id": "S7", "stance": "背景", "quote_or_summary": "國際重要疫情列表第 1 頁：卡達條目日期為 2022-03-28、2022-04-07；最新條目為 2026-06-10 沙烏地阿拉伯。"}
+      ]
+    },
+    {
+      "id": "C3",
+      "text": "兩名患者均為 50 歲以上、具慢性病之男性。",
+      "importance": "次要",
+      "verdict": "已證實",
+      "verdict_reason": "WHO DON626 原文相符，並補充兩人皆有職業性單峰駱駝暴露。",
+      "evidence": [
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"Both patients were men aged over 50 years with underlying medical conditions and occupational exposure to dromedary camels.\""}
+      ]
+    },
+    {
+      "id": "C4",
+      "text": "一名患者於 2026 年 7 月下旬發病，另一名於 8 月下旬發病。",
+      "importance": "次要",
+      "verdict": "已證實",
+      "verdict_reason": "WHO DON626 記載發病日分別為 2026-07-22 與 2026-08-23；確診日為 08-05 與 08-25。",
+      "evidence": [
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"He developed symptoms on 22 July 2026 and was admitted to hospital on 25 July.\""},
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"He developed symptoms on 23 August 2026.\""}
+      ]
+    },
+    {
+      "id": "C5",
+      "text": "兩例感染發生於地理位置分開、彼此無流行病學關聯的駱駝場，屬散發性人畜共通傳播。",
+      "importance": "關鍵",
+      "verdict": "部分證實",
+      "verdict_reason": "「駱駝場分開、無流行病學關聯」與 WHO 原文相符；但 WHO 對傳播型態之用語為「看似」散發性人畜共通感染，且明言確切感染源仍未確定（僅推定為可能之人畜共通感染），新聞以肯定語氣陳述，故判定為部分證實。",
+      "evidence": [
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"The cases were exposed at geographically separate farms, with no epidemiological link identified between them.\""},
+        {"source_id": "S2", "stance": "支持", "quote_or_summary": "\"The cases appear to represent sporadic infections associated with zoonotic transmission from dromedary camels\""},
+        {"source_id": "S2", "stance": "背景", "quote_or_summary": "\"The precise sources of infection remain undetermined.\""}
+      ]
+    }
+  ],
+  "news_credibility": {
+    "proposed_level": "中",
+    "reason": "新聞所述事實與 WHO 原始通報大致相符，僅對傳播型態之陳述較 WHO 確定；惟新聞來源為可靠度未知之彙整網站，且本次未能開啟原文全文，故整體可信度列為中。實際引用應以 WHO DON626 為準。"
+  },
+  "pathogen": {
+    "summary": "MERS-CoV 為 beta 冠狀病毒，單峰駱駝為主要宿主；人類主要經直接或間接接觸受感染駱駝而感染，人傳人以醫療機構院內感染為主，流行地區社區中尚無持續性人傳人。確定病例致死率約 37%，目前無核准之疫苗與特效治療。",
+    "facts": [
+      {"label": "病原", "value": "中東呼吸症候群冠狀病毒（MERS-CoV），beta 冠狀病毒", "source_ids": ["S3", "S2"]},
+      {"label": "主要宿主", "value": "單峰駱駝；卡達等多國單峰駱駝曾檢出病毒，並在中東、非洲及南亞部分國家駱駝間呈地區性流行", "source_ids": ["S3"]},
+      {"label": "傳播途徑", "value": "直接或間接接觸受感染單峰駱駝（含生飲駱駝乳）；人與人間主要為醫療機構院內感染及少數密切接觸者", "source_ids": ["S3", "S2"]},
+      {"label": "潛伏期", "value": "2–14 天（中位數 5–6 天）", "source_ids": ["S3"]},
+      {"label": "可傳染期", "value": "尚無明確證據；一般而言發病 4–10 天時傳染力最強，下呼吸道分泌物病毒量最高", "source_ids": ["S3"]},
+      {"label": "致死率", "value": "確定病例約 37%（可能高估）；具共病者約 50%，入住加護病房者約 67%", "source_ids": ["S2", "S3"]},
+      {"label": "高風險族群", "value": "65 歲以上長者及糖尿病、高血壓、心血管疾病、慢性肺病、腎病、癌症、免疫力缺陷者", "source_ids": ["S3"]},
+      {"label": "治療", "value": "目前無核准治療方法，以症狀治療及支持性療法為主", "source_ids": ["S3"]},
+      {"label": "疫苗", "value": "目前無核准疫苗；ChAdOx1-MERS、GLS-5300 等候選疫苗發展中", "source_ids": ["S3"]}
+    ]
+  },
+  "international": {
+    "summary": [
+      {"text": "卡達 IHR 國家對口單位於 2026-10-29 通報 2 例確定病例（確診日 2026-08-05、08-25），為卡達 2022 年以來首見；兩例均有職業性單峰駱駝暴露，其中 1 例曾照顧生病幼駝並生飲駱駝乳。", "source_ids": ["S2"]},
+      {"text": "兩例均已康復出院；第 2 例曾發生重度肺炎併急性低血氧性呼吸衰竭，需高流量鼻導管氧氣及非侵襲性呼吸器。", "source_ids": ["S2"]},
+      {"text": "兩例共 99 名接觸者（含 84 名醫療照護人員）均檢驗陰性並完成 14 天監測，未發現續發病例。", "source_ids": ["S2"]},
+      {"text": "第 1 例上呼吸道檢體 RT-PCR 初次陰性，後續下呼吸道檢體始確診，顯示僅採上呼吸道檢體可能漏診。", "source_ids": ["S2"]},
+      {"text": "依 ECDC 月報（搜尋摘要），截至 2026-11-09，2026 年沙烏地阿拉伯共報告 8 例（1 例死亡）；2012 年 4 月起全球累計 2,655 例、960 例死亡。該期數據未含卡達 2 例（WHO 於 11-13 才公布）。", "source_ids": ["S11"]},
+      {"text": "截至 2026 年 1 月，全球 27 國累計 2,635 例確診、964 例死亡，沙烏地阿拉伯占 84%（2,224 例）；2022 年 11 月至 2026 年 1 月全球 36 例（14 例死亡），巴基斯坦及法國於 2024、2025 年通報境外移入個案。", "source_ids": ["S3"]},
+      {"text": "中東以外最大規模疫情為 2015 年 5 月韓國院內感染群聚，造成 186 人感染、39 人死亡。", "source_ids": ["S3"]}
+    ],
+    "stats": [
+      {"label": "卡達 2026 年確定病例", "value": "2 例", "as_of": "2026-11-13", "note": "均已康復；無續發病例", "source_ids": ["S2"]},
+      {"label": "接觸者檢驗陰性", "value": "99／99 人", "as_of": "2026-11-13", "source_ids": ["S2"]},
+      {"label": "確定病例致死率", "value": "約 37%", "note": "可能高估（輕症易漏報）", "source_ids": ["S2", "S3"]},
+      {"label": "全球累計（2012 年起）", "value": "2,655 例／960 死", "as_of": "2026-11-09", "note": "ECDC，僅取得搜尋摘要；疾管署 2026-01 資料為 2,635 例／964 死", "source_ids": ["S11", "S3"]},
+      {"label": "我國確定病例", "value": "0 例", "note": "臺灣迄今無確定病例", "source_ids": ["S3"]}
+    ],
+    "timeline": [
+      {"date": "2024-04-19", "label": "我國解除卡達 MERS 旅遊疫情建議", "source_ids": ["S5"]},
+      {"date": "2026-02-03", "label": "WHO 發布東地中海區 MERS-CoV 快速風險評估 v.2", "source_ids": ["S12"]},
+      {"date": "2026-07-22", "label": "卡達第 1 例發病（7/25 住院）", "source_ids": ["S2"]},
+      {"date": "2026-08-05", "label": "第 1 例經下呼吸道檢體確診", "source_ids": ["S2"]},
+      {"date": "2026-08-23", "label": "卡達第 2 例發病", "source_ids": ["S2"]},
+      {"date": "2026-08-25", "label": "第 2 例鼻咽檢體確診", "source_ids": ["S2"]},
+      {"date": "2026-10-29", "label": "卡達 IHR 國家對口單位通報 WHO", "source_ids": ["S2"]},
+      {"date": "2026-11-13", "label": "WHO 發布疾病爆發新聞 DON626", "source_ids": ["S2"]}
+    ],
+    "time_series": [],
+    "country_counts": [
+      {"country": "沙烏地阿拉伯", "cases": 8, "deaths": 1, "period": "2026 年 1 月至 11 月 9 日", "source_ids": ["S11"]},
+      {"country": "卡達", "cases": 2, "deaths": 0, "period": "2026 年 1 月至 11 月 9 日", "source_ids": ["S2"]}
+    ],
+    "external_assessments": [
+      {"text": "WHO：依 2026-01-29 之快速風險評估，MERS-CoV 之區域及全球整體風險維持「中等」，理由為持續之零星人畜共通外溢、院內傳播及移入非流行國家之可能。", "source_ids": ["S2", "S12"]},
+      {"text": "WHO：依現有資訊，不建議對卡達採取任何旅行或貿易限制。", "source_ids": ["S2"]},
+      {"text": "ECDC：目前 MERS-CoV 情勢未變，對歐盟/歐洲經濟區之風險為低（搜尋摘要）。", "source_ids": ["S11"]}
+    ]
+  },
+  "taiwan": {
+    "notifiable_category": "第五類法定傳染病（2012-10-03 公告列入；2013 年更名），醫師應於 24 小時內通報",
+    "surveillance": [
+      {"text": "MERS 於 2012-10-03 以「新型冠狀病毒呼吸道重症」之名公告列為第五類法定傳染病，醫師應於 24 小時內通報。", "source_ids": ["S4", "S9"]},
+      {"text": "臺灣迄今無 MERS 確定病例。", "source_ids": ["S3"]},
+      {"text": "臨床醫師遇不明原因嚴重肺炎、不明原因肺炎群聚、醫護人員不明原因肺炎，或發病前 14 日內具流行地區旅遊史之急性呼吸道症狀者，應於「其他傳染病」項下通報 MERS-CoV 並送驗。", "source_ids": ["S9"]},
+      {"text": "疾管署「國際重要疫情」MERS 列表第 1 頁最新條目為 2026-06-10（沙烏地阿拉伯），截至取用日尚未見本次卡達事件條目。", "source_ids": ["S7"]},
+      {"text": "疾管署 2026-11-02 至 11-17 新聞稿（列表第 1 頁）未見 MERS 相關新聞稿；最近一則 MERS 相關新聞稿為 2026-04-28 麥加朝覲行前提醒。", "source_ids": ["S13", "S10"]}
+    ],
+    "laboratory": [
+      {"text": "依工作手冊，應採集咽喉擦拭液、痰液或下呼吸道抽取液（為佳）及血清，送疾管署研究檢驗及疫苗研製中心實驗室檢驗。", "source_ids": ["S9"]},
+      {"text": "本次卡達第 1 例上呼吸道檢體初次陰性、下呼吸道檢體陽性，佐證我國手冊「下呼吸道檢體為佳」之要求。", "source_ids": ["S2", "S9"], "is_inference": true}
+    ],
+    "vectors_hosts": [
+      {"text": "主要宿主為單峰駱駝，卡達單峰駱駝曾檢出 MERS-CoV；病毒可經駱駝分泌物、乳汁、尿液排出。", "source_ids": ["S3"]},
+      {"text": "本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。", "source_ids": [], "is_inference": true}
+    ],
+    "border_travel": [
+      {"text": "卡達 MERS 旅遊疫情建議已於 2024-04-19 解除，目前無等級；前次為 2022-04-12 因卡達病例列為第一級注意（Watch）。", "source_ids": ["S5"]},
+      {"text": "沙烏地阿拉伯 MERS 旅遊疫情建議最新紀錄為 2022-04-12 第一級注意（Watch）。", "source_ids": ["S5"]},
+      {"text": "旅遊疫情建議分三級：第一級注意（遵守當地一般預防措施）、第二級警示（對當地採取加強防護）、第三級警告（避免所有非必要旅遊）。", "source_ids": ["S6"]},
+      {"text": "自流行地區入境者如有發燒或急性呼吸道症狀應主動通報港埠檢疫人員；返國 14 天內出現症狀應戴外科口罩就醫並告知旅遊史。", "source_ids": ["S3"]}
+    ],
+    "healthcare": [
+      {"text": "疾管署 MERS 感染管制指引頁面於 2026-07-30 更新醫療機構、門急診及緊急醫療救護三份指引。", "source_ids": ["S8"]},
+      {"text": "疑似個案以傳染病隔離醫院就地收治為原則；密切接觸者實施健康監測至最後接觸後 14 天。", "source_ids": ["S9"]},
+      {"text": "現行工作手冊為 2015 年 6 月修訂版，與 2026 年更新之感染管制指引版本不同步。", "source_ids": ["S9", "S8"], "is_inference": true}
+    ]
+  },
+  "risk_items": [
+    {
+      "id": "R1",
+      "name": "境外移入風險",
+      "kind": "機率",
+      "question": "未來 3 個月內，我國出現 MERS 境外移入確定病例之可能性為何？",
+      "evidence": [
+        {"text": "卡達 2 例為散發人畜共通感染、無續發病例、99 名接觸者全數陰性，且兩例皆無旅遊史。", "source_ids": ["S2"]},
+        {"text": "2026 年病例仍以沙烏地阿拉伯為主（8 例），疫情高度集中於阿拉伯半島。", "source_ids": ["S11", "S3"]},
+        {"text": "臺灣自 2012 年迄今無確定病例；國際間近年仍有巴基斯坦、法國等境外移入個案，顯示移入非流行國家之可能持續存在。", "source_ids": ["S3"]},
+        {"text": "感染者多具職業性駱駝暴露；一般旅客暴露機會低，但從事畜牧、照顧駱駝、生飲駱駝乳或於當地醫療院所工作者風險較高。", "source_ids": ["S2", "S3"]},
+        {"text": "卡達目前無我國 MERS 旅遊疫情建議等級，出國民眾與旅遊醫學門診可能較少獲得針對卡達之提醒。", "source_ids": ["S5"], "is_inference": true}
+      ],
+      "level_definitions": {
+        "低": "病例侷限於中東流行區之散發人畜共通感染，無持續人傳人，國際間移入病例罕見",
+        "中": "流行區病例明顯增加或出現醫院群聚，或亞洲鄰近國家出現移入病例",
+        "高": "我國或鄰近國家出現移入／本土病例，或國人常往返地區出現持續人傳人"
+      },
+      "probability": 1,
+      "probability_rationale": "全球累計逾 2,600 例、我國 14 年來零病例；本次卡達事件無人傳人且已結束追蹤，評估期間內移入機率極低（<1%）。",
+      "impact": null,
+      "impact_rationale": "沿用「衝擊」項目（若出現 1 例移入之衝擊）。",
+      "proposed_level": "低",
+      "strata": [
+        {"name": "一般旅客（含轉機）", "probability": 1, "proposed_level": "低"},
+        {"name": "赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者", "probability": 2, "proposed_level": "中", "note": "暴露途徑明確；仍屬不太可能但無法排除"}
+      ],
+      "confidence": "中",
+      "confidence_reason": "疫情與我國病例資料來自 WHO 與疾管署全文；但缺乏國人赴卡達／中東之旅次與航班資料，且 ECDC 最新數據僅取得搜尋摘要。",
+      "hairs_questions": []
+    },
+    {
+      "id": "R2",
+      "name": "國內社區流行風險",
+      "kind": "機率",
+      "question": "未來 3 個月內，我國發生 MERS 社區傳播（含家戶群聚）之可能性為何？",
+      "evidence": [
+        {"text": "人與人傳播主要發生於醫療機構，流行地區社區中尚無持續性人傳人。", "source_ids": ["S3", "S2"]},
+        {"text": "本事件 99 名接觸者均陰性，無任何續發病例。", "source_ids": ["S2"]},
+        {"text": "我國對密切接觸者實施 14 天健康監測，疑似個案以隔離醫院收治。", "source_ids": ["S9"]},
+        {"text": "我國尚無任何確定病例，社區傳播之前提（移入病例）本身機率極低。", "source_ids": ["S3"], "is_inference": true}
+      ],
+      "level_definitions": {
+        "低": "無移入病例，或移入病例皆於隔離下確診且無續發",
+        "中": "出現移入病例且有家戶或醫院內續發病例",
+        "高": "出現多起續發或無法追溯感染源之本土病例"
+      },
+      "probability": 1,
+      "probability_rationale": "需先有移入病例且於社區中傳播，兩者皆極不可能。",
+      "impact": null,
+      "proposed_level": "低",
+      "strata": [],
+      "confidence": "高",
+      "confidence_reason": "傳播特性有多個官方來源一致描述，且本事件無續發病例。",
+      "hairs_questions": []
+    },
+    {
+      "id": "R3",
+      "name": "院內感染風險",
+      "kind": "機率",
+      "question": "若出現未及時辨識之移入個案，未來 3 個月內我國發生 MERS 院內傳播之可能性為何？",
+      "evidence": [
+        {"text": "2015 年韓國單一移入個案引發院內感染群聚（186 人感染、39 人死亡），主因包括認知不足、感管未落實、急診擁擠與跨院就醫。", "source_ids": ["S3"]},
+        {"text": "本事件第 1 例上呼吸道檢體初次陰性，病例辨識可能延遲。", "source_ids": ["S2"]},
+        {"text": "WHO 建議對疑似／確定個案採傳染途徑防護，執行產生氣膠之處置時採空氣傳染防護。", "source_ids": ["S2"]},
+        {"text": "我國感染管制指引已於 2026-07-30 更新，並要求看診時詢問 TOCC（旅遊史、職業史、接觸史、群聚史）。", "source_ids": ["S8", "S9"]}
+      ],
+      "level_definitions": {
+        "低": "無移入病例，或醫療機構能於就醫時即辨識並隔離",
+        "中": "出現移入病例且曾於未防護下就醫，但無續發",
+        "高": "出現醫療機構內續發病例或群聚"
+      },
+      "probability": 1,
+      "probability_rationale": "以移入病例極不可能為前提，且我國有更新之感管指引與 TOCC 機制。",
+      "impact": null,
+      "proposed_level": "低",
+      "strata": [],
+      "confidence": "中",
+      "confidence_reason": "未讀取 2026 年感管指引 PDF 內文，亦無醫院整備查核結果，僅能依指引存在與既有手冊判斷。",
+      "hairs_questions": []
+    },
+    {
+      "id": "R4",
+      "name": "衝擊",
+      "kind": "衝擊",
+      "question": "若我國出現 MERS 病例，對國人健康、醫療體系與社會之衝擊為何？",
+      "evidence": [
+        {"text": "確定病例致死率約 37%，具共病者約 50%，入住加護病房者約 67%；本事件 1 例需非侵襲性呼吸器支持。", "source_ids": ["S2", "S3"]},
+        {"text": "長者及具慢性病者為重症高風險族群。", "source_ids": ["S3"]},
+        {"text": "目前無核准之疫苗與特效治療，以支持性療法為主。", "source_ids": ["S3"]},
+        {"text": "人傳人主要限於醫療機構與密切接觸者，社區無持續傳播，防治策略（隔離、接觸者追蹤、感管）可行。", "source_ids": ["S3", "S9"]},
+        {"text": "2015 年韓國疫情期間，我國曾多次發布新聞稿澄清 MERS 不實訊息，顯示病例或傳聞即可能引發民眾關注與恐慌。", "source_ids": ["S10"]}
+      ],
+      "level_definitions": {
+        "低": "致死率或疾病嚴重性低，具可行之防治策略",
+        "中": "部分族群可能重症，無疫苗或特效藥，但防治策略可行且醫療量能足以因應",
+        "高": "致死率或重症比例高，無疫苗及特效治療，且可能造成院內傳播或明顯社會衝擊"
+      },
+      "probability": null,
+      "impact": 4,
+      "impact_rationale": "單一病例即具高致死率與院內傳播潛勢，且可能引發社會關注；但人傳人有限、防治策略可行，未達「極高」。",
+      "proposed_level": "高",
+      "strata": [
+        {"name": "長者及慢性病患者", "impact": 5, "proposed_level": "高"},
+        {"name": "一般健康成人", "impact": 3, "proposed_level": "中"}
+      ],
+      "confidence": "高",
+      "confidence_reason": "疾病嚴重度與治療現況有 WHO 與疾管署全文一致資料。",
+      "hairs_questions": [
+        {"question": "病原是否為已知可感染人類之人畜共通病原？", "answer": "是", "rationale": "MERS-CoV 為人畜共通病原，單峰駱駝為主要宿主。", "source_ids": ["S3"]},
+        {"question": "本事件是否有人類感染證據？", "answer": "是", "rationale": "2 例實驗室確診。", "source_ids": ["S2"]},
+        {"question": "是否有持續人傳人之證據？", "answer": "否", "rationale": "99 名接觸者均陰性；流行地區社區無持續人傳人。", "source_ids": ["S2", "S3"]},
+        {"question": "主要宿主或病媒是否存在於我國？", "answer": "不確定", "rationale": "本次未查得我國單峰駱駝飼養或輸入資料。", "source_ids": []},
+        {"question": "我國民眾是否有暴露途徑？", "answer": "是", "rationale": "赴中東旅遊、朝覲或工作時接觸駱駝、生飲駱駝乳或前往當地醫療院所。", "source_ids": ["S3", "S10"]},
+        {"question": "是否有有效疫苗或特效治療可降低衝擊？", "answer": "否", "rationale": "目前無核准疫苗與治療。", "source_ids": ["S3"]}
+      ]
+    }
+  ],
+  "overall": {
+    "proposed_level": "低",
+    "summary": "卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；境外移入、社區流行及院內感染之機率皆極低，惟一旦出現病例衝擊高。綜合研判我國 MERS 整體疫情風險為低，其中赴中東接觸駱駝或於當地醫療院所工作者之移入風險為中。",
+    "key_findings": [
+      "新聞所述事實經 WHO DON626 查證大致正確；「屬散發人畜共通傳播」一點 WHO 用語較保守（感染源未確定），新聞來源可靠度未知，整體可信度為中。",
+      "卡達 2 例分別於 2026 年 7、8 月發病，均已康復；99 名接觸者全數陰性，無續發病例，事件已結束 14 天監測期。",
+      "我國迄今無 MERS 確定病例；境外移入、社區流行與院內感染之機率皆評為極低，整體風險為低；高暴露職業族群之移入風險為中。",
+      "疾病本身衝擊高（致死率約 37%、無疫苗與特效藥），院內感染為主要擴大途徑，第 1 例上呼吸道檢體曾偽陰性。",
+      "卡達目前無我國 MERS 旅遊疫情建議等級；2022 年卡達出現病例時我國曾列第一級注意，可作為調整先例。"
+    ]
+  },
+  "ihr_annex2": {
+    "perspective": "以事件發生國（卡達）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定。",
+    "always_notifiable_disease": false,
+    "questions": [
+      {"key": "serious_impact", "answer": "是", "rationale": "MERS 確定病例致死率約 37%，本事件 1 例發生重度肺炎併呼吸衰竭；以病原嚴重度而言屬嚴重。", "source_ids": ["S2"]},
+      {"key": "unusual_unexpected", "answer": "否", "rationale": "單峰駱駝間 MERS-CoV 於卡達等地呈地區性流行，職業暴露者之零星感染屬可預期；雖為 2022 年後首見，但型態與既往相同。", "source_ids": ["S3", "S2"]},
+      {"key": "international_spread", "answer": "否", "rationale": "兩例皆無旅遊史、無續發病例，99 名接觸者均陰性。", "source_ids": ["S2"]},
+      {"key": "travel_trade_restriction", "answer": "否", "rationale": "WHO 明確不建議對卡達採取任何旅行或貿易限制。", "source_ids": ["S2"]}
+    ]
+  },
+  "scenarios": [
+    {
+      "kind": "最佳",
+      "description": "卡達事件維持 2 例散發病例，中東地區未出現醫院群聚，國際間無新的移入病例。",
+      "assumptions": ["卡達與沙烏地阿拉伯未再出現續發或群聚", "WHO／ECDC 月報持續顯示零星病例"],
+      "implied_level": "低",
+      "implications": "維持例行監測與旅遊衛教即可；若採行恢復卡達第一級注意，可於 3–6 個月無新病例後檢討解除。"
+    },
+    {
+      "kind": "最可能",
+      "description": "中東持續出現零星人畜共通病例（以沙烏地阿拉伯為主），偶有小型醫療機構群聚；我國可能出現少數具中東旅遊史之疑似通報，經檢驗排除。",
+      "assumptions": ["病例數維持近年水準（2022-11 至 2026-01 全球 36 例）", "我國醫師對 TOCC 詢問與通報維持敏感度"],
+      "implied_level": "低",
+      "implications": "重點在醫界警覺、下呼吸道檢體採檢與旅遊醫學衛教；無需邊境管制加嚴。"
+    },
+    {
+      "kind": "最壞",
+      "description": "中東出現較大規模醫院群聚並有移入亞洲之病例；我國出現 1 例移入個案，因上呼吸道檢體偽陰性或未詢問旅遊史而延誤辨識，造成醫療機構內續發病例（類似 2015 年韓國）。",
+      "assumptions": ["移入個案於未防護下多次就醫", "醫療機構感管落實不足"],
+      "implied_level": "高",
+      "implications": "需啟動應變機制、擴大接觸者追蹤、醫院感管稽核與每日風險溝通，並重新評估旅遊疫情建議等級。"
+    }
+  ],
+  "recommendations": [
+    {"id": "A1", "category": "監測通報", "text": "發布致醫界通函：對發病前 14 日內具中東（含卡達）旅遊、駱駝接觸、生飲駱駝乳或當地醫療院所就醫史之急性呼吸道症狀者，落實 TOCC 詢問並依規通報送驗。", "priority": "高", "timeframe": "1週", "owner": "疾管署（建議：急性傳染病組）", "rationale": "提高辨識敏感度，降低院內感染風險", "source_ids": ["S9", "S2"]},
+    {"id": "A2", "category": "監測通報", "text": "將卡達 2026 年 MERS 事件登錄「國際重要疫情」，並每週追蹤 WHO DON、ECDC 月報與沙烏地阿拉伯通報。", "priority": "中", "timeframe": "24小時", "owner": "疾管署（建議：疫情中心）", "rationale": "目前列表尚無本事件條目", "source_ids": ["S7", "S11"]},
+    {"id": "A3", "category": "實驗室檢驗", "text": "提醒醫療院所疑似個案優先採集下呼吸道檢體；上呼吸道檢體陰性但臨床高度懷疑者應再採下呼吸道檢體送驗。", "priority": "高", "timeframe": "1週", "owner": "疾管署（建議：研究檢驗及疫苗研製中心）", "rationale": "卡達第 1 例上呼吸道檢體曾偽陰性", "source_ids": ["S2", "S9"]},
+    {"id": "A4", "category": "邊境檢疫", "text": "依決策建議 D2 評估恢復卡達 MERS 旅遊疫情建議第一級注意（Watch），並於公告中載明解除條件。", "priority": "中", "timeframe": "1週", "owner": "疾管署（建議：疫情中心會同檢疫組）", "rationale": "2022 年卡達病例時曾列第一級注意", "source_ids": ["S5", "S6"]},
+    {"id": "A5", "category": "邊境檢疫", "text": "檢視自中東入境旅客之衛教與主動通報提醒（入境時如有發燒或急性呼吸道症狀主動告知港埠檢疫人員）。", "priority": "低", "timeframe": "1個月", "owner": "疾管署（建議：檢疫組）", "source_ids": ["S3"]},
+    {"id": "A6", "category": "醫療整備", "text": "請醫院依 2026-07-30 版感染管制指引自我查檢門急診分流、隔離病室與產生氣膠處置之防護。", "priority": "中", "timeframe": "1個月", "owner": "疾管署（建議：感染管制及生物安全組）", "source_ids": ["S8", "S2"]},
+    {"id": "A7", "category": "醫療整備", "text": "檢討更新 2015 年版 MERS 工作手冊，使其與 2026 年感染管制指引及現行檢驗作業一致。", "priority": "低", "timeframe": "1個月", "owner": "疾管署（建議：急性傳染病組）", "source_ids": ["S9", "S8"]},
+    {"id": "A8", "category": "病媒或動物防治", "text": "與農業主管機關確認我國單峰駱駝飼養、活體及產品輸入情形與規範，補足 HAIRS 宿主問題之資料缺口。", "priority": "低", "timeframe": "1個月", "owner": "疾管署會同農業部動植物防疫檢疫署", "rationale": "本次未查得相關資料"},
+    {"id": "A9", "category": "風險溝通", "text": "更新旅遊衛教：赴中東避免接觸駱駝、生飲駱駝乳或食用未熟肉品，避免非必要前往當地醫療院所；返國 14 天內出現症狀應戴口罩就醫並告知旅遊史。", "priority": "中", "timeframe": "1週", "owner": "疾管署（建議：疫情中心／旅遊醫學門診網絡）", "source_ids": ["S3", "S2"]},
+    {"id": "A10", "category": "風險溝通", "text": "備妥媒體問答：說明卡達病例屬散發人畜共通感染、無人傳人、我國迄今無病例且整體風險低，並引用 WHO 原始資料澄清轉述差異。", "priority": "中", "timeframe": "24小時", "owner": "疾管署（建議：新聞聯絡窗口）", "source_ids": ["S2", "S3"]},
+    {"id": "A11", "category": "跨部會與國際合作", "text": "透過既有國際衛生資訊管道取得 WHO 2026 年 MERS 快速風險評估全文與 ECDC 月報原文，以補足本次僅取得摘要之資料。", "priority": "低", "timeframe": "1週", "owner": "疾管署（建議：疫情中心）", "source_ids": ["S12", "S11"]}
+  ],
+  "decision": {
+    "question": "是否因卡達 2026 年 MERS 散發病例，調整我國對卡達之旅遊疫情建議等級與相關防疫作為？",
+    "options": [
+      {
+        "id": "D1",
+        "title": "維持現狀：卡達不列等級，僅例行監測",
+        "description": "不發布卡達 MERS 旅遊疫情建議，持續例行國際疫情監測。",
+        "pros": ["與 WHO 不建議旅行／貿易限制之立場一致", "不需額外行政資源", "避免被解讀為風險升高"],
+        "cons": ["卡達已有確定病例卻無等級，與 2022 年處理方式不一致", "旅遊醫學門診與民眾較難獲得針對卡達之提醒", "醫界對卡達旅遊史之警覺可能不足"],
+        "recommended": false,
+        "owner": "疾管署（建議：疫情中心）",
+        "timeframe": "1週"
+      },
+      {
+        "id": "D2",
+        "title": "恢復卡達第一級注意（Watch）＋致醫界通函＋旅遊衛教",
+        "description": "比照 2022 年作法將卡達列為 MERS 第一級注意，同步發布致醫界通函（TOCC、下呼吸道檢體）與旅遊衛教；以 3–6 個月無新增病例為解除檢討條件。",
+        "pros": ["第一級僅提醒遵守一般預防措施，屬與證據相稱之最低強度措施", "與我國 2022 年卡達病例之處理一致", "強化醫界與旅遊醫學門診之警覺，針對最壞情境之關鍵環節（延遲辨識）"],
+        "cons": ["病例發病已逾 2 個月且已無續發，時效性有限", "需設定並追蹤解除時點", "可能引起少量媒體關注"],
+        "recommended": true,
+        "owner": "疾管署（建議：疫情中心會同急性傳染病組）",
+        "timeframe": "1週",
+        "resources": "公告與新聞稿各 1 則、致醫界通函 1 則，既有人力可支應"
+      },
+      {
+        "id": "D3",
+        "title": "提升為第二級警示並加強邊境檢疫",
+        "description": "將卡達列為第二級警示，並對自卡達入境旅客加強健康聲明與篩檢。",
+        "pros": ["預警強度最高"],
+        "cons": ["與證據不相稱：無人傳人、無續發病例", "與 WHO 不建議旅行限制之精神不符", "耗用邊境檢疫資源，並可能影響雙邊交流"],
+        "recommended": false,
+        "owner": "疾管署（建議：檢疫組）",
+        "timeframe": "1週"
+      }
+    ],
+    "recommendation_reason": "整體風險為低，但卡達已有確定病例而我國目前未列等級，且院內感染（延遲辨識）為唯一可導致高衝擊之途徑。D2 以最低強度措施提高醫界與旅客警覺，並與 2022 年先例一致；D3 與證據不相稱，D1 則留下警覺缺口。",
+    "triggers": [
+      {"indicator": "卡達或中東出現人傳人續發病例或醫療機構群聚", "direction": "升級", "threshold": "任一起經 WHO 或當地衛生部證實", "monitoring_source": "WHO DON、ECDC 月報、當地衛生部", "current_status": "未出現（99 名接觸者均陰性）"},
+      {"indicator": "亞洲（含我國）出現 MERS 移入病例", "direction": "升級", "threshold": "1 例", "monitoring_source": "WHO DON、各國衛生部、我國法定傳染病通報", "current_status": "我國 0 例；本次查詢未見亞洲移入"},
+      {"indicator": "病毒序列顯示傳播力增加之變異，或 WHO 調升風險等級", "direction": "升級", "threshold": "WHO 風險評估由「中等」調升", "monitoring_source": "WHO RRA、DON", "current_status": "WHO 全球／區域風險：中等"},
+      {"indicator": "國人赴中東之大型活動（如朝覲）或高暴露族群出國人數顯著增加", "direction": "升級", "threshold": "由主管機關判定", "monitoring_source": "旅遊醫學門診諮詢量、相關部會統計", "current_status": "2026 年朝覲已於 5 月舉行；旅次資料未取得"},
+      {"indicator": "卡達自最後 1 例確診後持續無新增病例", "direction": "降級", "threshold": "3–6 個月無新增病例", "monitoring_source": "WHO DON、ECDC 月報", "current_status": "最後確診日 2026-08-25，已近 3 個月"}
+    ]
+  },
+  "limitations": [
+    "網路限制：本次執行環境僅能直接讀取 who.int 與 cdc.gov.tw；ecdc.europa.eu、archyde.com、gov.uk、cdn.who.int、iris.who.int 等無法連線，ECDC 數據與新聞內容僅取得搜尋結果摘要，WHO 快速風險評估全文 PDF 未能讀取。",
+    "被查證之新聞原文未能開啟，新聞陳述係依搜尋結果摘要擷取，可能遺漏原文其他陳述。",
+    "未取得國人赴卡達／中東之旅次、航班與朝覲人數資料，境外移入機率之判斷主要依病例分布與我國歷史零病例。",
+    "未查得我國單峰駱駝飼養及活體／產品輸入資料，動物傳播途徑無法評估。",
+    "全球累計數字於不同來源間不一致（疾管署 2026-01：2,635 例／964 死；ECDC 2026-11-09：2,655 例／960 死，後者為搜尋摘要），且 ECDC 該期數據尚未納入卡達 2 例。",
+    "我國 MERS 工作手冊為 2015 年版，感染管制指引 PDF 內文未逐一讀取；建議事項之主責單位為建議，需依實際分工調整。",
+    "機率與衝擊分數為評估者判斷，依本工具定義之 1–5 級量表給分；矩陣與三級對應為確定性規則，非 ECDC 原表之逐字重現。",
+    "本報告為 AI 協助產生之草稿，須經流行病學專業人員審閱。"
+  ]
+}

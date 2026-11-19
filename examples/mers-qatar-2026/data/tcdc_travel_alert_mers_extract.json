@@ -1,0 +1,170 @@
+{
+ "source_url": "https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON",
+ "publisher": "衛生福利部疾病管制署",
+ "retrieved_at": "2026-11-19",
+ "note": "自完整旅遊疫情建議歷史資料（2506 筆）篩出 alert_disease=中東呼吸症候群冠狀病毒感染症 之紀錄，未修改欄位值。",
+ "records": [
+  {
+   "effective": "2025-04-11T00:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "阿拉伯聯合大公國",
+   "areaDesc_EN": "United Arab Emirates",
+   "ISO3166": "AE",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2025-02-03T00:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "阿曼",
+   "areaDesc_EN": "Oman",
+   "ISO3166": "OM",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2024-04-19T00:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "卡達",
+   "areaDesc_EN": "Qatar",
+   "ISO3166": "QA",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2022-11-18T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "阿曼",
+   "areaDesc_EN": "Oman",
+   "ISO3166": "OM",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2022-04-12T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "卡達",
+   "areaDesc_EN": "Qatar",
+   "ISO3166": "QA",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2022-04-12T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "沙烏地阿拉伯",
+   "areaDesc_EN": "Saudi Arabia",
+   "ISO3166": "SA",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2021-04-09T16:30:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "卡達",
+   "areaDesc_EN": "Qatar",
+   "ISO3166": "QA",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2020-11-06T14:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "阿曼",
+   "areaDesc_EN": "Oman",
+   "ISO3166": "OM",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2020-11-06T14:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "科威特",
+   "areaDesc_EN": "Kuwait",
+   "ISO3166": "KW",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2020-11-06T14:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "伊朗",
+   "areaDesc_EN": "Iran",
+   "ISO3166": "IR",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2020-11-06T14:00:00+08:00",
+   "severity_level": "解除",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "約旦",
+   "areaDesc_EN": "Jordan",
+   "ISO3166": "JO",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-09-30T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "阿拉伯聯合大公國",
+   "areaDesc_EN": "United Arab Emirates",
+   "ISO3166": "AE",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-09-30T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "阿曼",
+   "areaDesc_EN": "Oman",
+   "ISO3166": "OM",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-09-30T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "卡達",
+   "areaDesc_EN": "Qatar",
+   "ISO3166": "QA",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-09-30T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "科威特",
+   "areaDesc_EN": "Kuwait",
+   "ISO3166": "KW",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-09-30T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "伊朗",
+   "areaDesc_EN": "Iran",
+   "ISO3166": "IR",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-09-30T00:00:00+08:00",
+   "severity_level": "第一級:注意(Watch)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "約旦",
+   "areaDesc_EN": "Jordan",
+   "ISO3166": "JO",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  },
+  {
+   "effective": "2015-06-09T00:00:00+08:00",
+   "severity_level": "第二級:警示(Alert)",
+   "alert_disease": "中東呼吸症候群冠狀病毒感染症",
+   "areaDesc": "沙烏地阿拉伯",
+   "areaDesc_EN": "Saudi Arabia",
+   "ISO3166": "SA",
+   "web": "https://www.cdc.gov.tw/InternationalEpidemicLevel/Index/NlUwZUNvckRWQ09CbDJkRVFjaExjUT09"
+  }
+ ]
+}
