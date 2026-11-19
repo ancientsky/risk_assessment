@@ -1,0 +1,1723 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="epi-risk-agent 0.1.0">
+<title>美國麻疹疫情與孕婦感染病例：新聞查證與我國快速風險評估</title>
+<style>/* ---------- tokens --------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f2f1ed;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6b6a66;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.12);
+  --accent: #2a78d6;
+  --accent-ink: #1c5cab;
+  --focus: #2a78d6;
+  /* status palette: level colours (always paired with icon + text) */
+  --lv-low: #0ca30c;
+  --lv-mod: #fab219;
+  --lv-high: #ec835a;
+  --lv-vhigh: #d03b3b;
+  --lv-low-bg: #e3f4e3;
+  --lv-mod-bg: #fdf1d3;
+  --lv-high-bg: #fde6d2;
+  --lv-vhigh-bg: #f5c6c6;
+  --lv-low-ink: #0a5c0a;
+  --lv-mod-ink: #6b4a00;
+  --lv-high-ink: #8a3412;
+  --lv-vhigh-ink: #8f1f1f;
+  --ok: #006300;
+  --bad: #b02a2a;
+  --warn-bg: #fff6dc;
+  --warn-border: #e7b84a;
+  --err-bg: #fbe5e5;
+  --bar: #2a78d6;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #a3a29a;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.12);
+    --accent: #3987e5;
+    --accent-ink: #86b6ef;
+    --focus: #86b6ef;
+    --lv-low-bg: #15301a;
+    --lv-mod-bg: #3a2f10;
+    --lv-high-bg: #3d2614;
+    --lv-vhigh-bg: #521c1c;
+    --lv-low-ink: #9be09b;
+    --lv-mod-ink: #ffd77a;
+    --lv-high-ink: #f6b496;
+    --lv-vhigh-ink: #f3a3a3;
+    --ok: #0ca30c;
+    --bad: #e66767;
+    --warn-bg: #33290f;
+    --warn-border: #a7811f;
+    --err-bg: #3a1a1a;
+    --bar: #3987e5;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #232321;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #a3a29a;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #3987e5;
+  --accent-ink: #86b6ef;
+  --focus: #86b6ef;
+  --lv-low-bg: #15301a;
+  --lv-mod-bg: #3a2f10;
+  --lv-high-bg: #3d2614;
+  --lv-vhigh-bg: #521c1c;
+  --lv-low-ink: #9be09b;
+  --lv-mod-ink: #ffd77a;
+  --lv-high-ink: #f6b496;
+  --lv-vhigh-ink: #f3a3a3;
+  --ok: #0ca30c;
+  --bad: #e66767;
+  --warn-bg: #33290f;
+  --warn-border: #a7811f;
+  --err-bg: #3a1a1a;
+  --bar: #3987e5;
+  --shadow: none;
+}
+
+/* ---------- base ------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+a { color: var(--accent-ink); }
+a:hover { text-decoration-thickness: 2px; }
+[id] { scroll-margin-top: 72px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3, h4 { line-height: 1.35; }
+h2 { font-size: 1.35rem; margin: 0 0 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+h3 { font-size: 1.1rem; margin: 1.4rem 0 0.6rem; }
+h4 { font-size: 1rem; margin: 0.8rem 0 0.4rem; }
+p { margin: 0.4rem 0 0.7rem; }
+ul, ol { padding-left: 1.3rem; margin: 0.3rem 0 0.8rem; }
+code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border-radius: 4px; margin-left: 0.4em; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.86rem; }
+.strong { font-weight: 600; }
+.label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.02em; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--surface); padding: 0.5rem 1rem; z-index: 10; }
+.skip:focus { left: 8px; top: 8px; }
+.ic { width: 1em; height: 1em; flex: none; vertical-align: -0.12em; }
+
+/* ---------- header ---------------------------------------------------- */
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 52px; flex-wrap: wrap; }
+.brand { font-weight: 700; }
+.brand-sub { font-weight: 500; font-size: 0.78rem; margin-left: 0.6rem; padding: 0.05rem 0.5rem; border: 1px solid var(--warn-border); background: var(--warn-bg); border-radius: 999px; }
+.toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn { font: inherit; font-size: 0.88rem; color: var(--ink); background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.35rem 0.8rem; cursor: pointer; min-height: 36px; }
+.btn:hover { border-color: var(--axis); }
+.disclaimer { display: flex; gap: 0.7rem; align-items: flex-start; background: var(--warn-bg); border: 1px solid var(--warn-border); border-radius: 10px; padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.92rem; }
+.disclaimer .ic { width: 1.4em; height: 1.4em; margin-top: 0.1em; }
+.toc ol { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; list-style: decimal inside; padding: 0; font-size: 0.9rem; }
+.report-title { font-size: 1.65rem; margin: 0.6rem 0 0.2rem; }
+.meta-line { color: var(--ink-2); margin-top: 0; }
+
+/* ---------- cards ----------------------------------------------------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.4rem; margin: 1.1rem 0; box-shadow: var(--shadow); }
+.secno { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); font-size: 0.9rem; }
+
+/* ---------- level badges & chips ------------------------------------- */
+.lv { display: inline-flex; align-items: center; gap: 0.35em; font-weight: 700; padding: 0.05em 0.6em; border-radius: 999px; border: 1.5px solid; line-height: 1.6; white-space: nowrap; }
+.lv-low { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
+.lv-low .ic { color: var(--lv-low); }
+.lv-mod { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
+.lv-mod .ic { color: var(--lv-mod); }
+.lv-high { color: var(--lv-high-ink); background: var(--lv-high-bg); border-color: var(--lv-high); }
+.lv-high .ic { color: var(--lv-high); }
+.lv-vhigh { color: var(--lv-vhigh-ink); background: var(--lv-vhigh-bg); border-color: var(--lv-vhigh); }
+.lv-vhigh .ic { color: var(--lv-vhigh); }
+.lv-na { color: var(--muted); border-color: var(--axis); }
+.lv-lg { font-size: 1.1rem; }
+.lv-xl { font-size: 2.6rem; padding: 0.05em 0.5em; border-width: 3px; }
+.chip { display: inline-block; font-size: 0.78rem; padding: 0 0.5em; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--ink-2); margin-left: 0.25em; white-space: nowrap; }
+.chip-uncited { background: var(--warn-bg); border-color: var(--warn-border); color: var(--ink); }
+.chip-err { background: var(--err-bg); border-color: var(--bad); color: var(--ink); }
+.cites { white-space: nowrap; }
+.cite { font-size: 0.78em; vertical-align: super; text-decoration: none; margin-left: 0.1em; }
+.vd { display: inline-flex; align-items: center; gap: 0.3em; font-size: 0.85rem; font-weight: 600; padding: 0.05em 0.55em; border-radius: 6px; border: 1.5px solid; white-space: nowrap; }
+.vd-ok { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
+.vd-partial { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
+.vd-unk { color: var(--ink-2); background: var(--surface-2); border-color: var(--axis); border-style: dashed; }
+.vd-bad { color: var(--lv-vhigh-ink); background: var(--lv-vhigh-bg); border-color: var(--lv-vhigh); }
+.vd-old { color: var(--ink-2); background: var(--surface-2); border-color: var(--axis); }
+.legend-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0; }
+.flag { display: flex; gap: 0.4rem; align-items: flex-start; padding: 0.45rem 0.65rem; border-radius: 8px; margin: 0.5rem 0; }
+.flag .ic { margin-top: 0.25em; }
+.flag-warn { background: var(--warn-bg); border: 1px solid var(--warn-border); }
+
+/* ---------- BLUF ------------------------------------------------------ */
+.bluf { border-width: 2px; }
+.bluf-grid { display: grid; grid-template-columns: minmax(240px, 320px) 1fr; gap: 1.5rem; }
+.bluf-level { border-right: 1px solid var(--grid); padding-right: 1.2rem; }
+.hero-level { margin: 0.3rem 0 0.6rem; }
+.bluf-level .sub { margin: 0.35rem 0; font-size: 0.92rem; }
+.lead { font-size: 1.05rem; }
+.findings li { margin-bottom: 0.35rem; }
+.bluf-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem 1.2rem; margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--grid); }
+.star { color: #c98500; margin-right: 0.25em; }
+.strata-hl ul { padding-left: 1rem; }
+
+/* ---------- decision -------------------------------------------------- */
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.9rem; }
+.option { border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; background: var(--surface); }
+.option header { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.option h3 { margin: 0; font-size: 1.02rem; flex: 1 1 auto; }
+.opt-id { font-weight: 700; color: var(--ink-2); }
+.option-rec { border: 2.5px solid var(--accent); background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+.rec-tag { display: inline-flex; gap: 0.3em; align-items: center; font-size: 0.82rem; font-weight: 700; padding: 0.05em 0.55em; border-radius: 999px; background: var(--accent); color: #fff; }
+.proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.92rem; }
+.proscons h4 { margin: 0.3rem 0; font-size: 0.88rem; color: var(--ink-2); }
+.kv { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.5rem 0 0; font-size: 0.9rem; }
+.kv dt { display: inline; color: var(--muted); }
+.kv dt::after { content: "："; }
+.kv dd { display: inline; margin: 0; font-weight: 600; }
+.question { font-size: 1.02rem; }
+.dir { font-weight: 700; white-space: nowrap; }
+.dir-up { color: var(--bad); }
+.dir-down { color: var(--ok); }
+
+/* ---------- tables ---------------------------------------------------- */
+.table-wrap { width: 100%; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+.tbl th, .tbl td { border-bottom: 1px solid var(--grid); padding: 0.55rem 0.6rem; text-align: left; vertical-align: top; }
+.tbl thead th { font-size: 0.82rem; color: var(--ink-2); border-bottom: 1.5px solid var(--axis); background: var(--surface-2); }
+.tbl caption { text-align: left; font-weight: 600; padding: 0.3rem 0; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl-kv th { width: 26%; color: var(--ink-2); font-weight: 600; }
+.risk-table th[scope="row"] { width: 17%; font-weight: 700; }
+.risk-table td.result { width: 21%; }
+.risk-table td ul { margin: 0; padding-left: 1rem; }
+.risk-table .defs { list-style: none; padding-left: 0; font-size: 0.88rem; }
+.risk-table .defs li { margin-bottom: 0.3rem; }
+.dash { list-style: none; padding-left: 0 !important; }
+.dash > li { position: relative; padding-left: 0.9rem; margin-bottom: 0.3rem; }
+.dash > li::before { content: "-"; position: absolute; left: 0; color: var(--muted); }
+.item-n { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: 0.8rem; margin-right: 0.4rem; }
+.mrisk { margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px dashed var(--grid); }
+.strata { list-style: none; padding: 0; margin: 0.4rem 0; font-size: 0.86rem; }
+.strata li { margin: 0.2rem 0; }
+.overall-row { background: var(--surface-2); }
+.why summary { cursor: pointer; color: var(--accent-ink); }
+.ans { font-weight: 700; padding: 0 0.5em; border-radius: 6px; border: 1.5px solid var(--axis); white-space: nowrap; }
+.ans-y { border-color: var(--lv-high); background: var(--lv-high-bg); color: var(--lv-high-ink); }
+.ans-n { border-color: var(--lv-low); background: var(--lv-low-bg); color: var(--lv-low-ink); }
+.ans-u { border-style: dashed; }
+.ans-y::before { content: "● "; }
+.ans-n::before { content: "○ "; }
+.ans-u::before { content: "? "; }
+
+/* ---------- claims ---------------------------------------------------- */
+.newsbox { background: var(--surface-2); border-radius: 10px; padding: 0.8rem 1rem; }
+.cred { margin: 0.9rem 0; }
+.claims { list-style: none; padding: 0; }
+.claim { border: 1px solid var(--border); border-radius: 10px; margin: 0.5rem 0; background: var(--surface); }
+.claim summary { cursor: pointer; padding: 0.6rem 0.8rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; list-style: none; }
+.claim summary::-webkit-details-marker { display: none; }
+.claim summary::before { content: "▸"; color: var(--muted); }
+.claim details[open] summary::before { content: "▾"; }
+.claim-id { font-weight: 700; color: var(--ink-2); }
+.claim-text { flex: 1 1 100%; }
+.claim-body { padding: 0 0.9rem 0.8rem; border-top: 1px solid var(--grid); }
+.evlist { list-style: none; padding: 0; }
+.ev { border-left: 3px solid var(--axis); padding: 0.3rem 0 0.3rem 0.7rem; margin: 0.5rem 0; }
+.ev-sup { border-left-color: var(--lv-low); }
+.ev-con { border-left-color: var(--lv-vhigh); }
+.stance { font-weight: 700; font-size: 0.82rem; margin-right: 0.3rem; }
+.ev blockquote { margin: 0.25rem 0 0; color: var(--ink-2); font-size: 0.92rem; }
+
+/* ---------- situation ------------------------------------------------- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.7rem; margin-bottom: 1rem; }
+.tile { border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 0.9rem; background: var(--surface); }
+.tile-label { font-size: 0.84rem; color: var(--ink-2); }
+.tile-value { font-size: 1.7rem; font-weight: 650; line-height: 1.3; margin: 0.15rem 0; }
+.tile-meta, .tile-note { font-size: 0.78rem; color: var(--muted); }
+.two-col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.4rem; }
+.bullets li { margin-bottom: 0.35rem; }
+.timeline { list-style: none; padding: 0; border-left: 2px solid var(--axis); margin-left: 0.4rem; }
+.timeline li { position: relative; padding: 0 0 0.7rem 1rem; display: grid; grid-template-columns: 6.2rem 1fr; gap: 0.5rem; font-size: 0.92rem; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 0.45rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.timeline time { font-variant-numeric: tabular-nums; color: var(--ink-2); font-weight: 600; }
+.tw-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.4rem 1.4rem; }
+.chart { margin: 1rem 0; }
+.chart figcaption { margin-bottom: 0.5rem; }
+.bars { display: grid; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: minmax(5rem, 9rem) 1fr 4rem; align-items: center; gap: 0.5rem; padding: 2px 0; border-radius: 4px; }
+.bar-row:hover, .bar-row:focus { background: var(--surface-2); }
+.bar-label { font-size: 0.9rem; }
+.bar-track { height: 18px; }
+.bar { display: block; height: 100%; max-width: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-val { font-variant-numeric: tabular-nums; font-size: 0.9rem; }
+.tableview summary { cursor: pointer; color: var(--accent-ink); font-size: 0.9rem; margin-top: 0.4rem; }
+.ts-chart svg { width: 100%; height: auto; display: block; }
+.tooltip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--surface); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.85rem; max-width: 260px; }
+
+/* ---------- matrix ---------------------------------------------------- */
+.matrix-layout { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+.matrix-wrap { position: relative; }
+.matrix .corner { font-size: 0.7rem; color: var(--muted); line-height: 1.3; vertical-align: bottom; }
+.matrix .corner span { display: block; }
+.matrix .corner span:first-child { text-align: right; }
+.matrix { border-collapse: separate; border-spacing: 2px; width: 100%; table-layout: fixed; }
+.matrix th { font-size: 0.78rem; color: var(--ink-2); font-weight: 600; text-align: center; padding: 2px; }
+.matrix thead td { width: 3.4rem; }
+.matrix th[scope="row"] { width: 3.4rem; }
+.matrix .ax { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
+.cell { height: 4.4rem; border-radius: 4px; vertical-align: top; padding: 3px 4px; position: relative; }
+.cell-low { background: var(--lv-low-bg); }
+.cell-mod { background: var(--lv-mod-bg); }
+.cell-high { background: var(--lv-high-bg); background-image: repeating-linear-gradient(45deg, transparent 0 7px, color-mix(in srgb, var(--lv-high) 18%, transparent) 7px 8px); }
+.cell-vhigh { background: var(--lv-vhigh-bg); background-image: repeating-linear-gradient(135deg, transparent 0 5px, color-mix(in srgb, var(--lv-vhigh) 22%, transparent) 5px 6px); }
+.cell-lv { font-size: 0.72rem; color: var(--ink-2); font-weight: 600; }
+.markers { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
+.marker { font: inherit; font-size: 0.85rem; font-weight: 700; width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 2px solid var(--surface); background: var(--ink); color: var(--surface); cursor: pointer; box-shadow: 0 0 0 1px var(--ink); }
+.marker:hover, .marker[aria-pressed="true"] { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.marker.ghost { background: transparent; color: var(--ink); border: 2px dashed var(--ink); box-shadow: none; }
+.matrix-detail { border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; min-height: 8rem; background: var(--surface-2); }
+.matrix-detail h4 { margin-top: 0; }
+.matrix-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.7rem 0; }
+.whatif { margin-top: 1.4rem; border: 2px dashed var(--axis); border-radius: 12px; padding: 0.9rem 1rem; }
+.whatif h3 { margin-top: 0; }
+.trial-tag { display: inline-block; font-size: 0.8rem; background: var(--ink); color: var(--surface); padding: 0 0.5em; border-radius: 4px; margin-right: 0.4rem; vertical-align: 0.1em; }
+.wi-controls, .filters { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: flex-end; }
+.wi-controls label, .filters label { display: flex; flex-direction: column; font-size: 0.82rem; color: var(--ink-2); gap: 0.2rem; }
+select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(--surface); border: 1px solid var(--axis); border-radius: 8px; padding: 0.3rem 0.5rem; min-height: 36px; max-width: 100%; }
+.wi-out { margin-top: 0.8rem; }
+.wi-out .delta { font-weight: 700; }
+
+/* ---------- scenarios / recs / refs ---------------------------------- */
+.scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; }
+.scn { border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; border-top-width: 4px; }
+.scn h3 { margin-top: 0.2rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.scn-best { border-top-color: var(--lv-low); }
+.scn-likely { border-top-color: var(--accent); }
+.scn-worst { border-top-color: var(--lv-vhigh); }
+.ihr-result { font-size: 1.02rem; }
+.recs { list-style: none; padding: 0; display: grid; gap: 0.6rem; margin-top: 0.8rem; }
+.rec { border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.9rem; }
+.rec-head { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.rec-head .chip { margin-left: 0; }
+.pri { font-size: 0.78rem; font-weight: 700; padding: 0 0.5em; border-radius: 6px; border: 1.5px solid; }
+.pri-h { color: var(--lv-vhigh-ink); border-color: var(--lv-vhigh); background: var(--lv-vhigh-bg); }
+.pri-m { color: var(--lv-mod-ink); border-color: var(--lv-mod); background: var(--lv-mod-bg); }
+.pri-l { color: var(--ink-2); border-color: var(--axis); }
+.issues summary { cursor: pointer; font-weight: 600; }
+.issues ul { list-style: none; padding: 0; font-size: 0.9rem; }
+.iss { padding: 0.3rem 0.5rem; border-left: 3px solid var(--axis); margin: 0.25rem 0; }
+.iss-error { border-left-color: var(--lv-vhigh); background: var(--err-bg); }
+.iss-warning { border-left-color: var(--warn-border); background: var(--warn-bg); }
+.iss-sev { font-weight: 700; margin-right: 0.5rem; }
+.method li { margin-bottom: 0.4rem; }
+.mini-matrix { max-width: 640px; text-align: center; }
+.mini-matrix td { text-align: center; }
+.refs { padding-left: 1.6rem; }
+.refs li { margin-bottom: 0.55rem; }
+.ref-id { font-size: 0.75rem; color: var(--muted); margin-right: 0.3rem; }
+.url { color: var(--muted); word-break: break-all; }
+.refs li:target { background: var(--warn-bg); outline: 2px solid var(--warn-border); border-radius: 4px; }
+.disclaimer.final { margin-top: 1.4rem; }
+
+/* ---------- responsive ------------------------------------------------ */
+@media (max-width: 860px) {
+  .bluf-grid, .two-col, .matrix-layout { grid-template-columns: 1fr; }
+  .bluf-level { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--grid); padding-bottom: 1rem; }
+}
+@media (max-width: 700px) {
+  .topbar { position: static; }
+  .card { padding: 1rem; border-radius: 12px; }
+  .report-title { font-size: 1.35rem; }
+  .bluf-facts, .proscons { grid-template-columns: 1fr; }
+  .lv-xl { font-size: 2.1rem; }
+  /* stacked tables: each row becomes a card, header text shown inline */
+  .risk-table, .risk-table tbody, .risk-table tr, .risk-table th, .risk-table td,
+  .tbl-stack, .tbl-stack tbody, .tbl-stack tr, .tbl-stack td { display: block; width: 100% !important; }
+  .risk-table thead, .tbl-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .risk-table tr, .tbl-stack tr { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.8rem; padding: 0.3rem 0.2rem; }
+  .risk-table td[data-th]::before, .tbl-stack td[data-th]::before { content: attr(data-th); display: block; font-size: 0.76rem; color: var(--muted); font-weight: 600; margin-bottom: 0.15rem; }
+  .risk-table th, .risk-table td, .tbl-stack td { border-bottom: 1px dashed var(--grid); }
+  .timeline li { grid-template-columns: 1fr; gap: 0; }
+  .bar-row { grid-template-columns: 5.5rem 1fr 3rem; }
+  .cell { height: 3.6rem; padding: 2px; }
+  .matrix thead td, .matrix th[scope="row"] { width: 2.6rem; }
+  .marker { width: 1.7rem; height: 1.7rem; font-size: 0.78rem; }
+}
+
+/* ---------- print (A4) ----------------------------------------------- */
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  :root, :root[data-theme="dark"] {
+    color-scheme: light;
+    --page: #fff; --surface: #fff; --surface-2: #f4f4f2; --ink: #000; --ink-2: #333; --muted: #555;
+    --grid: #ccc; --axis: #999; --border: #bbb; --accent: #1c5cab; --accent-ink: #1c5cab;
+    --lv-low-bg: #e3f4e3; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
+    --lv-low-ink: #0a5c0a; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
+    --warn-bg: #fff6dc; --err-bg: #fbe5e5;
+  }
+  body { font-size: 10.5pt; background: #fff; }
+  .topbar, .toc, .whatif, .filters, .skip, .tooltip { display: none !important; }
+  .marker { background: #000 !important; color: #fff !important; }
+  .card { border: 1px solid #bbb; box-shadow: none; break-inside: auto; padding: 0.8rem 1rem; }
+  .option, .scn, .tile, .claim, .rec, tr { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  a { color: #000; }
+  .refs a::after { content: ""; }
+  .matrix-layout { grid-template-columns: 1fr; }
+  .matrix-detail { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (forced-colors: active) {
+  .lv, .vd, .ans, .pri { border: 2px solid CanvasText; }
+  .marker { forced-color-adjust: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lvicon-low" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></symbol>
+  <symbol id="lvicon-mod" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-high" viewBox="0 0 16 16"><path d="M8 .8 15.2 8 8 15.2.8 8z" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vhigh" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2" fill="currentColor"/><rect x="7" y="3.8" width="2" height="5.6" fill="#fff"/><rect x="7" y="10.6" width="2" height="2" fill="#fff"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-half" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></symbol>
+  <symbol id="i-question" viewBox="0 0 16 16"><path d="M5.5 6a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5V10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="8" cy="13" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 4.5V8l2.5 1.8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="7.2" y="6" width="1.6" height="4.4" fill="currentColor"/><rect x="7.2" y="11.4" width="1.6" height="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1.2l2 4.3 4.7.6-3.4 3.2.9 4.6L8 11.6 3.8 13.9l.9-4.6L1.3 6.1 6 5.5z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#main">跳至主要內容</a>
+
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <div class="brand">疫情風險評估報告<span class="brand-sub">AI 草稿・待審</span></div>
+    <div class="toolbar">
+      <button type="button" class="btn" id="themeBtn" aria-label="切換顯示主題">主題：自動</button>
+      <button type="button" class="btn" id="printBtn">列印／存 PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="disclaimer" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>本報告為 AI 產生之草稿，尚未經流行病學專業人員審閱，不得逕作為正式決策依據。</strong>
+    資料截止：2026-11-19 12:50（UTC+08:00）；產出：2026-11-19 13:10（UTC+08:00）。
+</div>
+  </div>
+
+  <nav class="toc" aria-label="報告目錄">
+    <ol>
+      <li><a href="#sec-bluf">決策摘要</a></li>
+      <li><a href="#sec-decision">長官下一步決策建議</a></li>
+      <li><a href="#sec-verify">新聞查證</a></li>
+      <li><a href="#sec-situation">疫情概況</a></li>
+      <li><a href="#sec-risk">風險評估表</a></li>
+      <li><a href="#sec-scenario">情境分析與 IHR</a></li>
+      <li><a href="#sec-recs">建議事項</a></li>
+      <li><a href="#sec-limits">限制、方法與參考資料</a></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" class="wrap">
+<h1 class="report-title">美國麻疹疫情與孕婦感染病例：新聞查證與我國快速風險評估</h1>
+<p class="meta-line">事件：美國麻疹恢復地方性流行，2025 年以來逾百名孕婦感染｜地點：美國（以賓州為主）｜危害：麻疹病毒（Measles virus）</p>
+
+<!-- 1. BLUF ============================================================ -->
+<section id="sec-bluf" class="card bluf" aria-labelledby="h-bluf">
+  <h2 id="h-bluf"><span class="secno">1</span>決策摘要</h2>
+  <div class="bluf-grid">
+    <div class="bluf-level">
+      <div class="label">我國整體風險（計算結果）</div>
+      <div class="hero-level"><span class="lv lv-mod lv-xl"><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+      <div class="sub">矩陣等級：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span>
+        <span class="muted">（機率 中 × 衝擊 中）</span></div>
+      <div class="sub">信心程度：<strong>中</strong>
+<span class="muted">（受「境外移入風險」信心程度「中」限制）</span></div>
+      <div class="sub muted">評估者建議與規則計算一致（中）。</div>
+    </div>
+    <div class="bluf-body">
+      <p class="lead">美國麻疹已恢復地方性傳播，2026 年逾 5,400 例且持續擴大，成人病例比例升高並出現逾百名孕婦感染。我國今年已有 1 例自美國移入，未來 3 個月再出現之機率為中；在高接種率與接觸者追蹤下，持續社區流行之機率低，但移入個案引起侷限性群聚之機率為中。對一般民眾衝擊有限，對孕婦與未滿 1 歲嬰兒衝擊高。綜合研判我國整體風險為中。</p>
+      <h3>重點發現</h3>
+      <ol class="findings"><li>新聞主旨（美國逾百名孕婦感染麻疹、賓州最多）有獨立來源支持，但標題之 178 例與內文 167 例不一致，為記者彙整之下限而非官方統計，新聞可信度為中。</li><li>美國 2026 年截至 11/12 已 5,412 例（2025 年全年 2,289 例），PAHO 於 11/17 宣布美國喪失麻疹消除狀態；我國同日將美國全境提升至第二級警示。</li><li>我國 2026 年已有 1 例自美國移入（50 多歲女性、未出疹、以疑似腦炎表現），未來 3 個月再出現自美國移入病例之機率為中。</li><li>孕婦無法接種 MMR，且我國產檢與公費 MMR 均以德國麻疹抗體為準，孕婦之麻疹免疫狀態多屬未知；此族群感染機率低但衝擊高。</li><li>主要資料缺口：我國 6 月後病例數、育齡婦女麻疹抗體陽性率、免疫球蛋白庫存及暴露後預防指引內文，本次均未取得。</li></ol>
+      <div class="bluf-facts">
+        <div><div class="label">建議決策</div>
+<div class="strong"><svg class="ic star" aria-hidden="true"><use href="#i-star"/></svg>加強醫界警覺與孕婦防護整備</div>
+          <div class="muted">主責：疾管署（建議：急性傳染病組會同疫情中心、公關室）｜時程：1週</div></div>
+        <div><div class="label">新聞可信度</div>
+          <div><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span> <span class="muted">（規則計算；評估者建議：中）</span></div></div>
+        <div><div class="label">建議再評估日期</div><div class="strong">2026-12-17</div>
+          <div class="muted">或任一觸發指標出現時立即再評估</div></div>
+        <div><div class="label">IHR 附件二篩檢</div>
+          <div>3／4 項「是」（達門檻）</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Decision ======================================================== -->
+<section id="sec-decision" class="card" aria-labelledby="h-decision">
+  <h2 id="h-decision"><span class="secno">2</span>長官下一步決策建議</h2>
+  <p class="question"><strong>決策問題：</strong>我國已於 11/17 將美國麻疹旅遊疫情建議提升至第二級警示；是否需針對孕婦、嬰兒與醫界再採取加強措施？</p>
+  <div class="options">
+    <article class="option" aria-label="選項 D1：維持現狀：第二級警示＋既有衛教">
+      <header>
+        <span class="opt-id">D1</span>
+        <h3>維持現狀：第二級警示＋既有衛教</h3>
+      </header>
+      <p>不另採措施，依現行麻疹防治流程處理移入個案。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>不需額外資源</li><li>現行接觸者追蹤機制今年運作良好</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>醫界對成人未出疹等非典型表現之警覺可能不足</li><li>孕婦接觸者之暴露後預防時效未事先確認</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：疫情中心）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+      </dl>
+    </article>
+    <article class="option option-rec" aria-label="選項 D2：加強醫界警覺與孕婦防護整備（建議方案）">
+      <header>
+        <span class="opt-id">D2</span>
+        <h3>加強醫界警覺與孕婦防護整備</h3>
+<span class="rec-tag"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>建議方案</span>      </header>
+      <p>發布致醫界通函、盤點免疫球蛋白庫存與調度流程、於接觸者匡列標記孕婦與嬰兒，並對孕婦及嬰幼兒家長發布專屬衛教（建議事項 A1、A2、A3、A6）。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>直接針對最壞情境之起點（延遲診斷、院內暴露）</li><li>成本低，既有人力可執行</li><li>與美國升為第二級之時點一致，利於溝通</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>需跨組室協調</li><li>可能使孕婦詢問與門診諮詢量增加</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：急性傳染病組會同疫情中心、公關室）</dd></div>
+        <div><dt>時程</dt><dd>1週</dd></div>
+<div><dt>所需資源</dt><dd>致醫界通函 1 則、衛教素材 1 組、庫存盤點 1 次；既有人力可支應</dd></div>      </dl>
+    </article>
+    <article class="option" aria-label="選項 D3：擴大公費 MMR 對象至備孕婦女或赴美旅客">
+      <header>
+        <span class="opt-id">D3</span>
+        <h3>擴大公費 MMR 對象至備孕婦女或赴美旅客</h3>
+      </header>
+      <p>於 D2 之外，將公費 MMR 提供範圍擴及不具麻疹免疫力之備孕婦女或前往第二級地區之成人。</p>
+      <div class="proscons">
+        <div><h4>優點</h4><ul><li>可實質縮小育齡成人之免疫缺口</li></ul></div>
+        <div><h4>缺點／代價</h4><ul><li>缺乏我國育齡婦女麻疹抗體陽性率資料，效益無法估計</li><li>涉及疫苗供應、經費與 ACIP 審議，無法於短期內實施</li><li>目前國內無持續傳播，強度與風險等級不相稱</li></ul></div>
+      </div>
+      <dl class="kv">
+        <div><dt>主責單位</dt><dd>疾管署（建議：預防接種單位）</dd></div>
+        <div><dt>時程</dt><dd>1個月</dd></div>
+<div><dt>所需資源</dt><dd>疫苗採購經費與供應評估</dd></div>      </dl>
+    </article>
+  </div>
+  <p class="rec-reason"><strong>建議理由：</strong>整體風險為中，且風險集中於孕婦與嬰兒之高衝擊族群及延遲診斷之院內暴露情境。D2 以低成本措施直接處理這兩個弱點；D3 之政策調整目前缺乏資料支持，建議先以 A8 補足資料後再議。</p>
+
+  <h3>觸發指標（出現時應調整風險等級並再評估）</h3>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">方向</th><th scope="col">觀察指標</th><th scope="col">門檻</th><th scope="col">監測來源</th><th scope="col">目前狀態</th></tr></thead>
+    <tbody>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">我國出現自美國移入之麻疹確定病例</td>
+        <td data-th="門檻">評估期間內 2 例以上，或 1 例且造成醫療院所暴露</td>
+        <td data-th="監測來源">法定傳染病通報、疾管署新聞稿</td>
+        <td data-th="目前狀態">2026 年累計 1 例（3 月）</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">我國出現孕婦病例，或接觸者中孕婦／未滿 1 歲嬰兒出現續發</td>
+        <td data-th="門檻">1 例</td>
+        <td data-th="監測來源">個案疫調與接觸者追蹤</td>
+        <td data-th="目前狀態">本次未查得孕婦病例；已有未滿 1 歲嬰兒病例</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">同一移入事件出現三代以上傳播或感染源不明之本土病例</td>
+        <td data-th="門檻">1 起</td>
+        <td data-th="監測來源">疫調、病毒基因定序</td>
+        <td data-th="目前狀態">未出現（截至 6/2 之公開資料）</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-up">▲ 升級</span></td>
+        <td data-th="觀察指標">美國每週新增病例數</td>
+        <td data-th="門檻">連續 4 週較前期上升，或擴及國人主要往返之都會區</td>
+        <td data-th="監測來源">美國 CDC 每週更新、各州衛生部門</td>
+        <td data-th="目前狀態">連續 14 週每週逾百例</td>
+      </tr>
+      <tr>
+        <td data-th="方向"><span class="dir dir-down">▼ 降級</span></td>
+        <td data-th="觀察指標">美國每週新增病例數</td>
+        <td data-th="門檻">連續 8 週低於百例且我國 3 個月無自美國移入病例</td>
+        <td data-th="監測來源">美國 CDC 每週更新、我國法定傳染病通報</td>
+        <td data-th="目前狀態">未達</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 3. Verification ==================================================== -->
+<section id="sec-verify" class="card" aria-labelledby="h-verify">
+  <h2 id="h-verify"><span class="secno">3</span>新聞查證</h2>
+  <div class="newsbox">
+    <div class="label">被查證之新聞</div>
+<div class="strong"><a href="https://www.cidrap.umn.edu/measles/least-178-pregnant-americans-have-been-infected-measles-2025" rel="noopener noreferrer">At least 178 pregnant Americans have been infected with measles since 2025</a></div>
+    <div class="muted">CIDRAP｜2026-11-17｜主流媒體｜取得方式：全文</div>    <p>CIDRAP News 向各州衛生部門查詢後報導，自 2025 年以來美國至少 178 名（內文為 167 名）孕婦感染麻疹，其中賓州 101 例；並指出今年 41% 病例為 20 歲以上成人、賓州 1 名產婦及 2 名新生兒死亡，以及孕婦暴露後預防與治療選項有限。</p>
+    <p class="muted">分流（triage）：<strong>進行完整評估</strong>——來源為專業傳染病新聞機構、涉及我國已有移入紀錄之法定傳染病與高危險族群（孕婦、嬰兒），且適逢我國剛調升美國旅遊疫情建議等級，故進行完整評估。</p>
+  </div>
+  <div class="cred">
+    <div><span class="label">整體新聞可信度</span> <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+    <div class="muted">規則：關鍵陳述平均查證分數 0.73（已證實=1、部分證實=0.6、過時=0.4、無法證實=0.25、不符=0）</div>
+    <div class="muted">評估者說明（建議「中」）：CIDRAP 為專業傳染病新聞機構，臨床敘述與 WHO 資料一致，賓州數字亦有獨立來源支持；但核心數字為記者自行彙整之下限，且標題（178）與內文（167）不一致，多項細節僅能部分證實，故評為中。</div>
+  </div>
+  <div class="legend-row" aria-label="查證結果圖例">
+<span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span><span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span><span class="vd vd-unk"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>無法證實</span><span class="vd vd-bad"><svg class="ic" aria-hidden="true"><use href="#i-cross"/></svg>與官方資訊不符</span><span class="vd vd-old"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>過時</span>  </div>
+  <ol class="claims">
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C1</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">自 2025 年以來，美國至少 178 名孕婦感染麻疹。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>「逾百名孕婦感染」之量級有獨立來源支持（賓州 101 例；另一份報告統計 2025 年 1 月至 2026 年 9 月共 112 例），但確切數字無法確認：同一篇報導標題寫 178、內文寫 167，內文列舉之各州數字加總為 174，CIDRAP 次日報導又寫 168。此為記者自行向各州彙整之下限，非官方統計。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：2｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S14" class="cite">[14]</a>
+<a href="https://www.adn.com/nation-world/2026/11/14/surging-measles-cases-are-forcing-doctors-to-treat-conditions-theyve-never-seen/" rel="noopener noreferrer">Anchorage Daily News</a>              <span class="muted">｜2026-11-14｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：截至該週五，賓州至少 101 名孕婦確診麻疹，三週內增加 24 例（引州衛生部門）。</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S18" class="cite">[18]</a>
+<a href="https://www.news-medical.net/news/20261118/What-happens-to-a-baby-when-its-mother-catches-measles-during-pregnancy.aspx" rel="noopener noreferrer">News-Medical</a>              <span class="muted">｜2026-11-18｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：一份涵蓋 2025 年 1 月至 2026 年 9 月之初步監測報告記錄 112 例孕期麻疹及 13 例先天性麻疹。</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S1" class="cite">[1]</a>
+<a href="https://www.cidrap.umn.edu/measles/least-178-pregnant-americans-have-been-infected-measles-2025" rel="noopener noreferrer">CIDRAP</a>              <span class="muted">｜2026-11-17｜主流媒體｜全文</span>              <blockquote>&#34;At least 167 measles infections have been diagnosed in pregnant people this year and last, according to state health departments contacted by CIDRAP News.&#34;（與標題 178 不一致）</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S15" class="cite">[15]</a>
+<a href="https://www.cidrap.umn.edu/measles/national-embarrassment-measles-again-endemic-us" rel="noopener noreferrer">CIDRAP</a>              <span class="muted">｜日期不明｜主流媒體｜全文</span>              <blockquote>&#34;As CIDRAP News reported yesterday , there have been at least 168 measles infections in pregnant US women since 2025.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C2</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">賓州今年 1,561 例麻疹中有 101 例為孕婦。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>孕婦 101 例有獨立媒體引述州衛生部門之數字支持；總病例數 1,561 未找到完全相同之官方數字，但介於賓州衛生部 11 月中旬公布之 1,542（第 7 例死亡時）與 11/18 之 1,589 之間，屬合理。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S14" class="cite">[14]</a>
+<a href="https://www.adn.com/nation-world/2026/11/14/surging-measles-cases-are-forcing-doctors-to-treat-conditions-theyve-never-seen/" rel="noopener noreferrer">Anchorage Daily News</a>              <span class="muted">｜2026-11-14｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：賓州至少 101 名孕婦確診麻疹（州衛生部門）。</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S13" class="cite">[13]</a>
+<a href="https://www.pa.gov/agencies/health/newsroom/pa-department-of-health-confirms-eighth-measles-associated-death" rel="noopener noreferrer">Pennsylvania Department of Health</a>              <span class="muted">｜2026-11-18｜官方衛生機關/國際組織｜搜尋摘要</span>              <blockquote>新聞稿標題：&#34;…Cases Reach 1,589 in 46 Counties&#34;（2026-11-18）；前一則為 1,542 例、46 郡。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C3</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">過去兩年美國通報逾 8,000 例麻疹（Johns Hopkins 追蹤資料）。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>美國 CDC 之確定病例為 2026 年 5,412 例（截至 11/12）加 2025 年全年 2,289 例，合計 7,701 例，略低於 8,000；Johns Hopkins 追蹤採不同納入標準與更新頻率，數字較高（搜尋摘要顯示 2026 年截至 11/13 為 5,739 例），其兩年合計未能直接讀取。量級相符，確切數字依來源而異。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：2｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S11" class="cite">[11]</a>
+<a href="https://www.cdc.gov/measles/data-research/index.html" rel="noopener noreferrer">US Centers for Disease Control and Prevention</a>              <span class="muted">｜日期不明｜官方衛生機關/國際組織｜搜尋摘要</span>              <blockquote>搜尋摘要：截至 2026-11-12，美國 CDC 統計 2026 年確定病例 5,412 例，96% 與群聚相關。</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S12" class="cite">[12]</a>
+<a href="https://www.cna.com.tw/news/ahel/202611170156.aspx" rel="noopener noreferrer">中央通訊社</a>              <span class="muted">｜2026-11-17｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要：截至 11/12 美國 5,412 例確定病例、6 例死亡，約為 2025 年全年 2,289 例之 2.4 倍。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C4</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">今年美國 41% 之麻疹病例為 20 歲以上成人（美國 CDC 資料）。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>搜尋摘要顯示美國 CDC 資料中 20 歲以上病例為 2,240 例，占 5,412 例之 41%（比例為本評估依兩數字計算，與媒體引述之 41% 一致）。惟 cdc.gov 無法連線，未讀得原頁。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S11" class="cite">[11]</a>
+<a href="https://www.cdc.gov/measles/data-research/index.html" rel="noopener noreferrer">US Centers for Disease Control and Prevention</a>              <span class="muted">｜日期不明｜官方衛生機關/國際組織｜搜尋摘要</span>              <blockquote>搜尋摘要：20 歲以上成人 2,240 例／總數 5,412 例；另有媒體引述 20 歲以上與 5–19 歲各占 41%。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C5</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+          <span class="claim-text">一名 21 歲賓州麻疹女性於本月初居家分娩後死亡；賓州另有 2 名新生兒感染麻疹後死亡。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>2026-11-05 有媒體以「新手母親死亡」為題報導，賓州衛生部亦曾公布 2 例嬰兒死亡；但年齡 21 歲、居家分娩等細節出自《華盛頓郵報》，原文未能取得，賓州衛生部第 6 例死亡新聞稿之搜尋摘要亦未提及分娩。</p>
+<p class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>支持來源僅取得搜尋摘要，未讀取全文</p>          <p class="muted">獨立來源數：1｜最佳支持來源等級：主流媒體</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S19" class="cite">[19]</a>
+<a href="https://www.powershealth.org/about-us/newsroom/health-library/2026/11/05/new-mothers-death-adds-to-measles-toll-as-pregnancy-warnings-grow" rel="noopener noreferrer">HealthDay（Powers Health 轉載）</a>              <span class="muted">｜2026-11-05｜主流媒體｜搜尋摘要</span>              <blockquote>標題：&#34;New Mother&#39;s Death Adds to Measles Toll as Pregnancy Warnings Grow&#34;（2026-11-05）。</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S13" class="cite">[13]</a>
+<a href="https://www.pa.gov/agencies/health/newsroom/pa-department-of-health-confirms-eighth-measles-associated-death" rel="noopener noreferrer">Pennsylvania Department of Health</a>              <span class="muted">｜2026-11-18｜官方衛生機關/國際組織｜搜尋摘要</span>              <blockquote>搜尋摘要：賓州衛生部先前公布 2 例感染麻疹之嬰兒死亡；所有死亡個案均未接種或未達接種年齡。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C6</span>
+          <span class="vd vd-unk"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>無法證實</span>
+          <span class="claim-text">美國 CDC 並未追蹤（或公布）孕婦麻疹病例數。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>未能連線 cdc.gov 確認其公布項目。另有一份統計 112 例孕期麻疹之報告，一說為 Public Health Alerts 報告、一說為美國 CDC 初步監測報告，來源說法不一，原報告未取得，故無法判定。</p>
+          <p class="muted">獨立來源數：0</p>
+          <ul class="evlist">
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S18" class="cite">[18]</a>
+<a href="https://www.news-medical.net/news/20261118/What-happens-to-a-baby-when-its-mother-catches-measles-during-pregnancy.aspx" rel="noopener noreferrer">News-Medical</a>              <span class="muted">｜2026-11-18｜主流媒體｜搜尋摘要</span>              <blockquote>搜尋摘要稱「美國 CDC 初步監測報告」記錄 112 例孕期麻疹。</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S10" class="cite">[10]</a>
+<a href="https://www.cidrap.umn.edu/measles/2-more-people-die-measles-complications-us-cases-top-5400" rel="noopener noreferrer">CIDRAP</a>              <span class="muted">｜日期不明｜主流媒體｜全文</span>              <blockquote>&#34;New Public Health Alerts report spotlights how pregnant women with measles and their babies fare About a fourth of the 112 pregnant women required hospital care not related to labor, and 13 babies were born with measles.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C7</span>
+          <span class="vd vd-partial"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg>部分證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">孕婦不可接種麻疹疫苗；暴露後 6 日內可給予靜脈注射免疫球蛋白（IVIG）；孕期不建議使用維生素 A。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>ECDC 說明暴露後 72 小時內接種含麻疹疫苗為首選，我國疾管署亦將孕婦列為感染高危險群並訂有接觸者暴露後預防建議措施；但「孕婦 6 日內給予 IVIG」及「孕期不建議維生素 A」之具體內容，因美國 CDC 文件與我國指引 PDF 均未能取得，本次未能逐項確認。</p>
+          <p class="muted">獨立來源數：2｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S9" class="cite">[9]</a>
+<a href="https://www.ecdc.europa.eu/en/measles/facts" rel="noopener noreferrer">European Centre for Disease Prevention and Control</a>              <span class="muted">｜2023-11-28｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;Regarding post-exposure prophylaxis, administration of an MCV is the intervention of choice within 72 hours of exposure&#34;</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S3" class="cite">[3]</a>
+<a href="https://www.cdc.gov.tw/Bulletin/Detail/rLPw84BE1BElUb8OebRuhA?typeid=9" rel="noopener noreferrer">衛生福利部疾病管制署</a>              <span class="muted">｜2026-03-31｜官方衛生機關/國際組織｜全文</span>              <blockquote>「孕婦及未滿1歲嬰幼兒為感染高危險群，應避免前往流行區」</blockquote>
+            </li>
+            <li class="ev ev-ctx">
+              <span class="stance">背景</span>
+<a href="#ref-S7" class="cite">[7]</a>
+<a href="https://www.cdc.gov.tw/Category/MPage/cXOGgsKTJ5MG4SyOAF2fng" rel="noopener noreferrer">衛生福利部疾病管制署</a>              <span class="muted">｜日期不明｜官方衛生機關/國際組織｜全文</span>              <blockquote>指引清單列有「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」及肌肉注射免疫球蛋白同意書；內文未取得。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C8</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+          <span class="claim-text">麻疹會造成「免疫失憶」，使人對原已具免疫力之病原再度易感。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>WHO 麻疹實況報導有相同敘述。新聞所稱「可持續達 5 年」及孕婦個案情形，本次未另行查證。</p>
+          <p class="muted">獨立來源數：1｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S8" class="cite">[8]</a>
+<a href="https://www.who.int/news-room/fact-sheets/detail/measles" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-07-15｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;Measles itself also weakens the immune system and can make the body “forget” how to protect itself against infections, leaving children extremely vulnerable.&#34;</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+    <li class="claim">
+      <details>
+        <summary>
+          <span class="claim-id">C9</span>
+          <span class="vd vd-ok"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>已證實</span>
+<span class="chip">關鍵</span>          <span class="claim-text">孕婦感染麻疹可能發生肺炎等嚴重併發症與死亡，並增加早產與低出生體重風險。</span>
+        </summary>
+        <div class="claim-body">
+          <p><strong>判定理由：</strong>WHO 明列孕婦為重症最高風險族群，並說明孕期感染可致流產、早產與低出生體重；系統性回顧（搜尋摘要）顯示孕婦病例以肺炎為最常見併發症。</p>
+          <p class="muted">獨立來源數：2｜最佳支持來源等級：官方衛生機關/國際組織</p>
+          <ul class="evlist">
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S8" class="cite">[8]</a>
+<a href="https://www.who.int/news-room/fact-sheets/detail/measles" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-07-15｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;If a woman catches measles during pregnancy, this can be dangerous for the mother and can result in miscarriage or her baby being born prematurely with a low birth weight.&#34;</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S8" class="cite">[8]</a>
+<a href="https://www.who.int/news-room/fact-sheets/detail/measles" rel="noopener noreferrer">World Health Organization</a>              <span class="muted">｜2026-07-15｜官方衛生機關/國際組織｜全文</span>              <blockquote>&#34;Unvaccinated young children and pregnant persons are at highest risk of severe measles complications.&#34;</blockquote>
+            </li>
+            <li class="ev ev-sup">
+              <span class="stance">支持</span>
+<a href="#ref-S17" class="cite">[17]</a>
+<a href="https://pubmed.ncbi.nlm.nih.gov/31891729/" rel="noopener noreferrer">Journal of Infection (PubMed)</a>              <span class="muted">｜日期不明｜同儕審查文獻｜搜尋摘要</span>              <blockquote>搜尋摘要：彙整 1941–2012 年 420 例孕婦病例，18 例死亡（4.3%），肺炎為最常見併發症（17.9%）。</blockquote>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+  </ol>
+</section>
+
+<!-- 4. Situation ======================================================= -->
+<section id="sec-situation" class="card" aria-labelledby="h-sit">
+  <h2 id="h-sit"><span class="secno">4</span>疫情概況</h2>
+  <div class="tiles">
+    <div class="tile">
+      <div class="tile-label">美國 2026 年確定病例</div>
+      <div class="tile-value">5,412 例</div>
+      <div class="tile-meta">截至 2026-11-12 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></div>
+<div class="tile-note">美國 CDC；2025 年全年 2,289 例</div>    </div>
+    <div class="tile">
+      <div class="tile-label">美國 2026 年麻疹相關死亡</div>
+      <div class="tile-value">6–10 例</div>
+      <div class="tile-meta">截至 2026-11-13 <span class="cites"><a class="cite" href="#ref-S10" title="CIDRAP：2 more people die of measles complications as US cases top 5,400">[10]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></div>
+<div class="tile-note">CDC 確認 6 例；各州通報 10 例</div>    </div>
+    <div class="tile">
+      <div class="tile-label">美國孕婦病例（2025 年迄今）</div>
+      <div class="tile-value">至少 167–178 例</div>
+      <div class="tile-meta">截至 2026-11-17 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></div>
+<div class="tile-note">記者彙整之下限，非官方統計；標題與內文不一致</div>    </div>
+    <div class="tile">
+      <div class="tile-label">賓州孕婦病例</div>
+      <div class="tile-value">101 例</div>
+      <div class="tile-meta">截至 2026-11-13 <span class="cites"><a class="cite" href="#ref-S14" title="Anchorage Daily News：Surging measles cases are forcing doctors to treat conditions they&#39;ve never seen">[14]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></div>
+<div class="tile-note">州衛生部門</div>    </div>
+    <div class="tile">
+      <div class="tile-label">20 歲以上成人占比</div>
+      <div class="tile-value">41%</div>
+      <div class="tile-meta">截至 2026-11-12 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></div>
+<div class="tile-note">2,240／5,412</div>    </div>
+    <div class="tile">
+      <div class="tile-label">我國 2026 年麻疹病例</div>
+      <div class="tile-value">11 例</div>
+      <div class="tile-meta">截至 2026-06-02 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></div>
+<div class="tile-note">8 例境外移入（含美國 1 例）、3 例國內感染；6 月後數字未取得</div>    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>國際疫情概況</h3>
+      <ul class="bullets"><li>美國 CDC 統計 2026 年截至 11/12 共 5,412 例確定病例，96% 與群聚相關；2025 年全年為 2,289 例。 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></li><li>美國 CDC 確認 2026 年 6 例死亡，各州衛生部門則已通報 10 例麻疹相關死亡；賓州於 11/18 公布第 8 例死亡，累計 1,589 例、46 郡。 <span class="cites"><a class="cite" href="#ref-S10" title="CIDRAP：2 more people die of measles complications as US cases top 5,400">[10]</a><a class="cite" href="#ref-S13" title="Pennsylvania Department of Health：Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties">[13]</a></span></li><li>美國近 3 個月（8/16–11/8）累計 2,622 例，已連續 14 週每週新增逾百例，疫情仍在活躍傳播。 <span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></li><li>泛美衛生組織（PAHO）於 2026-11-17 宣布美國喪失麻疹消除狀態，玻利維亞與墨西哥亦同；判定依據為同一病毒株持續傳播 12 個月以上。 <span class="cites"><a class="cite" href="#ref-S15" title="CIDRAP：&#39;A national embarrassment&#39;: Measles is again endemic in the US">[15]</a><a class="cite" href="#ref-S16" title="CNBC：U.S. officially loses measles elimination status amid ongoing outbreaks">[16]</a></span></li><li>孕婦病例：記者彙整各州資料為至少 167–178 例（2025 年迄今），賓州 101 例；另一份報告統計 112 例孕期麻疹，其中約四分之一需非分娩相關之住院、13 名嬰兒出生即感染。 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a><a class="cite" href="#ref-S10" title="CIDRAP：2 more people die of measles complications as US cases top 5,400">[10]</a><a class="cite" href="#ref-S14" title="Anchorage Daily News：Surging measles cases are forcing doctors to treat conditions they&#39;ve never seen">[14]</a></span></li><li>今年美國病例中 20 歲以上成人占 41%，賓州則有三分之二為 18 歲以上成人，育齡成人暴露機會高於以往以兒童為主之疫情。 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></li><li>其他地區：墨西哥 2026 年截至 3/26 逾 8,000 例；日本截至 6 月初累計 511 例（已逾 2025 年全年 265 例）；孟加拉自 3 月迄 6 月初通報 70,936 例、585 例相關死亡。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li></ul>
+      <h3>國際機構既有評估</h3>
+      <ul class="bullets"><li>PAHO：美國已恢復麻疹地方性傳播，須提出矯正行動計畫方能重新取得消除狀態（媒體報導；PAHO 正式公告未取得）。 <span class="cites"><a class="cite" href="#ref-S15" title="CIDRAP：&#39;A national embarrassment&#39;: Measles is again endemic in the US">[15]</a><a class="cite" href="#ref-S16" title="CNBC：U.S. officially loses measles elimination status amid ongoing outbreaks">[16]</a></span></li><li>我國疾管署：美國疫情對我國影響較低，主因幼兒 MMR 兩劑接種率長年維持 97% 以上，且國籍航空空服員及機組員逾 80% 具麻疹免疫力（媒體引述疾管署 11/17 說明）。 <span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></li><li>WHO、ECDC 針對美國疫情之旅行建議或風險評估，本次未查得。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span></li></ul>
+    </div>
+    <div>
+      <h3>事件時序</h3>
+      <ol class="timeline">
+        <li><time datetime="2025-03-18">2025-03-18</time><span>我國將美國麻疹旅遊疫情建議列為第一級注意 <span class="cites"><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></span></li>
+        <li><time datetime="2026-03-31">2026-03-31</time><span>疾管署公布 1 例自美國（紐約）移入之麻疹確定病例，接觸者 339 名 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a></span></span></li>
+        <li><time datetime="2026-06-02">2026-06-02</time><span>疾管署公布境外移入致國內感染群聚，我國當年累計 11 例 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></span></li>
+        <li><time datetime="2026-11-12">2026-11-12</time><span>美國 CDC：2026 年累計 5,412 例 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></span></li>
+        <li><time datetime="2026-11-17">2026-11-17</time><span>PAHO 宣布美國喪失麻疹消除狀態 <span class="cites"><a class="cite" href="#ref-S15" title="CIDRAP：&#39;A national embarrassment&#39;: Measles is again endemic in the US">[15]</a><a class="cite" href="#ref-S16" title="CNBC：U.S. officially loses measles elimination status amid ongoing outbreaks">[16]</a></span></span></li>
+        <li><time datetime="2026-11-17">2026-11-17</time><span>我國將美國全境麻疹旅遊疫情建議提升至第二級警示 <span class="cites"><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></span></li>
+        <li><time datetime="2026-11-17">2026-11-17</time><span>CIDRAP 報導美國孕婦麻疹病例（本次查證之新聞） <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></span></li>
+        <li><time datetime="2026-11-18">2026-11-18</time><span>賓州公布第 8 例麻疹相關死亡，累計 1,589 例 <span class="cites"><a class="cite" href="#ref-S13" title="Pennsylvania Department of Health：Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties">[13]</a></span></span></li>
+      </ol>
+    </div>
+  </div>
+
+  <figure class="chart" aria-labelledby="cc-title">
+    <figcaption id="cc-title"><strong>各國病例數</strong>（2026 年 1 月至 11 月 12 日）</figcaption>
+    <div class="bars" role="list">
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="美國：5412 例，死亡 6（2026 年 1 月至 11 月 12 日）">
+        <span class="bar-label">美國</span>
+        <span class="bar-track"><span class="bar" style="width: 100.0%"></span></span>
+        <span class="bar-val">5412</span>
+      </div>
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="美國（2025 年）：2289 例（2025 年全年）">
+        <span class="bar-label">美國（2025 年）</span>
+        <span class="bar-track"><span class="bar" style="width: 42.3%"></span></span>
+        <span class="bar-val">2289</span>
+      </div>
+      <div class="bar-row" role="listitem" tabindex="0" data-tip="日本：511 例（2026 年 1 月至 6 月初）">
+        <span class="bar-label">日本</span>
+        <span class="bar-track"><span class="bar" style="width: 9.4%"></span></span>
+        <span class="bar-val">511</span>
+      </div>
+    </div>
+    <details class="tableview"><summary>表格檢視</summary>
+      <table class="tbl"><thead><tr><th scope="col">國家</th><th scope="col">病例</th><th scope="col">死亡</th><th scope="col">期間</th><th scope="col">來源</th></tr></thead>
+      <tbody><tr><td>美國</td><td class="num">5412</td><td class="num">6</td><td>2026 年 1 月至 11 月 12 日</td><td><span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></td></tr><tr><td>美國（2025 年）</td><td class="num">2289</td><td class="num">—</td><td>2025 年全年</td><td><span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></td></tr><tr><td>日本</td><td class="num">511</td><td class="num">—</td><td>2026 年 1 月至 6 月初</td><td><span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></td></tr></tbody></table>
+    </details>
+  </figure>
+
+
+  <h3>病原與傳播特性</h3>
+  <p>麻疹由麻疹病毒引起，人為唯一宿主，經空氣、飛沫或接觸病人鼻咽分泌物傳播，傳染力極強（基本再生數估計 12–18）。兩劑含麻疹疫苗可提供高度保護；無特效抗病毒藥物。未接種之幼兒與孕婦為重症最高風險族群。</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-kv">
+    <tbody><tr><th scope="row">病原與宿主</th><td>麻疹病毒；人為唯一之宿主及傳染窩 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></td></tr><tr><th scope="row">傳播途徑</th><td>空氣、飛沫傳播，或直接接觸病人鼻腔或咽喉分泌物 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a></span></td></tr><tr><th scope="row">傳染力</th><td>基本再生數（R0）模式估計 12–18 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a></span></td></tr><tr><th scope="row">潛伏期</th><td>前驅症狀於 10–12 天潛伏期後出現 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a></span></td></tr><tr><th scope="row">可傳染期</th><td>出疹前 4 天至出疹後 4 天 <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a></span></td></tr><tr><th scope="row">併發症</th><td>中耳炎（7–9%）、肺炎（1–6%）、腹瀉（8%）、感染後腦炎（每 1,000–2,000 例 1 例）；我國資料：約 5–10% 患者產生併發症 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></td></tr><tr><th scope="row">孕婦</th><td>重症最高風險族群之一；可致流產、早產、低出生體重。系統性回顧 420 例孕婦病例中 4.3% 死亡、17.9% 併發肺炎（搜尋摘要） <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a><a class="cite" href="#ref-S17" title="Journal of Infection (PubMed)：Measles in pregnant women: A systematic review of clinical outcomes and a meta-analysis of antibodies seroprevalence">[17]</a></span></td></tr><tr><th scope="row">免疫失憶</th><td>麻疹會削弱免疫系統，使身體「遺忘」原有之防護 <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a></span></td></tr><tr><th scope="row">疫苗</th><td>疫苗效力至少 95%；我國常規於出生滿 12 個月及滿 5 歲至入國小前各接種 1 劑 MMR <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></td></tr><tr><th scope="row">暴露後預防</th><td>暴露後 72 小時內接種含麻疹疫苗為首選；孕婦無法接種活性減毒疫苗 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></td></tr><tr><th scope="row">嬰兒之被動免疫</th><td>母親具免疫力時，嬰兒出生後可由母體抗體獲得保護 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a></span></td></tr></tbody>
+  </table>
+  </div>
+
+  <h3>我國現況</h3>
+<p><strong>法定傳染病分類：</strong>第二類法定傳染病</p>  <div class="tw-grid">
+    <div class="tw-block"><h4>監測與通報</h4>
+      <ul class="bullets"><li>麻疹為第二類法定傳染病。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></li><li>2026 年截至 6/2 累計 11 例，年齡介於未滿 1 歲至 50 多歲；8 例境外移入（越南、馬來西亞、美國、印度、印尼、吉爾吉斯、日本、泰國各 1 例），3 例國內感染。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>自美國移入之個案為北部 50 多歲女性，返國後發燒但未出疹，後因疑似腦炎就醫才通報確診，顯示成人非典型表現可能延遲診斷。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a></span></li><li>2026 年 6 月之後之我國麻疹病例數，本次未能取得（傳染病統計資料查詢系統無法連線，疾管署新聞稿 6 月後無麻疹專稿）。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>檢驗量能</h4>
+      <ul class="bullets"><li>疾管署訂有麻疹病例定義暨防疫檢體採檢送驗事項（清單頁可見，內文未取得）。 <span class="cites"><a class="cite" href="#ref-S7" title="衛生福利部疾病管制署：麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）">[7]</a></span></li></ul></div>
+    <div class="tw-block"><h4>病媒／宿主分布</h4>
+      <ul class="bullets"><li>人為唯一宿主，無動物或病媒傳播途徑；國內傳播取決於移入個案與人群免疫缺口。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></li></ul></div>
+    <div class="tw-block"><h4>邊境檢疫與旅遊疫情建議</h4>
+      <ul class="bullets"><li>美國全境麻疹旅遊疫情建議自 2026-11-17 起為第二級警示（Alert）；先前為 2025-03-18 起之第一級注意。 <span class="cites"><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></li><li>目前共 12 國列第二級警示（含美國、墨西哥、越南、印尼、印度等），34 國列第一級注意（含加拿大、日本）。 <span class="cites"><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></li><li>疾管署建議孕婦及未滿 1 歲嬰幼兒避免前往流行區；1966 年（含）以後出生成人如不確定是否具免疫力，可於出國前 2 至 4 週至旅遊醫學門診評估接種 MMR；返國 3 週內出現疑似症狀應戴口罩就醫並告知旅遊史。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a></span></li><li>國人赴美旅次、年底假期與農曆春節前後之往返人數，本次未取得。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+    <div class="tw-block"><h4>醫療與感染管制</h4>
+      <ul class="bullets"><li>疾管署訂有「疑似麻疹個案接觸者之暴露後預防建議措施」及「醫院內疑似麻疹個案處置指引」（均為 114 年 4 月修訂），並備有肌肉注射免疫球蛋白同意書。 <span class="cites"><a class="cite" href="#ref-S7" title="衛生福利部疾病管制署：麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）">[7]</a></span></li><li>單一個案之接觸者匡列規模大：2026 年 3 月兩例分別匡列 339 名與 719 名，6 月群聚匡列 491 名。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>公費 MMR 提供育齡婦女之條件以「德國麻疹抗體陰性」為準（一般育齡婦女、產後補種、外籍配偶），並非依麻疹抗體；孕期產檢亦以德國麻疹抗體為檢測項目。 <span class="cites"><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象">[6]</a></span></li><li>我國育齡婦女之麻疹抗體陽性率與免疫球蛋白（IVIG／IMIG）庫存量，本次未查得公開資料。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></div>
+  </div>
+</section>
+
+<!-- 5. Risk table + matrix ============================================= -->
+<section id="sec-risk" class="card" aria-labelledby="h-risk">
+  <h2 id="h-risk"><span class="secno">5</span>風險評估表</h2>
+  <p class="muted">格式依疾管署《疫情報導》風險評估表（評估項目／評估內容／風險等級定義／評估結果）。與原文章相同，機率類項目（如境外移入、社區流行）之「評估結果」為<strong>發生機率</strong>（1–5 對應低／中／高），「衝擊」另列一列；另附「矩陣風險（機率×衝擊）」供參考並標示於下方矩陣。「綜合研判」才合併機率與衝擊：取各機率類項目之最高矩陣風險，對應為三級。評估者原始建議並列。</p>
+  <div class="table-wrap">
+  <table class="tbl risk-table">
+    <caption class="sr-only">我國風險評估表</caption>
+    <thead><tr><th scope="col">評估項目</th><th scope="col">評估內容</th><th scope="col">風險等級定義</th><th scope="col">評估結果</th></tr></thead>
+    <tbody>
+      <tr id="item-R1">
+        <th scope="row" data-th="評估項目"><span class="item-n">1</span>境外移入風險<div class="muted small">未來 3 個月內，我國再出現自美國移入之麻疹確定病例之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>我國 2026 年已有 1 例自美國（紐約）移入之確定病例，當時美國累計約 1,500 例；目前美國已達 5,412 例。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></li><li>美國已連續 14 週每週新增逾百例，並經 PAHO 判定恢復地方性傳播，短期內不會中斷。 <span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a><a class="cite" href="#ref-S15" title="CIDRAP：&#39;A national embarrassment&#39;: Measles is again endemic in the US">[15]</a></span></li><li>美國病例 41% 為 20 歲以上成人，旅客年齡層之暴露機會增加。 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></li><li>我國 2026 年境外移入來源分散於 8 國，美國僅占 1 例；整體移入壓力主要仍來自亞洲鄰近國家。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>評估期間涵蓋年底假期至農曆春節前，為往返美國之旅遊與返鄉旺季。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span><span class="chip">推論</span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>美國疫情侷限於少數州且趨緩，我國當年無自美國移入病例</li>
+          <li><strong>中：</strong>美國疫情持續擴大且我國曾有自美國移入病例，評估期間內可能再出現</li>
+          <li><strong>高：</strong>我國已接連出現自美國移入病例，或美國疫情擴及國人主要往返之都會區並大幅上升</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">發生機率</div>
+          <div><span class="lv lv-mod lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+          <div class="small">
+機率 3（中）→ 中
+            <div class="mrisk">矩陣風險（機率×衝擊）：3×3（衝擊沿用衝擊項目） → <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+          </div>
+          <div class="small">信心：<strong>中</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>美國疫情規模為今年 3 月（已發生 1 例移入）時之 3 倍以上且持續傳播，並逢旅遊旺季；但 10 個多月來僅 1 例自美國移入，故判斷為有可能發生（約 10–50%）。</p>            <p><strong>信心程度理由：</strong>我國移入紀錄與旅遊建議等級來自疾管署全文；美國數字僅取得搜尋摘要，且缺國人赴美旅次與我國 6 月後病例資料。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R2">
+        <th scope="row" data-th="評估項目"><span class="item-n">2</span>國內社區流行風險<div class="muted small">未來 3 個月內，我國因移入個案而出現持續性社區傳播（三代以上或跨縣市擴散）之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>我國幼兒 MMR 兩劑接種率長年維持 97% 以上（媒體引述疾管署）。 <span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></li><li>2026 年截至 6/2 之 11 例中僅 3 例為國內感染，移入個案引起之群聚規模有限（6 月群聚共 2 例）。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>每例個案皆匡列數百名接觸者並進行健康監測，6 月群聚之續發個案即於監測期間發現。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>麻疹傳染力極強（R0 12–18），出疹前 4 天即具傳染力；自美國移入之個案未出疹、延至腦炎症狀才確診，顯示非典型成人個案可能造成較長之未察覺暴露。 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a></span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>移入個案僅引起零星或侷限性續發，傳播鏈於接觸者監測下中斷</li>
+          <li><strong>中：</strong>同一移入事件出現三代以上傳播或多起無關聯群聚同時發生</li>
+          <li><strong>高：</strong>出現無法追溯感染源之本土病例或跨縣市持續傳播</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">發生機率</div>
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 2（低）→ 低
+            <div class="mrisk">矩陣風險（機率×衝擊）：2×3（衝擊沿用衝擊項目） → <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+          </div>
+<ul class="strata"><li>移入個案引起之侷限性群聚（家戶、職場、醫療院所）：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="small">｜矩陣風險 3×3 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></span></li></ul>          <div class="small">信心：<strong>中</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>高接種率與既有接觸者追蹤機制使傳播鏈多能中斷；惟傳染力極強且成人非典型表現可能延遲診斷，無法排除。</p>            <p><strong>信心程度理由：</strong>我國群聚紀錄來自疾管署全文；接種率數字僅取得媒體摘要，且缺各出生世代（尤其 1981 年後出生成人）之抗體陽性率資料。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R3">
+        <th scope="row" data-th="評估項目"><span class="item-n">3</span>孕婦及未滿 1 歲嬰兒感染風險<div class="muted small">未來 3 個月內，我國出現孕婦或未滿 1 歲嬰兒感染麻疹（含赴美感染或國內續發）之可能性為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>我國 2026 年病例年齡介於未滿 1 歲至 50 多歲，已有未滿 1 歲嬰兒病例。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>孕婦無法接種活性減毒之 MMR；未滿 1 歲嬰兒尚未達常規接種年齡（滿 12 個月接種第 1 劑）。 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></li><li>我國公費 MMR 對育齡婦女之提供條件與產檢抗體檢測皆以德國麻疹為準，孕婦個人之麻疹免疫狀態通常未知。 <span class="cites"><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象">[6]</a></span></li><li>美國經驗顯示成人病例比例升高時，孕婦病例隨之出現（賓州 101 例孕婦，成人占該州病例三分之二）。 <span class="cites"><a class="cite" href="#ref-S14" title="Anchorage Daily News：Surging measles cases are forcing doctors to treat conditions they&#39;ve never seen">[14]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></li><li>疾管署已建議孕婦及未滿 1 歲嬰幼兒避免前往流行區，美國升為第二級後該建議適用於美國全境。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>國內無持續傳播，孕婦與嬰兒僅可能因個別旅遊暴露或零星接觸而感染</li>
+          <li><strong>中：</strong>國內出現群聚且接觸者中含孕婦或嬰兒，或接連出現嬰兒病例</li>
+          <li><strong>高：</strong>國內持續傳播，孕婦或嬰兒病例接連發生</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">發生機率</div>
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+          <div class="small">
+機率 2（低）→ 低
+            <div class="mrisk">矩陣風險（機率×衝擊）：2×4 → <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+          </div>
+          <div class="small">信心：<strong>中</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>機率：</strong>國內目前無持續傳播，且已建議該族群避免前往流行區；但今年已有嬰兒病例，且孕婦免疫狀態多屬未知，無法排除。</p><p><strong>衝擊：</strong>此族群一旦感染，重症、流產、早產與死亡風險明顯高於一般民眾，且孕婦無法以疫苗進行暴露後預防，故採該族群之衝擊（高）。</p>            <p><strong>信心程度理由：</strong>臨床風險有 WHO 全文支持；但我國育齡婦女麻疹抗體陽性率、孕婦赴美人數及暴露後預防指引內文均未取得。</p>
+          </details>
+        </td>
+      </tr>
+      <tr id="item-R4">
+        <th scope="row" data-th="評估項目"><span class="item-n">4</span>衝擊<div class="muted small">若我國出現自美國移入病例並引起國內續發，對國人健康、醫療與公衛體系及社會之衝擊為何？</div></th>
+        <td data-th="評估內容"><ul class="dash"><li>一般病例約 5–10% 產生併發症（中耳炎、肺炎、腦炎）；兒童致死率估計每 1,000 例未接種兒童 1–3 例。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a><a class="cite" href="#ref-S10" title="CIDRAP：2 more people die of measles complications as US cases top 5,400">[10]</a></span></li><li>孕婦為重症最高風險族群之一，感染可致流產、早產與低出生體重；系統性回顧中孕婦病例 4.3% 死亡。 <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a><a class="cite" href="#ref-S17" title="Journal of Infection (PubMed)：Measles in pregnant women: A systematic review of clinical outcomes and a meta-analysis of antibodies seroprevalence">[17]</a></span></li><li>有安全有效之疫苗（效力至少 95%），我國幼兒兩劑接種率 97% 以上；無特效抗病毒藥物。 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></li><li>公衛量能負擔重：每例個案匡列 339–719 名接觸者並監測約 3 週。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>麻疹會削弱既有免疫力，病後一段時間對其他感染之易感性上升。 <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a></span></li><li>美國孕婦與新生兒死亡之報導及我國調升旅遊警示，可能引發民眾（特別是孕婦與嬰幼兒家長）對疫苗與赴美旅遊之詢問增加。 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span><span class="chip">推論</span></li></ul></td>
+        <td data-th="風險等級定義"><ul class="defs">
+          <li><strong>低：</strong>僅零星輕症，接觸者追蹤可由既有量能吸收</li>
+          <li><strong>中：</strong>部分族群可能重症，接觸者追蹤與院內感染管制需投入特定整備，社會中度關注</li>
+          <li><strong>高：</strong>高風險族群接連出現重症或死亡，或醫療院所發生群聚，量能局部吃緊</li></ul></td>
+        <td data-th="評估結果" class="result">
+          <div class="small muted">衝擊</div>
+          <div><span class="lv lv-mod lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></div>
+          <div class="small">
+衝擊 3（中）→ 中          </div>
+<ul class="strata"><li>孕婦、胎兒、未滿 1 歲嬰兒及免疫不全者：<span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></li><li>已完成兩劑接種或具自然免疫之一般民眾：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></li></ul>          <div class="small">信心：<strong>中</strong></div>
+          <details class="why small"><summary>判斷依據</summary>
+<p><strong>衝擊：</strong>有疫苗且人群免疫力高，多數民眾衝擊有限；但孕婦、嬰兒與免疫不全者可能重症，且每例個案之接觸者追蹤負擔大，整體評為中。</p>            <p><strong>信心程度理由：</strong>嚴重度資料來自 WHO、ECDC 與疾管署全文；孕婦預後數字與我國接種率僅取得摘要。</p>
+          </details>
+        </td>
+      </tr>
+      <tr class="overall-row">
+        <th scope="row" data-th="評估項目">綜合研判</th>
+        <td data-th="評估內容" colspan="2">美國麻疹已恢復地方性傳播，2026 年逾 5,400 例且持續擴大，成人病例比例升高並出現逾百名孕婦感染。我國今年已有 1 例自美國移入，未來 3 個月再出現之機率為中；在高接種率與接觸者追蹤下，持續社區流行之機率低，但移入個案引起侷限性群聚之機率為中。對一般民眾衝擊有限，對孕婦與未滿 1 歲嬰兒衝擊高。綜合研判我國整體風險為中。<div class="small muted">計算方式：綜合研判＝各機率類項目「矩陣風險（機率×衝擊）」之最高者，再對應三級（本次由「境外移入風險」決定）。</div></td>
+        <td data-th="評估結果" class="result"><span class="lv lv-mod lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><div class="small">信心：<strong>中</strong></div>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">註：本評估依據現有資訊判定風險等級，將視新增實證適時調整。</p>
+
+
+  <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
+  <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。項目編號所在位置即該項目之「矩陣風險（機率×衝擊）」，格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
+  <div class="matrix-layout">
+    <div class="matrix-wrap">
+      <table class="matrix" aria-labelledby="matrix-h" id="matrix">
+        <thead><tr><td class="corner"><span>衝擊→</span><span>機率↓</span></td><th scope="col">1<span class="ax">極低</span></th><th scope="col">2<span class="ax">低</span></th><th scope="col">3<span class="ax">中</span></th><th scope="col">4<span class="ax">高</span></th><th scope="col">5<span class="ax">極高</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">5<span class="ax">極高</span></th>
+            <td class="cell cell-mod" data-p="5" data-i="1">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="5" data-i="2">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="5" data-i="3">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="5" data-i="4">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="5" data-i="5">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">4<span class="ax">高</span></th>
+            <td class="cell cell-low" data-p="4" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="4" data-i="2">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="4" data-i="3">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="4" data-i="4">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="4" data-i="5">
+              <span class="cell-lv">極高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">3<span class="ax">中</span></th>
+            <td class="cell cell-low" data-p="3" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="3" data-i="2">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="3" data-i="3">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+<button type="button" class="marker" data-item="R1" aria-label="1. 境外移入風險：機率 中、衝擊 中、矩陣等級 中">1</button>              </span>
+            </td>
+            <td class="cell cell-high" data-p="3" data-i="4">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="3" data-i="5">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">2<span class="ax">低</span></th>
+            <td class="cell cell-low" data-p="2" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="2" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="3">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+<button type="button" class="marker" data-item="R2" aria-label="2. 國內社區流行風險：機率 低、衝擊 中、矩陣等級 中">2</button>              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="4">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+<button type="button" class="marker" data-item="R3" aria-label="3. 孕婦及未滿 1 歲嬰兒感染風險：機率 低、衝擊 高、矩陣等級 中">3</button>              </span>
+            </td>
+            <td class="cell cell-high" data-p="2" data-i="5">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+          <tr><th scope="row">1<span class="ax">極低</span></th>
+            <td class="cell cell-low" data-p="1" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="3">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="4">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="1" data-i="5">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="matrix-detail" id="matrixDetail" aria-live="polite">
+      <p class="muted">請點選矩陣中的項目編號。</p>
+    </div>
+  </div>
+  <div class="matrix-legend">
+<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="lv lv-vhigh "><svg class="ic" aria-hidden="true"><use href="#lvicon-vhigh"/></svg><span>極高</span></span>    <span class="muted small">矩陣等級 → 三級：低→低、中→中、高→高、極高→高</span>
+  </div>
+  <template id="itemDetails">
+    <div data-item="R1">
+      <h4>1. 境外移入風險</h4>
+      <p>發生機率：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span>　矩陣風險（3×3）：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="muted small">（信心 中）</span></p>
+      <ul class="dash"><li>我國 2026 年已有 1 例自美國（紐約）移入之確定病例，當時美國累計約 1,500 例；目前美國已達 5,412 例。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></li><li>美國已連續 14 週每週新增逾百例，並經 PAHO 判定恢復地方性傳播，短期內不會中斷。 <span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a><a class="cite" href="#ref-S15" title="CIDRAP：&#39;A national embarrassment&#39;: Measles is again endemic in the US">[15]</a></span></li><li>美國病例 41% 為 20 歲以上成人，旅客年齡層之暴露機會增加。 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></li><li>我國 2026 年境外移入來源分散於 8 國，美國僅占 1 例；整體移入壓力主要仍來自亞洲鄰近國家。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>評估期間涵蓋年底假期至農曆春節前，為往返美國之旅遊與返鄉旺季。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span></li></ul>
+      <p><a href="#item-R1">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R2">
+      <h4>2. 國內社區流行風險</h4>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（2×3）：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="muted small">（信心 中）</span></p>
+      <ul class="dash"><li>我國幼兒 MMR 兩劑接種率長年維持 97% 以上（媒體引述疾管署）。 <span class="cites"><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></li><li>2026 年截至 6/2 之 11 例中僅 3 例為國內感染，移入個案引起之群聚規模有限（6 月群聚共 2 例）。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>每例個案皆匡列數百名接觸者並進行健康監測，6 月群聚之續發個案即於監測期間發現。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>麻疹傳染力極強（R0 12–18），出疹前 4 天即具傳染力；自美國移入之個案未出疹、延至腦炎症狀才確診，顯示非典型成人個案可能造成較長之未察覺暴露。 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a></span></li></ul>
+      <p><a href="#item-R2">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R3">
+      <h4>3. 孕婦及未滿 1 歲嬰兒感染風險</h4>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（2×4）：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="muted small">（信心 中）</span></p>
+      <ul class="dash"><li>我國 2026 年病例年齡介於未滿 1 歲至 50 多歲，已有未滿 1 歲嬰兒病例。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>孕婦無法接種活性減毒之 MMR；未滿 1 歲嬰兒尚未達常規接種年齡（滿 12 個月接種第 1 劑）。 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a></span></li><li>我國公費 MMR 對育齡婦女之提供條件與產檢抗體檢測皆以德國麻疹為準，孕婦個人之麻疹免疫狀態通常未知。 <span class="cites"><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象">[6]</a></span></li><li>美國經驗顯示成人病例比例升高時，孕婦病例隨之出現（賓州 101 例孕婦，成人占該州病例三分之二）。 <span class="cites"><a class="cite" href="#ref-S14" title="Anchorage Daily News：Surging measles cases are forcing doctors to treat conditions they&#39;ve never seen">[14]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></li><li>疾管署已建議孕婦及未滿 1 歲嬰幼兒避免前往流行區，美國升為第二級後該建議適用於美國全境。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></li></ul>
+      <p><a href="#item-R3">至風險評估表該列</a></p>
+    </div>
+    <div data-item="R4">
+      <h4>4. 衝擊</h4>
+      <p>衝擊：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="muted small">（信心 中）</span></p>
+      <ul class="dash"><li>一般病例約 5–10% 產生併發症（中耳炎、肺炎、腦炎）；兒童致死率估計每 1,000 例未接種兒童 1–3 例。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：麻疹－疾病介紹">[5]</a><a class="cite" href="#ref-S10" title="CIDRAP：2 more people die of measles complications as US cases top 5,400">[10]</a></span></li><li>孕婦為重症最高風險族群之一，感染可致流產、早產與低出生體重；系統性回顧中孕婦病例 4.3% 死亡。 <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a><a class="cite" href="#ref-S17" title="Journal of Infection (PubMed)：Measles in pregnant women: A systematic review of clinical outcomes and a meta-analysis of antibodies seroprevalence">[17]</a></span></li><li>有安全有效之疫苗（效力至少 95%），我國幼兒兩劑接種率 97% 以上；無特效抗病毒藥物。 <span class="cites"><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></li><li>公衛量能負擔重：每例個案匡列 339–719 名接觸者並監測約 3 週。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a></span></li><li>麻疹會削弱既有免疫力，病後一段時間對其他感染之易感性上升。 <span class="cites"><a class="cite" href="#ref-S8" title="World Health Organization：Measles (fact sheet)">[8]</a></span></li><li>美國孕婦與新生兒死亡之報導及我國調升旅遊警示，可能引發民眾（特別是孕婦與嬰幼兒家長）對疫苗與赴美旅遊之詢問增加。 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a><a class="cite" href="#ref-S12" title="中央通訊社：疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往">[12]</a></span></li></ul>
+      <p><a href="#item-R4">至風險評估表該列</a></p>
+    </div>
+  </template>
+
+  <div class="whatif" id="whatif" role="region" aria-labelledby="wi-h">
+    <h3 id="wi-h"><span class="trial-tag">試算</span>情境試算（非正式結果）</h3>
+    <p class="small">調整任一項目之機率或衝擊，查看依同一矩陣計算之結果變化。<strong>試算不會改變本報告之正式評估結果。</strong></p>
+    <div class="wi-controls">
+      <label>項目<select id="wiItem"></select></label>
+      <label>機率<select id="wiP"></select></label>
+      <label>衝擊<select id="wiI"></select></label>
+      <button type="button" class="btn" id="wiReset">重設</button>
+    </div>
+    <div class="wi-out" aria-live="polite" id="wiOut"></div>
+  </div>
+</section>
+
+<!-- 6. Scenarios + IHR ================================================= -->
+<section id="sec-scenario" class="card" aria-labelledby="h-scn">
+  <h2 id="h-scn"><span class="secno">6</span>情境分析與 IHR 附件二篩檢</h2>
+  <div class="scenarios">
+    <article class="scn scn-best">
+      <h3>最佳情境 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></h3>
+      <p>美國疫情於冬季趨緩，我國未再出現自美國移入病例，其他國家之移入個案均於接觸者監測下中斷傳播。</p>
+<h4>假設</h4><ul><li>美國每週新增病例降至百例以下</li><li>赴美旅客行前評估接種比例提高</li></ul>      <h4>對我國的意涵</h4><p>維持第二級警示與例行衛教；3 個月無自美移入病例且美國趨緩後可檢討調降。</p>
+    </article>
+    <article class="scn scn-likely">
+      <h3>最可能情境 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></h3>
+      <p>美國疫情持續，年底假期至農曆春節前後我國出現 1–2 例自美國移入病例，每例匡列數百名接觸者，可能引起家戶或職場之侷限性續發。</p>
+<h4>假設</h4><ul><li>美國維持每週逾百例新增</li><li>移入個案多為未具免疫力之成人，部分表現不典型</li></ul>      <h4>對我國的意涵</h4><p>重點在醫界對成人非典型表現之警覺、接觸者中孕婦與嬰兒之即時辨識與暴露後預防，以及地方衛生局之追蹤量能。</p>
+    </article>
+    <article class="scn scn-worst">
+      <h3>最壞情境 <span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></h3>
+      <p>移入個案延遲診斷，於醫療院所（急診、婦產科、兒科）造成暴露，接觸者中含多名孕婦與未滿 1 歲嬰兒並出現續發重症。</p>
+<h4>假設</h4><ul><li>個案未出疹或未主動告知旅遊史</li><li>院內暴露後才通報</li><li>免疫球蛋白供應或給予時效不足</li></ul>      <h4>對我國的意涵</h4><p>需啟動院內群聚處置、優先對孕婦與嬰兒接觸者進行暴露後預防，並同步進行風險溝通以避免恐慌。</p>
+    </article>
+  </div>
+
+  <h3>IHR（2005）附件二決策工具篩檢</h3>
+  <p class="small muted">以事件發生國（美國）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定，亦不代表本事件構成國際關注公共衛生緊急事件。</p>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">理由</th></tr></thead>
+    <tbody>
+      <tr><td data-th="問題">一、事件對公共衛生的影響是否嚴重？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="理由">2026 年逾 5,400 例、6–10 例死亡，並出現孕婦與新生兒死亡，為美國數十年來最大規模疫情。 <span class="cites"><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a><a class="cite" href="#ref-S10" title="CIDRAP：2 more people die of measles complications as US cases top 5,400">[10]</a><a class="cite" href="#ref-S13" title="Pennsylvania Department of Health：Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties">[13]</a></span></td></tr>
+      <tr><td data-th="問題">二、事件是否不尋常或非預期？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="理由">美國自 2000 年宣布消除麻疹後，首度被判定恢復地方性傳播；成人與孕婦病例比例高亦異於以往。 <span class="cites"><a class="cite" href="#ref-S15" title="CIDRAP：&#39;A national embarrassment&#39;: Measles is again endemic in the US">[15]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></td></tr>
+      <tr><td data-th="問題">三、是否有國際傳播的顯著風險？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="理由">已有病例自美國輸出至其他國家（我國 2026 年 3 月 1 例）；麻疹傳染力極強且美國國際旅運量大。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S9" title="European Centre for Disease Prevention and Control：Disease information on measles (factsheet)">[9]</a></span></td></tr>
+      <tr><td data-th="問題">四、是否有限制國際旅行或貿易的顯著風險？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="理由">本次未查得任何國家或 WHO 對美國採取旅行或貿易限制；我國措施為旅遊疫情建議（提醒加強防護），非限制。 <span class="cites"><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="ihr-result"><strong>篩檢結果：</strong>四問題中 3 項為「是」（≥2），符合附件二通報門檻。</p>
+</section>
+
+<!-- 7. Recommendations ================================================= -->
+<section id="sec-recs" class="card" aria-labelledby="h-recs">
+  <h2 id="h-recs"><span class="secno">7</span>建議事項</h2>
+  <div class="filters" role="group" aria-label="篩選建議事項">
+    <label>類別<select id="fCat"><option value="">全部</option><option>醫療整備</option><option>監測通報</option><option>邊境檢疫</option><option>風險溝通</option><option>跨部會與國際合作</option></select></label>
+    <label>優先順序<select id="fPri"><option value="">全部</option><option>高</option><option>中</option><option>低</option></select></label>
+    <label>時程<select id="fTime"><option value="">全部</option><option>24小時</option><option>1週</option><option>1個月</option></select></label>
+    <span class="muted small" id="fCount" aria-live="polite">共 8 項</span>
+  </div>
+  <ul class="recs" id="recList">
+    <li class="rec" data-cat="醫療整備" data-pri="高" data-time="1週">
+      <div class="rec-head"><span class="chip">醫療整備</span><span class="pri pri-h">優先：高</span><span class="chip">1週</span><span class="muted small">A1</span></div>
+      <p>發布致醫界通函（特別是急診、婦產科、兒科與旅遊醫學門診）：具美國等流行區旅遊史之發燒病人，即使未出疹亦應考慮麻疹；孕婦就診時落實 TOCC 詢問，疑似個案依院內處置指引採空氣傳染防護。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a><a class="cite" href="#ref-S7" title="衛生福利部疾病管制署：麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）">[7]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：急性傳染病組）｜理由：我國自美移入個案及美國孕婦病例均有不典型表現；延遲診斷為最壞情境之起點</div>
+    </li>
+    <li class="rec" data-cat="醫療整備" data-pri="高" data-time="1週">
+      <div class="rec-head"><span class="chip">醫療整備</span><span class="pri pri-h">優先：高</span><span class="chip">1週</span><span class="muted small">A2</span></div>
+      <p>盤點免疫球蛋白（IMIG／IVIG）庫存與調度流程，確認孕婦、未滿 1 歲嬰兒及免疫不全之接觸者可於時效內完成暴露後預防。 <span class="cites"><a class="cite" href="#ref-S7" title="衛生福利部疾病管制署：麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）">[7]</a><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：急性傳染病組會同整備單位）｜理由：孕婦無法以疫苗進行暴露後預防，免疫球蛋白為唯一選項且有時效限制</div>
+    </li>
+    <li class="rec" data-cat="監測通報" data-pri="中" data-time="1個月">
+      <div class="rec-head"><span class="chip">監測通報</span><span class="pri pri-m">優先：中</span><span class="chip">1個月</span><span class="muted small">A3</span></div>
+      <p>於個案疫調與接觸者匡列表單中明確標記「孕婦」與「未滿 1 歲嬰兒」，並統計其暴露後預防完成率與結果。 <span class="cites"><a class="cite" href="#ref-S1" title="CIDRAP：At least 178 pregnant Americans have been infected with measles since 2025">[1]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心）及地方衛生局｜理由：美國因未系統性蒐集懷孕狀態，至今無法掌握孕婦病例總數與預後</div>
+    </li>
+    <li class="rec" data-cat="監測通報" data-pri="中" data-time="24小時">
+      <div class="rec-head"><span class="chip">監測通報</span><span class="pri pri-m">優先：中</span><span class="chip">24小時</span><span class="muted small">A4</span></div>
+      <p>每週追蹤美國 CDC、賓州衛生部及 PAHO 公布之病例數與我國自美移入情形，並更新我國 2026 年累計病例之公開說明。 <span class="cites"><a class="cite" href="#ref-S4" title="衛生福利部疾病管制署：國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師">[4]</a><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a><a class="cite" href="#ref-S13" title="Pennsylvania Department of Health：Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties">[13]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：疫情中心）｜理由：本次查得之我國最新公開麻疹累計數字停留於 6/2</div>
+    </li>
+    <li class="rec" data-cat="邊境檢疫" data-pri="中" data-time="1週">
+      <div class="rec-head"><span class="chip">邊境檢疫</span><span class="pri pri-m">優先：中</span><span class="chip">1週</span><span class="muted small">A5</span></div>
+      <p>於美國直航航班入境動線與航空公司加強宣導：返國 3 週內出現發燒、紅疹等症狀應戴口罩就醫並主動告知旅遊史；入境時有症狀者主動告知檢疫人員。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S2" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級開放資料（JSON）">[2]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：檢疫單位）｜理由：與既有麻疹流行區返國建議一致，配合美國升為第二級加強執行</div>
+    </li>
+    <li class="rec" data-cat="風險溝通" data-pri="高" data-time="1週">
+      <div class="rec-head"><span class="chip">風險溝通</span><span class="pri pri-h">優先：高</span><span class="chip">1週</span><span class="muted small">A6</span></div>
+      <p>針對孕婦、備孕婦女及嬰幼兒家長發布衛教：孕婦與未滿 1 歲嬰兒避免前往美國等流行區；備孕婦女如不確定免疫力，可於孕前諮詢接種 MMR（接種後 4 週內避免懷孕）；6 個月以上未滿 1 歲嬰兒如須前往，行前諮詢自費接種。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象">[6]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：公關室會同急性傳染病組）；協同國民健康署｜理由：美國孕婦與新生兒死亡報導可能引發詢問，應提供明確可行之指引</div>
+    </li>
+    <li class="rec" data-cat="風險溝通" data-pri="中" data-time="1週">
+      <div class="rec-head"><span class="chip">風險溝通</span><span class="pri pri-m">優先：中</span><span class="chip">1週</span><span class="muted small">A7</span></div>
+      <p>提醒 1966 年（含）以後出生、計劃於年底假期或農曆春節赴美之成人，出國前 2 至 4 週至旅遊醫學門診評估接種 MMR。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護">[3]</a><a class="cite" href="#ref-S11" title="US Centers for Disease Control and Prevention：Measles Cases and Outbreaks">[11]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：公關室）｜理由：美國 41% 病例為成人，旅客年齡層暴露機會高</div>
+    </li>
+    <li class="rec" data-cat="跨部會與國際合作" data-pri="低" data-time="1個月">
+      <div class="rec-head"><span class="chip">跨部會與國際合作</span><span class="pri pri-l">優先：低</span><span class="chip">1個月</span><span class="muted small">A8</span></div>
+      <p>研議蒐集或分析我國育齡婦女之麻疹抗體陽性率（例如利用既有血清流行病學資料），評估是否需調整育齡婦女 MMR 接種建議。 <span class="cites"><a class="cite" href="#ref-S6" title="衛生福利部疾病管制署：育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象">[6]</a></span></p>
+      <div class="small muted">主責：疾管署（建議：預防接種單位，提報 ACIP 討論）｜理由：現行公費 MMR 與產檢以德國麻疹抗體為準，孕婦麻疹免疫缺口未知</div>
+    </li>
+  </ul>
+  <p class="muted" id="recEmpty" hidden>沒有符合篩選條件的建議事項。</p>
+</section>
+
+<!-- 8. Limitations / method / refs ===================================== -->
+<section id="sec-limits" class="card" aria-labelledby="h-lim">
+  <h2 id="h-lim"><span class="secno">8</span>限制與不確定性、方法說明、參考資料</h2>
+  <h3>限制與不確定性</h3>
+  <ul class="bullets"><li>網路限制：cdc.gov、pa.gov、paho.org、pubmed/pmc、cna.com.tw、nidss.cdc.gov.tw、gov.uk 於本次執行環境無法連線，相關數字（美國 CDC 病例數與年齡分布、賓州衛生部數字、PAHO 決定、孕婦預後系統性回顧、疾管署 11/17 說明）僅取得搜尋結果摘要，未讀得原文。</li><li>疾管署網站之 PDF 附件（暴露後預防建議措施、院內處置指引、2025 年消除狀況報告）下載時回傳網頁而非檔案，內文未取得；我國 MMR 接種率僅有媒體引述之數字。</li><li>我國 2026 年 6 月 2 日之後之麻疹病例數、國人赴美旅次、育齡婦女麻疹抗體陽性率及免疫球蛋白庫存均未取得，境外移入與孕婦感染機率之判斷含推論成分。</li><li>被查證新聞之核心數字為記者向各州彙整之下限，且自身不一致（178／167／列舉加總 174）；美國並無全國性孕婦麻疹病例官方統計可供比對。</li><li>美國死亡數有兩種口徑（CDC 確認 6 例、各州通報 10 例），本報告並列呈現。</li><li>5×5 矩陣之分級界線與機率量化錨點為本工具自訂，尚未與 ECDC 2019 操作工具原文校正。</li><li>本評估依現有資訊判定，將視新增實證適時調整。</li></ul>
+  <p>本風險評估係依據現有資訊判定風險等級，將視新增實證適時調整判定。</p>
+
+  <details class="issues" >
+    <summary>自動檢核結果：錯誤 0、警告 10、提示 0</summary>
+    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「WHO、ECDC 針對美國疫情之旅行建議或風險評估，本次未查得。…」<code>international.external_assessments</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「2026 年 6 月之後之我國麻疹病例數，本次未能取得（傳染病統計資料查詢系統無…」<code>taiwan.surveillance</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「國人赴美旅次、年底假期與農曆春節前後之往返人數，本次未取得。…」<code>taiwan.border_travel</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「我國育齡婦女之麻疹抗體陽性率與免疫球蛋白（IVIG／IMIG）庫存量，本次未查得…」<code>taiwan.healthcare</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「評估期間涵蓋年底假期至農曆春節前，為往返美國之旅遊與返鄉旺季。…」<code>risk_items[R1]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C1：支持來源僅取得搜尋摘要，未讀取全文<code>claims[C1]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C2：支持來源僅取得搜尋摘要，未讀取全文<code>claims[C2]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C3：支持來源僅取得搜尋摘要，未讀取全文<code>claims[C3]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C4：支持來源僅取得搜尋摘要，未讀取全文<code>claims[C4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>陳述 C5：支持來源僅取得搜尋摘要，未讀取全文<code>claims[C5]</code></li></ul>
+  </details>
+
+  <h3>方法說明</h3>
+  <ol class="method">
+    <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
+    <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
+    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>如原文章，每一機率類項目之評估結果為發生機率（1–2 低、3 中、4–5 高），衝擊另列（1–2 低、3 中、4–5 高）；各機率類項目另以機率×衝擊查下表得「矩陣風險」。綜合研判取各機率類項目之最高矩陣風險，再對應三級（極高→高）。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
+    <li><strong>升級篩檢：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另列參考 UKHSA HAIRS 流程之篩檢問題。</li>
+    <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
+  </ol>
+  <div class="table-wrap">
+  <table class="tbl mini-matrix">
+    <caption>風險矩陣（epi-risk-5x5-v1）：列＝機率，欄＝衝擊</caption>
+    <thead><tr><th scope="col">機率＼衝擊</th><th scope="col">1 極低</th><th scope="col">2 低</th><th scope="col">3 中</th><th scope="col">4 高</th><th scope="col">5 極高</th></tr></thead>
+    <tbody><tr><th scope="row">5 極高</th><td>中</td><td>高</td><td>高</td><td>極高</td><td>極高</td></tr><tr><th scope="row">4 高</th><td>低</td><td>中</td><td>高</td><td>極高</td><td>極高</td></tr><tr><th scope="row">3 中</th><td>低</td><td>中</td><td>中</td><td>高</td><td>高</td></tr><tr><th scope="row">2 低</th><td>低</td><td>低</td><td>中</td><td>中</td><td>高</td></tr><tr><th scope="row">1 極低</th><td>低</td><td>低</td><td>低</td><td>低</td><td>中</td></tr></tbody>
+  </table>
+  </div>
+  <p class="small muted">工具版本 0.1.0｜方法版本 2026.11-v1｜產出模式：claude-code-skill（claude-fable-5-2）｜以 Claude Code 技能路徑產出。可直接讀取全文之主機：cdc.gov.tw、who.int、ecdc.europa.eu、cidrap.umn.edu；cdc.gov、pa.gov、paho.org、pubmed/pmc、cna.com.tw、nidss.cdc.gov.tw、gov.uk 無法連線，僅取得搜尋摘要。</p>
+
+  <h3>參考資料</h3>
+  <ol class="refs">
+    <li id="ref-S1">
+      <span class="ref-id">S1</span>
+<a href="https://www.cidrap.umn.edu/measles/least-178-pregnant-americans-have-been-infected-measles-2025" rel="noopener noreferrer">At least 178 pregnant Americans have been infected with measles since 2025</a>.
+      CIDRAP. 2026-11-17.      <span class="muted small">主流媒體｜取得方式：全文｜取用 2026-11-19｜被查證之新聞｜被查證之新聞；使用者貼上全文，並以 curl 讀取原頁比對關鍵句</span>
+<div class="url small">https://www.cidrap.umn.edu/measles/least-178-pregnant-americans-have-been-infected-measles-2025</div>    </li>
+    <li id="ref-S2">
+      <span class="ref-id">S2</span>
+<a href="https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON" rel="noopener noreferrer">國際間旅遊疫情建議等級開放資料（JSON）</a>.
+      衛生福利部疾病管制署. 2026-11-17.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜下載全檔後以程式篩選「麻疹」紀錄；各國現行等級取最新一筆</span>
+<div class="url small">https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON</div>    </li>
+    <li id="ref-S3">
+      <span class="ref-id">S3</span>
+<a href="https://www.cdc.gov.tw/Bulletin/Detail/rLPw84BE1BElUb8OebRuhA?typeid=9" rel="noopener noreferrer">國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護</a>.
+      衛生福利部疾病管制署. 2026-03-31.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.cdc.gov.tw/Bulletin/Detail/rLPw84BE1BElUb8OebRuhA?typeid=9</div>    </li>
+    <li id="ref-S4">
+      <span class="ref-id">S4</span>
+<a href="https://www.cdc.gov.tw/Bulletin/Detail/RQMqkQ2-D6sOpVi8dnV75w?typeid=9" rel="noopener noreferrer">國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師</a>.
+      衛生福利部疾病管制署. 2026-06-02.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜以關鍵字「麻疹」搜尋疾管署新聞稿所得之最新一則；6 月之後未見新的麻疹新聞稿</span>
+<div class="url small">https://www.cdc.gov.tw/Bulletin/Detail/RQMqkQ2-D6sOpVi8dnV75w?typeid=9</div>    </li>
+    <li id="ref-S5">
+      <span class="ref-id">S5</span>
+<a href="https://www.cdc.gov.tw/Category/Page/73T9QxZDqlVYayLyfrBN5Q" rel="noopener noreferrer">麻疹－疾病介紹</a>.
+      衛生福利部疾病管制署. 2018-12-12.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜頁面標示最後更新日期 2018/12/12</span>
+<div class="url small">https://www.cdc.gov.tw/Category/Page/73T9QxZDqlVYayLyfrBN5Q</div>    </li>
+    <li id="ref-S6">
+      <span class="ref-id">S6</span>
+<a href="https://www.cdc.gov.tw/Category/Page/OnPyMiYwouZrYhY7noxjKQ" rel="noopener noreferrer">育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象</a>.
+      衛生福利部疾病管制署. 2019-02-21.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜頁面標示最後更新日期 2019/2/21</span>
+<div class="url small">https://www.cdc.gov.tw/Category/Page/OnPyMiYwouZrYhY7noxjKQ</div>    </li>
+    <li id="ref-S7">
+      <span class="ref-id">S7</span>
+<a href="https://www.cdc.gov.tw/Category/MPage/cXOGgsKTJ5MG4SyOAF2fng" rel="noopener noreferrer">麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）</a>.
+      衛生福利部疾病管制署.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜僅讀得指引清單頁；各 PDF 附件下載時回傳網頁而非檔案，指引內文未取得</span>
+<div class="url small">https://www.cdc.gov.tw/Category/MPage/cXOGgsKTJ5MG4SyOAF2fng</div>    </li>
+    <li id="ref-S8">
+      <span class="ref-id">S8</span>
+<a href="https://www.who.int/news-room/fact-sheets/detail/measles" rel="noopener noreferrer">Measles (fact sheet)</a>.
+      World Health Organization. 2026-07-15.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19</span>
+<div class="url small">https://www.who.int/news-room/fact-sheets/detail/measles</div>    </li>
+    <li id="ref-S9">
+      <span class="ref-id">S9</span>
+<a href="https://www.ecdc.europa.eu/en/measles/facts" rel="noopener noreferrer">Disease information on measles (factsheet)</a>.
+      European Centre for Disease Prevention and Control. 2023-11-28.      <span class="muted small">官方衛生機關/國際組織｜取得方式：全文｜取用 2026-11-19｜頁面標示 Page last updated 28 November 2023</span>
+<div class="url small">https://www.ecdc.europa.eu/en/measles/facts</div>    </li>
+    <li id="ref-S10">
+      <span class="ref-id">S10</span>
+<a href="https://www.cidrap.umn.edu/measles/2-more-people-die-measles-complications-us-cases-top-5400" rel="noopener noreferrer">2 more people die of measles complications as US cases top 5,400</a>.
+      CIDRAP.      <span class="muted small">主流媒體｜取得方式：全文｜取用 2026-11-19｜與被查證新聞同一發布者，不作為獨立查證來源，僅供疫情概況</span>
+<div class="url small">https://www.cidrap.umn.edu/measles/2-more-people-die-measles-complications-us-cases-top-5400</div>    </li>
+    <li id="ref-S11">
+      <span class="ref-id">S11</span>
+<a href="https://www.cdc.gov/measles/data-research/index.html" rel="noopener noreferrer">Measles Cases and Outbreaks</a>.
+      US Centers for Disease Control and Prevention.      <span class="muted small">官方衛生機關/國際組織｜取得方式：搜尋摘要｜取用 2026-11-19｜cdc.gov 無法連線；數字取自搜尋結果摘要（截至 2026-11-12）</span>
+<div class="url small">https://www.cdc.gov/measles/data-research/index.html</div>    </li>
+    <li id="ref-S12">
+      <span class="ref-id">S12</span>
+<a href="https://www.cna.com.tw/news/ahel/202611170156.aspx" rel="noopener noreferrer">疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往</a>.
+      中央通訊社. 2026-11-17.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜cna.com.tw 無法連線；內容取自搜尋結果摘要（彙整多家媒體對疾管署 11/17 說明之報導）</span>
+<div class="url small">https://www.cna.com.tw/news/ahel/202611170156.aspx</div>    </li>
+    <li id="ref-S13">
+      <span class="ref-id">S13</span>
+<a href="https://www.pa.gov/agencies/health/newsroom/pa-department-of-health-confirms-eighth-measles-associated-death" rel="noopener noreferrer">Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties</a>.
+      Pennsylvania Department of Health. 2026-11-18.      <span class="muted small">官方衛生機關/國際組織｜取得方式：搜尋摘要｜取用 2026-11-19｜pa.gov 無法連線；僅取得新聞稿標題與搜尋摘要</span>
+<div class="url small">https://www.pa.gov/agencies/health/newsroom/pa-department-of-health-confirms-eighth-measles-associated-death</div>    </li>
+    <li id="ref-S14">
+      <span class="ref-id">S14</span>
+<a href="https://www.adn.com/nation-world/2026/11/14/surging-measles-cases-are-forcing-doctors-to-treat-conditions-theyve-never-seen/" rel="noopener noreferrer">Surging measles cases are forcing doctors to treat conditions they&#39;ve never seen</a>.
+      Anchorage Daily News. 2026-11-14.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得搜尋摘要</span>
+<div class="url small">https://www.adn.com/nation-world/2026/11/14/surging-measles-cases-are-forcing-doctors-to-treat-conditions-theyve-never-seen/</div>    </li>
+    <li id="ref-S15">
+      <span class="ref-id">S15</span>
+<a href="https://www.cidrap.umn.edu/measles/national-embarrassment-measles-again-endemic-us" rel="noopener noreferrer">&#39;A national embarrassment&#39;: Measles is again endemic in the US</a>.
+      CIDRAP.      <span class="muted small">主流媒體｜取得方式：全文｜取用 2026-11-19｜與被查證新聞同一發布者，不作為獨立查證來源</span>
+<div class="url small">https://www.cidrap.umn.edu/measles/national-embarrassment-measles-again-endemic-us</div>    </li>
+    <li id="ref-S16">
+      <span class="ref-id">S16</span>
+<a href="https://www.cnbc.com/2026/11/17/us-measles-elimination-status.html" rel="noopener noreferrer">U.S. officially loses measles elimination status amid ongoing outbreaks</a>.
+      CNBC. 2026-11-17.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得搜尋摘要；paho.org 無法連線，未讀得 PAHO 正式公告</span>
+<div class="url small">https://www.cnbc.com/2026/11/17/us-measles-elimination-status.html</div>    </li>
+    <li id="ref-S17">
+      <span class="ref-id">S17</span>
+<a href="https://pubmed.ncbi.nlm.nih.gov/31891729/" rel="noopener noreferrer">Measles in pregnant women: A systematic review of clinical outcomes and a meta-analysis of antibodies seroprevalence</a>.
+      Journal of Infection (PubMed).      <span class="muted small">同儕審查文獻｜取得方式：搜尋摘要｜取用 2026-11-19｜pubmed 無法連線；數字取自搜尋結果摘要</span>
+<div class="url small">https://pubmed.ncbi.nlm.nih.gov/31891729/</div>    </li>
+    <li id="ref-S18">
+      <span class="ref-id">S18</span>
+<a href="https://www.news-medical.net/news/20261118/What-happens-to-a-baby-when-its-mother-catches-measles-during-pregnancy.aspx" rel="noopener noreferrer">What happens to a baby when its mother catches measles during pregnancy?</a>.
+      News-Medical. 2026-11-18.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得搜尋摘要；摘要稱該報告為「美國 CDC 初步監測報告」，CIDRAP 則稱為 Public Health Alerts 報告，原報告未取得</span>
+<div class="url small">https://www.news-medical.net/news/20261118/What-happens-to-a-baby-when-its-mother-catches-measles-during-pregnancy.aspx</div>    </li>
+    <li id="ref-S19">
+      <span class="ref-id">S19</span>
+<a href="https://www.powershealth.org/about-us/newsroom/health-library/2026/11/05/new-mothers-death-adds-to-measles-toll-as-pregnancy-warnings-grow" rel="noopener noreferrer">New Mother&#39;s Death Adds to Measles Toll as Pregnancy Warnings Grow</a>.
+      HealthDay（Powers Health 轉載）. 2026-11-05.      <span class="muted small">主流媒體｜取得方式：搜尋摘要｜取用 2026-11-19｜僅取得標題與日期；《華盛頓郵報》原報導未取得</span>
+<div class="url small">https://www.powershealth.org/about-us/newsroom/health-library/2026/11/05/new-mothers-death-adds-to-measles-toll-as-pregnancy-warnings-grow</div>    </li>
+  </ol>
+
+  <div class="disclaimer final" role="note">
+    <svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
+    <div><strong>免責聲明：</strong>本報告由 AI 協助蒐集證據並產生草稿，風險等級由確定性規則計算；所有內容須經流行病學專業人員審閱、確認來源後方可使用。資料截止時間：2026-11-19 12:50（UTC+08:00）。</div>
+  </div>
+</section>
+</main>
+
+<div class="tooltip" id="tip" role="tooltip" hidden></div>
+<script type="application/json" id="report-data">{"matrix":{"1":{"1":"低","2":"低","3":"低","4":"低","5":"中"},"2":{"1":"低","2":"低","3":"中","4":"中","5":"高"},"3":{"1":"低","2":"中","3":"中","4":"高","5":"高"},"4":{"1":"低","2":"中","3":"高","4":"極高","5":"極高"},"5":{"1":"中","2":"高","3":"高","4":"極高","5":"極高"}},"matrixTo3":{"低":"低","中":"中","高":"高","極高":"高"},"impactTo3":{"1":"低","2":"低","3":"中","4":"高","5":"高"},"probTo3":{"1":"低","2":"低","3":"中","4":"高","5":"高"},"pLabels":{"1":"極低","2":"低","3":"中","4":"高","5":"極高"},"iLabels":{"1":"極低","2":"低","3":"中","4":"高","5":"極高"},"levelClass":{"低":"low","中":"mod","高":"high","極高":"vhigh"},"items":[{"id":"R1","n":1,"name":"境外移入風險","kind":"機率","p":3,"i":null,"inherit":true,"computed":"中","matrix":"中","matrix3":"中","proposed":"中","confidence":"中"},{"id":"R2","n":2,"name":"國內社區流行風險","kind":"機率","p":2,"i":null,"inherit":true,"computed":"低","matrix":"中","matrix3":"中","proposed":"低","confidence":"中"},{"id":"R3","n":3,"name":"孕婦及未滿 1 歲嬰兒感染風險","kind":"機率","p":2,"i":4,"inherit":false,"computed":"低","matrix":"中","matrix3":"中","proposed":"低","confidence":"中"},{"id":"R4","n":4,"name":"衝擊","kind":"衝擊","p":null,"i":3,"inherit":false,"computed":"中","matrix":null,"matrix3":null,"proposed":"中","confidence":"中"}],"overall":{"computed":"中","matrix":"中","p":3,"i":3,"from":"R1"},"timeseries":[]}</script>
+<script>(function () {
+  "use strict";
+  var data;
+  try { data = JSON.parse(document.getElementById("report-data").textContent); } catch (e) { data = null; }
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  /* ---------- theme ---------------------------------------------------- */
+  var THEMES = ["auto", "light", "dark"];
+  var THEME_LABEL = { auto: "主題：自動", light: "主題：淺色", dark: "主題：深色" };
+  function applyTheme(t) {
+    if (t === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+    var b = $("themeBtn"); if (b) b.textContent = THEME_LABEL[t];
+  }
+  var theme = "auto";
+  try { theme = localStorage.getItem("epi-risk-theme") || "auto"; } catch (e) { /* storage unavailable */ }
+  if (THEMES.indexOf(theme) < 0) theme = "auto";
+  applyTheme(theme);
+  if ($("themeBtn")) $("themeBtn").addEventListener("click", function () {
+    theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+    applyTheme(theme);
+    try { localStorage.setItem("epi-risk-theme", theme); } catch (e) { /* ignore */ }
+  });
+
+  /* ---------- print: expand all <details> ------------------------------- */
+  var reopened = [];
+  window.addEventListener("beforeprint", function () {
+    reopened = [];
+    document.querySelectorAll("details:not([open])").forEach(function (d) { d.open = true; reopened.push(d); });
+  });
+  window.addEventListener("afterprint", function () { reopened.forEach(function (d) { d.open = false; }); reopened = []; });
+  if ($("printBtn")) $("printBtn").addEventListener("click", function () { window.print(); });
+
+  /* ---------- tooltip --------------------------------------------------- */
+  var tip = $("tip");
+  function showTip(text, x, y) {
+    if (!tip) return;
+    tip.textContent = text; tip.hidden = false;
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(Math.max(8, x + 12), window.innerWidth - w - 8);
+    var top = y - h - 10; if (top < 8) top = y + 16;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+  function hideTip() { if (tip) tip.hidden = true; }
+  document.querySelectorAll(".bar-row[data-tip]").forEach(function (row) {
+    row.addEventListener("pointermove", function (ev) { showTip(row.getAttribute("data-tip"), ev.clientX, ev.clientY); });
+    row.addEventListener("pointerleave", hideTip);
+    row.addEventListener("focus", function () { var r = row.getBoundingClientRect(); showTip(row.getAttribute("data-tip"), r.left + r.width / 2, r.top); });
+    row.addEventListener("blur", hideTip);
+  });
+
+  if (!data) return;
+
+  /* ---------- matrix detail -------------------------------------------- */
+  var detail = $("matrixDetail");
+  var tpl = $("itemDetails");
+  function showItem(id, btn) {
+    if (!detail || !tpl) return;
+    var src = tpl.content.querySelector('[data-item="' + CSS.escape(id) + '"]');
+    detail.innerHTML = "";
+    if (src) detail.appendChild(src.cloneNode(true));
+    document.querySelectorAll(".marker[data-item]").forEach(function (m) { m.setAttribute("aria-pressed", m === btn ? "true" : "false"); });
+  }
+  document.querySelectorAll(".marker[data-item]").forEach(function (m) {
+    m.setAttribute("aria-pressed", "false");
+    m.addEventListener("click", function () { showItem(m.getAttribute("data-item"), m); });
+  });
+
+  /* ---------- what-if (試算) -------------------------------------------- */
+  var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3, P3 = data.probTo3;
+  var ORDER = { "低": 0, "中": 1, "高": 2, "極高": 3 };
+  var items = data.items;
+  var trial = {};
+  function resetTrial() { trial = {}; items.forEach(function (it) { trial[it.id] = { p: it.p, i: it.inherit ? null : it.i }; }); }
+  resetTrial();
+
+  function compute(state) {
+    var shared = null;
+    items.forEach(function (it) { if (it.kind === "衝擊") { var v = state[it.id].i; if (shared === null || v > shared) shared = v; } });
+    var res = {}, best = null;
+    items.forEach(function (it) {
+      var s = state[it.id];
+      if (it.kind === "衝擊") { res[it.id] = { level: I3[String(s.i)], matrix: null, p: null, i: s.i }; return; }
+      var ii = s.i == null ? shared : s.i;
+      var m = M[String(s.p)][String(ii)];
+      // item result = probability of occurrence alone (article convention); P x I kept as matrix risk
+      res[it.id] = { level: P3[String(s.p)], matrix: m, p: s.p, i: ii };
+      if (!best || ORDER[m] > ORDER[best.matrix] || (ORDER[m] === ORDER[best.matrix] && s.p > best.p)) best = { matrix: m, p: s.p, i: ii, id: it.id };
+    });
+    return { items: res, overall: best ? { level: M3[best.matrix], matrix: best.matrix, from: best.id } : null };
+  }
+  var official = compute(trial);
+
+  var selItem = $("wiItem"), selP = $("wiP"), selI = $("wiI"), out = $("wiOut");
+  function opt(sel, value, label) { var o = el("option", null, label); o.value = value; sel.appendChild(o); }
+  function fillScores(sel, labels, allowInherit) {
+    sel.innerHTML = "";
+    if (allowInherit) opt(sel, "", "沿用衝擊項目");
+    for (var k = 1; k <= 5; k++) opt(sel, String(k), k + "（" + labels[String(k)] + "）");
+  }
+  function itemById(id) { for (var k = 0; k < items.length; k++) if (items[k].id === id) return items[k]; return null; }
+
+  function syncControls() {
+    var it = itemById(selItem.value); if (!it) return;
+    var s = trial[it.id];
+    fillScores(selP, data.pLabels, false);
+    fillScores(selI, data.iLabels, it.kind === "機率" && it.inherit);
+    selP.disabled = it.kind === "衝擊";
+    selP.value = s.p == null ? "" : String(s.p);
+    selI.value = s.i == null ? "" : String(s.i);
+  }
+
+  function badge(level) {
+    var span = el("span", "lv lv-" + data.levelClass[level]);
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "ic"); svg.setAttribute("aria-hidden", "true");
+    var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "#lvicon-" + data.levelClass[level]);
+    svg.appendChild(use); span.appendChild(svg); span.appendChild(el("span", null, level));
+    return span;
+  }
+
+  function placeGhost(res) {
+    document.querySelectorAll(".marker.ghost").forEach(function (g) { g.remove(); });
+    items.forEach(function (it) {
+      var r = res.items[it.id], o = official.items[it.id];
+      if (it.kind !== "機率" || (r.p === o.p && r.i === o.i)) return;
+      var cell = document.querySelector('.cell[data-p="' + r.p + '"][data-i="' + r.i + '"] .markers');
+      if (!cell) return;
+      var g = el("span", "marker ghost", String(it.n));
+      g.setAttribute("title", "試算位置：" + it.name); g.setAttribute("aria-hidden", "true");
+      g.style.display = "inline-grid"; g.style.placeItems = "center";
+      cell.appendChild(g);
+    });
+  }
+
+  function renderTrial() {
+    var res = compute(trial);
+    out.innerHTML = "";
+    var tbl = el("table", "tbl");
+    var thead = el("thead"); var hr = el("tr");
+    ["項目", "正式結果", "試算結果", "變化"].forEach(function (h) { var th = el("th", null, h); th.scope = "col"; hr.appendChild(th); });
+    thead.appendChild(hr); tbl.appendChild(thead);
+    var tb = el("tbody");
+    function cell(r, label) {
+      var td = el("td");
+      if (label) td.appendChild(el("span", "small muted", label + " "));
+      td.appendChild(badge(r.level));
+      if (r.matrix) { td.appendChild(el("span", "small", " 矩陣風險 ")); td.appendChild(badge(r.matrix)); }
+      return td;
+    }
+    function change(a, b, what) {
+      var d = ORDER[b] - ORDER[a];
+      return d > 0 ? what + "▲" : d < 0 ? what + "▼" : "";
+    }
+    function row(name, off, trl, label) {
+      var tr = el("tr");
+      tr.appendChild(el("td", null, name));
+      tr.appendChild(cell(off, label));
+      tr.appendChild(cell(trl, label));
+      var parts = [change(off.level, trl.level, label || "結果")];
+      if (off.matrix && trl.matrix) parts.push(change(off.matrix, trl.matrix, "矩陣風險"));
+      var txt = parts.filter(Boolean).join("　");
+      tr.appendChild(el("td", "delta", txt || "＝ 不變"));
+      tb.appendChild(tr);
+    }
+    items.forEach(function (it) {
+      row(it.n + ". " + it.name, official.items[it.id], res.items[it.id], it.kind === "衝擊" ? "衝擊" : "機率");
+    });
+    if (res.overall && official.overall) row("綜合研判", { level: official.overall.level }, { level: res.overall.level }, "");
+    tbl.appendChild(tb);
+    out.appendChild(el("p", "small", "以下為試算，非正式評估結果。正式結果請見上方風險評估表。"));
+    out.appendChild(tbl);
+    placeGhost(res);
+  }
+
+  if (selItem && selP && selI && out) {
+    items.forEach(function (it) { opt(selItem, it.id, it.n + ". " + it.name); });
+    syncControls(); renderTrial();
+    selItem.addEventListener("change", syncControls);
+    selP.addEventListener("change", function () { trial[selItem.value].p = selP.value ? Number(selP.value) : null; renderTrial(); });
+    selI.addEventListener("change", function () { trial[selItem.value].i = selI.value ? Number(selI.value) : null; renderTrial(); });
+    $("wiReset").addEventListener("click", function () { resetTrial(); syncControls(); renderTrial(); });
+  }
+
+  /* ---------- recommendation filters ----------------------------------- */
+  var fCat = $("fCat"), fPri = $("fPri"), fTime = $("fTime");
+  function filterRecs() {
+    var c = fCat.value, p = fPri.value, t = fTime.value, n = 0;
+    document.querySelectorAll("#recList .rec").forEach(function (li) {
+      var ok = (!c || li.dataset.cat === c) && (!p || li.dataset.pri === p) && (!t || li.dataset.time === t);
+      li.hidden = !ok; if (ok) n++;
+    });
+    $("fCount").textContent = "顯示 " + n + " 項";
+    $("recEmpty").hidden = n !== 0;
+  }
+  if (fCat && fPri && fTime) [fCat, fPri, fTime].forEach(function (s) { s.addEventListener("change", filterRecs); });
+
+  /* ---------- optional time-series chart -------------------------------- */
+  var ts = data.timeseries || [];
+  var host = $("tsChart");
+  if (host && ts.length) {
+    var series = {}; ts.forEach(function (p) { (series[p.series] = series[p.series] || []).push(p); });
+    var names = Object.keys(series).slice(0, 3);
+    var colors = ["var(--accent)", "#eb6834", "#1baf7a"];
+    var dates = Array.from(new Set(ts.map(function (p) { return p.date; }))).sort();
+    var maxV = Math.max.apply(null, ts.map(function (p) { return p.value; })) || 1;
+    var W = 640, H = 240, L = 44, R = 12, T = 12, B = 30;
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "病例數時間序列，資料見表格檢視");
+    function x(d) { return L + (dates.length < 2 ? 0 : (W - L - R) * dates.indexOf(d) / (dates.length - 1)); }
+    function y(v) { return T + (H - T - B) * (1 - v / maxV); }
+    function line(x1, y1, x2, y2, stroke) { var l = document.createElementNS(NS, "line"); l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2); l.setAttribute("stroke", stroke); l.setAttribute("stroke-width", "1"); return l; }
+    function text(xx, yy, s, anchor) { var t = document.createElementNS(NS, "text"); t.setAttribute("x", xx); t.setAttribute("y", yy); t.setAttribute("font-size", "11"); t.setAttribute("fill", "var(--muted)"); t.setAttribute("text-anchor", anchor || "start"); t.textContent = s; return t; }
+    for (var g = 0; g <= 4; g++) { var vv = maxV * g / 4; svg.appendChild(line(L, y(vv), W - R, y(vv), "var(--grid)")); svg.appendChild(text(L - 6, y(vv) + 4, String(Math.round(vv)), "end")); }
+    svg.appendChild(text(L, H - 8, dates[0])); svg.appendChild(text(W - R, H - 8, dates[dates.length - 1], "end"));
+    names.forEach(function (nm, k) {
+      var pts = series[nm].slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+      var path = document.createElementNS(NS, "path");
+      path.setAttribute("d", pts.map(function (p, j) { return (j ? "L" : "M") + x(p.date) + "," + y(p.value); }).join(""));
+      path.setAttribute("fill", "none"); path.setAttribute("stroke", colors[k]); path.setAttribute("stroke-width", "2"); path.setAttribute("stroke-linejoin", "round");
+      svg.appendChild(path);
+    });
+    var cross = line(0, T, 0, H - B, "var(--axis)"); cross.style.display = "none"; svg.appendChild(cross);
+    svg.addEventListener("pointermove", function (ev) {
+      var r = svg.getBoundingClientRect(); var px = (ev.clientX - r.left) * W / r.width;
+      var best = dates[0], bd = 1e9; dates.forEach(function (d) { var dd = Math.abs(x(d) - px); if (dd < bd) { bd = dd; best = d; } });
+      cross.setAttribute("x1", x(best)); cross.setAttribute("x2", x(best)); cross.style.display = "";
+      var parts = names.map(function (nm) { var p = series[nm].filter(function (q) { return q.date === best; })[0]; return (p ? p.value : "—") + " " + nm; });
+      showTip(best + "：" + parts.join("；"), ev.clientX, ev.clientY);
+    });
+    svg.addEventListener("pointerleave", function () { cross.style.display = "none"; hideTip(); });
+    host.appendChild(svg);
+    if (names.length > 1) {
+      var lg = el("div", "matrix-legend");
+      names.forEach(function (nm, k) { var s = el("span", "small"); var sw = el("span"); sw.style.cssText = "display:inline-block;width:16px;height:2px;vertical-align:middle;margin-right:4px;background:" + colors[k]; s.appendChild(sw); s.appendChild(document.createTextNode(nm)); lg.appendChild(s); });
+      host.appendChild(lg);
+    }
+  }
+})();
+</script>
+</body>
+</html>
