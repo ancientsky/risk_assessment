@@ -88,6 +88,21 @@ python -c "import json; from epi_risk_agent.schema import llm_output_schema; pri
 - UKHSA HAIRS 機率演算法 Q1–Q10、衝擊演算法 Q1–Q12（題目見 `src/epi_risk_agent/prompts/methodology.md` §4.2 或 `src/epi_risk_agent/algorithms.py`）。
 - 程式分別推導 HAIRS 機率與衝擊，報告中與 ECDC 結果並列作為交叉核對，**不併入矩陣**。
 
+## who_rra（頂層，建議填寫）
+
+```json
+"who_rra": {"risk_question": "未來 3 個月內…之可能性與後果為何？",
+  "likelihood": 1, "likelihood_rationale": "極不可能（<5%）：…",
+  "consequences": 3, "consequences_rationale": "中度：…", "source_ids": ["S2", "S3"],
+  "groups": [{"name": "高暴露職業族群", "likelihood": 2, "consequences": 3, "rationale": "…", "source_ids": ["S2"]}]}
+```
+- WHO 2012 圖 3a：`likelihood` 1 極不可能、2 不太可能、3 可能、4 很可能、5 幾乎確定（表 7）；`consequences` 1 極輕微、2 輕微、3 中度、4 重大、5 嚴重（表 8）。
+- WHO 無題目樹，兩者皆為評估者判斷；程式查圖 3a 得低／中／高／極高，並附表 6 對應行動。
+
+## overall.synthesis_note
+
+- 綜合評估中任一架構（WHO、文章式判斷）、族群結果或 HAIRS 分項與綜合等級（ECDC 2019）不同時必填：說明差異原因與審閱者應權衡之處。
+
 ## 其他列舉值
 - 建議類別：監測通報、邊境檢疫、醫療整備、實驗室檢驗、病媒或動物防治、風險溝通、跨部會與國際合作
 - 優先：高／中／低；時程：24小時／1週／1個月

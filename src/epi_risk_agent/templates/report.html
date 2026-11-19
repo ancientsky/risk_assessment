@@ -67,8 +67,10 @@
   <h2 id="h-bluf"><span class="secno">1</span>決策摘要</h2>
   <div class="bluf-grid">
     <div class="bluf-level">
-      <div class="label">我國整體風險（計算結果）</div>
+      <div class="label">綜合等級（ECDC 2019 為主要方法）</div>
       <div class="hero-level">{{ level_badge(au.overall_computed_level, "lv-xl") }}</div>
+      {% if au.synthesis %}<div class="compact-line" aria-label="各架構結果">{{ au.synthesis.compact }}</div>
+      <div class="sub">各架構一致性：<strong>{{ au.synthesis.consistency }}</strong>　<a href="#synthesis-h">見綜合評估</a></div>{% endif %}
       <div class="sub">矩陣等級：{{ level_badge(au.overall_matrix_level) }}
         <span class="muted">（ECDC 圖 4：機率 {{ p_labels[au.overall_probability] if au.overall_probability is not none else "—" }} × 衝擊 {{ i_labels[au.overall_impact] if au.overall_impact is not none else "—" }}）</span></div>
       <div class="sub">信心程度：<strong>{{ au.overall_confidence }}（{{ conf_labels[au.overall_confidence] }}）</strong>
@@ -81,7 +83,7 @@
       {% endif %}
       {% if higher_strata %}
       <div class="strata-hl"><div class="label">矩陣風險高於整體之分層</div>
-        <ul>{% for s in higher_strata %}<li>{{ s.item }}／{{ s.name }}：發生機率 {{ level_badge(s.prob_level) }}，惟矩陣風險（機率 {{ s.p }} × 衝擊 {{ s.i }}）{{ level_badge(s.matrix_level) }}</li>{% endfor %}</ul></div>
+        <ul>{% for s in higher_strata %}<li>{{ s.item }}／{{ s.name }}：發生機率 {{ level_badge(s.prob_level) }}；矩陣風險（機率 {{ s.p }} × 衝擊 {{ s.i }}）{{ level_badge(s.matrix_level) }}</li>{% endfor %}</ul></div>
       {% endif %}
     </div>
     <div class="bluf-body">
@@ -420,6 +422,79 @@
     </div>
     <div class="wi-out" aria-live="polite" id="wiOut"></div>
   </div>
+
+  {% if a.who_rra and au.who %}
+  <section class="who" aria-labelledby="who-h">
+    <h3 id="who-h">並行評估：WHO 2012 風險矩陣</h3>
+    <p class="small muted">依 WHO《Rapid Risk Assessment of Acute Public Health Events》（2012）圖 3a。WHO 未提供題目樹：可能性與後果為<strong>評估者依其表 7、表 8 定義之判斷</strong>（WHO 註明定義可依國情調整）。</p>
+    <p><strong>風險問題：</strong>{{ a.who_rra.risk_question }}</p>
+    <div class="table-wrap">
+    <table class="tbl tbl-stack">
+      <thead><tr><th scope="col">對象</th><th scope="col">可能性（表 7）</th><th scope="col">後果（表 8）</th><th scope="col">WHO 風險等級</th><th scope="col">表 6 對應行動</th></tr></thead>
+      <tbody>
+      <tr><td data-th="對象">一般民眾</td>
+        <td data-th="可能性（表 7）">{{ au.who.likelihood }} {{ au.who.likelihood_label }}<div class="small muted">{{ a.who_rra.likelihood_rationale }}</div></td>
+        <td data-th="後果（表 8）">{{ au.who.consequences }} {{ au.who.consequences_label }}<div class="small muted">{{ a.who_rra.consequences_rationale }} {% if a.who_rra.source_ids %}{{ cite(a.who_rra.source_ids) }}{% endif %}</div></td>
+        <td data-th="WHO 風險等級">{{ level_badge(au.who.level) }}<div class="small">三級：{{ au.who.level3 }}</div></td>
+        <td data-th="表 6 對應行動" class="small">{{ au.who.action }}</td></tr>
+      {% for g in au.who_groups %}{% set gi = a.who_rra.groups[loop.index0] %}
+      <tr><td data-th="對象">{{ g.name }}</td>
+        <td data-th="可能性（表 7）">{{ g.likelihood }} {{ g.likelihood_label }}</td>
+        <td data-th="後果（表 8）">{{ g.consequences }} {{ g.consequences_label }}<div class="small muted">{{ gi.rationale }} {% if gi.source_ids %}{{ cite(gi.source_ids) }}{% endif %}</div></td>
+        <td data-th="WHO 風險等級">{{ level_badge(g.level) }}<div class="small">三級：{{ g.level3 }}</div></td>
+        <td data-th="表 6 對應行動" class="small">{{ g.action }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <div class="table-wrap">
+    <table class="matrix who-matrix" aria-label="WHO 2012 圖 3a 風險矩陣（本評估位置以 W／G 標示）">
+      <thead><tr><td class="corner"><span>後果→</span><span>可能性↓</span></td>{% for c in range(1, 6) %}<th scope="col">{{ c }}<span class="ax">{{ who_c_labels[c] }}</span></th>{% endfor %}</tr></thead>
+      <tbody>
+      {% for l in range(5, 0, -1) %}
+        <tr><th scope="row">{{ l }}<span class="ax">{{ who_l_labels[l] }}</span></th>
+        {% for c in range(1, 6) %}{% set m = who_matrix[l][c] %}
+          <td class="cell cell-{{ level_class[m] }}"><span class="cell-lv">{{ m }}</span><span class="markers">
+          {% if au.who.likelihood == l and au.who.consequences == c %}<span class="marker static" title="一般民眾">W</span>{% endif %}
+          {% for g in au.who_groups %}{% if g.likelihood == l and g.consequences == c %}<span class="marker static" title="{{ g.name }}">G{{ loop.index }}</span>{% endif %}{% endfor %}
+          </span></td>
+        {% endfor %}</tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <p class="small muted">W＝一般民眾；{% for g in au.who_groups %}G{{ loop.index }}＝{{ g.name }}{% if not loop.last %}；{% endif %}{% endfor %}。版面依 WHO 圖 3a（列＝可能性、欄＝後果）；顏色依表 6（綠＝低、黃＝中、橙＝高、紅＝極高），格內文字為等級。</p>
+  </section>
+  {% endif %}
+
+  {% if au.synthesis %}{% set sy = au.synthesis %}
+  <section class="synthesis" aria-labelledby="synthesis-h">
+    <h3 id="synthesis-h">綜合評估：各架構結果比較</h3>
+    <div class="table-wrap">
+    <table class="tbl tbl-stack">
+      <thead><tr><th scope="col">架構</th><th scope="col">對象</th><th scope="col">原生結果</th><th scope="col">三級對應</th><th scope="col">取得方式</th><th scope="col">主要決定因素</th></tr></thead>
+      <tbody>
+      {% for r in sy.rows %}
+      <tr{% if not r.is_population %} class="row-group"{% endif %}>
+        <td data-th="架構">{{ r.framework }}</td><td data-th="對象">{{ r.scope }}</td><td data-th="原生結果">{{ r.native }}</td>
+        <td data-th="三級對應">{% if r.level3 %}{{ level_badge(r.level3) }}{% else %}<span class="muted">無合併等級</span>{% endif %}</td>
+        <td data-th="取得方式" class="small">{{ r.method }}</td><td data-th="主要決定因素" class="small">{{ r.driver }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <dl class="synth-kv">
+      <div><dt>綜合等級（ECDC 2019，主要方法）</dt><dd>{{ level_badge(sy.integrated_level, "lv-lg") }}</dd></div>
+      <div><dt>一致性（一般民眾層級）</dt><dd><strong>{{ sy.consistency }}</strong>{% if sy.differences %}<ul>{% for d in sy.differences %}<li>{{ d }}</li>{% endfor %}</ul>{% endif %}</dd></div>
+      <div><dt>審慎上限（ECDC、WHO、文章式判斷之最高者）</dt><dd>{{ level_badge(sy.cautious_cap, "lv-lg") }}</dd></div>
+      {% if sy.cautions %}<div><dt>注意事項（族群結果或 HAIRS 分項高於綜合等級）</dt><dd><ul>{% for c in sy.cautions %}<li>{{ c }}</li>{% endfor %}</ul></dd></div>{% endif %}
+    </dl>
+    {% if a.overall.synthesis_note %}<div class="synth-note"><strong>評估者說明：</strong>{{ a.overall.synthesis_note }}</div>
+    {% elif sy.note_required %}<div class="flag flag-warn"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>各架構結果有差異，但評估者未填寫說明（overall.synthesis_note）。</div>{% endif %}
+    <p class="small muted">綜合等級依使用單位決定採 ECDC 2019 結果；WHO 2012 為評估者判斷之並行矩陣；HAIRS 分別報告機率與衝擊，無合併等級，僅作交叉核對；三級對應與審慎上限為本工具之規則。</p>
+  </section>
+  {% endif %}
 </section>
 
 <!-- 6. Scenarios + IHR ================================================= -->
@@ -490,6 +565,7 @@
     <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
     <li><strong>風險估計（ECDC 2019《Operational tool on rapid risk assessment methodology》）：</strong>機率依圖 2.1（國內感染／傳播）或圖 2.2（國人境外感染，本工具用於「境外移入」）之問題推導為無／極低／低／中／高；衝擊依圖 3 推導為極低／低／中／高；「不確定」依 ECDC 預防原則取較高風險分支。機率×衝擊依圖 4 得「矩陣風險」（無～極高）。如疾管署原文章，機率類項目之評估結果為發生機率，衝擊另列；綜合研判取各機率類項目之最高矩陣風險。三級對應（機率 0–2 低、3 中、4 高；衝擊 1–2 低、3 中、4 高；矩陣 無／極低／低→低、中→中、高／極高→高）為本工具之調整。</li>
     <li><strong>信心程度（ECDC Box 2／HAIRS 附錄 B）：</strong>低＝不足、中＝尚可、高＝良好；依來源數量、等級與取得方式自動設上限之規則為本工具自訂。</li>
+    <li><strong>並行評估與綜合評估：</strong>WHO 2012《Rapid Risk Assessment of Acute Public Health Events》圖 3a 矩陣（可能性 5 級 × 後果 5 級，依表 7、表 8 由評估者判斷；表 6 對應行動）與 ECDC 結果並列；綜合等級採 ECDC 2019，另列一致性、審慎上限與評估者說明。</li>
     <li><strong>升級篩檢與交叉核對：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另以 UKHSA HAIRS 機率與衝擊演算法交叉核對（分別報告，不併入矩陣）。</li>
     <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
   </ol>

@@ -252,6 +252,17 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 .item-n { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: 0.8rem; margin-right: 0.4rem; }
 .algpath { font-size: 0.8rem; color: var(--ink-2); background: var(--surface-2); border-radius: 6px; padding: 0.15rem 0.45rem; margin: 0.25rem 0; }
 .hairs-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.6rem 1.2rem; margin: 0.6rem 0 0.9rem; }
+.compact-line { font-size: 0.86rem; font-weight: 600; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.3rem 0.5rem; margin: 0.2rem 0 0.4rem; }
+.who, .synthesis { margin-top: 1.6rem; padding-top: 0.6rem; border-top: 2px solid var(--grid); }
+.who-matrix { max-width: 560px; margin-top: 0.6rem; }
+.who-matrix .cell { height: 3.2rem; }
+.marker.static { display: inline-grid; place-items: center; cursor: default; font-size: 0.75rem; width: auto; min-width: 1.9rem; padding: 0 0.3rem; border-radius: 999px; }
+.row-group td { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+.synth-kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.6rem 1.2rem; margin: 0.9rem 0; }
+.synth-kv dt { font-size: 0.82rem; color: var(--muted); }
+.synth-kv dd { margin: 0.2rem 0 0; }
+.synth-kv ul { margin: 0.2rem 0; padding-left: 1.1rem; font-size: 0.9rem; }
+.synth-note { background: var(--warn-bg); border: 1px solid var(--warn-border); border-radius: 10px; padding: 0.6rem 0.9rem; }
 .mrisk { margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px dashed var(--grid); }
 .strata { list-style: none; padding: 0; margin: 0.4rem 0; font-size: 0.86rem; }
 .strata li { margin: 0.2rem 0; }
@@ -400,6 +411,7 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
   .cell { height: 3.6rem; padding: 2px; }
   .matrix thead td, .matrix th[scope="row"] { width: 2.6rem; }
   .marker { width: 1.7rem; height: 1.7rem; font-size: 0.78rem; }
+  .marker.static { width: auto; min-width: 1.6rem; }
 }
 
 /* ---------- print (A4) ----------------------------------------------- */
@@ -492,15 +504,16 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
   <h2 id="h-bluf"><span class="secno">1</span>決策摘要</h2>
   <div class="bluf-grid">
     <div class="bluf-level">
-      <div class="label">我國整體風險（計算結果）</div>
+      <div class="label">綜合等級（ECDC 2019 為主要方法）</div>
       <div class="hero-level"><span class="lv lv-low lv-xl"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
-      <div class="sub">矩陣等級：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>
+<div class="compact-line" aria-label="各架構結果">ECDC 低｜WHO 中｜HAIRS 機率中・衝擊中｜文章式判斷 低｜審慎上限 中</div>
+      <div class="sub">各架構一致性：<strong>部分一致</strong>　<a href="#synthesis-h">見綜合評估</a></div>      <div class="sub">矩陣等級：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>
         <span class="muted">（ECDC 圖 4：機率 極低 × 衝擊 低）</span></div>
       <div class="sub">信心程度：<strong>中（尚可）</strong>
 <span class="muted">（受「境外移入風險」信心程度「中」限制）</span></div>
       <div class="sub muted">評估者建議與規則計算一致（低）。</div>
       <div class="strata-hl"><div class="label">矩陣風險高於整體之分層</div>
-        <ul><li>境外移入風險／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：發生機率 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span>，惟矩陣風險（機率 3 × 衝擊 2）<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul></div>
+        <ul><li>境外移入風險／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：發生機率 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span>；矩陣風險（機率 3 × 衝擊 2）<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul></div>
     </div>
     <div class="bluf-body">
       <p class="lead">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；依 ECDC 演算法，境外移入、社區流行及院內感染之機率皆為極低，衝擊為低（重症可能但受影響人數不多）；惟依本項目之文章式判斷，致死率高且無疫苗與特效藥，衝擊列為高，兩者並列。綜合研判我國 MERS 整體疫情風險為低；其中赴中東接觸駱駝或於當地醫療院所工作者之移入機率雖低，惟衝擊高，矩陣風險為中。</p>
@@ -1147,6 +1160,145 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
     </div>
     <div class="wi-out" aria-live="polite" id="wiOut"></div>
   </div>
+
+  <section class="who" aria-labelledby="who-h">
+    <h3 id="who-h">並行評估：WHO 2012 風險矩陣</h3>
+    <p class="small muted">依 WHO《Rapid Risk Assessment of Acute Public Health Events》（2012）圖 3a。WHO 未提供題目樹：可能性與後果為<strong>評估者依其表 7、表 8 定義之判斷</strong>（WHO 註明定義可依國情調整）。</p>
+    <p><strong>風險問題：</strong>未來 3 個月內，我國出現 MERS 境外移入病例並造成醫療機構內續發之可能性與後果為何？</p>
+    <div class="table-wrap">
+    <table class="tbl tbl-stack">
+      <thead><tr><th scope="col">對象</th><th scope="col">可能性（表 7）</th><th scope="col">後果（表 8）</th><th scope="col">WHO 風險等級</th><th scope="col">表 6 對應行動</th></tr></thead>
+      <tbody>
+      <tr><td data-th="對象">一般民眾</td>
+        <td data-th="可能性（表 7）">1 極不可能<div class="small muted">極不可能（&lt;5%）：我國歷年零病例；本次卡達事件無人傳人、99 名接觸者全數陰性。</div></td>
+        <td data-th="後果（表 8）">3 中度<div class="small muted">中度：若發生，需隔離收治、大規模接觸者追蹤與院內感染管制，對特定醫療機構造成中度干擾；南韓 2015 年經驗顯示延遲辨識時後果可更嚴重。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a></span></div></td>
+        <td data-th="WHO 風險等級"><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><div class="small">三級：中</div></td>
+        <td data-th="表 6 對應行動" class="small">須明定應變之角色與責任；需特定監測或防治措施（例：加強監測、額外疫苗接種活動）</td></tr>
+      <tr><td data-th="對象">赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者</td>
+        <td data-th="可能性（表 7）">2 不太可能</td>
+        <td data-th="後果（表 8）">3 中度<div class="small muted">不太可能（5–29%）：暴露途徑明確但人畜共通外溢傳播效率低；後果同一般民眾評估為中度。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></div></td>
+        <td data-th="WHO 風險等級"><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><div class="small">三級：中</div></td>
+        <td data-th="表 6 對應行動" class="small">須明定應變之角色與責任；需特定監測或防治措施（例：加強監測、額外疫苗接種活動）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-wrap">
+    <table class="matrix who-matrix" aria-label="WHO 2012 圖 3a 風險矩陣（本評估位置以 W／G 標示）">
+      <thead><tr><td class="corner"><span>後果→</span><span>可能性↓</span></td><th scope="col">1<span class="ax">極輕微</span></th><th scope="col">2<span class="ax">輕微</span></th><th scope="col">3<span class="ax">中度</span></th><th scope="col">4<span class="ax">重大</span></th><th scope="col">5<span class="ax">嚴重</span></th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5<span class="ax">幾乎確定</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">4<span class="ax">很可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">3<span class="ax">可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-vhigh"><span class="cell-lv">極高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">2<span class="ax">不太可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+<span class="marker static" title="赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者">G1</span>          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+</tr>
+        <tr><th scope="row">1<span class="ax">極不可能</span></th>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-low"><span class="cell-lv">低</span><span class="markers">
+          </span></td>
+          <td class="cell cell-mod"><span class="cell-lv">中</span><span class="markers">
+<span class="marker static" title="一般民眾">W</span>          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+          <td class="cell cell-high"><span class="cell-lv">高</span><span class="markers">
+          </span></td>
+</tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small muted">W＝一般民眾；G1＝赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者。版面依 WHO 圖 3a（列＝可能性、欄＝後果）；顏色依表 6（綠＝低、黃＝中、橙＝高、紅＝極高），格內文字為等級。</p>
+  </section>
+
+  <section class="synthesis" aria-labelledby="synthesis-h">
+    <h3 id="synthesis-h">綜合評估：各架構結果比較</h3>
+    <div class="table-wrap">
+    <table class="tbl tbl-stack">
+      <thead><tr><th scope="col">架構</th><th scope="col">對象</th><th scope="col">原生結果</th><th scope="col">三級對應</th><th scope="col">取得方式</th><th scope="col">主要決定因素</th></tr></thead>
+      <tbody>
+      <tr>
+        <td data-th="架構">ECDC 2019（主要）</td><td data-th="對象">一般民眾</td><td data-th="原生結果">低風險</td>
+        <td data-th="三級對應"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></td>
+        <td data-th="取得方式" class="small">演算法推導（圖 2.1／2.2／3）＋圖 4 矩陣</td><td data-th="主要決定因素" class="small">境外移入風險：機率 極低 × 衝擊 低</td>
+      </tr>
+      <tr class="row-group">
+        <td data-th="架構">ECDC 2019（主要）</td><td data-th="對象">赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者</td><td data-th="原生結果">中風險</td>
+        <td data-th="三級對應"><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></td>
+        <td data-th="取得方式" class="small">圖 4 矩陣（分層）</td><td data-th="主要決定因素" class="small">境外移入風險：機率 中 × 衝擊 低</td>
+      </tr>
+      <tr>
+        <td data-th="架構">WHO 2012</td><td data-th="對象">一般民眾</td><td data-th="原生結果">中風險</td>
+        <td data-th="三級對應"><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></td>
+        <td data-th="取得方式" class="small">評估者依表 7／表 8 判斷＋圖 3a 矩陣</td><td data-th="主要決定因素" class="small">可能性 極不可能 × 後果 中度</td>
+      </tr>
+      <tr class="row-group">
+        <td data-th="架構">WHO 2012</td><td data-th="對象">赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者</td><td data-th="原生結果">中風險</td>
+        <td data-th="三級對應"><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></td>
+        <td data-th="取得方式" class="small">評估者依表 7／表 8 判斷＋圖 3a 矩陣</td><td data-th="主要決定因素" class="small">可能性 不太可能 × 後果 中度</td>
+      </tr>
+      <tr>
+        <td data-th="架構">UKHSA HAIRS（交叉核對）</td><td data-th="對象">一般民眾</td><td data-th="原生結果">機率 中・衝擊 中（無合併等級）</td>
+        <td data-th="三級對應"><span class="muted">無合併等級</span></td>
+        <td data-th="取得方式" class="small">演算法推導（機率 Q1–Q10、衝擊 Q1–Q12）</td><td data-th="主要決定因素" class="small">不確定題：機率 Q4, Q9；衝擊 Q9</td>
+      </tr>
+      <tr>
+        <td data-th="架構">疫情報導式判斷</td><td data-th="對象">一般民眾</td><td data-th="原生結果">低</td>
+        <td data-th="三級對應"><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></td>
+        <td data-th="取得方式" class="small">評估者依各項目風險等級定義之文章式綜合判斷</td><td data-th="主要決定因素" class="small">overall.proposed_level</td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+    <dl class="synth-kv">
+      <div><dt>綜合等級（ECDC 2019，主要方法）</dt><dd><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></dd></div>
+      <div><dt>一致性（一般民眾層級）</dt><dd><strong>部分一致</strong><ul><li>WHO 2012：中（高於綜合等級 低）</li></ul></dd></div>
+      <div><dt>審慎上限（ECDC、WHO、文章式判斷之最高者）</dt><dd><span class="lv lv-mod lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></dd></div>
+<div><dt>注意事項（族群結果或 HAIRS 分項高於綜合等級）</dt><dd><ul><li>ECDC 2019（主要）／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：中（中風險）</li><li>WHO 2012／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：中（中風險）</li><li>HAIRS 機率：中（對應 中，高於綜合等級）</li><li>HAIRS 衝擊：中（對應 中，高於綜合等級）</li></ul></dd></div>    </dl>
+<div class="synth-note"><strong>評估者說明：</strong>ECDC 推導為低（衝擊因「不會影響相當人數」為低）；WHO 矩陣較重視後果，給中，與 WHO 對 MERS 區域及全球風險之「中等」評估一致；HAIRS 之中係多題「不確定」依審慎原則推高所致。建議以低作為日常整備等級，但院內感染之整備（TOCC、下呼吸道檢體）比照中等風險辦理。</div>
+    <p class="small muted">綜合等級依使用單位決定採 ECDC 2019 結果；WHO 2012 為評估者判斷之並行矩陣；HAIRS 分別報告機率與衝擊，無合併等級，僅作交叉核對；三級對應與審慎上限為本工具之規則。</p>
+  </section>
 </section>
 
 <!-- 6. Scenarios + IHR ================================================= -->
@@ -1273,6 +1425,7 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
     <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
     <li><strong>風險估計（ECDC 2019《Operational tool on rapid risk assessment methodology》）：</strong>機率依圖 2.1（國內感染／傳播）或圖 2.2（國人境外感染，本工具用於「境外移入」）之問題推導為無／極低／低／中／高；衝擊依圖 3 推導為極低／低／中／高；「不確定」依 ECDC 預防原則取較高風險分支。機率×衝擊依圖 4 得「矩陣風險」（無～極高）。如疾管署原文章，機率類項目之評估結果為發生機率，衝擊另列；綜合研判取各機率類項目之最高矩陣風險。三級對應（機率 0–2 低、3 中、4 高；衝擊 1–2 低、3 中、4 高；矩陣 無／極低／低→低、中→中、高／極高→高）為本工具之調整。</li>
     <li><strong>信心程度（ECDC Box 2／HAIRS 附錄 B）：</strong>低＝不足、中＝尚可、高＝良好；依來源數量、等級與取得方式自動設上限之規則為本工具自訂。</li>
+    <li><strong>並行評估與綜合評估：</strong>WHO 2012《Rapid Risk Assessment of Acute Public Health Events》圖 3a 矩陣（可能性 5 級 × 後果 5 級，依表 7、表 8 由評估者判斷；表 6 對應行動）與 ECDC 結果並列；綜合等級採 ECDC 2019，另列一致性、審慎上限與評估者說明。</li>
     <li><strong>升級篩檢與交叉核對：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另以 UKHSA HAIRS 機率與衝擊演算法交叉核對（分別報告，不併入矩陣）。</li>
     <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
   </ol>

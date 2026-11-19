@@ -23,6 +23,8 @@ def _print_issues(a) -> int:
     n_warn = sum(1 for i in au.issues if i.severity == "warning")
     print(f"整體風險（計算）：{au.overall_computed_level}（矩陣 {au.overall_matrix_level}；評估者建議 {au.overall_proposed_level}）"
           f"；信心：{au.overall_confidence}；新聞可信度：{au.credibility_computed}")
+    if au.synthesis:
+        print(f"綜合評估：{au.synthesis.compact}；一致性：{au.synthesis.consistency}")
     print(f"檢核結果：錯誤 {n_err}、警告 {n_warn}、提示 {len(au.issues) - n_err - n_warn}")
     return n_err
 

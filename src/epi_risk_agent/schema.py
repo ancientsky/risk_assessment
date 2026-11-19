@@ -309,10 +309,42 @@ class HairsBlock(StrictModel):
         return self
 
 
+class WhoGroup(StrictModel):
+    name: str = Field(description="族群或地區，如：孕婦、未滿 1 歲嬰兒及免疫不全者")
+    likelihood: int = Field(ge=1, le=5, description="WHO 表 7：1 極不可能、2 不太可能、3 可能、4 很可能、5 幾乎確定")
+    consequences: int = Field(ge=1, le=5, description="WHO 表 8：1 極輕微、2 輕微、3 中度、4 重大、5 嚴重")
+    rationale: str
+    source_ids: list[str] = Field(default_factory=list)
+
+
+class WhoRra(StrictModel):
+    """WHO (2012) Rapid Risk Assessment of Acute Public Health Events, Figure 3a.
+
+    No question tree: likelihood and consequences are assessor judgments against
+    WHO Tables 7 and 8."""
+
+    risk_question: str
+    likelihood: int = Field(ge=1, le=5, description="WHO 表 7：1 極不可能（<5%）、2 不太可能（5–29%）、3 可能（30–69%）、4 很可能（70–94%）、5 幾乎確定（≥95%）")
+    likelihood_rationale: str
+    consequences: int = Field(ge=1, le=5, description="WHO 表 8：1 極輕微、2 輕微、3 中度、4 重大、5 嚴重")
+    consequences_rationale: str
+    source_ids: list[str] = Field(default_factory=list)
+    groups: list[WhoGroup] = Field(default_factory=list)
+
+    @field_validator("groups")
+    @classmethod
+    def _unique_groups(cls, v: list[WhoGroup]) -> list[WhoGroup]:
+        names = [g.name for g in v]
+        if len(names) != len(set(names)):
+            raise ValueError("who_rra.groups 名稱重複")
+        return v
+
+
 class OverallJudgment(StrictModel):
-    proposed_level: Level3
+    proposed_level: Level3 = Field(description="疫情報導式（文章式）綜合判斷")
     summary: str = Field(description="綜合研判文字")
     key_findings: list[str] = Field(description="3–5 項重點發現")
+    synthesis_note: Optional[str] = Field(default=None, description="各架構結果不一致時，評估者說明差異原因與審閱者應權衡之處（必填條件見方法）")
 
 
 # ---------------------------------------------------------------------------
@@ -436,6 +468,38 @@ class ItemAudit(StrictModel):
     strata_computed: list[dict] = Field(default_factory=list)
 
 
+class WhoResult(StrictModel):
+    name: str
+    likelihood: int
+    likelihood_label: str
+    consequences: int
+    consequences_label: str
+    level: Literal["低", "中", "高", "極高"]
+    level3: Level3
+    action: str
+
+
+class SynthesisRow(StrictModel):
+    framework: str
+    scope: str = Field(description="一般民眾／族群名稱")
+    native: str
+    level3: Optional[Level3] = Field(description="三級對應；HAIRS 無合併等級時為 null")
+    method: str
+    driver: str
+    is_population: bool = True
+
+
+class Synthesis(StrictModel):
+    rows: list[SynthesisRow]
+    integrated_level: Level3 = Field(description="綜合等級＝ECDC 2019 結果（主要方法）")
+    consistency: Literal["一致", "部分一致", "不一致"]
+    differences: list[str] = Field(default_factory=list)
+    cautious_cap: Level3 = Field(description="審慎上限：ECDC、WHO、文章式判斷（一般民眾層級）之最高三級")
+    cautions: list[str] = Field(default_factory=list, description="高於綜合等級之族群結果或 HAIRS 分項")
+    note_required: bool
+    compact: str
+
+
 class ClaimAudit(StrictModel):
     claim_id: str
     stated_verdict: Verdict
@@ -468,6 +532,9 @@ class Audit(StrictModel):
     ihr_note: str
     hairs_probability: Optional[PathAudit] = None
     hairs_impact: Optional[PathAudit] = None
+    who: Optional[WhoResult] = None
+    who_groups: list[WhoResult] = Field(default_factory=list)
+    synthesis: Optional[Synthesis] = None
     issues: list[Issue]
 
 
@@ -498,6 +565,7 @@ class Assessment(StrictModel):
     decision: DecisionSupport
     limitations: list[str]
     hairs: Optional[HairsBlock] = Field(default=None, description="人畜共通／新興病原：UKHSA HAIRS 演算法作答（交叉核對用）")
+    who_rra: Optional[WhoRra] = Field(default=None, description="WHO 2012 風險矩陣（圖 3a）之並行評估：可能性與後果為評估者依表 7、表 8 之判斷")
     audit: Optional[Audit] = Field(default=None, description="由 scoring.audit() 計算；輸入值會被忽略並重算")
 
     @model_validator(mode="after")

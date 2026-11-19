@@ -15,7 +15,8 @@
 | A | 疾管署《疫情報導》：茲卡病毒感染症疫情現況與風險評估（2016；32(11)；DOI 10.6524/EB.20160607.32(11).001） | 使用者提供 PDF | 全文閱讀 | 風險評估表格式、表三「風險等級定義」、分層結果、表四建議、限制陳述 |
 | B | 疾管署《疫情報導》：發熱伴血小板減少綜合症疫情與風險評估（2023；39(4)；DOI 10.6524/EB.202302_39(4).0001） | 使用者提供 PDF | 全文閱讀 | 疾病特有項目（境外移入感染動物、野外感染）、表一格式、綜合研判 |
 | C | 疾管署《疫情報導》：國內外 COVID-19 疫情研析及風險評估（2020；36(15)；DOI 10.6524/EB.202008_36(15).0001） | 使用者提供 PDF | 全文閱讀 | 境外移入／社區流行／衝擊三面向、事件型監測於疫情偵測之角色 |
-| D | WHO. Rapid Risk Assessment of Acute Public Health Events（2012；WHO/HSE/GAR/ARO/2012.1） | https://www.who.int/publications/i/item/rapid-risk-assessment-of-acute-public-health-events | 出版品頁面已讀；PDF（iris.who.int）未取得 | 危害／暴露／情境評估之結構；風險特徵化 |
+| D | WHO. Rapid Risk Assessment of Acute Public Health Events（2012；WHO/HSE/GAR/ARO/2012.1） | https://iris.who.int/server/api/core/bitstreams/53e9bf3f-55f6-412b-b90a-1ec37abd36e0/content（條目頁 https://iris.who.int/handle/10665/70810） | **已取得全文**（2026-11-19）：風險特徵化見 PDF 第 21–24 頁（印刷頁 19–22）；圖 3a 為 PDF 第 22 頁之圖片，以頁面影像判讀；表 6（含顏色圖例）、表 7、表 8、表 9 | 危害／暴露／情境評估之結構；並行之 WHO 圖 3a 風險矩陣（`who_rra`）、表 6 對應行動；信心（表 9） |
+| D′ | ECDC. Operational guidance on rapid risk assessment methodology（2011 年 8 月；三篇《疫情報導》文章引用之版本） | https://www.ecdc.europa.eu/sites/default/files/media/en/publications/Publications/1108_TED_Risk_Assessment_Methodology_Guidance.pdf | **已取得全文**（2026-11-19）：矩陣為圖 2.3（PDF 第 25 頁，印刷頁 20）；機率樹圖 2.1a／2.1b、衝擊樹圖 2.2 | 僅作比較（見 4.7），**未實作** |
 | E | WHO Rapid Risk Assessment Guidance v.2.1（2025-05-19） | https://www.who.int/publications/m/item/who-rapid-risk-assessment-guidance-v.2.1 | 出版品頁面已讀；PDF（cdn.who.int）未取得 | 同上；以明確風險問題、信心程度表述 |
 | F | ECDC. Operational tool on rapid risk assessment methodology – ECDC 2019 | https://www.ecdc.europa.eu/sites/default/files/documents/operational-tool-rapid-risk-assessment-methodolgy-ecdc-2019.pdf | **已取得全文**（2026-11-19）：圖 2.1、2.2、3、4 為 PDF 第 15–17 頁之圖片（印刷頁碼 10–12），以頁面影像判讀；Box 2 為印刷頁碼第 7 頁文字；預防原則見第 6 頁 | 機率（圖 2.1／2.2）與衝擊（圖 3）演算法、風險排序矩陣（圖 4）、信心程度（Box 2）、不確定時之預防原則、先評估一般民眾再分族群、情境因素不計分 |
 | G | Nauta M, et al. Towards more transparent risk assessment of communicable diseases – Redefining probability and impact. *Epidemiol Infect* 2025;153:e31（DOI 10.1017/S0950268825000147） | https://www.cambridge.org/core/journals/epidemiology-and-infection/article/towards-more-transparent-risk-assessment-of-communicable-diseases-redefining-probability-and-impact/401D53CACF89A13A3D24D766D7B668E4 | **未取得原文**；搜尋摘要確認主張：以數值區間表達機率、風險問題由風險管理者明確提出、不宜只以單一「低／高」概括 | 機率量表加上量化錨點；報告同時呈現機率、衝擊與等級，不只給單一標籤 |
@@ -109,6 +110,66 @@
 - 超過 30% 評估內容未引證 → 中。
 整體信心 = 各項目有效信心之最小值；若有關鍵陳述未通過查證規則，再設上限「中」。
 
+### 4.5 並行評估：WHO 2012 風險矩陣（D）
+WHO 手冊以「危害評估、暴露評估、情境評估」為基礎進行風險特徵化（risk characterization），在無量化模型時由團隊專家意見判定，並以風險矩陣輔助（第 19 頁）。WHO 明言：「When applying the matrix, the definitions of likelihood and consequence can be refined to fit with the national or sub-national context in each country.」**WHO 無題目樹**：本工具中可能性與後果為評估者依表 7、表 8 之判斷（`who_rra`），報告中明示。
+
+圖 3a（PDF 第 22 頁；版本 `who-2012-fig3a`；顏色依表 6 之顏色圖例：綠＝Low risk、黃＝Moderate risk、橙＝High risk、紅＝Very high risk——表 6 本身即附色塊，故此對應出自原文，非推論）：
+
+| 可能性＼後果 | Minimal 極輕微 | Minor 輕微 | Moderate 中度 | Major 重大 | Severe 嚴重 |
+|---|---|---|---|---|---|
+| **Almost certain 幾乎確定** | 低 | 中 | 高 | 極高 | 極高 |
+| **Highly likely 很可能** | 低 | 中 | 高 | 極高 | 極高 |
+| **Likely 可能** | 低 | 中 | 高 | 高 | 極高 |
+| **Unlikely 不太可能** | 低 | 低 | 中 | 高 | 高 |
+| **Very unlikely 極不可能** | 低 | 低 | 中 | 高 | 高 |
+
+測試 `test_who_matrix_equals_figure_3a` 逐格（25 格）比對。三級對應（極高→高）為本工具之規則。
+
+表 6「How to read Figures 3a and 3b」：
+- Low risk：Managed according to standard response protocols, routine control programmes and regulation (e.g. monitoring through routine surveillance systems)
+- Moderate risk：Roles and responsibility for the response must be specified. Specific monitoring or control measures required (e.g. enhanced surveillance, additional vaccination campaigns)
+- High risk：Senior management attention needed: there may be a need to establish command and control structures; a range of additional control measures will be required some of which may have significant consequences
+- Very high risk：Immediate response required even if the event is reported out of normal working hours. Immediate senior management attention needed (e.g. the command and control structure should be established within hours); the implementation of control measures with serious consequences is highly likely
+
+表 7「Estimates of likelihood definitions」：
+- Almost certain：Is expected to occur in most circumstances (e.g. probability of 95% or more)
+- Highly likely：Will probably occur in most circumstances (e.g. a probability of between 70% and 94%)
+- Likely：Will occur some of the time (e.g. a probability of between 30% and 69%)
+- Unlikely：Could occur some of the time (e.g. a probability of between 5% and 29%)
+- Very unlikely：Could occur under exceptional circumstances (e.g. a probability of less than 5%)
+
+表 8「Estimates of consequences definitions」（各級四項：族群影響／活動與服務干擾／額外防治措施／成本）：
+- Minimal：Limited impact on the affected population；Little disruption to normal activities and services；Routine responses are adequate and there is no need to implement additional control measures；Few extra costs for authorities and stakeholders
+- Minor：Minor impact for a small population or at-risk group；Limited disruption to normal activities and services；A small number of additional control measures will be needed that require minimal resources；Some increase in costs for authorities and stakeholders
+- Moderate：Moderate impact as a large population or at-risk group is affected；Moderate disruption to normal activities and services；Some additional control measures will be needed and some of these require moderate resources to implement；Moderate increase in costs for authorities and stakeholders
+- Major：Major impact for a small population or at-risk group；Major disruption to normal activities and services；A large number of additional control measures will be needed and some of these require significant resources to implement；Significant increase in costs for authorities and stakeholders
+- Severe：Severe impact for a large population or at-risk group；Severe disruption to normal activities and services；A large number of additional control measures will be needed and most of these require significant resources to implement；Serious increase in costs for authorities and stakeholders
+
+表 9「Level of confidence in two risk assessments」以兩例說明信心：例 A（醫院醫師之詳細臨床描述、監測資料、快速應變團隊流行病學調查、同儕審查文獻等）屬中至高信心；例 B（僅見未經其他來源證實之報紙報導）屬極低或低信心。信心可用「very low 至 very high」之描述量表表達（第 23 頁）。本工具之信心三級仍以 ECDC Box 2／HAIRS 附錄 B 定義，WHO 表 9 之例與其一致。
+
+註：WHO 手冊正文（第 19 頁）稱可能性見「Table 6」、後果見「Table 7」，但實際編號為表 7、表 8（表 6 為讀圖說明）；本文件以實際表號引用。
+
+### 4.6 綜合評估（`scoring.synthesize`）
+使用單位決定以 ECDC 2019 為主要方法、WHO 2012 並行、HAIRS 交叉核對，最後產出單一綜合評估：
+- **比較表**：每一架構一列（ECDC 2019 一般民眾＋矩陣風險高於整體之分層；WHO 2012 一般民眾＋族群；HAIRS 機率與衝擊分列、明示無合併等級；疫情報導式判斷＝`overall.proposed_level`），欄位為原生結果、三級對應、取得方式（演算法推導或評估者判斷）、主要決定因素。
+- **綜合等級**＝ECDC 2019 之綜合研判（使用單位之決定）。
+- **一致性**（一般民眾層級之 ECDC、WHO、文章式判斷）：全相同＝一致；最高與最低相差一級＝部分一致；相差兩級（低對高）＝不一致；並列出何者不同、較高或較低。
+- **審慎上限**＝上述一般民眾層級三者之最高三級（本工具之規則）。族群結果與 HAIRS 分項不納入上限，但若高於綜合等級，列為「注意事項」。
+- 有任何差異或注意事項時，`overall.synthesis_note`（評估者說明差異原因與應權衡之處）為必填，未填則警告；報告於比較表下方呈現。
+- 決策摘要之綜合等級徽章維持 ECDC 結果，下方以一行列出「ECDC｜WHO｜HAIRS｜文章式判斷｜審慎上限」。
+
+### 4.7 三個矩陣之比較（皆讀過原文）
+
+| | WHO 2012 圖 3a | ECDC 2011 圖 2.3 | ECDC 2019 圖 4（本工具主要方法） |
+|---|---|---|---|
+| 機率／可能性 | 5 級：Very unlikely～Almost certain（表 7 附機率區間） | 4 級：Very low、Low、Moderate、High（無「None」） | 5 級：None、Very low、Low、Moderate、High |
+| 衝擊／後果 | 5 級：Minimal～Severe（表 8 四面向） | 5 級：Very low～Very high | 4 級：Very low～High |
+| 如何得分 | 評估者判斷（無題目樹） | 題目樹（機率圖 2.1a：暴露、易感、高度傳染力；圖 2.1b 另問傳入其他會員國之途徑；衝擊圖 2.2：重症、相當多人、高度傳染力、有效治療與防治） | 題目樹（圖 2.1／2.2：傳入途徑、暴露、易感、傳播；圖 3：重症、相當多人、有效治療與防治） |
+| 輸出 | Low、Moderate、High、Very high | Very low～Very high risk | None～Very high risk |
+| 特性 | 偏重後果：極不可能 × 中度後果即為中；極不可能 × 重大後果即為高 | 高 × 高＝High；Very high 僅見於極高衝擊 × 高機率 | 高 × 高＝Very high；極低機率 × 高衝擊＝中 |
+
+三篇《疫情報導》文章引用的是 WHO 2012 手冊與 ECDC 2011 操作指引；本工具則以 ECDC 2019 版計算（使用單位之決定），WHO 2012 並行呈現，ECDC 2011 僅作比較、未實作。
+
 ## 5. 新聞查證（J）
 
 - 判定：已證實／部分證實／無法證實／與官方資訊不符／過時。
@@ -142,7 +203,7 @@
 
 ## 9. 已知限制
 
-- G（Nauta 等 2025）、I（IHR 附件二原文 PDF）、J（WHO EIOS 課程文件）仍未取得原文；IHR 四問題依多個搜尋結果一致之內容。
+- G（Nauta 等 2025）、I（IHR 附件二原文 PDF）、J（WHO EIOS 課程文件）仍未取得原文；WHO 2012 可能性與後果無題目樹，屬評估者判斷；IHR 四問題依多個搜尋結果一致之內容。
 - 本工具之調整（非原文）：圖 2.2↔境外移入、圖 2.1↔國內傳播類項目之對應；六級矩陣與機率／衝擊分數對應三級之規則；不確定時「兩分支取高」之實作；信心上限規則；HAIRS 以我國取代 UK。
 - ECDC 演算法之是非題對連續性證據較粗略（例：Q6「相當多人受影響」未量化，HAIRS 附註 4 亦指出「substantial」未量化），作答需判斷並附理由。
 - 機率與衝擊分數仍為主觀判斷；本工具使其**透明、可稽核、可重現**，但不保證判斷正確。

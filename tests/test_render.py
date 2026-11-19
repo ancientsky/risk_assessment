@@ -121,3 +121,14 @@ def test_measles_example_renders_cleanly():
     html = render_html(a)
     assert "交叉核對：UKHSA HAIRS" not in html  # not zoonotic, no HAIRS block
     assert not re.search(r"<script\b[^>]*\bsrc=", html)
+
+
+def test_who_and_synthesis_sections(data):
+    html = _html(data)
+    assert "並行評估：WHO 2012 風險矩陣" in html and "評估者依其表 7、表 8 定義之判斷" in html
+    assert "綜合評估：各架構結果比較" in html
+    assert "ECDC 低｜WHO 中｜HAIRS 機率中・衝擊中｜文章式判斷 低｜審慎上限 中" in html
+    assert html.index('id="synthesis-h"') < html.index('id="sec-scenario"')  # last part of section 5
+    assert "評估者說明：" in html
+    m = re.search(r'<table class="matrix who-matrix".*?</table>', html, re.S).group(0)
+    assert m.count('<th scope="row">') == 5 and '<span class="marker static" title="一般民眾">W</span>' in m

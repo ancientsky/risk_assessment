@@ -18,6 +18,9 @@ from .schema import (
     Assessment,
     EcdcPath,
     PathAudit,
+    Synthesis,
+    SynthesisRow,
+    WhoResult,
     Audit,
     Claim,
     ClaimAudit,
@@ -55,6 +58,36 @@ MATRIX_TO_LEVEL3 = {"無": "低", "極低": "低", "低": "低", "中": "中", "
 PROBABILITY_TO_LEVEL3 = {0: "低", 1: "低", 2: "低", 3: "中", 4: "高"}
 IMPACT_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高"}
 
+# --- WHO (2012) Rapid Risk Assessment of Acute Public Health Events -------------
+# Figure 3a (PDF p.22, printed p.20), written out cell by cell. Keys: likelihood
+# 1..5 (Very unlikely..Almost certain, Table 7) -> consequences 1..5
+# (Minimal..Severe, Table 8). Colours per Table 6 (which carries the colour key):
+# green = Low, yellow = Moderate, orange = High, red = Very high.
+WHO_MATRIX_VERSION = "who-2012-fig3a"
+WHO_L_LABELS = {1: "極不可能", 2: "不太可能", 3: "可能", 4: "很可能", 5: "幾乎確定"}
+WHO_L_LABELS_EN = {1: "Very unlikely", 2: "Unlikely", 3: "Likely", 4: "Highly likely", 5: "Almost certain"}
+WHO_C_LABELS = {1: "極輕微", 2: "輕微", 3: "中度", 4: "重大", 5: "嚴重"}
+WHO_C_LABELS_EN = {1: "Minimal", 2: "Minor", 3: "Moderate", 4: "Major", 5: "Severe"}
+WHO_MATRIX: dict[int, dict[int, str]] = {
+    5: {1: "低", 2: "中", 3: "高", 4: "極高", 5: "極高"},  # Almost certain
+    4: {1: "低", 2: "中", 3: "高", 4: "極高", 5: "極高"},  # Highly likely
+    3: {1: "低", 2: "中", 3: "高", 4: "高", 5: "極高"},    # Likely
+    2: {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"},      # Unlikely
+    1: {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"},      # Very unlikely
+}
+WHO_TO_LEVEL3 = {"低": "低", "中": "中", "高": "高", "極高": "高"}  # this tool's mapping
+# WHO Table 6: actions implied by each level (translated; English in docs/methodology.md).
+WHO_ACTIONS = {
+    "低": "依標準應變程序、例行防治計畫與法規管理（例：以例行監測系統監測）",
+    "中": "須明定應變之角色與責任；需特定監測或防治措施（例：加強監測、額外疫苗接種活動）",
+    "高": "需高階主管關注：可能需建立指揮管制架構；將需一系列額外防治措施，部分可能有重大後果",
+    "極高": "即使於非上班時間通報亦須立即應變；需高階主管立即關注（例：數小時內建立指揮管制架構）；極可能需實施具嚴重後果之防治措施",
+}
+
+# HAIRS has no combined level; for cross-checks only, this tool maps each
+# component to three levels: very low/low -> 低, moderate -> 中, high/very high -> 高.
+HAIRS_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"}
+
 # ECDC Box 2 / HAIRS Appendix B confidence wording for the 低/中/高 values.
 CONF_LABELS = {"低": "不足", "中": "尚可", "高": "良好"}
 
@@ -71,6 +104,12 @@ def matrix_level(p: int, i: int) -> str:
     if p not in RISK_MATRIX or i not in RISK_MATRIX[p]:
         raise ValueError(f"probability must be 0..4 and impact 1..4, got P={p}, I={i}")
     return RISK_MATRIX[p][i]
+
+
+def who_level(likelihood: int, consequences: int) -> str:
+    if likelihood not in WHO_MATRIX or consequences not in WHO_MATRIX[likelihood]:
+        raise ValueError(f"WHO likelihood/consequences must be 1..5, got L={likelihood}, C={consequences}")
+    return WHO_MATRIX[likelihood][consequences]
 
 
 def level3_from_matrix(level: str) -> str:
@@ -149,6 +188,12 @@ def iter_source_refs(a: Assessment) -> Iterable[tuple[str, str]]:
             for ans in getattr(a.hairs, group):
                 for sid in ans.source_ids:
                     yield f"hairs.{group}.{ans.q}", sid
+    if a.who_rra is not None:
+        for sid in a.who_rra.source_ids:
+            yield "who_rra", sid
+        for g in a.who_rra.groups:
+            for sid in g.source_ids:
+                yield f"who_rra.groups[{g.name}]", sid
     for q in a.ihr_annex2.questions:
         for sid in q.source_ids:
             yield f"ihr_annex2.{q.key}", sid
@@ -414,6 +459,99 @@ def audit_hairs(a: Assessment, issues: list[Issue]) -> tuple[Optional[PathAudit]
     return out[0], out[1]
 
 
+def _who_result(name: str, lk: int, cq: int) -> WhoResult:
+    lv = who_level(lk, cq)
+    return WhoResult(name=name, likelihood=lk, likelihood_label=WHO_L_LABELS[lk], consequences=cq,
+                     consequences_label=WHO_C_LABELS[cq], level=lv, level3=WHO_TO_LEVEL3[lv], action=WHO_ACTIONS[lv])
+
+
+def audit_who(a: Assessment) -> tuple[Optional[WhoResult], list[WhoResult]]:
+    if a.who_rra is None:
+        return None, []
+    w = a.who_rra
+    return (_who_result("一般民眾", w.likelihood, w.consequences),
+            [_who_result(g.name, g.likelihood, g.consequences) for g in w.groups])
+
+
+def synthesize(a: Assessment, item_audits: list[ItemAudit], overall_m: Optional[str], overall_comp: str,
+               overall_from: Optional[str], who: Optional[WhoResult], who_groups: list[WhoResult],
+               hairs_p: Optional[PathAudit], hairs_i: Optional[PathAudit]) -> Synthesis:
+    """Integrated assessment: ECDC 2019 is primary; WHO 2012, HAIRS and the
+    article-style judgment are compared against it (see docs/methodology.md §4.6)."""
+    names = {r.id: r.name for r in a.risk_items}
+    rows: list[SynthesisRow] = []
+    driver_ia = next((ia for ia in item_audits if ia.item_id == overall_from), None)
+    all_derived = all(
+        (ia.ecdc_probability is not None if ia.probability is not None else ia.ecdc_impact is not None)
+        for ia in item_audits)
+    if driver_ia is not None:
+        drv = f"{names[driver_ia.item_id]}：機率 {P_LABELS[driver_ia.probability]} × 衝擊 {I_LABELS[driver_ia.impact]}"
+    else:  # pragma: no cover
+        drv = "—"
+    rows.append(SynthesisRow(framework="ECDC 2019（主要）", scope="一般民眾", native=f"{overall_m}風險" if overall_m else "—",
+                             level3=overall_comp,
+                             method="演算法推導（圖 2.1／2.2／3）＋圖 4 矩陣" if all_derived else "演算法推導＋部分評估者所填分數；圖 4 矩陣",
+                             driver=drv))
+    for ia in item_audits:
+        for st in ia.strata_computed:
+            m3 = st.get("matrix_level3")
+            if m3 and LEVEL3_ORDER[m3] > LEVEL3_ORDER[overall_comp]:
+                rows.append(SynthesisRow(framework="ECDC 2019（主要）", scope=st["name"], native=f"{st['matrix_level']}風險",
+                                         level3=m3, method="圖 4 矩陣（分層）",
+                                         driver=f"{names[ia.item_id]}：機率 {P_LABELS[st['probability']]} × 衝擊 {I_LABELS[st['impact']]}",
+                                         is_population=False))
+    if who is not None:
+        rows.append(SynthesisRow(framework="WHO 2012", scope="一般民眾", native=f"{who.level}風險", level3=who.level3,
+                                 method="評估者依表 7／表 8 判斷＋圖 3a 矩陣",
+                                 driver=f"可能性 {who.likelihood_label} × 後果 {who.consequences_label}"))
+        for g in who_groups:
+            rows.append(SynthesisRow(framework="WHO 2012", scope=g.name, native=f"{g.level}風險", level3=g.level3,
+                                     method="評估者依表 7／表 8 判斷＋圖 3a 矩陣",
+                                     driver=f"可能性 {g.likelihood_label} × 後果 {g.consequences_label}", is_population=False))
+    if hairs_p is not None and hairs_i is not None:
+        rows.append(SynthesisRow(framework="UKHSA HAIRS（交叉核對）", scope="一般民眾",
+                                 native=f"機率 {hairs_p.label}・衝擊 {hairs_i.label}（無合併等級）", level3=None,
+                                 method="演算法推導（機率 Q1–Q10、衝擊 Q1–Q12）",
+                                 driver=f"不確定題：機率 {', '.join(hairs_p.uncertain) or '無'}；衝擊 {', '.join(hairs_i.uncertain) or '無'}"))
+    rows.append(SynthesisRow(framework="疫情報導式判斷", scope="一般民眾", native=a.overall.proposed_level, level3=a.overall.proposed_level,
+                             method="評估者依各項目風險等級定義之文章式綜合判斷", driver="overall.proposed_level"))
+
+    integrated = overall_comp
+    pop = [r for r in rows if r.is_population and r.level3 is not None]
+    diffs = []
+    for r in pop[1:]:
+        if r.level3 != integrated:
+            direction = "高" if LEVEL3_ORDER[r.level3] > LEVEL3_ORDER[integrated] else "低"
+            diffs.append(f"{r.framework}：{r.level3}（{direction}於綜合等級 {integrated}）")
+    lv = [LEVEL3_ORDER[r.level3] for r in pop]
+    if max(lv) == min(lv):
+        consistency = "一致"
+    elif max(lv) - min(lv) >= 2:
+        consistency = "不一致"
+    else:
+        consistency = "部分一致" if len(pop) >= 2 else "一致"
+    cap = max((r.level3 for r in pop), key=lambda x: LEVEL3_ORDER[x])
+    cautions = []
+    for r in rows:
+        if not r.is_population and r.level3 and LEVEL3_ORDER[r.level3] > LEVEL3_ORDER[integrated]:
+            cautions.append(f"{r.framework}／{r.scope}：{r.level3}（{r.native}）")
+    if hairs_p is not None and hairs_i is not None:
+        for comp, pa in (("機率", hairs_p), ("衝擊", hairs_i)):
+            l3 = HAIRS_TO_LEVEL3[pa.value]
+            if LEVEL3_ORDER[l3] > LEVEL3_ORDER[integrated]:
+                cautions.append(f"HAIRS {comp}：{pa.label}（對應 {l3}，高於綜合等級）")
+    note_required = bool(diffs or cautions or cap != integrated)
+    parts = [f"ECDC {integrated}"]
+    if who is not None:
+        parts.append(f"WHO {who.level}")
+    if hairs_p is not None and hairs_i is not None:
+        parts.append(f"HAIRS 機率{hairs_p.label}・衝擊{hairs_i.label}")
+    parts.append(f"文章式判斷 {a.overall.proposed_level}")
+    parts.append(f"審慎上限 {cap}")
+    return Synthesis(rows=rows, integrated_level=integrated, consistency=consistency, differences=diffs,
+                     cautious_cap=cap, cautions=cautions, note_required=note_required, compact="｜".join(parts))
+
+
 # ---------------------------------------------------------------------------
 # Main entry point
 # ---------------------------------------------------------------------------
@@ -500,6 +638,14 @@ def audit(a: Assessment) -> Audit:
                 issues.append(Issue(severity="info", code="stratum_higher",
                                     message=f"{names[ia.item_id]}：分層「{st['name']}」之矩陣風險「{st['matrix_level']}」（三級：{m3}）高於整體（{overall_comp}），決策摘要應明列",
                                     path=f"risk_items[{ia.item_id}]"))
+    who, who_groups = audit_who(a)
+    synthesis = synthesize(a, item_audits, overall_m, overall_comp, overall_from, who, who_groups, hairs_p, hairs_i)
+    if synthesis.note_required and not (a.overall.synthesis_note or "").strip():
+        issues.append(Issue(severity="warning", code="synthesis_note_missing",
+                            message=f"各架構結果與綜合等級（{synthesis.integrated_level}）不一致或有族群／HAIRS 注意事項，需填寫 overall.synthesis_note 說明差異",
+                            path="overall.synthesis_note"))
+    if a.who_rra is None:
+        issues.append(Issue(severity="info", code="who_missing", message="未填 WHO 2012 並行評估（who_rra）；綜合評估僅比較 ECDC 與文章式判斷"))
     if not overall_agrees:
         issues.append(Issue(severity="warning", code="overall_mismatch",
                             message=f"綜合研判：評估者建議「{a.overall.proposed_level}」，矩陣計算「{overall_comp}」（取最高之機率項目 {overall_from}）"))
@@ -594,6 +740,9 @@ def audit(a: Assessment) -> Audit:
         ihr_note=note,
         hairs_probability=hairs_p,
         hairs_impact=hairs_i,
+        who=who,
+        who_groups=who_groups,
+        synthesis=synthesis,
         issues=issues,
     )
 
