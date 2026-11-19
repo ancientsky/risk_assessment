@@ -62,3 +62,27 @@ def test_llm_schema_excludes_audit():
     s = llm_output_schema()
     assert "audit" not in s["properties"]
     assert "risk_items" in s["properties"]
+
+
+@pytest.mark.parametrize("field,value,ok", [("probability", 0, True), ("probability", 4, True), ("probability", 5, False),
+                                            ("impact", 4, True), ("impact", 5, False), ("impact", 0, False)])
+def test_ecdc_scale_bounds(data, field, value, ok):
+    item = data["risk_items"][0] if field == "probability" else data["risk_items"][3]
+    item[field] = value
+    if ok:
+        Assessment.model_validate(data)
+    else:
+        with pytest.raises(ValidationError):
+            Assessment.model_validate(data)
+
+
+def test_hairs_question_ids_validated(data):
+    data["hairs"]["impact"].append({"q": "Q13", "answer": "是", "rationale": "x"})
+    with pytest.raises(ValidationError, match="無此問題"):
+        Assessment.model_validate(data)
+
+
+def test_legacy_hairs_questions_rejected(data):
+    data["risk_items"][3]["hairs_questions"] = []
+    with pytest.raises(ValidationError):
+        Assessment.model_validate(data)

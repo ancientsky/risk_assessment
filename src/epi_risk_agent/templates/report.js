@@ -70,7 +70,7 @@
 
   /* ---------- what-if (試算) -------------------------------------------- */
   var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3, P3 = data.probTo3;
-  var ORDER = { "低": 0, "中": 1, "高": 2, "極高": 3 };
+  var ORDER = { "無": 0, "極低": 1, "低": 2, "中": 3, "高": 4, "極高": 5 };
   var items = data.items;
   var trial = {};
   function resetTrial() { trial = {}; items.forEach(function (it) { trial[it.id] = { p: it.p, i: it.inherit ? null : it.i }; }); }
@@ -98,7 +98,8 @@
   function fillScores(sel, labels, allowInherit) {
     sel.innerHTML = "";
     if (allowInherit) opt(sel, "", "沿用衝擊項目");
-    for (var k = 1; k <= 5; k++) opt(sel, String(k), k + "（" + labels[String(k)] + "）");
+    Object.keys(labels).map(Number).sort(function (a, b) { return a - b; })
+      .forEach(function (k) { opt(sel, String(k), k + "（" + labels[String(k)] + "）"); });
   }
   function itemById(id) { for (var k = 0; k < items.length; k++) if (items[k].id === id) return items[k]; return null; }
 

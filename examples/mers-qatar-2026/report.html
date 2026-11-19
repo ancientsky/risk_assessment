@@ -21,15 +21,21 @@
   --accent-ink: #1c5cab;
   --focus: #2a78d6;
   /* status palette: level colours (always paired with icon + text) */
-  --lv-low: #0ca30c;
+  --lv-none: #898781;
+  --lv-vlow: #0ca30c;
+  --lv-low: #6aa84f;
   --lv-mod: #fab219;
   --lv-high: #ec835a;
   --lv-vhigh: #d03b3b;
-  --lv-low-bg: #e3f4e3;
+  --lv-none-bg: #f2f1ed;
+  --lv-vlow-bg: #e3f4e3;
+  --lv-low-bg: #eef6dc;
   --lv-mod-bg: #fdf1d3;
   --lv-high-bg: #fde6d2;
   --lv-vhigh-bg: #f5c6c6;
-  --lv-low-ink: #0a5c0a;
+  --lv-none-ink: #52514e;
+  --lv-vlow-ink: #0a5c0a;
+  --lv-low-ink: #3d6b1e;
   --lv-mod-ink: #6b4a00;
   --lv-high-ink: #8a3412;
   --lv-vhigh-ink: #8f1f1f;
@@ -56,11 +62,15 @@
     --accent: #3987e5;
     --accent-ink: #86b6ef;
     --focus: #86b6ef;
-    --lv-low-bg: #15301a;
+    --lv-none-bg: #232321;
+    --lv-vlow-bg: #15301a;
+    --lv-none-ink: #c3c2b7;
+    --lv-vlow-ink: #9be09b;
+    --lv-low-bg: #26331a;
     --lv-mod-bg: #3a2f10;
     --lv-high-bg: #3d2614;
     --lv-vhigh-bg: #521c1c;
-    --lv-low-ink: #9be09b;
+    --lv-low-ink: #c5e3a0;
     --lv-mod-ink: #ffd77a;
     --lv-high-ink: #f6b496;
     --lv-vhigh-ink: #f3a3a3;
@@ -87,11 +97,15 @@
   --accent: #3987e5;
   --accent-ink: #86b6ef;
   --focus: #86b6ef;
-  --lv-low-bg: #15301a;
+  --lv-none-bg: #232321;
+  --lv-vlow-bg: #15301a;
+  --lv-none-ink: #c3c2b7;
+  --lv-vlow-ink: #9be09b;
+  --lv-low-bg: #26331a;
   --lv-mod-bg: #3a2f10;
   --lv-high-bg: #3d2614;
   --lv-vhigh-bg: #521c1c;
-  --lv-low-ink: #9be09b;
+  --lv-low-ink: #c5e3a0;
   --lv-mod-ink: #ffd77a;
   --lv-high-ink: #f6b496;
   --lv-vhigh-ink: #f3a3a3;
@@ -157,6 +171,10 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 
 /* ---------- level badges & chips ------------------------------------- */
 .lv { display: inline-flex; align-items: center; gap: 0.35em; font-weight: 700; padding: 0.05em 0.6em; border-radius: 999px; border: 1.5px solid; line-height: 1.6; white-space: nowrap; }
+.lv-none { color: var(--lv-none-ink); background: var(--lv-none-bg); border-color: var(--lv-none); border-style: dashed; }
+.lv-none .ic { color: var(--lv-none); }
+.lv-vlow { color: var(--lv-vlow-ink); background: var(--lv-vlow-bg); border-color: var(--lv-vlow); }
+.lv-vlow .ic { color: var(--lv-vlow); }
 .lv-low { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
 .lv-low .ic { color: var(--lv-low); }
 .lv-mod { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
@@ -232,6 +250,8 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 .dash > li { position: relative; padding-left: 0.9rem; margin-bottom: 0.3rem; }
 .dash > li::before { content: "-"; position: absolute; left: 0; color: var(--muted); }
 .item-n { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: 0.8rem; margin-right: 0.4rem; }
+.algpath { font-size: 0.8rem; color: var(--ink-2); background: var(--surface-2); border-radius: 6px; padding: 0.15rem 0.45rem; margin: 0.25rem 0; }
+.hairs-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.6rem 1.2rem; margin: 0.6rem 0 0.9rem; }
 .mrisk { margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px dashed var(--grid); }
 .strata { list-style: none; padding: 0; margin: 0.4rem 0; font-size: 0.86rem; }
 .strata li { margin: 0.2rem 0; }
@@ -302,6 +322,8 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 .matrix th[scope="row"] { width: 3.4rem; }
 .matrix .ax { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
 .cell { height: 4.4rem; border-radius: 4px; vertical-align: top; padding: 3px 4px; position: relative; }
+.cell-none { background: var(--lv-none-bg); }
+.cell-vlow { background: var(--lv-vlow-bg); }
 .cell-low { background: var(--lv-low-bg); }
 .cell-mod { background: var(--lv-mod-bg); }
 .cell-high { background: var(--lv-high-bg); background-image: repeating-linear-gradient(45deg, transparent 0 7px, color-mix(in srgb, var(--lv-high) 18%, transparent) 7px 8px); }
@@ -387,8 +409,8 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
     color-scheme: light;
     --page: #fff; --surface: #fff; --surface-2: #f4f4f2; --ink: #000; --ink-2: #333; --muted: #555;
     --grid: #ccc; --axis: #999; --border: #bbb; --accent: #1c5cab; --accent-ink: #1c5cab;
-    --lv-low-bg: #e3f4e3; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
-    --lv-low-ink: #0a5c0a; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
+    --lv-none-bg: #f2f1ed; --lv-vlow-bg: #e3f4e3; --lv-low-bg: #eef6dc; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
+    --lv-none-ink: #52514e; --lv-vlow-ink: #0a5c0a; --lv-low-ink: #3d6b1e; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
     --warn-bg: #fff6dc; --err-bg: #fbe5e5;
   }
   body { font-size: 10.5pt; background: #fff; }
@@ -412,6 +434,8 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lvicon-none" viewBox="0 0 16 16"><rect x="2" y="7" width="12" height="2.4" rx="1" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vlow" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
   <symbol id="lvicon-low" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></symbol>
   <symbol id="lvicon-mod" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="currentColor"/></symbol>
   <symbol id="lvicon-high" viewBox="0 0 16 16"><path d="M8 .8 15.2 8 8 15.2.8 8z" fill="currentColor"/></symbol>
@@ -471,17 +495,17 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
       <div class="label">我國整體風險（計算結果）</div>
       <div class="hero-level"><span class="lv lv-low lv-xl"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
       <div class="sub">矩陣等級：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>
-        <span class="muted">（機率 極低 × 衝擊 高）</span></div>
-      <div class="sub">信心程度：<strong>中</strong>
+        <span class="muted">（ECDC 圖 4：機率 極低 × 衝擊 低）</span></div>
+      <div class="sub">信心程度：<strong>中（尚可）</strong>
 <span class="muted">（受「境外移入風險」信心程度「中」限制）</span></div>
       <div class="sub muted">評估者建議與規則計算一致（低）。</div>
       <div class="strata-hl"><div class="label">矩陣風險高於整體之分層</div>
-        <ul><li>境外移入風險／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：發生機率 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>，惟矩陣風險（機率 2 × 衝擊 4）<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul></div>
+        <ul><li>境外移入風險／赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：發生機率 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span>，惟矩陣風險（機率 3 × 衝擊 2）<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul></div>
     </div>
     <div class="bluf-body">
-      <p class="lead">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；境外移入、社區流行及院內感染之機率皆極低，惟一旦出現病例衝擊高。綜合研判我國 MERS 整體疫情風險為低；其中赴中東接觸駱駝或於當地醫療院所工作者之移入機率雖低，惟衝擊高，矩陣風險為中。</p>
+      <p class="lead">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；依 ECDC 演算法，境外移入、社區流行及院內感染之機率皆為極低，衝擊為低（重症可能但受影響人數不多）；惟依本項目之文章式判斷，致死率高且無疫苗與特效藥，衝擊列為高，兩者並列。綜合研判我國 MERS 整體疫情風險為低；其中赴中東接觸駱駝或於當地醫療院所工作者之移入機率雖低，惟衝擊高，矩陣風險為中。</p>
       <h3>重點發現</h3>
-      <ol class="findings"><li>新聞所述事實經 WHO DON626 查證大致正確；「屬散發人畜共通傳播」一點 WHO 用語較保守（感染源未確定），新聞來源可靠度未知，整體可信度為中。</li><li>卡達 2 例分別於 2026 年 7、8 月發病，均已康復；99 名接觸者全數陰性，無續發病例，事件已結束 14 天監測期。</li><li>我國迄今無 MERS 確定病例；境外移入、社區流行與院內感染之發生機率皆評為低（極低），整體風險為低；高暴露職業族群移入機率低，惟衝擊高，矩陣風險為中。</li><li>疾病本身衝擊高（致死率約 37%、無疫苗與特效藥），院內感染為主要擴大途徑，第 1 例上呼吸道檢體曾偽陰性。</li><li>卡達目前無我國 MERS 旅遊疫情建議等級；2022 年卡達出現病例時我國曾列第一級注意，可作為調整先例。</li></ol>
+      <ol class="findings"><li>新聞所述事實經 WHO DON626 查證大致正確；「屬散發人畜共通傳播」一點 WHO 用語較保守（感染源未確定），新聞來源可靠度未知，整體可信度為中。</li><li>卡達 2 例分別於 2026 年 7、8 月發病，均已康復；99 名接觸者全數陰性，無續發病例，事件已結束 14 天監測期。</li><li>我國迄今無 MERS 確定病例；境外移入、社區流行與院內感染之發生機率皆評為低（極低），整體風險為低；高暴露職業族群移入機率低，惟衝擊高，矩陣風險為中。</li><li>疾病本身嚴重（致死率約 37%、無疫苗與特效藥），文章式判斷衝擊為高，ECDC 圖 3 則因受影響人數不多推導為低；院內感染為主要擴大途徑，第 1 例上呼吸道檢體曾偽陰性。</li><li>卡達目前無我國 MERS 旅遊疫情建議等級；2022 年卡達出現病例時我國曾列第一級注意，可作為調整先例。</li></ol>
       <div class="bluf-facts">
         <div><div class="label">建議決策</div>
 <div class="strong"><svg class="ic star" aria-hidden="true"><use href="#i-star"/></svg>恢復卡達第一級注意（Watch）＋致醫界通函＋旅遊衛教</div>
@@ -858,11 +882,11 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
           <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           <div class="small">
 機率 1（極低）→ 低
-            <div class="mrisk">矩陣風險（機率×衝擊）：1×4（衝擊沿用衝擊項目） → <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+<div class="algpath">ECDC 圖 2.2：Q2 否 ⇒ 極低</div>            <div class="mrisk">矩陣風險（機率×衝擊）：1×2（衝擊沿用衝擊項目） → <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           </div>
-<ul class="strata"><li>一般旅客（含轉機）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="small">｜矩陣風險 1×4 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></span></li><li>赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="small">｜矩陣風險 2×4 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></span></li></ul>          <div class="small">信心：<strong>中</strong></div>
+<ul class="strata"><li>一般旅客（含轉機）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="small">｜矩陣風險 1×2 <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></span></li><li>赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="small">｜矩陣風險 3×2 <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></span><div class="algpath">ECDC 圖 2.2：Q2 是 → Q3 是 → Q4 否 ⇒ 中</div></li></ul>          <div class="small">信心：<strong>中（尚可）</strong></div>
           <details class="why small"><summary>判斷依據</summary>
-<p><strong>機率：</strong>全球累計逾 2,600 例、我國 14 年來零病例；本次卡達事件無人傳人且已結束追蹤，評估期間內移入機率極低（&lt;1%）。</p><p><strong>衝擊：</strong>沿用「衝擊」項目（若出現 1 例移入之衝擊）。</p>            <p><strong>信心程度理由：</strong>疫情與我國病例資料來自 WHO 與疾管署全文；但缺乏國人赴卡達／中東之旅次與航班資料，且 ECDC 最新數據僅取得搜尋摘要。</p>
+<p><strong>機率：</strong>依 ECDC 圖 2.2：一般旅客暴露不太可能（Q2 否）⇒ 極低。全球累計逾 2,600 例、我國迄今零病例，本次卡達事件無人傳人且已結束追蹤，亦支持此判斷。</p><p><strong>衝擊：</strong>沿用「衝擊」項目（若出現 1 例移入之衝擊）。</p>            <p><strong>信心程度理由：</strong>疫情與我國病例資料來自 WHO 與疾管署全文；但缺乏國人赴卡達／中東之旅次與航班資料，且 ECDC 最新數據僅取得搜尋摘要。</p>
           </details>
         </td>
       </tr>
@@ -878,11 +902,11 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
           <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           <div class="small">
 機率 1（極低）→ 低
-            <div class="mrisk">矩陣風險（機率×衝擊）：1×4（衝擊沿用衝擊項目） → <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+<div class="algpath">ECDC 圖 2.1：Q1 是 → Q2 否 ⇒ 極低</div>            <div class="mrisk">矩陣風險（機率×衝擊）：1×2（衝擊沿用衝擊項目） → <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           </div>
-          <div class="small">信心：<strong>高</strong></div>
+          <div class="small">信心：<strong>高（良好）</strong></div>
           <details class="why small"><summary>判斷依據</summary>
-<p><strong>機率：</strong>需先有移入病例且於社區中傳播，兩者皆極不可能。</p>            <p><strong>信心程度理由：</strong>傳播特性有多個官方來源一致描述，且本事件無續發病例。</p>
+<p><strong>機率：</strong>依 ECDC 圖 2.1：有傳入途徑（Q1 是），但國內人類暴露不太可能（Q2 否）⇒ 極低。</p>            <p><strong>信心程度理由：</strong>傳播特性有多個官方來源一致描述，且本事件無續發病例。</p>
           </details>
         </td>
       </tr>
@@ -898,11 +922,11 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
           <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           <div class="small">
 機率 1（極低）→ 低
-            <div class="mrisk">矩陣風險（機率×衝擊）：1×4（衝擊沿用衝擊項目） → <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
+<div class="algpath">ECDC 圖 2.1：Q1 是 → Q2 否 ⇒ 極低</div>            <div class="mrisk">矩陣風險（機率×衝擊）：1×2（衝擊沿用衝擊項目） → <span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           </div>
-          <div class="small">信心：<strong>中</strong></div>
+          <div class="small">信心：<strong>中（尚可）</strong></div>
           <details class="why small"><summary>判斷依據</summary>
-<p><strong>機率：</strong>以移入病例極不可能為前提，且我國有更新之感管指引與 TOCC 機制。</p>            <p><strong>信心程度理由：</strong>未讀取 2026 年感管指引 PDF 內文，亦無醫院整備查核結果，僅能依指引存在與既有手冊判斷。</p>
+<p><strong>機率：</strong>依 ECDC 圖 2.1：有傳入途徑（Q1 是），但醫療機構內人類暴露不太可能（Q2 否）⇒ 極低。</p>            <p><strong>信心程度理由：</strong>未讀取 2026 年感管指引 PDF 內文，亦無醫院整備查核結果，僅能依指引存在與既有手冊判斷。</p>
           </details>
         </td>
       </tr>
@@ -915,19 +939,20 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
           <li><strong>高：</strong>致死率或重症比例高，無疫苗及特效治療，且可能造成院內傳播或明顯社會衝擊</li></ul></td>
         <td data-th="評估結果" class="result">
           <div class="small muted">衝擊</div>
-          <div><span class="lv lv-high lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></div>
+          <div><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span></div>
           <div class="small">
-衝擊 4（高）→ 高          </div>
-<ul class="strata"><li>長者及慢性病患者：<span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span></li><li>一般健康成人：<span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span></li></ul>          <div class="small">信心：<strong>高</strong></div>
+衝擊 2（低）→ 低
+<div class="algpath">ECDC 圖 3：Q5 是 → Q6 否 ⇒ 低</div>          </div>
+<div class="flag flag-warn small"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>評估者建議「高」</div><ul class="strata"><li>長者及慢性病患者：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（建議 高）</span><div class="algpath">ECDC 圖 3：Q5 是 → Q6 否 ⇒ 低</div></li><li>一般健康成人：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（建議 中）</span><div class="algpath">ECDC 圖 3：Q5 是 → Q6 否 ⇒ 低</div></li></ul>          <div class="small">信心：<strong>高（良好）</strong></div>
           <details class="why small"><summary>判斷依據</summary>
-<p><strong>衝擊：</strong>單一病例即具高致死率與院內傳播潛勢，且可能引發社會關注；但人傳人有限、防治策略可行，未達「極高」。</p>            <p><strong>信心程度理由：</strong>疾病嚴重度與治療現況有 WHO 與疾管署全文一致資料。</p>
+<p><strong>衝擊：</strong>依 ECDC 圖 3：可能發生重症（Q5 是），但不會有相當多人受影響（Q6 否）⇒ 低。文章式判斷（本項目之風險等級定義）因致死率高、無疫苗與特效治療且可能院內傳播而評為高，兩者並列呈現。</p>            <p><strong>信心程度理由：</strong>疾病嚴重度與治療現況有 WHO 與疾管署全文一致資料。</p>
           </details>
         </td>
       </tr>
       <tr class="overall-row">
         <th scope="row" data-th="評估項目">綜合研判</th>
-        <td data-th="評估內容" colspan="2">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；境外移入、社區流行及院內感染之機率皆極低，惟一旦出現病例衝擊高。綜合研判我國 MERS 整體疫情風險為低；其中赴中東接觸駱駝或於當地醫療院所工作者之移入機率雖低，惟衝擊高，矩陣風險為中。<div class="small muted">計算方式：綜合研判＝各機率類項目「矩陣風險（機率×衝擊）」之最高者，再對應三級（本次由「境外移入風險」決定）。</div></td>
-        <td data-th="評估結果" class="result"><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="small">信心：<strong>中</strong></div>
+        <td data-th="評估內容" colspan="2">卡達 2 例為已結束追蹤之散發人畜共通感染，無人傳人跡象，國際疫情仍集中於沙烏地阿拉伯，我國迄今無病例；依 ECDC 演算法，境外移入、社區流行及院內感染之機率皆為極低，衝擊為低（重症可能但受影響人數不多）；惟依本項目之文章式判斷，致死率高且無疫苗與特效藥，衝擊列為高，兩者並列。綜合研判我國 MERS 整體疫情風險為低；其中赴中東接觸駱駝或於當地醫療院所工作者之移入機率雖低，惟衝擊高，矩陣風險為中。<div class="small muted">計算方式：綜合研判＝各機率類項目「矩陣風險（機率×衝擊）」之最高者，再對應三級（本次由「境外移入風險」決定）。</div></td>
+        <td data-th="評估結果" class="result"><span class="lv lv-low lv-lg"><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><div class="small">信心：<strong>中（尚可）</strong></div>
 </td>
       </tr>
     </tbody>
@@ -935,78 +960,76 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
   </div>
   <p class="small muted">註：本評估依據現有資訊判定風險等級，將視新增實證適時調整。</p>
 
-  <h3>人畜共通／新興病原篩檢問題（參考 UKHSA HAIRS 流程）</h3>
+  <section class="hairs" aria-labelledby="hairs-h">
+  <h3 id="hairs-h">交叉核對：UKHSA HAIRS 演算法（不併入矩陣）</h3>
+  <p class="small muted">以我國人口為評估對象（原文之 UK 換為我國）；僅供交叉核對，不併入 ECDC 矩陣。HAIRS 分別報告機率與衝擊，不以矩陣合併；「不確定」依預防原則取較高風險分支。</p>
+  <div class="hairs-summary">
+    <div><span class="label">HAIRS 機率</span> <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><div class="algpath">HAIRS：我國人口感染機率：Q1 是 → Q3 否 → Q4 不確定（預防原則取「是」） → Q8 是 → Q9 不確定（預防原則取「是」） → Q10 否 ⇒ 中</div></div>
+    <div><span class="label">HAIRS 衝擊</span> <span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><div class="algpath">HAIRS：對我國人群健康之衝擊：Q1 是 → Q4 是 → Q5 是 → Q8 否 → Q9 不確定（預防原則取「否」） ⇒ 中</div></div>
+    <div><span class="label">對照：ECDC（綜合研判之決定項目）</span> 機率 極低、衝擊 低</div>
+  </div>
   <div class="table-wrap">
   <table class="tbl tbl-stack">
-    <caption>衝擊</caption>
+    <caption>HAIRS：我國人口感染機率：機率問題</caption>
     <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
-    <tbody><tr><td data-th="問題">病原是否為已知可感染人類之人畜共通病原？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">MERS-CoV 為人畜共通病原，單峰駱駝為主要宿主。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題">本事件是否有人類感染證據？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">2 例實驗室確診。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr><tr><td data-th="問題">是否有持續人傳人之證據？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">99 名接觸者均陰性；流行地區社區無持續人傳人。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題">主要宿主或病媒是否存在於我國？</td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">本次未查得我國單峰駱駝飼養或輸入資料。 <span class="chip chip-uncited" title="此項評估內容未引用任何來源">未引證</span></td></tr><tr><td data-th="問題">我國民眾是否有暴露途徑？</td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">赴中東旅遊、朝覲或工作時接觸駱駝、生飲駱駝乳或前往當地醫療院所。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></td></tr><tr><td data-th="問題">是否有有效疫苗或特效治療可降低衝擊？</td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">目前無核准疫苗與治療。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr></tbody>
+    <tbody><tr><td data-th="問題"><strong>Q1</strong> 是否為已知之人類疾病？<div class="small muted">Is this a recognised human disease?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">MERS 為已知之人類疾病 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q3</strong> 此疾病是否於我國人類中呈地方性流行？<div class="small muted">Is this disease endemic in humans within the UK?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">臺灣迄今無確定病例 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q4</strong> 此疾病是否於我國動物中呈地方性流行？<div class="small muted">Is this disease endemic in animals in the UK?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">本次未查得我國單峰駱駝飼養資料 </td></tr><tr><td data-th="問題"><strong>Q5</strong> 是否有傳入我國動物之途徑？<div class="small muted">Are there routes of introduction into animals in the UK?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">本次未查得我國駱駝活體或產品輸入資料 </td></tr><tr><td data-th="問題"><strong>Q6</strong> 是否已有有效措施可減緩這些途徑？<div class="small muted">Are effective measures in place to mitigate against these?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">本次未查得相關動物輸入管制措施資料 </td></tr><tr><td data-th="問題"><strong>Q7</strong> 我國環境條件是否支持該疾病之自然病媒？<div class="small muted">Do environmental conditions in the UK support the natural vectors of disease?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">本次未查得相關資料（MERS 無病媒，主要宿主為單峰駱駝） <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q8</strong> 是否會有人類暴露？<div class="small muted">Will there be human exposure?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">國人赴中東旅遊、朝覲或工作時可能接觸駱駝、生飲駱駝乳或前往當地醫療院所 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></td></tr><tr><td data-th="問題"><strong>Q9</strong> 人類是否高度易感？<div class="small muted">Are humans highly susceptible?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">無核准疫苗，但檔案中無我國人口易感性之直接資料 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q10</strong> 此疾病於人類間是否具高度傳染力？<div class="small muted">Is the disease highly infectious in humans?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">流行地區社區無持續性人傳人；本事件無續發病例 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr></tbody>
   </table>
   </div>
+  <div class="table-wrap">
+  <table class="tbl tbl-stack">
+    <caption>HAIRS：對我國人群健康之衝擊：衝擊問題</caption>
+    <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
+    <tbody><tr><td data-th="問題"><strong>Q1</strong> 是否有人傳人？<div class="small muted">Is there human-to-human spread?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">有人傳人，主要為醫療機構院內感染及少數密切接觸者 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q4</strong> 人群是否易感？<div class="small muted">Is the human population susceptible?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">無核准疫苗 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q5</strong> 是否造成人類重症？<div class="small muted">Does it cause severe disease in humans?</div></td><td data-th="回答"><span class="ans ans-y">是</span></td><td data-th="說明">致死率約 37%，長者及慢性病者為高風險族群 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></td></tr><tr><td data-th="問題"><strong>Q8</strong> 是否會有相當多人受影響？<div class="small muted">Would a substantial number of people be affected?</div></td><td data-th="回答"><span class="ans ans-n">否</span></td><td data-th="說明">散發病例為主，預期受影響人數不多 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></td></tr><tr><td data-th="問題"><strong>Q9</strong> 是否有有效介入措施？<div class="small muted">Are effective interventions available?</div></td><td data-th="回答"><span class="ans ans-u">不確定</span></td><td data-th="說明">無核准疫苗與特效治療，但隔離、接觸者追蹤與感染管制可行 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></td></tr></tbody>
+  </table>
+  </div>
+  </section>
 
   <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
   <p class="small muted">點選（或以 Tab 移至後按 Enter）矩陣中的編號可查看該項目之評估內容。項目編號所在位置即該項目之「矩陣風險（機率×衝擊）」，格內文字為矩陣等級；顏色與斜線僅為輔助。「衝擊」項目僅有衝擊分數，不標示於矩陣，其分數決定各機率類項目所在之欄。</p>
   <div class="matrix-layout">
     <div class="matrix-wrap">
       <table class="matrix" aria-labelledby="matrix-h" id="matrix">
-        <thead><tr><td class="corner"><span>衝擊→</span><span>機率↓</span></td><th scope="col">1<span class="ax">極低</span></th><th scope="col">2<span class="ax">低</span></th><th scope="col">3<span class="ax">中</span></th><th scope="col">4<span class="ax">高</span></th><th scope="col">5<span class="ax">極高</span></th></tr></thead>
+        <thead><tr><td class="corner"><span>機率→</span><span>衝擊↓</span></td><th scope="col">0<span class="ax">無</span></th><th scope="col">1<span class="ax">極低</span></th><th scope="col">2<span class="ax">低</span></th><th scope="col">3<span class="ax">中</span></th><th scope="col">4<span class="ax">高</span></th></tr></thead>
         <tbody>
-          <tr><th scope="row">5<span class="ax">極高</span></th>
-            <td class="cell cell-mod" data-p="5" data-i="1">
-              <span class="cell-lv">中</span>
+          <tr><th scope="row">1<span class="ax">極低</span></th>
+            <td class="cell cell-none" data-p="0" data-i="1">
+              <span class="cell-lv">無</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-high" data-p="5" data-i="2">
-              <span class="cell-lv">高</span>
+            <td class="cell cell-vlow" data-p="1" data-i="1">
+              <span class="cell-lv">極低</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-high" data-p="5" data-i="3">
-              <span class="cell-lv">高</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-vhigh" data-p="5" data-i="4">
-              <span class="cell-lv">極高</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-vhigh" data-p="5" data-i="5">
-              <span class="cell-lv">極高</span>
-              <span class="markers">
-              </span>
-            </td>
-          </tr>
-          <tr><th scope="row">4<span class="ax">高</span></th>
-            <td class="cell cell-low" data-p="4" data-i="1">
+            <td class="cell cell-low" data-p="2" data-i="1">
               <span class="cell-lv">低</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-mod" data-p="4" data-i="2">
+            <td class="cell cell-low" data-p="3" data-i="1">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="4" data-i="1">
               <span class="cell-lv">中</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-high" data-p="4" data-i="3">
-              <span class="cell-lv">高</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-vhigh" data-p="4" data-i="4">
-              <span class="cell-lv">極高</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-vhigh" data-p="4" data-i="5">
-              <span class="cell-lv">極高</span>
-              <span class="markers">
-              </span>
-            </td>
           </tr>
-          <tr><th scope="row">3<span class="ax">中</span></th>
-            <td class="cell cell-low" data-p="3" data-i="1">
+          <tr><th scope="row">2<span class="ax">低</span></th>
+            <td class="cell cell-none" data-p="0" data-i="2">
+              <span class="cell-lv">無</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-low" data-p="1" data-i="2">
+              <span class="cell-lv">低</span>
+              <span class="markers">
+<button type="button" class="marker" data-item="R1" aria-label="1. 境外移入風險：機率 極低、衝擊 低、矩陣等級 低">1</button><button type="button" class="marker" data-item="R2" aria-label="2. 國內社區流行風險：機率 極低、衝擊 低、矩陣等級 低">2</button><button type="button" class="marker" data-item="R3" aria-label="3. 院內感染風險：機率 極低、衝擊 低、矩陣等級 低">3</button>              </span>
+            </td>
+            <td class="cell cell-low" data-p="2" data-i="2">
               <span class="cell-lv">低</span>
               <span class="markers">
               </span>
@@ -1016,29 +1039,19 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-mod" data-p="3" data-i="3">
+            <td class="cell cell-mod" data-p="4" data-i="2">
               <span class="cell-lv">中</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-high" data-p="3" data-i="4">
-              <span class="cell-lv">高</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-high" data-p="3" data-i="5">
-              <span class="cell-lv">高</span>
-              <span class="markers">
-              </span>
-            </td>
           </tr>
-          <tr><th scope="row">2<span class="ax">低</span></th>
-            <td class="cell cell-low" data-p="2" data-i="1">
-              <span class="cell-lv">低</span>
+          <tr><th scope="row">3<span class="ax">中</span></th>
+            <td class="cell cell-none" data-p="0" data-i="3">
+              <span class="cell-lv">無</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-low" data-p="2" data-i="2">
+            <td class="cell cell-low" data-p="1" data-i="3">
               <span class="cell-lv">低</span>
               <span class="markers">
               </span>
@@ -1048,40 +1061,40 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-mod" data-p="2" data-i="4">
+            <td class="cell cell-mod" data-p="3" data-i="3">
               <span class="cell-lv">中</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-high" data-p="2" data-i="5">
+            <td class="cell cell-high" data-p="4" data-i="3">
               <span class="cell-lv">高</span>
               <span class="markers">
               </span>
             </td>
           </tr>
-          <tr><th scope="row">1<span class="ax">極低</span></th>
-            <td class="cell cell-low" data-p="1" data-i="1">
-              <span class="cell-lv">低</span>
+          <tr><th scope="row">4<span class="ax">高</span></th>
+            <td class="cell cell-none" data-p="0" data-i="4">
+              <span class="cell-lv">無</span>
               <span class="markers">
               </span>
             </td>
-            <td class="cell cell-low" data-p="1" data-i="2">
-              <span class="cell-lv">低</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-low" data-p="1" data-i="3">
-              <span class="cell-lv">低</span>
-              <span class="markers">
-              </span>
-            </td>
-            <td class="cell cell-low" data-p="1" data-i="4">
-              <span class="cell-lv">低</span>
-              <span class="markers">
-<button type="button" class="marker" data-item="R1" aria-label="1. 境外移入風險：機率 極低、衝擊 高、矩陣等級 低">1</button><button type="button" class="marker" data-item="R2" aria-label="2. 國內社區流行風險：機率 極低、衝擊 高、矩陣等級 低">2</button><button type="button" class="marker" data-item="R3" aria-label="3. 院內感染風險：機率 極低、衝擊 高、矩陣等級 低">3</button>              </span>
-            </td>
-            <td class="cell cell-mod" data-p="1" data-i="5">
+            <td class="cell cell-mod" data-p="1" data-i="4">
               <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-mod" data-p="2" data-i="4">
+              <span class="cell-lv">中</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-high" data-p="3" data-i="4">
+              <span class="cell-lv">高</span>
+              <span class="markers">
+              </span>
+            </td>
+            <td class="cell cell-vhigh" data-p="4" data-i="4">
+              <span class="cell-lv">極高</span>
               <span class="markers">
               </span>
             </td>
@@ -1094,38 +1107,38 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
     </div>
   </div>
   <div class="matrix-legend">
-<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="lv lv-vhigh "><svg class="ic" aria-hidden="true"><use href="#lvicon-vhigh"/></svg><span>極高</span></span>    <span class="muted small">矩陣等級 → 三級：低→低、中→中、高→高、極高→高</span>
+<span class="lv lv-none "><svg class="ic" aria-hidden="true"><use href="#lvicon-none"/></svg><span>無</span></span><span class="lv lv-vlow "><svg class="ic" aria-hidden="true"><use href="#lvicon-vlow"/></svg><span>極低</span></span><span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="lv lv-mod "><svg class="ic" aria-hidden="true"><use href="#lvicon-mod"/></svg><span>中</span></span><span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="lv lv-vhigh "><svg class="ic" aria-hidden="true"><use href="#lvicon-vhigh"/></svg><span>極高</span></span>    <span class="muted small">依 ECDC 2019 圖 4 排列（列＝衝擊、欄＝機率）。本工具對應三級：無／極低／低→低、中→中、高／極高→高</span>
   </div>
   <template id="itemDetails">
     <div data-item="R1">
       <h4>1. 境外移入風險</h4>
-      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×4）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 中）</span></p>
-      <ul class="dash"><li>卡達 2 例為散發人畜共通感染、無續發病例、99 名接觸者全數陰性，且兩例皆無旅遊史。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>2026 年病例仍以沙烏地阿拉伯為主（8 例），疫情高度集中於阿拉伯半島。 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>臺灣自 2012 年迄今無確定病例；國際間近年仍有巴基斯坦、法國等境外移入個案，顯示移入非流行國家之可能持續存在。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>感染者多具職業性駱駝暴露；一般旅客暴露機會低，但從事畜牧、照顧駱駝、生飲駱駝乳或於當地醫療院所工作者風險較高。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>卡達目前無我國 MERS 旅遊疫情建議等級，出國民眾與旅遊醫學門診可能較少獲得針對卡達之提醒。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span></li></ul>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×2）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 中，尚可）</span></p>
+<p class="algpath">ECDC 圖 2.2：Q2 否 ⇒ 極低</p>      <ul class="dash"><li>卡達 2 例為散發人畜共通感染、無續發病例、99 名接觸者全數陰性，且兩例皆無旅遊史。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>2026 年病例仍以沙烏地阿拉伯為主（8 例），疫情高度集中於阿拉伯半島。 <span class="cites"><a class="cite" href="#ref-S11" title="European Centre for Disease Prevention and Control：Updates for Middle East respiratory syndrome coronavirus (MERS-CoV) – Multi-country – Monthly update">[11]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>臺灣自 2012 年迄今無確定病例；國際間近年仍有巴基斯坦、法國等境外移入個案，顯示移入非流行國家之可能持續存在。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>感染者多具職業性駱駝暴露；一般旅客暴露機會低，但從事畜牧、照顧駱駝、生飲駱駝乳或於當地醫療院所工作者風險較高。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>卡達目前無我國 MERS 旅遊疫情建議等級，出國民眾與旅遊醫學門診可能較少獲得針對卡達之提醒。 <span class="cites"><a class="cite" href="#ref-S5" title="衛生福利部疾病管制署：國際間旅遊疫情建議等級（開放資料 JSON；本範例擷取 MERS 紀錄存於 data/tcdc_travel_alert_mers_extract.json）">[5]</a></span></li></ul>
       <p><a href="#item-R1">至風險評估表該列</a></p>
     </div>
     <div data-item="R2">
       <h4>2. 國內社區流行風險</h4>
-      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×4）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 高）</span></p>
-      <ul class="dash"><li>人與人傳播主要發生於醫療機構，流行地區社區中尚無持續性人傳人。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>本事件 99 名接觸者均陰性，無任何續發病例。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國對密切接觸者實施 14 天健康監測，疑似個案以隔離醫院收治。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>我國尚無任何確定病例，社區傳播之前提（移入病例）本身機率極低。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li></ul>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×2）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 高，良好）</span></p>
+<p class="algpath">ECDC 圖 2.1：Q1 是 → Q2 否 ⇒ 極低</p>      <ul class="dash"><li>人與人傳播主要發生於醫療機構，流行地區社區中尚無持續性人傳人。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>本事件 99 名接觸者均陰性，無任何續發病例。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國對密切接觸者實施 14 天健康監測，疑似個案以隔離醫院收治。 <span class="cites"><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>我國尚無任何確定病例，社區傳播之前提（移入病例）本身機率極低。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li></ul>
       <p><a href="#item-R2">至風險評估表該列</a></p>
     </div>
     <div data-item="R3">
       <h4>3. 院內感染風險</h4>
-      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×4）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 中）</span></p>
-      <ul class="dash"><li>2015 年韓國單一移入個案引發院內感染群聚（186 人感染、39 人死亡），主因包括認知不足、感管未落實、急診擁擠與跨院就醫。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>本事件第 1 例上呼吸道檢體初次陰性，病例辨識可能延遲。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>WHO 建議對疑似／確定個案採傳染途徑防護，執行產生氣膠之處置時採空氣傳染防護。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國感染管制指引已於 2026-07-30 更新，並要求看診時詢問 TOCC（旅遊史、職業史、接觸史、群聚史）。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li></ul>
+      <p>發生機率：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span>　矩陣風險（1×2）：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 中，尚可）</span></p>
+<p class="algpath">ECDC 圖 2.1：Q1 是 → Q2 否 ⇒ 極低</p>      <ul class="dash"><li>2015 年韓國單一移入個案引發院內感染群聚（186 人感染、39 人死亡），主因包括認知不足、感管未落實、急診擁擠與跨院就醫。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>本事件第 1 例上呼吸道檢體初次陰性，病例辨識可能延遲。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>WHO 建議對疑似／確定個案採傳染途徑防護，執行產生氣膠之處置時採空氣傳染防護。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a></span></li><li>我國感染管制指引已於 2026-07-30 更新，並要求看診時詢問 TOCC（旅遊史、職業史、接觸史、群聚史）。 <span class="cites"><a class="cite" href="#ref-S8" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症之感染管制指引">[8]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li></ul>
       <p><a href="#item-R3">至風險評估表該列</a></p>
     </div>
     <div data-item="R4">
       <h4>4. 衝擊</h4>
-      <p>衝擊：<span class="lv lv-high "><svg class="ic" aria-hidden="true"><use href="#lvicon-high"/></svg><span>高</span></span><span class="muted small">（信心 高）</span></p>
-      <ul class="dash"><li>確定病例致死率約 37%，具共病者約 50%，入住加護病房者約 67%；本事件 1 例需非侵襲性呼吸器支持。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>長者及具慢性病者為重症高風險族群。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>目前無核准之疫苗與特效治療，以支持性療法為主。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>人傳人主要限於醫療機構與密切接觸者，社區無持續傳播，防治策略（隔離、接觸者追蹤、感管）可行。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>2015 年韓國疫情期間，我國曾多次發布新聞稿澄清 MERS 不實訊息，顯示病例或傳聞即可能引發民眾關注與恐慌。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></li></ul>
+      <p>衝擊：<span class="lv lv-low "><svg class="ic" aria-hidden="true"><use href="#lvicon-low"/></svg><span>低</span></span><span class="muted small">（信心 高，良好）</span></p>
+<p class="algpath">ECDC 圖 3：Q5 是 → Q6 否 ⇒ 低</p>      <ul class="dash"><li>確定病例致死率約 37%，具共病者約 50%，入住加護病房者約 67%；本事件 1 例需非侵襲性呼吸器支持。 <span class="cites"><a class="cite" href="#ref-S2" title="World Health Organization：Disease Outbreak News: Middle East respiratory syndrome (MERS) – Qatar">[2]</a><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>長者及具慢性病者為重症高風險族群。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>目前無核准之疫苗與特效治療，以支持性療法為主。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a></span></li><li>人傳人主要限於醫療機構與密切接觸者，社區無持續傳播，防治策略（隔離、接觸者追蹤、感管）可行。 <span class="cites"><a class="cite" href="#ref-S3" title="衛生福利部疾病管制署：疾病介紹－中東呼吸症候群冠狀病毒感染症">[3]</a><a class="cite" href="#ref-S9" title="衛生福利部疾病管制署：傳染病防治工作手冊：中東呼吸症候群冠狀病毒感染症（中華民國 104 年 6 月修訂）">[9]</a></span></li><li>2015 年韓國疫情期間，我國曾多次發布新聞稿澄清 MERS 不實訊息，顯示病例或傳聞即可能引發民眾關注與恐慌。 <span class="cites"><a class="cite" href="#ref-S10" title="衛生福利部疾病管制署：中東呼吸症候群冠狀病毒感染症新聞稿列表">[10]</a></span></li></ul>
       <p><a href="#item-R4">至風險評估表該列</a></p>
     </div>
   </template>
 
   <div class="whatif" id="whatif" role="region" aria-labelledby="wi-h">
     <h3 id="wi-h"><span class="trial-tag">試算</span>情境試算（非正式結果）</h3>
-    <p class="small">調整任一項目之機率或衝擊，查看依同一矩陣計算之結果變化。<strong>試算不會改變本報告之正式評估結果。</strong></p>
+    <p class="small">調整任一項目之機率（0–4）或衝擊（1–4），查看依同一 ECDC 圖 4 矩陣計算之結果變化（試算直接改分數，不經演算法問題）。<strong>試算不會改變本報告之正式評估結果。</strong></p>
     <div class="wi-controls">
       <label>項目<select id="wiItem"></select></label>
       <label>機率<select id="wiP"></select></label>
@@ -1246,27 +1259,28 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
 <section id="sec-limits" class="card" aria-labelledby="h-lim">
   <h2 id="h-lim"><span class="secno">8</span>限制與不確定性、方法說明、參考資料</h2>
   <h3>限制與不確定性</h3>
-  <ul class="bullets"><li>網路限制：本次執行環境僅能直接讀取 who.int 與 cdc.gov.tw；ecdc.europa.eu、archyde.com、gov.uk、cdn.who.int、iris.who.int 等無法連線，ECDC 數據與新聞內容僅取得搜尋結果摘要，WHO 快速風險評估全文 PDF 未能讀取。</li><li>被查證之新聞原文未能開啟，新聞陳述係依搜尋結果摘要擷取，可能遺漏原文其他陳述。</li><li>未取得國人赴卡達／中東之旅次、航班與朝覲人數資料，境外移入機率之判斷主要依病例分布與我國歷史零病例。</li><li>未查得我國單峰駱駝飼養及活體／產品輸入資料，動物傳播途徑無法評估。</li><li>全球累計數字於不同來源間不一致（疾管署 2026-01：2,635 例／964 死；ECDC 2026-11-09：2,655 例／960 死，後者為搜尋摘要），且 ECDC 該期數據尚未納入卡達 2 例。</li><li>我國 MERS 工作手冊為 2015 年版，感染管制指引 PDF 內文未逐一讀取；建議事項之主責單位為建議，需依實際分工調整。</li><li>機率與衝擊分數為評估者判斷，依本工具定義之 1–5 級量表給分；矩陣與三級對應為確定性規則，非 ECDC 原表之逐字重現。</li><li>本報告為 AI 協助產生之草稿，須經流行病學專業人員審閱。</li></ul>
+  <ul class="bullets"><li>網路限制：本次執行環境僅能直接讀取 who.int 與 cdc.gov.tw；ecdc.europa.eu、archyde.com、gov.uk、cdn.who.int、iris.who.int 等無法連線，ECDC 數據與新聞內容僅取得搜尋結果摘要，WHO 快速風險評估全文 PDF 未能讀取。</li><li>被查證之新聞原文未能開啟，新聞陳述係依搜尋結果摘要擷取，可能遺漏原文其他陳述。</li><li>未取得國人赴卡達／中東之旅次、航班與朝覲人數資料，境外移入機率之判斷主要依病例分布與我國歷史零病例。</li><li>未查得我國單峰駱駝飼養及活體／產品輸入資料，動物傳播途徑無法評估。</li><li>全球累計數字於不同來源間不一致（疾管署 2026-01：2,635 例／964 死；ECDC 2026-11-09：2,655 例／960 死，後者為搜尋摘要），且 ECDC 該期數據尚未納入卡達 2 例。</li><li>我國 MERS 工作手冊為 2015 年版，感染管制指引 PDF 內文未逐一讀取；建議事項之主責單位為建議，需依實際分工調整。</li><li>機率與衝擊分數依 ECDC 2019 操作工具圖 2.1／2.2／3 之演算法推導，風險矩陣採其圖 4；圖 2.2 對應「境外移入」、圖 2.1 對應國內傳播類項目，以及矩陣等級對應三級，為本工具之調整。</li><li>本報告為 AI 協助產生之草稿，須經流行病學專業人員審閱。</li></ul>
   <p>本風險評估係依據現有資訊判定風險等級，將視新增實證適時調整判定。</p>
 
   <details class="issues" >
-    <summary>自動檢核結果：錯誤 0、警告 1、提示 1</summary>
-    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。…」<code>taiwan.vectors_hosts</code></li><li class="iss iss-info"><span class="iss-sev">提示</span>境外移入風險：分層「赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者」之矩陣風險（中→中）高於整體（低），決策摘要應明列<code>risk_items[R1]</code></li></ul>
+    <summary>自動檢核結果：錯誤 0、警告 4、提示 1</summary>
+    <ul><li class="iss iss-warning"><span class="iss-sev">警告</span>未引證：「本次未查得我國單峰駱駝飼養或活體／產品輸入資料，無法評估國內動物傳播途徑。…」<code>taiwan.vectors_hosts</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊：評估者建議「高」，規則對應「低」（衝擊 2）<code>risk_items[R4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／長者及慢性病患者：建議「高」，計算「低」<code>risk_items[R4]</code></li><li class="iss iss-warning"><span class="iss-sev">警告</span>衝擊／一般健康成人：建議「中」，計算「低」<code>risk_items[R4]</code></li><li class="iss iss-info"><span class="iss-sev">提示</span>境外移入風險：分層「赴中東從事畜牧、接觸駱駝或於當地醫療院所工作者」之矩陣風險「中」（三級：中）高於整體（低），決策摘要應明列<code>risk_items[R1]</code></li></ul>
   </details>
 
   <h3>方法說明</h3>
   <ol class="method">
     <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
     <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
-    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>如原文章，每一機率類項目之評估結果為發生機率（1–2 低、3 中、4–5 高），衝擊另列（1–2 低、3 中、4–5 高）；各機率類項目另以機率×衝擊查下表得「矩陣風險」。綜合研判取各機率類項目之最高矩陣風險，再對應三級（極高→高）。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
-    <li><strong>升級篩檢：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另列參考 UKHSA HAIRS 流程之篩檢問題。</li>
+    <li><strong>風險估計（ECDC 2019《Operational tool on rapid risk assessment methodology》）：</strong>機率依圖 2.1（國內感染／傳播）或圖 2.2（國人境外感染，本工具用於「境外移入」）之問題推導為無／極低／低／中／高；衝擊依圖 3 推導為極低／低／中／高；「不確定」依 ECDC 預防原則取較高風險分支。機率×衝擊依圖 4 得「矩陣風險」（無～極高）。如疾管署原文章，機率類項目之評估結果為發生機率，衝擊另列；綜合研判取各機率類項目之最高矩陣風險。三級對應（機率 0–2 低、3 中、4 高；衝擊 1–2 低、3 中、4 高；矩陣 無／極低／低→低、中→中、高／極高→高）為本工具之調整。</li>
+    <li><strong>信心程度（ECDC Box 2／HAIRS 附錄 B）：</strong>低＝不足、中＝尚可、高＝良好；依來源數量、等級與取得方式自動設上限之規則為本工具自訂。</li>
+    <li><strong>升級篩檢與交叉核對：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另以 UKHSA HAIRS 機率與衝擊演算法交叉核對（分別報告，不併入矩陣）。</li>
     <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
   </ol>
   <div class="table-wrap">
   <table class="tbl mini-matrix">
-    <caption>風險矩陣（epi-risk-5x5-v1）：列＝機率，欄＝衝擊</caption>
-    <thead><tr><th scope="col">機率＼衝擊</th><th scope="col">1 極低</th><th scope="col">2 低</th><th scope="col">3 中</th><th scope="col">4 高</th><th scope="col">5 極高</th></tr></thead>
-    <tbody><tr><th scope="row">5 極高</th><td>中</td><td>高</td><td>高</td><td>極高</td><td>極高</td></tr><tr><th scope="row">4 高</th><td>低</td><td>中</td><td>高</td><td>極高</td><td>極高</td></tr><tr><th scope="row">3 中</th><td>低</td><td>中</td><td>中</td><td>高</td><td>高</td></tr><tr><th scope="row">2 低</th><td>低</td><td>低</td><td>中</td><td>中</td><td>高</td></tr><tr><th scope="row">1 極低</th><td>低</td><td>低</td><td>低</td><td>低</td><td>中</td></tr></tbody>
+    <caption>ECDC 2019 圖 4 風險排序矩陣（ecdc-2019-fig4）：列＝衝擊，欄＝機率</caption>
+    <thead><tr><th scope="col">衝擊＼機率</th><th scope="col">無<span class="small muted"> None</span></th><th scope="col">極低<span class="small muted"> Very low</span></th><th scope="col">低<span class="small muted"> Low</span></th><th scope="col">中<span class="small muted"> Moderate</span></th><th scope="col">高<span class="small muted"> High</span></th></tr></thead>
+    <tbody><tr><th scope="row">極低<span class="small muted"> Very low</span></th><td>無</td><td>極低</td><td>低</td><td>低</td><td>中</td></tr><tr><th scope="row">低<span class="small muted"> Low</span></th><td>無</td><td>低</td><td>低</td><td>中</td><td>中</td></tr><tr><th scope="row">中<span class="small muted"> Moderate</span></th><td>無</td><td>低</td><td>中</td><td>中</td><td>高</td></tr><tr><th scope="row">高<span class="small muted"> High</span></th><td>無</td><td>中</td><td>中</td><td>高</td><td>極高</td></tr></tbody>
   </table>
   </div>
   <p class="small muted">工具版本 0.1.0｜方法版本 2026.11-v1｜產出模式：claude-code-skill（claude-opus-5-5）｜以 Claude Code 技能路徑產出；執行環境網路僅允許直接讀取 who.int 與 cdc.gov.tw，其餘來源僅取得搜尋摘要</p>
@@ -1348,7 +1362,7 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
 </main>
 
 <div class="tooltip" id="tip" role="tooltip" hidden></div>
-<script type="application/json" id="report-data">{"matrix":{"1":{"1":"低","2":"低","3":"低","4":"低","5":"中"},"2":{"1":"低","2":"低","3":"中","4":"中","5":"高"},"3":{"1":"低","2":"中","3":"中","4":"高","5":"高"},"4":{"1":"低","2":"中","3":"高","4":"極高","5":"極高"},"5":{"1":"中","2":"高","3":"高","4":"極高","5":"極高"}},"matrixTo3":{"低":"低","中":"中","高":"高","極高":"高"},"impactTo3":{"1":"低","2":"低","3":"中","4":"高","5":"高"},"probTo3":{"1":"低","2":"低","3":"中","4":"高","5":"高"},"pLabels":{"1":"極低","2":"低","3":"中","4":"高","5":"極高"},"iLabels":{"1":"極低","2":"低","3":"中","4":"高","5":"極高"},"levelClass":{"低":"low","中":"mod","高":"high","極高":"vhigh"},"items":[{"id":"R1","n":1,"name":"境外移入風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","matrix3":"低","proposed":"低","confidence":"中"},{"id":"R2","n":2,"name":"國內社區流行風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","matrix3":"低","proposed":"低","confidence":"高"},{"id":"R3","n":3,"name":"院內感染風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","matrix3":"低","proposed":"低","confidence":"中"},{"id":"R4","n":4,"name":"衝擊","kind":"衝擊","p":null,"i":4,"inherit":false,"computed":"高","matrix":null,"matrix3":null,"proposed":"高","confidence":"高"}],"overall":{"computed":"低","matrix":"低","p":1,"i":4,"from":"R1"},"timeseries":[]}</script>
+<script type="application/json" id="report-data">{"matrix":{"0":{"1":"無","2":"無","3":"無","4":"無"},"1":{"1":"極低","2":"低","3":"低","4":"中"},"2":{"1":"低","2":"低","3":"中","4":"中"},"3":{"1":"低","2":"中","3":"中","4":"高"},"4":{"1":"中","2":"中","3":"高","4":"極高"}},"matrixTo3":{"無":"低","極低":"低","低":"低","中":"中","高":"高","極高":"高"},"impactTo3":{"1":"低","2":"低","3":"中","4":"高"},"probTo3":{"0":"低","1":"低","2":"低","3":"中","4":"高"},"pLabels":{"0":"無","1":"極低","2":"低","3":"中","4":"高"},"iLabels":{"1":"極低","2":"低","3":"中","4":"高"},"levelClass":{"無":"none","極低":"vlow","低":"low","中":"mod","高":"high","極高":"vhigh"},"items":[{"id":"R1","n":1,"name":"境外移入風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","matrix3":"低","proposed":"低","confidence":"中"},{"id":"R2","n":2,"name":"國內社區流行風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","matrix3":"低","proposed":"低","confidence":"高"},{"id":"R3","n":3,"name":"院內感染風險","kind":"機率","p":1,"i":null,"inherit":true,"computed":"低","matrix":"低","matrix3":"低","proposed":"低","confidence":"中"},{"id":"R4","n":4,"name":"衝擊","kind":"衝擊","p":null,"i":2,"inherit":false,"computed":"低","matrix":null,"matrix3":null,"proposed":"高","confidence":"高"}],"overall":{"computed":"低","matrix":"低","p":1,"i":2,"from":"R1"},"timeseries":[]}</script>
 <script>(function () {
   "use strict";
   var data;
@@ -1421,7 +1435,7 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
 
   /* ---------- what-if (試算) -------------------------------------------- */
   var M = data.matrix, M3 = data.matrixTo3, I3 = data.impactTo3, P3 = data.probTo3;
-  var ORDER = { "低": 0, "中": 1, "高": 2, "極高": 3 };
+  var ORDER = { "無": 0, "極低": 1, "低": 2, "中": 3, "高": 4, "極高": 5 };
   var items = data.items;
   var trial = {};
   function resetTrial() { trial = {}; items.forEach(function (it) { trial[it.id] = { p: it.p, i: it.inherit ? null : it.i }; }); }
@@ -1449,7 +1463,8 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
   function fillScores(sel, labels, allowInherit) {
     sel.innerHTML = "";
     if (allowInherit) opt(sel, "", "沿用衝擊項目");
-    for (var k = 1; k <= 5; k++) opt(sel, String(k), k + "（" + labels[String(k)] + "）");
+    Object.keys(labels).map(Number).sort(function (a, b) { return a - b; })
+      .forEach(function (k) { opt(sel, String(k), k + "（" + labels[String(k)] + "）"); });
   }
   function itemById(id) { for (var k = 0; k < items.length; k++) if (items[k].id === id) return items[k]; return null; }
 

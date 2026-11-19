@@ -9,6 +9,8 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lvicon-none" viewBox="0 0 16 16"><rect x="2" y="7" width="12" height="2.4" rx="1" fill="currentColor"/></symbol>
+  <symbol id="lvicon-vlow" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
   <symbol id="lvicon-low" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></symbol>
   <symbol id="lvicon-mod" viewBox="0 0 16 16"><path d="M8 1.5 15 14.5H1z" fill="currentColor"/></symbol>
   <symbol id="lvicon-high" viewBox="0 0 16 16"><path d="M8 .8 15.2 8 8 15.2.8 8z" fill="currentColor"/></symbol>
@@ -68,8 +70,8 @@
       <div class="label">我國整體風險（計算結果）</div>
       <div class="hero-level">{{ level_badge(au.overall_computed_level, "lv-xl") }}</div>
       <div class="sub">矩陣等級：{{ level_badge(au.overall_matrix_level) }}
-        <span class="muted">（機率 {{ p_labels[au.overall_probability] if au.overall_probability else "—" }} × 衝擊 {{ i_labels[au.overall_impact] if au.overall_impact else "—" }}）</span></div>
-      <div class="sub">信心程度：<strong>{{ au.overall_confidence }}</strong>
+        <span class="muted">（ECDC 圖 4：機率 {{ p_labels[au.overall_probability] if au.overall_probability is not none else "—" }} × 衝擊 {{ i_labels[au.overall_impact] if au.overall_impact is not none else "—" }}）</span></div>
+      <div class="sub">信心程度：<strong>{{ au.overall_confidence }}（{{ conf_labels[au.overall_confidence] }}）</strong>
         {% if au.overall_confidence_caps %}<span class="muted">（{{ au.overall_confidence_caps | join("；") }}）</span>{% endif %}</div>
       {% if not au.overall_agrees %}
       <div class="flag flag-warn" role="status"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>
@@ -312,12 +314,16 @@
           <div>{{ level_badge(ia.computed_level, "lv-lg") }}</div>
           <div class="small">
             {% if r.kind == "機率" %}機率 {{ ia.probability }}（{{ p_labels[ia.probability] }}）→ {{ ia.computed_level }}
-            <div class="mrisk">矩陣風險（機率×衝擊）：{{ ia.probability }}×{{ ia.impact }}{% if ia.impact_inherited %}（衝擊沿用衝擊項目）{% endif %} → {{ level_badge(ia.matrix_level) }}</div>
-            {% else %}衝擊 {{ ia.impact }}（{{ i_labels[ia.impact] }}）→ {{ ia.computed_level }}{% endif %}
+            {% if ia.ecdc_probability %}<div class="algpath">{{ ia.ecdc_probability.path_text }}</div>{% else %}<div class="algpath muted">未填 ECDC 演算法路徑（採評估者所填分數）</div>{% endif %}
+            {% if ia.ecdc_probability and ia.stated_probability != ia.probability %}<div class="flag flag-warn small">評估者所填機率 {{ ia.stated_probability }}（{{ p_labels[ia.stated_probability] }}）與推導值不同</div>{% endif %}
+            <div class="mrisk">矩陣風險（機率×衝擊）：{{ ia.probability }}×{{ ia.impact }}{% if ia.impact_inherited %}（衝擊沿用衝擊項目）{% endif %} → {{ level_badge(ia.matrix_level) }}{% if ia.ecdc_impact %}<div class="algpath">本項衝擊：{{ ia.ecdc_impact.path_text }}</div>{% endif %}</div>
+            {% else %}衝擊 {{ ia.impact }}（{{ i_labels[ia.impact] }}）→ {{ ia.computed_level }}
+            {% if ia.ecdc_impact %}<div class="algpath">{{ ia.ecdc_impact.path_text }}</div>{% else %}<div class="algpath muted">未填 ECDC 演算法路徑（採評估者所填分數）</div>{% endif %}
+            {% if ia.ecdc_impact and ia.stated_impact != ia.impact %}<div class="flag flag-warn small">評估者所填衝擊 {{ ia.stated_impact }}（{{ i_labels[ia.stated_impact] }}）與推導值不同</div>{% endif %}{% endif %}
           </div>
           {% if not ia.agrees %}<div class="flag flag-warn small"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>評估者建議「{{ ia.proposed_level }}」</div>{% endif %}
-          {% if ia.strata_computed %}<ul class="strata">{% for st in ia.strata_computed %}<li>{{ st.name }}：{{ level_badge(st.computed_level or st.proposed_level) }}{% if st.computed_level and st.computed_level != st.proposed_level %}<span class="muted small">（建議 {{ st.proposed_level }}）</span>{% endif %}{% if st.matrix_level %}<span class="small">｜矩陣風險 {{ st.probability }}×{{ st.impact }} {{ level_badge(st.matrix_level) }}</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
-          <div class="small">信心：<strong>{{ ia.effective_confidence }}</strong>{% if ia.effective_confidence != ia.stated_confidence %}<span class="muted">（原 {{ ia.stated_confidence }}，經規則調降）</span>{% endif %}</div>
+          {% if ia.strata_computed %}<ul class="strata">{% for st in ia.strata_computed %}<li>{{ st.name }}：{{ level_badge(st.computed_level or st.proposed_level) }}{% if st.computed_level and st.computed_level != st.proposed_level %}<span class="muted small">（建議 {{ st.proposed_level }}）</span>{% endif %}{% if st.matrix_level %}<span class="small">｜矩陣風險 {{ st.probability }}×{{ st.impact }} {{ level_badge(st.matrix_level) }}</span>{% endif %}{% if st.ecdc_path %}<div class="algpath">{{ st.ecdc_path }}</div>{% endif %}{% if st.ecdc_impact_path %}<div class="algpath">{{ st.ecdc_impact_path }}</div>{% endif %}</li>{% endfor %}</ul>{% endif %}
+          <div class="small">信心：<strong>{{ ia.effective_confidence }}（{{ conf_labels[ia.effective_confidence] }}）</strong>{% if ia.effective_confidence != ia.stated_confidence %}<span class="muted">（原 {{ ia.stated_confidence }}，經規則調降）</span>{% endif %}</div>
           <details class="why small"><summary>判斷依據</summary>
             {% if r.probability_rationale %}<p><strong>機率：</strong>{{ r.probability_rationale }}</p>{% endif %}
             {% if r.impact_rationale %}<p><strong>衝擊：</strong>{{ r.impact_rationale }}</p>{% endif %}
@@ -330,7 +336,7 @@
       <tr class="overall-row">
         <th scope="row" data-th="評估項目">綜合研判</th>
         <td data-th="評估內容" colspan="2">{{ a.overall.summary }}<div class="small muted">計算方式：綜合研判＝各機率類項目「矩陣風險（機率×衝擊）」之最高者，再對應三級（本次由「{{ (a.risk_items | selectattr("id", "equalto", au.overall_probability_from) | first).name if au.overall_probability_from else "—" }}」決定）。</div></td>
-        <td data-th="評估結果" class="result">{{ level_badge(au.overall_computed_level, "lv-lg") }}<div class="small">信心：<strong>{{ au.overall_confidence }}</strong></div>
+        <td data-th="評估結果" class="result">{{ level_badge(au.overall_computed_level, "lv-lg") }}<div class="small">信心：<strong>{{ au.overall_confidence }}（{{ conf_labels[au.overall_confidence] }}）</strong></div>
           {% if not au.overall_agrees %}<div class="flag flag-warn small">評估者建議「{{ au.overall_proposed_level }}」</div>{% endif %}</td>
       </tr>
     </tbody>
@@ -338,18 +344,26 @@
   </div>
   <p class="small muted">註：本評估依據現有資訊判定風險等級，將視新增實證適時調整。</p>
 
-  {% set hairs_items = items_view | selectattr("item.hairs_questions") | list %}
-  {% if hairs_items %}
-  <h3>人畜共通／新興病原篩檢問題（參考 UKHSA HAIRS 流程）</h3>
-  {% for iv in hairs_items %}
+  {% if a.hairs and au.hairs_probability %}
+  <section class="hairs" aria-labelledby="hairs-h">
+  <h3 id="hairs-h">交叉核對：UKHSA HAIRS 演算法（不併入矩陣）</h3>
+  <p class="small muted">{{ a.hairs.perspective }}。HAIRS 分別報告機率與衝擊，不以矩陣合併；「不確定」依預防原則取較高風險分支。</p>
+  <div class="hairs-summary">
+    <div><span class="label">HAIRS 機率</span> {{ level_badge(au.hairs_probability.label) }}<div class="algpath">{{ au.hairs_probability.path_text }}</div></div>
+    <div><span class="label">HAIRS 衝擊</span> {{ level_badge(au.hairs_impact.label) }}<div class="algpath">{{ au.hairs_impact.path_text }}</div></div>
+    <div><span class="label">對照：ECDC（綜合研判之決定項目）</span> 機率 {{ p_labels[au.overall_probability] if au.overall_probability is not none else "—" }}、衝擊 {{ i_labels[au.overall_impact] if au.overall_impact is not none else "—" }}</div>
+  </div>
+  {% for key, title in [("probability", "機率問題"), ("impact", "衝擊問題")] %}
+  {% set tree = hairs_trees[key] %}
   <div class="table-wrap">
   <table class="tbl tbl-stack">
-    <caption>{{ iv.item.name }}</caption>
+    <caption>{{ tree.title }}：{{ title }}</caption>
     <thead><tr><th scope="col">問題</th><th scope="col">回答</th><th scope="col">說明</th></tr></thead>
-    <tbody>{% for h in iv.item.hairs_questions %}<tr><td data-th="問題">{{ h.question }}</td><td data-th="回答"><span class="ans ans-{{ {'是':'y','否':'n','不確定':'u'}[h.answer] }}">{{ h.answer }}</span></td><td data-th="說明">{{ h.rationale }} {{ cite(h.source_ids) }}</td></tr>{% endfor %}</tbody>
+    <tbody>{% for x in a.hairs[key] %}<tr><td data-th="問題"><strong>{{ x.q }}</strong> {{ tree.nodes[x.q].zh }}<div class="small muted">{{ tree.nodes[x.q].en }}</div></td><td data-th="回答"><span class="ans ans-{{ {'是':'y','否':'n','不確定':'u'}[x.answer] }}">{{ x.answer }}</span></td><td data-th="說明">{{ x.rationale }} {% if x.source_ids %}{{ cite(x.source_ids) }}{% endif %}</td></tr>{% endfor %}</tbody>
   </table>
   </div>
   {% endfor %}
+  </section>
   {% endif %}
 
   <h3 id="matrix-h">機率 × 衝擊風險矩陣</h3>
@@ -357,11 +371,11 @@
   <div class="matrix-layout">
     <div class="matrix-wrap">
       <table class="matrix" aria-labelledby="matrix-h" id="matrix">
-        <thead><tr><td class="corner"><span>衝擊→</span><span>機率↓</span></td>{% for i in range(1, 6) %}<th scope="col">{{ i }}<span class="ax">{{ i_labels[i] }}</span></th>{% endfor %}</tr></thead>
+        <thead><tr><td class="corner"><span>機率→</span><span>衝擊↓</span></td>{% for p in range(0, 5) %}<th scope="col">{{ p }}<span class="ax">{{ p_labels[p] }}</span></th>{% endfor %}</tr></thead>
         <tbody>
-        {% for p in range(5, 0, -1) %}
-          <tr><th scope="row">{{ p }}<span class="ax">{{ p_labels[p] }}</span></th>
-          {% for i in range(1, 6) %}
+        {% for i in range(1, 5) %}
+          <tr><th scope="row">{{ i }}<span class="ax">{{ i_labels[i] }}</span></th>
+          {% for p in range(0, 5) %}
             {% set m = matrix[p][i] %}
             <td class="cell cell-{{ level_class[m] }}" data-p="{{ p }}" data-i="{{ i }}">
               <span class="cell-lv">{{ m }}</span>
@@ -380,14 +394,15 @@
     </div>
   </div>
   <div class="matrix-legend">
-    {% for lv in ["低", "中", "高", "極高"] %}{{ level_badge(lv) }}{% endfor %}
-    <span class="muted small">矩陣等級 → 三級：低→低、中→中、高→高、極高→高</span>
+    {% for lv in risk_levels %}{{ level_badge(lv) }}{% endfor %}
+    <span class="muted small">依 ECDC 2019 圖 4 排列（列＝衝擊、欄＝機率）。本工具對應三級：無／極低／低→低、中→中、高／極高→高</span>
   </div>
   <template id="itemDetails">
     {% for iv in items_view %}
     <div data-item="{{ iv.item.id }}">
       <h4>{{ iv.n }}. {{ iv.item.name }}</h4>
-      <p>{% if iv.audit.probability %}發生機率：{{ level_badge(iv.audit.computed_level) }}　矩陣風險（{{ iv.audit.probability }}×{{ iv.audit.impact }}）：{{ level_badge(iv.audit.matrix_level) }}{% else %}衝擊：{{ level_badge(iv.audit.computed_level) }}{% endif %}<span class="muted small">（信心 {{ iv.audit.effective_confidence }}）</span></p>
+      <p>{% if iv.item.kind == "機率" %}發生機率：{{ level_badge(iv.audit.computed_level) }}　矩陣風險（{{ iv.audit.probability }}×{{ iv.audit.impact }}）：{{ level_badge(iv.audit.matrix_level) }}{% else %}衝擊：{{ level_badge(iv.audit.computed_level) }}{% endif %}<span class="muted small">（信心 {{ iv.audit.effective_confidence }}，{{ conf_labels[iv.audit.effective_confidence] }}）</span></p>
+      {% if iv.audit.ecdc_probability %}<p class="algpath">{{ iv.audit.ecdc_probability.path_text }}</p>{% endif %}{% if iv.audit.ecdc_impact %}<p class="algpath">{{ iv.audit.ecdc_impact.path_text }}</p>{% endif %}
       <ul class="dash">{% for b in iv.item.evidence %}<li>{{ b.text }} {{ cite(b.source_ids) }}</li>{% endfor %}</ul>
       <p><a href="#item-{{ iv.item.id }}">至風險評估表該列</a></p>
     </div>
@@ -396,7 +411,7 @@
 
   <div class="whatif" id="whatif" role="region" aria-labelledby="wi-h">
     <h3 id="wi-h"><span class="trial-tag">試算</span>情境試算（非正式結果）</h3>
-    <p class="small">調整任一項目之機率或衝擊，查看依同一矩陣計算之結果變化。<strong>試算不會改變本報告之正式評估結果。</strong></p>
+    <p class="small">調整任一項目之機率（0–4）或衝擊（1–4），查看依同一 ECDC 圖 4 矩陣計算之結果變化（試算直接改分數，不經演算法問題）。<strong>試算不會改變本報告之正式評估結果。</strong></p>
     <div class="wi-controls">
       <label>項目<select id="wiItem"></select></label>
       <label>機率<select id="wiP"></select></label>
@@ -473,15 +488,16 @@
   <ol class="method">
     <li><strong>事件型監測（EBS）分流與查證：</strong>擷取新聞中可查證陳述，以多來源交叉比對判定「已證實／部分證實／無法證實／與官方資訊不符／過時」，來源依「官方衛生機關/國際組織 &gt; 同儕審查文獻 &gt; 主流媒體 &gt; 社群/未知」分級。規則：「已證實」須至少 1 個具網址且與新聞不同發布者之支持來源。</li>
     <li><strong>證據蒐集順序（依疾管署《疫情報導》風險評估文章）：</strong>病原/傳播特性 → 國際疫情概況 → 我國現況（監測、檢驗量能、病媒/宿主、法定傳染病分類）→ 風險評估 → 建議。</li>
-    <li><strong>風險估計（參考 WHO 快速風險評估手冊與 ECDC 快速風險評估操作工具）：</strong>如原文章，每一機率類項目之評估結果為發生機率（1–2 低、3 中、4–5 高），衝擊另列（1–2 低、3 中、4–5 高）；各機率類項目另以機率×衝擊查下表得「矩陣風險」。綜合研判取各機率類項目之最高矩陣風險，再對應三級（極高→高）。每一判斷附信心程度，並依來源數量、等級與取得方式自動設上限。</li>
-    <li><strong>升級篩檢：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另列參考 UKHSA HAIRS 流程之篩檢問題。</li>
+    <li><strong>風險估計（ECDC 2019《Operational tool on rapid risk assessment methodology》）：</strong>機率依圖 2.1（國內感染／傳播）或圖 2.2（國人境外感染，本工具用於「境外移入」）之問題推導為無／極低／低／中／高；衝擊依圖 3 推導為極低／低／中／高；「不確定」依 ECDC 預防原則取較高風險分支。機率×衝擊依圖 4 得「矩陣風險」（無～極高）。如疾管署原文章，機率類項目之評估結果為發生機率，衝擊另列；綜合研判取各機率類項目之最高矩陣風險。三級對應（機率 0–2 低、3 中、4 高；衝擊 1–2 低、3 中、4 高；矩陣 無／極低／低→低、中→中、高／極高→高）為本工具之調整。</li>
+    <li><strong>信心程度（ECDC Box 2／HAIRS 附錄 B）：</strong>低＝不足、中＝尚可、高＝良好；依來源數量、等級與取得方式自動設上限之規則為本工具自訂。</li>
+    <li><strong>升級篩檢與交叉核對：</strong>IHR（2005）附件二四問題（≥2 項「是」即達通報門檻）；人畜共通／新興病原另以 UKHSA HAIRS 機率與衝擊演算法交叉核對（分別報告，不併入矩陣）。</li>
     <li><strong>決策支援：</strong>觸發指標、三種情境、決策選項比較（優缺點、主責單位、時程）與再評估日期。</li>
   </ol>
   <div class="table-wrap">
   <table class="tbl mini-matrix">
-    <caption>風險矩陣（{{ matrix_version }}）：列＝機率，欄＝衝擊</caption>
-    <thead><tr><th scope="col">機率＼衝擊</th>{% for i in range(1, 6) %}<th scope="col">{{ i }} {{ i_labels[i] }}</th>{% endfor %}</tr></thead>
-    <tbody>{% for p in range(5, 0, -1) %}<tr><th scope="row">{{ p }} {{ p_labels[p] }}</th>{% for i in range(1, 6) %}<td>{{ matrix[p][i] }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+    <caption>ECDC 2019 圖 4 風險排序矩陣（{{ matrix_version }}）：列＝衝擊，欄＝機率</caption>
+    <thead><tr><th scope="col">衝擊＼機率</th>{% for p in range(0, 5) %}<th scope="col">{{ p_labels[p] }}<span class="small muted"> {{ p_labels_en[p] }}</span></th>{% endfor %}</tr></thead>
+    <tbody>{% for i in range(1, 5) %}<tr><th scope="row">{{ i_labels[i] }}<span class="small muted"> {{ i_labels_en[i] }}</span></th>{% for p in range(0, 5) %}<td>{{ matrix[p][i] }}</td>{% endfor %}</tr>{% endfor %}</tbody>
   </table>
   </div>
   <p class="small muted">工具版本 {{ tool_version }}｜方法版本 {{ methodology_version }}｜產出模式：{{ a.generator.mode }}{% if a.generator.model %}（{{ a.generator.model }}）{% endif %}{% if a.generator.notes %}｜{{ a.generator.notes }}{% endif %}</p>

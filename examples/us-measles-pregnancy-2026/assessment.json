@@ -1,1498 +1,1640 @@
 {
- "schema_version": "1.0",
- "report_title": "美國麻疹疫情與孕婦感染病例：新聞查證與我國快速風險評估",
- "generated_at": "2026-11-19T14:20:00+08:00",
- "data_cutoff": "2026-11-19T14:05:00+08:00",
- "reassessment_date": "2026-12-17",
- "generator": {
-  "mode": "claude-code-skill",
-  "model": "claude-fable-5-2",
-  "tool_version": "0.1.0",
-  "notes": "以 Claude Code 技能路徑產出（第 2 次執行，新增 cdc.gov 全文）。可直接讀取全文之主機：cdc.gov.tw、who.int、ecdc.europa.eu、cidrap.umn.edu、cdc.gov、www.gov.uk；pa.gov、paho.org、pubmed/pmc、cna.com.tw、nidss.cdc.gov.tw 無法連線，僅取得搜尋摘要。"
- },
- "event": {
-  "title": "美國麻疹恢復地方性流行，2025 年以來逾百名孕婦感染",
-  "hazard": "麻疹病毒（Measles virus）",
-  "event_location": "美國（以賓州為主）",
-  "event_type": [
-   "呼吸道"
-  ],
-  "news_source_id": "S1",
-  "news_summary": "CIDRAP News 向各州衛生部門查詢後報導，自 2025 年以來美國至少 178 名（內文為 167 名）孕婦感染麻疹，其中賓州 101 例；並指出今年 41% 病例為 20 歲以上成人、賓州 1 名產婦及 2 名新生兒死亡，以及孕婦暴露後預防與治療選項有限。",
-  "taiwan_relevance": "麻疹為我國第二類法定傳染病；我國 2026 年已有 1 例自美國移入之確定病例，且疾管署已於 2026-11-17 將美國麻疹旅遊疫情建議提升至第二級警示。孕婦無法接種 MMR，為感染高危險群。",
-  "triage_decision": "進行完整評估",
-  "triage_reason": "來源為專業傳染病新聞機構、涉及我國已有移入紀錄之法定傳染病與高危險族群（孕婦、嬰兒），且適逢我國剛調升美國旅遊疫情建議等級，故進行完整評估。"
- },
- "sources": [
-  {
-   "id": "S1",
-   "url": "https://www.cidrap.umn.edu/measles/least-178-pregnant-americans-have-been-infected-measles-2025",
-   "title": "At least 178 pregnant Americans have been infected with measles since 2025",
-   "publisher": "CIDRAP",
-   "published_date": "2026-11-17",
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "全文",
-   "is_news_item": true,
-   "note": "被查證之新聞；使用者貼上全文，並以 curl 讀取原頁比對關鍵句"
+  "schema_version": "1.0",
+  "report_title": "美國麻疹疫情與孕婦感染病例：新聞查證與我國快速風險評估",
+  "generated_at": "2026-11-19T14:20:00+08:00",
+  "data_cutoff": "2026-11-19T14:05:00+08:00",
+  "reassessment_date": "2026-12-17",
+  "generator": {
+    "mode": "claude-code-skill",
+    "model": "claude-fable-5-2",
+    "tool_version": "0.1.0",
+    "notes": "以 Claude Code 技能路徑產出（第 2 次執行，新增 cdc.gov 全文）。可直接讀取全文之主機：cdc.gov.tw、who.int、ecdc.europa.eu、cidrap.umn.edu、cdc.gov、www.gov.uk；pa.gov、paho.org、pubmed/pmc、cna.com.tw、nidss.cdc.gov.tw 無法連線，僅取得搜尋摘要。"
   },
-  {
-   "id": "S2",
-   "url": "https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON",
-   "title": "國際間旅遊疫情建議等級開放資料（JSON）",
-   "publisher": "衛生福利部疾病管制署",
-   "published_date": "2026-11-17",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "下載全檔後以程式篩選「麻疹」紀錄；各國現行等級取最新一筆"
-  },
-  {
-   "id": "S3",
-   "url": "https://www.cdc.gov.tw/Bulletin/Detail/rLPw84BE1BElUb8OebRuhA?typeid=9",
-   "title": "國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護",
-   "publisher": "衛生福利部疾病管制署",
-   "published_date": "2026-03-31",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": null
-  },
-  {
-   "id": "S4",
-   "url": "https://www.cdc.gov.tw/Bulletin/Detail/RQMqkQ2-D6sOpVi8dnV75w?typeid=9",
-   "title": "國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師",
-   "publisher": "衛生福利部疾病管制署",
-   "published_date": "2026-06-02",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "以關鍵字「麻疹」搜尋疾管署新聞稿所得之最新一則；6 月之後未見新的麻疹新聞稿"
-  },
-  {
-   "id": "S5",
-   "url": "https://www.cdc.gov.tw/Category/Page/73T9QxZDqlVYayLyfrBN5Q",
-   "title": "麻疹－疾病介紹",
-   "publisher": "衛生福利部疾病管制署",
-   "published_date": "2018-12-12",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "頁面標示最後更新日期 2018/12/12"
-  },
-  {
-   "id": "S6",
-   "url": "https://www.cdc.gov.tw/Category/Page/OnPyMiYwouZrYhY7noxjKQ",
-   "title": "育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象",
-   "publisher": "衛生福利部疾病管制署",
-   "published_date": "2019-02-21",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "頁面標示最後更新日期 2019/2/21"
-  },
-  {
-   "id": "S7",
-   "url": "https://www.cdc.gov.tw/Category/MPage/cXOGgsKTJ5MG4SyOAF2fng",
-   "title": "麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）",
-   "publisher": "衛生福利部疾病管制署",
-   "published_date": null,
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "僅讀得指引清單頁；各 PDF 附件下載時回傳網頁而非檔案，指引內文未取得"
-  },
-  {
-   "id": "S8",
-   "url": "https://www.who.int/news-room/fact-sheets/detail/measles",
-   "title": "Measles (fact sheet)",
-   "publisher": "World Health Organization",
-   "published_date": "2026-07-15",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": null
-  },
-  {
-   "id": "S9",
-   "url": "https://www.ecdc.europa.eu/en/measles/facts",
-   "title": "Disease information on measles (factsheet)",
-   "publisher": "European Centre for Disease Prevention and Control",
-   "published_date": "2023-11-28",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "頁面標示 Page last updated 28 November 2023"
-  },
-  {
-   "id": "S10",
-   "url": "https://www.cidrap.umn.edu/measles/2-more-people-die-measles-complications-us-cases-top-5400",
-   "title": "2 more people die of measles complications as US cases top 5,400",
-   "publisher": "CIDRAP",
-   "published_date": null,
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "與被查證新聞同一發布者，不作為獨立查證來源，僅供疫情概況"
-  },
-  {
-   "id": "S11",
-   "url": "https://www.cdc.gov/measles/data-research/index.html",
-   "title": "Measles Cases and Outbreaks",
-   "publisher": "US Centers for Disease Control and Prevention",
-   "published_date": "2026-11-12",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "頁面載明資料截至 2026-11-12；年齡與住院數字由頁面載入之資料檔（S20）提供"
-  },
-  {
-   "id": "S12",
-   "url": "https://www.cna.com.tw/news/ahel/202611170156.aspx",
-   "title": "疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往",
-   "publisher": "中央通訊社",
-   "published_date": "2026-11-17",
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "cna.com.tw 無法連線；內容取自搜尋結果摘要（彙整多家媒體對疾管署 11/17 說明之報導）"
-  },
-  {
-   "id": "S13",
-   "url": "https://www.pa.gov/agencies/health/newsroom/pa-department-of-health-confirms-eighth-measles-associated-death",
-   "title": "Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties",
-   "publisher": "Pennsylvania Department of Health",
-   "published_date": "2026-11-18",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "pa.gov 無法連線；僅取得新聞稿標題與搜尋摘要"
-  },
-  {
-   "id": "S14",
-   "url": "https://www.adn.com/nation-world/2026/11/14/surging-measles-cases-are-forcing-doctors-to-treat-conditions-theyve-never-seen/",
-   "title": "Surging measles cases are forcing doctors to treat conditions they've never seen",
-   "publisher": "Anchorage Daily News",
-   "published_date": "2026-11-14",
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "僅取得搜尋摘要"
-  },
-  {
-   "id": "S15",
-   "url": "https://www.cidrap.umn.edu/measles/national-embarrassment-measles-again-endemic-us",
-   "title": "'A national embarrassment': Measles is again endemic in the US",
-   "publisher": "CIDRAP",
-   "published_date": null,
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "與被查證新聞同一發布者，不作為獨立查證來源"
-  },
-  {
-   "id": "S16",
-   "url": "https://www.cnbc.com/2026/11/17/us-measles-elimination-status.html",
-   "title": "U.S. officially loses measles elimination status amid ongoing outbreaks",
-   "publisher": "CNBC",
-   "published_date": "2026-11-17",
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "僅取得搜尋摘要；paho.org 無法連線，未讀得 PAHO 正式公告"
-  },
-  {
-   "id": "S17",
-   "url": "https://pubmed.ncbi.nlm.nih.gov/31891729/",
-   "title": "Measles in pregnant women: A systematic review of clinical outcomes and a meta-analysis of antibodies seroprevalence",
-   "publisher": "Journal of Infection (PubMed)",
-   "published_date": null,
-   "accessed_date": "2026-11-19",
-   "tier": 2,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "pubmed 無法連線；數字取自搜尋結果摘要"
-  },
-  {
-   "id": "S18",
-   "url": "https://www.news-medical.net/news/20261118/What-happens-to-a-baby-when-its-mother-catches-measles-during-pregnancy.aspx",
-   "title": "What happens to a baby when its mother catches measles during pregnancy?",
-   "publisher": "News-Medical",
-   "published_date": "2026-11-18",
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "僅取得搜尋摘要；摘要稱該報告為「美國 CDC 初步監測報告」，CIDRAP 則稱為 Public Health Alerts 報告，原報告未取得"
-  },
-  {
-   "id": "S19",
-   "url": "https://www.powershealth.org/about-us/newsroom/health-library/2026/11/05/new-mothers-death-adds-to-measles-toll-as-pregnancy-warnings-grow",
-   "title": "New Mother's Death Adds to Measles Toll as Pregnancy Warnings Grow",
-   "publisher": "HealthDay（Powers Health 轉載）",
-   "published_date": "2026-11-05",
-   "accessed_date": "2026-11-19",
-   "tier": 3,
-   "retrieval": "搜尋摘要",
-   "is_news_item": false,
-   "note": "僅取得標題與日期；《華盛頓郵報》原報導未取得"
-  },
-  {
-   "id": "S20",
-   "url": "https://www.cdc.gov/wcms/vizdata/measles/measles_hosp.json",
-   "title": "Measles Cases and Outbreaks 頁面資料檔（年齡、接種狀態、住院、死亡）",
-   "publisher": "US Centers for Disease Control and Prevention",
-   "published_date": "2026-11-12",
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "lastUpdated: November 12, 2026；死亡數為 8，與頁面靜態文字之 6 不同"
-  },
-  {
-   "id": "S21",
-   "url": "https://www.cdc.gov/measles/downloads/measles-immune-globulin-post-exposure-prophylaxis.pdf",
-   "title": "Measles Immune Globulin (IG) Post-Exposure Prophylaxis",
-   "publisher": "US Centers for Disease Control and Prevention",
-   "published_date": null,
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": "PDF 全文；文件日期未辨識"
-  },
-  {
-   "id": "S22",
-   "url": "https://www.cdc.gov/measles/hcp/clinical-overview/index.html",
-   "title": "Clinical Overview of Measles",
-   "publisher": "US Centers for Disease Control and Prevention",
-   "published_date": null,
-   "accessed_date": "2026-11-19",
-   "tier": 1,
-   "retrieval": "全文",
-   "is_news_item": false,
-   "note": null
-  }
- ],
- "claims": [
-  {
-   "id": "C1",
-   "text": "自 2025 年以來，美國至少 178 名孕婦感染麻疹。",
-   "importance": "關鍵",
-   "verdict": "部分證實",
-   "verdict_reason": "「逾百名孕婦感染」之量級有獨立來源支持（賓州 101 例；另一份報告統計 2025 年 1 月至 2026 年 9 月共 112 例），但確切數字無法確認：同一篇報導標題寫 178、內文寫 167，內文列舉之各州數字加總為 174，CIDRAP 次日報導又寫 168。此為記者自行向各州彙整之下限，非官方統計。",
-   "evidence": [
-    {
-     "source_id": "S14",
-     "stance": "支持",
-     "quote_or_summary": "搜尋摘要：截至該週五，賓州至少 101 名孕婦確診麻疹，三週內增加 24 例（引州衛生部門）。"
-    },
-    {
-     "source_id": "S18",
-     "stance": "支持",
-     "quote_or_summary": "搜尋摘要：一份涵蓋 2025 年 1 月至 2026 年 9 月之初步監測報告記錄 112 例孕期麻疹及 13 例先天性麻疹。"
-    },
-    {
-     "source_id": "S1",
-     "stance": "背景",
-     "quote_or_summary": "\"At least 167 measles infections have been diagnosed in pregnant people this year and last, according to state health departments contacted by CIDRAP News.\"（與標題 178 不一致）"
-    },
-    {
-     "source_id": "S15",
-     "stance": "背景",
-     "quote_or_summary": "\"As CIDRAP News reported yesterday , there have been at least 168 measles infections in pregnant US women since 2025.\""
-    }
-   ]
-  },
-  {
-   "id": "C2",
-   "text": "賓州今年 1,561 例麻疹中有 101 例為孕婦。",
-   "importance": "關鍵",
-   "verdict": "部分證實",
-   "verdict_reason": "孕婦 101 例有獨立媒體引述州衛生部門之數字支持；總病例數 1,561 未找到完全相同之官方數字，但介於賓州衛生部 11 月中旬公布之 1,542（第 7 例死亡時）與 11/18 之 1,589 之間，屬合理。",
-   "evidence": [
-    {
-     "source_id": "S14",
-     "stance": "支持",
-     "quote_or_summary": "搜尋摘要：賓州至少 101 名孕婦確診麻疹（州衛生部門）。"
-    },
-    {
-     "source_id": "S13",
-     "stance": "背景",
-     "quote_or_summary": "新聞稿標題：\"…Cases Reach 1,589 in 46 Counties\"（2026-11-18）；前一則為 1,542 例、46 郡。"
-    }
-   ]
-  },
-  {
-   "id": "C3",
-   "text": "過去兩年美國通報逾 8,000 例麻疹（Johns Hopkins 追蹤資料）。",
-   "importance": "關鍵",
-   "verdict": "部分證實",
-   "verdict_reason": "美國 CDC 頁面載明 2026 年截至 11/12 為 5,412 例、2025 年全年 2,289 例，合計 7,701 例，略低於 8,000；Johns Hopkins 追蹤採不同納入標準與更新頻率，數字較高（搜尋摘要顯示 2026 年截至 11/13 為 5,739 例），其兩年合計未能直接讀取。量級相符，確切數字依來源而異。",
-   "evidence": [
-    {
-     "source_id": "S11",
-     "stance": "支持",
-     "quote_or_summary": "\"As of November 12, 2026, 5,412 confirmed* measles cases were reported in the United States in 2026.\""
-    },
-    {
-     "source_id": "S11",
-     "stance": "支持",
-     "quote_or_summary": "\"For the full year of 2025, a total of 2,289 confirmed* measles cases were reported in the United States.\""
-    }
-   ]
-  },
-  {
-   "id": "C4",
-   "text": "今年美國 41% 之麻疹病例為 20 歲以上成人（美國 CDC 資料）。",
-   "importance": "關鍵",
-   "verdict": "已證實",
-   "verdict_reason": "美國 CDC 頁面資料檔（更新至 2026-11-12）載明 20 歲以上病例為 2,240 例（41%）。",
-   "evidence": [
-    {
-     "source_id": "S20",
-     "stance": "支持",
-     "quote_or_summary": "\"case_age_20_up\": [\"2,240 (41%)\"]；\"total_cases\": [\"5,412\"]"
-    }
-   ]
-  },
-  {
-   "id": "C5",
-   "text": "一名 21 歲賓州麻疹女性於本月初居家分娩後死亡；賓州另有 2 名新生兒感染麻疹後死亡。",
-   "importance": "次要",
-   "verdict": "部分證實",
-   "verdict_reason": "2026-11-05 有媒體以「新手母親死亡」為題報導，賓州衛生部亦曾公布 2 例嬰兒死亡；但年齡 21 歲、居家分娩等細節出自《華盛頓郵報》，原文未能取得，賓州衛生部第 6 例死亡新聞稿之搜尋摘要亦未提及分娩。",
-   "evidence": [
-    {
-     "source_id": "S19",
-     "stance": "支持",
-     "quote_or_summary": "標題：\"New Mother's Death Adds to Measles Toll as Pregnancy Warnings Grow\"（2026-11-05）。"
-    },
-    {
-     "source_id": "S13",
-     "stance": "背景",
-     "quote_or_summary": "搜尋摘要：賓州衛生部先前公布 2 例感染麻疹之嬰兒死亡；所有死亡個案均未接種或未達接種年齡。"
-    }
-   ]
-  },
-  {
-   "id": "C6",
-   "text": "美國 CDC 並未追蹤（或公布）孕婦麻疹病例數。",
-   "importance": "次要",
-   "verdict": "部分證實",
-   "verdict_reason": "美國 CDC 麻疹病例頁面及其資料檔僅公布年齡、接種狀態、住院與死亡，未見懷孕狀態欄位，與新聞所述相符；惟 CDC 內部是否蒐集該資料無從確認，另有一份統計 112 例孕期麻疹之報告，其來源說法不一（Public Health Alerts 或美國 CDC 初步監測報告），原報告未取得。",
-   "evidence": [
-    {
-     "source_id": "S20",
-     "stance": "支持",
-     "quote_or_summary": "資料檔欄位為 total_cases、case_age_*、case_unvax_unknown、case_one_mmr、case_two_mmr、hosp_*、total_deaths，無懷孕狀態。"
-    },
-    {
-     "source_id": "S18",
-     "stance": "背景",
-     "quote_or_summary": "搜尋摘要稱「美國 CDC 初步監測報告」記錄 112 例孕期麻疹。"
-    },
-    {
-     "source_id": "S10",
-     "stance": "背景",
-     "quote_or_summary": "\"New Public Health Alerts report spotlights how pregnant women with measles and their babies fare About a fourth of the 112 pregnant women required hospital care not related to labor, and 13 babies were born with measles.\""
-    }
-   ]
-  },
-  {
-   "id": "C7",
-   "text": "孕婦不可接種麻疹疫苗；暴露後 6 日內可給予靜脈注射免疫球蛋白（IVIG）。",
-   "importance": "關鍵",
-   "verdict": "已證實",
-   "verdict_reason": "美國 CDC 暴露後預防文件載明免疫球蛋白須於初次暴露後 6 日內給予，孕婦使用靜脈注射劑型，且 MMR 於孕期為禁忌；ECDC 亦說明一般對象以 72 小時內接種疫苗為首選。",
-   "evidence": [
-    {
-     "source_id": "S21",
-     "stance": "支持",
-     "quote_or_summary": "\"IG needs to be given within 6 days of initial exposure and can be given intramuscularly (IGIM) or intravenously (IGIV).\""
-    },
-    {
-     "source_id": "S21",
-     "stance": "支持",
-     "quote_or_summary": "表格列：\"Pregnant women … IGIV (MMR is contraindicated in pregnancy)\""
-    },
-    {
-     "source_id": "S9",
-     "stance": "支持",
-     "quote_or_summary": "\"Regarding post-exposure prophylaxis, administration of an MCV is the intervention of choice within 72 hours of exposure\""
-    },
-    {
-     "source_id": "S7",
-     "stance": "背景",
-     "quote_or_summary": "我國指引清單列有「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」及肌肉注射免疫球蛋白同意書；內文未取得。"
-    }
-   ]
-  },
-  {
-   "id": "C8",
-   "text": "麻疹會造成「免疫失憶」，使人對原已具免疫力之病原再度易感。",
-   "importance": "次要",
-   "verdict": "已證實",
-   "verdict_reason": "WHO 麻疹實況報導有相同敘述。新聞所稱「可持續達 5 年」及孕婦個案情形，本次未另行查證。",
-   "evidence": [
-    {
-     "source_id": "S8",
-     "stance": "支持",
-     "quote_or_summary": "\"Measles itself also weakens the immune system and can make the body “forget” how to protect itself against infections, leaving children extremely vulnerable.\""
-    }
-   ]
-  },
-  {
-   "id": "C9",
-   "text": "孕婦感染麻疹可能發生肺炎等嚴重併發症與死亡，並增加早產與低出生體重風險。",
-   "importance": "關鍵",
-   "verdict": "已證實",
-   "verdict_reason": "WHO 明列孕婦為重症最高風險族群，並說明孕期感染可致流產、早產與低出生體重；系統性回顧（搜尋摘要）顯示孕婦病例以肺炎為最常見併發症。",
-   "evidence": [
-    {
-     "source_id": "S8",
-     "stance": "支持",
-     "quote_or_summary": "\"If a woman catches measles during pregnancy, this can be dangerous for the mother and can result in miscarriage or her baby being born prematurely with a low birth weight.\""
-    },
-    {
-     "source_id": "S8",
-     "stance": "支持",
-     "quote_or_summary": "\"Unvaccinated young children and pregnant persons are at highest risk of severe measles complications.\""
-    },
-    {
-     "source_id": "S17",
-     "stance": "支持",
-     "quote_or_summary": "搜尋摘要：彙整 1941–2012 年 420 例孕婦病例，18 例死亡（4.3%），肺炎為最常見併發症（17.9%）。"
-    },
-    {
-     "source_id": "S22",
-     "stance": "支持",
-     "quote_or_summary": "\"Measles can also lead to adverse pregnancy outcomes, including pregnancy loss, premature delivery, and low birth weight.\""
-    }
-   ]
-  },
-  {
-   "id": "C10",
-   "text": "維生素 A 可用於麻疹兒童，但因流產與胎兒畸形風險，不建議於孕期使用。",
-   "importance": "次要",
-   "verdict": "部分證實",
-   "verdict_reason": "美國 CDC 說明維生素 A 可在醫療人員監督下用於麻疹嬰兒與兒童，WHO 亦提及維生素 A 補充；但「孕期不建議使用」一點，本次讀得之官方頁面未提及，新聞所引之母胎醫學會指引未取得。",
-   "evidence": [
-    {
-     "source_id": "S22",
-     "stance": "支持",
-     "quote_or_summary": "\"vitamin A may be administered to infants and children in the United States with measles under the supervision of a healthcare provider as part of supportive management.\""
-    },
-    {
-     "source_id": "S8",
-     "stance": "支持",
-     "quote_or_summary": "\"Vitamin A supplements may also reduce the number of measles deaths.\""
-    }
-   ]
-  }
- ],
- "news_credibility": {
-  "proposed_level": "中",
-  "reason": "CIDRAP 為專業傳染病新聞機構，病例數、年齡分布與暴露後預防等內容經美國 CDC、WHO 全文查證相符；但標題之核心數字為記者自行彙整之下限，且標題（178）與內文（167）不一致，賓州與死亡個案細節僅能部分證實，故評為中。"
- },
- "pathogen": {
-  "summary": "麻疹由麻疹病毒引起，人為唯一宿主，經空氣、飛沫或接觸病人鼻咽分泌物傳播，傳染力極強（基本再生數估計 12–18）。兩劑含麻疹疫苗可提供高度保護；無特效抗病毒藥物。未接種之幼兒與孕婦為重症最高風險族群。",
-  "facts": [
-   {
-    "label": "病原與宿主",
-    "value": "麻疹病毒；人為唯一之宿主及傳染窩",
-    "source_ids": [
-     "S5"
-    ]
-   },
-   {
-    "label": "傳播途徑",
-    "value": "空氣、飛沫傳播，或直接接觸病人鼻腔或咽喉分泌物",
-    "source_ids": [
-     "S5",
-     "S8"
-    ]
-   },
-   {
-    "label": "傳染力",
-    "value": "基本再生數（R0）模式估計 12–18",
-    "source_ids": [
-     "S9"
-    ]
-   },
-   {
-    "label": "潛伏期",
-    "value": "前驅症狀於 10–12 天潛伏期後出現",
-    "source_ids": [
-     "S9"
-    ]
-   },
-   {
-    "label": "可傳染期",
-    "value": "出疹前 4 天至出疹後 4 天",
-    "source_ids": [
-     "S8"
-    ]
-   },
-   {
-    "label": "併發症",
-    "value": "中耳炎（7–9%）、肺炎（1–6%）、腹瀉（8%）、感染後腦炎（每 1,000–2,000 例 1 例）；我國資料：約 5–10% 患者產生併發症",
-    "source_ids": [
-     "S9",
-     "S5"
-    ]
-   },
-   {
-    "label": "孕婦",
-    "value": "重症最高風險族群之一；可致流產、早產、低出生體重。系統性回顧 420 例孕婦病例中 4.3% 死亡、17.9% 併發肺炎（搜尋摘要）",
-    "source_ids": [
-     "S8",
-     "S17"
-    ]
-   },
-   {
-    "label": "免疫失憶",
-    "value": "麻疹會削弱免疫系統，使身體「遺忘」原有之防護",
-    "source_ids": [
-     "S8"
-    ]
-   },
-   {
-    "label": "疫苗",
-    "value": "疫苗效力至少 95%；我國常規於出生滿 12 個月及滿 5 歲至入國小前各接種 1 劑 MMR",
-    "source_ids": [
-     "S9",
-     "S5"
-    ]
-   },
-   {
-    "label": "暴露後預防",
-    "value": "暴露後 72 小時內接種含麻疹疫苗為首選；孕婦無法接種活性減毒疫苗",
-    "source_ids": [
-     "S9",
-     "S1"
-    ]
-   },
-   {
-    "label": "嬰兒之被動免疫",
-    "value": "母親具免疫力時，嬰兒出生後可由母體抗體獲得保護",
-    "source_ids": [
-     "S9"
-    ]
-   },
-   {
-    "label": "接觸後感染機率",
-    "value": "未具免疫力之密切接觸者最多 10 人中有 9 人會感染",
-    "source_ids": [
-     "S22"
-    ]
-   },
-   {
-    "label": "孕婦暴露後預防（美國 CDC）",
-    "value": "MMR 為禁忌；無免疫證據之孕婦於暴露後 6 日內給予靜脈注射免疫球蛋白（400 mg/kg）",
-    "source_ids": [
-     "S21"
-    ]
-   }
-  ]
- },
- "international": {
-  "summary": [
-   {
-    "text": "美國 CDC：2026 年截至 11/12 共 5,412 例確定病例，96%（5,216 例）與群聚相關，當年新增 43 起群聚；2025 年全年為 2,289 例。",
-    "source_ids": [
-     "S11"
-    ]
-   },
-   {
-    "text": "死亡數有三種口徑：美國 CDC 頁面文字為 6 例、其資料檔為 8 例，各州衛生部門則已通報 10 例；賓州於 11/18 公布第 8 例死亡，累計 1,589 例、46 郡。",
-    "source_ids": [
-     "S11",
-     "S20",
-     "S10",
-     "S13"
-    ]
-   },
-   {
-    "text": "美國近 3 個月（8/16–11/8）累計 2,622 例，已連續 14 週每週新增逾百例，疫情仍在活躍傳播。",
-    "source_ids": [
-     "S12"
-    ]
-   },
-   {
-    "text": "泛美衛生組織（PAHO）於 2026-11-17 宣布美國喪失麻疹消除狀態，玻利維亞與墨西哥亦同；判定依據為同一病毒株持續傳播 12 個月以上。",
-    "source_ids": [
-     "S15",
-     "S16"
-    ]
-   },
-   {
-    "text": "孕婦病例：記者彙整各州資料為至少 167–178 例（2025 年迄今），賓州 101 例；另一份報告統計 112 例孕期麻疹，其中約四分之一需非分娩相關之住院、13 名嬰兒出生即感染。",
-    "source_ids": [
-     "S1",
-     "S10",
-     "S14"
-    ]
-   },
-   {
-    "text": "2026 年美國病例中 20 歲以上成人 2,240 例（41%），2025 年為 29%；賓州則有三分之二為 18 歲以上成人。成人病例住院比例 15%（332／2,240），整體 11%（591／5,412）。",
-    "source_ids": [
-     "S20",
-     "S1"
-    ]
-   },
-   {
-    "text": "2026 年美國病例 96% 為未接種或接種史不明，接種 1 劑與 2 劑者各占 2%。",
-    "source_ids": [
-     "S20"
-    ]
-   },
-   {
-    "text": "其他地區：墨西哥 2026 年截至 3/26 逾 8,000 例；日本截至 6 月初累計 511 例（已逾 2025 年全年 265 例）；孟加拉自 3 月迄 6 月初通報 70,936 例、585 例相關死亡。",
-    "source_ids": [
-     "S3",
-     "S4"
-    ]
-   }
-  ],
-  "stats": [
-   {
-    "label": "美國 2026 年確定病例",
-    "value": "5,412 例",
-    "as_of": "2026-11-12",
-    "note": "美國 CDC；2025 年全年 2,289 例",
-    "source_ids": [
-     "S11"
-    ]
-   },
-   {
-    "label": "美國 2026 年麻疹相關死亡",
-    "value": "6–10 例",
-    "as_of": "2026-11-13",
-    "note": "CDC 頁面 6、CDC 資料檔 8、各州通報 10",
-    "source_ids": [
-     "S11",
-     "S20",
-     "S10"
-    ]
-   },
-   {
-    "label": "美國孕婦病例（2025 年迄今）",
-    "value": "至少 167–178 例",
-    "as_of": "2026-11-17",
-    "note": "記者彙整之下限，非官方統計；標題與內文不一致",
-    "source_ids": [
-     "S1"
-    ]
-   },
-   {
-    "label": "賓州孕婦病例",
-    "value": "101 例",
-    "as_of": "2026-11-13",
-    "note": "州衛生部門",
-    "source_ids": [
-     "S14",
-     "S1"
-    ]
-   },
-   {
-    "label": "20 歲以上成人占比",
-    "value": "41%",
-    "as_of": "2026-11-12",
-    "note": "2,240／5,412；2025 年為 29%",
-    "source_ids": [
-     "S20"
-    ]
-   },
-   {
-    "label": "美國 2026 年住院比例",
-    "value": "11%",
-    "as_of": "2026-11-12",
-    "note": "591／5,412；20 歲以上為 15%",
-    "source_ids": [
-     "S20"
-    ]
-   },
-   {
-    "label": "我國 2026 年麻疹病例",
-    "value": "11 例",
-    "as_of": "2026-06-02",
-    "note": "8 例境外移入（含美國 1 例）、3 例國內感染；6 月後數字未取得",
-    "source_ids": [
-     "S4"
-    ]
-   }
-  ],
-  "timeline": [
-   {
-    "date": "2025-03-18",
-    "label": "我國將美國麻疹旅遊疫情建議列為第一級注意",
-    "source_ids": [
-     "S2"
-    ]
-   },
-   {
-    "date": "2026-03-31",
-    "label": "疾管署公布 1 例自美國（紐約）移入之麻疹確定病例，接觸者 339 名",
-    "source_ids": [
-     "S3"
-    ]
-   },
-   {
-    "date": "2026-06-02",
-    "label": "疾管署公布境外移入致國內感染群聚，我國當年累計 11 例",
-    "source_ids": [
-     "S4"
-    ]
-   },
-   {
-    "date": "2026-11-12",
-    "label": "美國 CDC：2026 年累計 5,412 例",
-    "source_ids": [
-     "S11"
-    ]
-   },
-   {
-    "date": "2026-11-17",
-    "label": "PAHO 宣布美國喪失麻疹消除狀態",
-    "source_ids": [
-     "S15",
-     "S16"
-    ]
-   },
-   {
-    "date": "2026-11-17",
-    "label": "我國將美國全境麻疹旅遊疫情建議提升至第二級警示",
-    "source_ids": [
-     "S2",
-     "S12"
-    ]
-   },
-   {
-    "date": "2026-11-17",
-    "label": "CIDRAP 報導美國孕婦麻疹病例（本次查證之新聞）",
-    "source_ids": [
-     "S1"
-    ]
-   },
-   {
-    "date": "2026-11-18",
-    "label": "賓州公布第 8 例麻疹相關死亡，累計 1,589 例",
-    "source_ids": [
-     "S13"
-    ]
-   }
-  ],
-  "time_series": [],
-  "country_counts": [
-   {
-    "country": "美國",
-    "cases": 5412,
-    "deaths": 8,
-    "period": "2026 年 1 月至 11 月 12 日",
-    "source_ids": [
-     "S11",
-     "S20"
-    ]
-   },
-   {
-    "country": "美國（2025 年）",
-    "cases": 2289,
-    "deaths": null,
-    "period": "2025 年全年",
-    "source_ids": [
-     "S11"
-    ]
-   },
-   {
-    "country": "日本",
-    "cases": 511,
-    "deaths": null,
-    "period": "2026 年 1 月至 6 月初",
-    "source_ids": [
-     "S4"
-    ]
-   }
-  ],
-  "external_assessments": [
-   {
-    "text": "PAHO：美國已恢復麻疹地方性傳播，須提出矯正行動計畫方能重新取得消除狀態（媒體報導；PAHO 正式公告未取得）。",
-    "source_ids": [
-     "S15",
-     "S16"
-    ]
-   },
-   {
-    "text": "我國疾管署：美國疫情對我國影響較低，主因幼兒 MMR 兩劑接種率長年維持 97% 以上，且國籍航空空服員及機組員逾 80% 具麻疹免疫力（媒體引述疾管署 11/17 說明）。",
-    "source_ids": [
-     "S12"
-    ]
-   },
-   {
-    "text": "WHO、ECDC 針對美國疫情之旅行建議或風險評估，本次未查得。",
-    "source_ids": [],
-    "is_inference": true
-   }
-  ]
- },
- "taiwan": {
-  "notifiable_category": "第二類法定傳染病",
-  "surveillance": [
-   {
-    "text": "麻疹為第二類法定傳染病。",
-    "source_ids": [
-     "S5"
-    ]
-   },
-   {
-    "text": "2026 年截至 6/2 累計 11 例，年齡介於未滿 1 歲至 50 多歲；8 例境外移入（越南、馬來西亞、美國、印度、印尼、吉爾吉斯、日本、泰國各 1 例），3 例國內感染。",
-    "source_ids": [
-     "S4"
-    ]
-   },
-   {
-    "text": "自美國移入之個案為北部 50 多歲女性，返國後發燒但未出疹，後因疑似腦炎就醫才通報確診，顯示成人非典型表現可能延遲診斷。",
-    "source_ids": [
-     "S3"
-    ]
-   },
-   {
-    "text": "2026 年 6 月之後之我國麻疹病例數，本次未能取得（傳染病統計資料查詢系統無法連線，疾管署新聞稿 6 月後無麻疹專稿）。",
-    "source_ids": [],
-    "is_inference": true
-   }
-  ],
-  "laboratory": [
-   {
-    "text": "疾管署訂有麻疹病例定義暨防疫檢體採檢送驗事項（清單頁可見，內文未取得）。",
-    "source_ids": [
-     "S7"
-    ]
-   }
-  ],
-  "vectors_hosts": [
-   {
-    "text": "人為唯一宿主，無動物或病媒傳播途徑；國內傳播取決於移入個案與人群免疫缺口。",
-    "source_ids": [
-     "S5"
-    ]
-   }
-  ],
-  "border_travel": [
-   {
-    "text": "美國全境麻疹旅遊疫情建議自 2026-11-17 起為第二級警示（Alert）；先前為 2025-03-18 起之第一級注意。",
-    "source_ids": [
-     "S2"
-    ]
-   },
-   {
-    "text": "目前共 12 國列第二級警示（含美國、墨西哥、越南、印尼、印度等），34 國列第一級注意（含加拿大、日本）。",
-    "source_ids": [
-     "S2"
-    ]
-   },
-   {
-    "text": "疾管署建議孕婦及未滿 1 歲嬰幼兒避免前往流行區；1966 年（含）以後出生成人如不確定是否具免疫力，可於出國前 2 至 4 週至旅遊醫學門診評估接種 MMR；返國 3 週內出現疑似症狀應戴口罩就醫並告知旅遊史。",
-    "source_ids": [
-     "S3"
-    ]
-   },
-   {
-    "text": "國人赴美旅次、年底假期與農曆春節前後之往返人數，本次未取得。",
-    "source_ids": [],
-    "is_inference": true
-   }
-  ],
-  "healthcare": [
-   {
-    "text": "疾管署訂有「疑似麻疹個案接觸者之暴露後預防建議措施」及「醫院內疑似麻疹個案處置指引」（均為 114 年 4 月修訂），並備有肌肉注射免疫球蛋白同意書。",
-    "source_ids": [
-     "S7"
-    ]
-   },
-   {
-    "text": "單一個案之接觸者匡列規模大：2026 年 3 月兩例分別匡列 339 名與 719 名，6 月群聚匡列 491 名。",
-    "source_ids": [
-     "S3",
-     "S4"
-    ]
-   },
-   {
-    "text": "公費 MMR 提供育齡婦女之條件以「德國麻疹抗體陰性」為準（一般育齡婦女、產後補種、外籍配偶），並非依麻疹抗體；孕期產檢亦以德國麻疹抗體為檢測項目。",
-    "source_ids": [
-     "S6"
-    ]
-   },
-   {
-    "text": "我國育齡婦女之麻疹抗體陽性率與免疫球蛋白（IVIG／IMIG）庫存量，本次未查得公開資料。",
-    "source_ids": [],
-    "is_inference": true
-   }
-  ]
- },
- "risk_items": [
-  {
-   "id": "R1",
-   "name": "境外移入風險",
-   "kind": "機率",
-   "question": "未來 3 個月內，我國再出現自美國移入之麻疹確定病例之可能性為何？",
-   "evidence": [
-    {
-     "text": "我國 2026 年已有 1 例自美國（紐約）移入之確定病例，當時美國累計約 1,500 例；目前美國已達 5,412 例。",
-     "source_ids": [
-      "S3",
-      "S11"
-     ]
-    },
-    {
-     "text": "美國已連續 14 週每週新增逾百例，並經 PAHO 判定恢復地方性傳播，短期內不會中斷。",
-     "source_ids": [
-      "S12",
-      "S15"
-     ]
-    },
-    {
-     "text": "美國病例 41% 為 20 歲以上成人（2025 年為 29%），旅客年齡層之暴露機會增加；另有 26 例發生於赴美之國際旅客。",
-     "source_ids": [
-      "S20",
-      "S11"
-     ]
-    },
-    {
-     "text": "我國 2026 年境外移入來源分散於 8 國，美國僅占 1 例；整體移入壓力主要仍來自亞洲鄰近國家。",
-     "source_ids": [
-      "S4"
-     ]
-    },
-    {
-     "text": "評估期間涵蓋年底假期至農曆春節前，為往返美國之旅遊與返鄉旺季。",
-     "source_ids": [],
-     "is_inference": true
-    }
-   ],
-   "level_definitions": {
-    "低": "美國疫情侷限於少數州且趨緩，我國當年無自美國移入病例",
-    "中": "美國疫情持續擴大且我國曾有自美國移入病例，評估期間內可能再出現",
-    "高": "我國已接連出現自美國移入病例，或美國疫情擴及國人主要往返之都會區並大幅上升"
-   },
-   "probability": 3,
-   "probability_rationale": "美國疫情規模為今年 3 月（已發生 1 例移入）時之 3 倍以上且持續傳播，並逢旅遊旺季；但 10 個多月來僅 1 例自美國移入，故判斷為有可能發生（約 10–50%）。",
-   "impact": null,
-   "proposed_level": "中",
-   "strata": [],
-   "confidence": "中",
-   "confidence_reason": "我國移入紀錄、旅遊建議等級與美國 CDC 數字均讀得全文；但缺國人赴美旅次與我國 6 月後病例資料。",
-   "hairs_questions": []
-  },
-  {
-   "id": "R2",
-   "name": "國內社區流行風險",
-   "kind": "機率",
-   "question": "未來 3 個月內，我國因移入個案而出現持續性社區傳播（三代以上或跨縣市擴散）之可能性為何？",
-   "evidence": [
-    {
-     "text": "我國幼兒 MMR 兩劑接種率長年維持 97% 以上（媒體引述疾管署）。",
-     "source_ids": [
-      "S12"
-     ]
-    },
-    {
-     "text": "2026 年截至 6/2 之 11 例中僅 3 例為國內感染，移入個案引起之群聚規模有限（6 月群聚共 2 例）。",
-     "source_ids": [
-      "S4"
-     ]
-    },
-    {
-     "text": "每例個案皆匡列數百名接觸者並進行健康監測，6 月群聚之續發個案即於監測期間發現。",
-     "source_ids": [
-      "S3",
-      "S4"
-     ]
-    },
-    {
-     "text": "麻疹傳染力極強（R0 12–18），出疹前 4 天即具傳染力；自美國移入之個案未出疹、延至腦炎症狀才確診，顯示非典型成人個案可能造成較長之未察覺暴露。",
-     "source_ids": [
-      "S9",
-      "S8",
-      "S3"
-     ]
-    }
-   ],
-   "level_definitions": {
-    "低": "移入個案僅引起零星或侷限性續發，傳播鏈於接觸者監測下中斷",
-    "中": "同一移入事件出現三代以上傳播或多起無關聯群聚同時發生",
-    "高": "出現無法追溯感染源之本土病例或跨縣市持續傳播"
-   },
-   "probability": 2,
-   "probability_rationale": "高接種率與既有接觸者追蹤機制使傳播鏈多能中斷；惟傳染力極強且成人非典型表現可能延遲診斷，無法排除。",
-   "impact": null,
-   "proposed_level": "低",
-   "strata": [
-    {
-     "name": "移入個案引起之侷限性群聚（家戶、職場、醫療院所）",
-     "probability": 3,
-     "proposed_level": "中",
-     "note": "2026 年上半年已發生至少 1 起；3 例國內感染個案"
-    }
-   ],
-   "confidence": "中",
-   "confidence_reason": "我國群聚紀錄來自疾管署全文；接種率數字僅取得媒體摘要，且缺各出生世代（尤其 1981 年後出生成人）之抗體陽性率資料。",
-   "hairs_questions": []
-  },
-  {
-   "id": "R3",
-   "name": "孕婦及未滿 1 歲嬰兒感染風險",
-   "kind": "機率",
-   "question": "未來 3 個月內，我國出現孕婦或未滿 1 歲嬰兒感染麻疹（含赴美感染或國內續發）之可能性為何？",
-   "evidence": [
-    {
-     "text": "我國 2026 年病例年齡介於未滿 1 歲至 50 多歲，已有未滿 1 歲嬰兒病例。",
-     "source_ids": [
-      "S4"
-     ]
-    },
-    {
-     "text": "孕婦無法接種活性減毒之 MMR；未滿 1 歲嬰兒尚未達常規接種年齡（滿 12 個月接種第 1 劑）。",
-     "source_ids": [
-      "S1",
-      "S5"
-     ]
-    },
-    {
-     "text": "我國公費 MMR 對育齡婦女之提供條件與產檢抗體檢測皆以德國麻疹為準，孕婦個人之麻疹免疫狀態通常未知。",
-     "source_ids": [
-      "S6"
-     ]
-    },
-    {
-     "text": "美國經驗顯示成人病例比例升高時，孕婦病例隨之出現（賓州 101 例孕婦，成人占該州病例三分之二）。",
-     "source_ids": [
-      "S14",
-      "S1"
-     ]
-    },
-    {
-     "text": "疾管署已建議孕婦及未滿 1 歲嬰幼兒避免前往流行區，美國升為第二級後該建議適用於美國全境。",
-     "source_ids": [
-      "S3",
-      "S2"
-     ]
-    },
-    {
-     "text": "美國 CDC 將無免疫證據之孕婦列為免疫球蛋白暴露後預防之優先對象，須於暴露後 6 日內給予。",
-     "source_ids": [
-      "S21"
-     ]
-    }
-   ],
-   "level_definitions": {
-    "低": "國內無持續傳播，孕婦與嬰兒僅可能因個別旅遊暴露或零星接觸而感染",
-    "中": "國內出現群聚且接觸者中含孕婦或嬰兒，或接連出現嬰兒病例",
-    "高": "國內持續傳播，孕婦或嬰兒病例接連發生"
-   },
-   "probability": 2,
-   "probability_rationale": "國內目前無持續傳播，且已建議該族群避免前往流行區；但今年已有嬰兒病例，且孕婦免疫狀態多屬未知，無法排除。",
-   "impact": 4,
-   "impact_rationale": "此族群一旦感染，重症、流產、早產與死亡風險明顯高於一般民眾，且孕婦無法以疫苗進行暴露後預防，故採該族群之衝擊（高）。",
-   "proposed_level": "低",
-   "strata": [],
-   "confidence": "中",
-   "confidence_reason": "臨床風險有 WHO 全文支持；但我國育齡婦女麻疹抗體陽性率、孕婦赴美人數及暴露後預防指引內文均未取得。",
-   "hairs_questions": []
-  },
-  {
-   "id": "R4",
-   "name": "衝擊",
-   "kind": "衝擊",
-   "question": "若我國出現自美國移入病例並引起國內續發，對國人健康、醫療與公衛體系及社會之衝擊為何？",
-   "evidence": [
-    {
-     "text": "一般病例約 5–10% 產生併發症（中耳炎、肺炎、腦炎）；兒童致死率估計每 1,000 例未接種兒童 1–3 例。",
-     "source_ids": [
-      "S5",
-      "S10"
-     ]
-    },
-    {
-     "text": "孕婦為重症最高風險族群之一，感染可致流產、早產與低出生體重；系統性回顧中孕婦病例 4.3% 死亡。",
-     "source_ids": [
-      "S8",
-      "S22",
-      "S17"
-     ]
-    },
-    {
-     "text": "美國 2026 年病例住院比例 11%，20 歲以上成人為 15%，未滿 5 歲為 17%。",
-     "source_ids": [
-      "S20"
-     ]
-    },
-    {
-     "text": "有安全有效之疫苗（效力至少 95%），我國幼兒兩劑接種率 97% 以上；無特效抗病毒藥物。",
-     "source_ids": [
-      "S9",
-      "S12",
-      "S1"
-     ]
-    },
-    {
-     "text": "公衛量能負擔重：每例個案匡列 339–719 名接觸者並監測約 3 週。",
-     "source_ids": [
-      "S3",
-      "S4"
-     ]
-    },
-    {
-     "text": "麻疹會削弱既有免疫力，病後一段時間對其他感染之易感性上升。",
-     "source_ids": [
-      "S8"
-     ]
-    },
-    {
-     "text": "美國孕婦與新生兒死亡之報導及我國調升旅遊警示，可能引發民眾（特別是孕婦與嬰幼兒家長）對疫苗與赴美旅遊之詢問增加。",
-     "source_ids": [
-      "S1",
-      "S12"
-     ],
-     "is_inference": true
-    }
-   ],
-   "level_definitions": {
-    "低": "僅零星輕症，接觸者追蹤可由既有量能吸收",
-    "中": "部分族群可能重症，接觸者追蹤與院內感染管制需投入特定整備，社會中度關注",
-    "高": "高風險族群接連出現重症或死亡，或醫療院所發生群聚，量能局部吃緊"
-   },
-   "probability": null,
-   "impact": 3,
-   "impact_rationale": "有疫苗且人群免疫力高，多數民眾衝擊有限；但孕婦、嬰兒與免疫不全者可能重症，且每例個案之接觸者追蹤負擔大，整體評為中。",
-   "proposed_level": "中",
-   "strata": [
-    {
-     "name": "孕婦、胎兒、未滿 1 歲嬰兒及免疫不全者",
-     "impact": 4,
-     "proposed_level": "高"
-    },
-    {
-     "name": "已完成兩劑接種或具自然免疫之一般民眾",
-     "impact": 2,
-     "proposed_level": "低"
-    }
-   ],
-   "confidence": "中",
-   "confidence_reason": "嚴重度資料來自 WHO、ECDC、美國 CDC 與疾管署全文；孕婦預後系統性回顧與我國接種率僅取得摘要。",
-   "hairs_questions": []
-  }
- ],
- "overall": {
-  "proposed_level": "中",
-  "summary": "美國麻疹已恢復地方性傳播，2026 年逾 5,400 例且持續擴大，成人病例比例升高並出現逾百名孕婦感染。我國今年已有 1 例自美國移入，未來 3 個月再出現之機率為中；在高接種率與接觸者追蹤下，持續社區流行之機率低，但移入個案引起侷限性群聚之機率為中。對一般民眾衝擊有限，對孕婦與未滿 1 歲嬰兒衝擊高。綜合研判我國整體風險為中。",
-  "key_findings": [
-   "新聞主旨（美國逾百名孕婦感染麻疹、賓州最多）有獨立來源支持，但標題之 178 例與內文 167 例不一致，為記者彙整之下限而非官方統計，新聞可信度為中。",
-   "美國 CDC：2026 年截至 11/12 已 5,412 例（2025 年全年 2,289 例），成人占 41%、住院 11%；PAHO 於 11/17 宣布美國喪失麻疹消除狀態，我國同日將美國全境提升至第二級警示。",
-   "我國 2026 年已有 1 例自美國移入（50 多歲女性、未出疹、以疑似腦炎表現），未來 3 個月再出現自美國移入病例之機率為中。",
-   "孕婦無法接種 MMR，且我國產檢與公費 MMR 均以德國麻疹抗體為準，孕婦之麻疹免疫狀態多屬未知；此族群感染機率低但衝擊高。",
-   "主要資料缺口：我國 6 月後病例數、育齡婦女麻疹抗體陽性率、免疫球蛋白庫存及暴露後預防指引內文，本次均未取得。"
-  ]
- },
- "ihr_annex2": {
-  "perspective": "以事件發生國（美國）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定，亦不代表本事件構成國際關注公共衛生緊急事件。",
-  "always_notifiable_disease": false,
-  "questions": [
-   {
-    "key": "serious_impact",
-    "answer": "是",
-    "rationale": "2026 年 5,412 例、住院 591 例（11%）、死亡 6–10 例，並出現孕婦與新生兒死亡，為美國數十年來最大規模疫情。",
-    "source_ids": [
-     "S11",
-     "S20",
-     "S10",
-     "S13"
-    ]
-   },
-   {
-    "key": "unusual_unexpected",
-    "answer": "是",
-    "rationale": "美國自 2000 年宣布消除麻疹後，首度被判定恢復地方性傳播；成人與孕婦病例比例高亦異於以往。",
-    "source_ids": [
-     "S15",
-     "S1"
-    ]
-   },
-   {
-    "key": "international_spread",
-    "answer": "是",
-    "rationale": "已有病例自美國輸出至其他國家（我國 2026 年 3 月 1 例），美國境內亦有 26 例發生於國際旅客；麻疹傳染力極強且美國國際旅運量大。",
-    "source_ids": [
-     "S3",
-     "S11",
-     "S9"
-    ]
-   },
-   {
-    "key": "travel_trade_restriction",
-    "answer": "否",
-    "rationale": "本次未查得任何國家或 WHO 對美國採取旅行或貿易限制；我國措施為旅遊疫情建議（提醒加強防護），非限制。",
-    "source_ids": [
-     "S2"
-    ]
-   }
-  ]
- },
- "scenarios": [
-  {
-   "kind": "最佳",
-   "description": "美國疫情於冬季趨緩，我國未再出現自美國移入病例，其他國家之移入個案均於接觸者監測下中斷傳播。",
-   "assumptions": [
-    "美國每週新增病例降至百例以下",
-    "赴美旅客行前評估接種比例提高"
-   ],
-   "implied_level": "低",
-   "implications": "維持第二級警示與例行衛教；3 個月無自美移入病例且美國趨緩後可檢討調降。"
-  },
-  {
-   "kind": "最可能",
-   "description": "美國疫情持續，年底假期至農曆春節前後我國出現 1–2 例自美國移入病例，每例匡列數百名接觸者，可能引起家戶或職場之侷限性續發。",
-   "assumptions": [
-    "美國維持每週逾百例新增",
-    "移入個案多為未具免疫力之成人，部分表現不典型"
-   ],
-   "implied_level": "中",
-   "implications": "重點在醫界對成人非典型表現之警覺、接觸者中孕婦與嬰兒之即時辨識與暴露後預防，以及地方衛生局之追蹤量能。"
-  },
-  {
-   "kind": "最壞",
-   "description": "移入個案延遲診斷，於醫療院所（急診、婦產科、兒科）造成暴露，接觸者中含多名孕婦與未滿 1 歲嬰兒並出現續發重症。",
-   "assumptions": [
-    "個案未出疹或未主動告知旅遊史",
-    "院內暴露後才通報",
-    "免疫球蛋白供應或給予時效不足"
-   ],
-   "implied_level": "高",
-   "implications": "需啟動院內群聚處置、優先對孕婦與嬰兒接觸者進行暴露後預防，並同步進行風險溝通以避免恐慌。"
-  }
- ],
- "recommendations": [
-  {
-   "id": "A1",
-   "category": "醫療整備",
-   "text": "發布致醫界通函（特別是急診、婦產科、兒科與旅遊醫學門診）：具美國等流行區旅遊史之發燒病人，即使未出疹亦應考慮麻疹；孕婦就診時落實 TOCC 詢問，疑似個案依院內處置指引採空氣傳染防護。",
-   "priority": "高",
-   "timeframe": "1週",
-   "owner": "疾管署（建議：急性傳染病組）",
-   "rationale": "我國自美移入個案及美國孕婦病例均有不典型表現；延遲診斷為最壞情境之起點",
-   "source_ids": [
-    "S3",
-    "S1",
-    "S7"
-   ]
-  },
-  {
-   "id": "A2",
-   "category": "醫療整備",
-   "text": "盤點免疫球蛋白（IMIG／IVIG）庫存與調度流程，確認孕婦、未滿 1 歲嬰兒及免疫不全之接觸者可於時效內完成暴露後預防。",
-   "priority": "高",
-   "timeframe": "1週",
-   "owner": "疾管署（建議：急性傳染病組會同整備單位）",
-   "rationale": "孕婦無法以疫苗進行暴露後預防，免疫球蛋白為唯一選項且須於暴露後 6 日內給予",
-   "source_ids": [
-    "S7",
-    "S21"
-   ]
-  },
-  {
-   "id": "A3",
-   "category": "監測通報",
-   "text": "於個案疫調與接觸者匡列表單中明確標記「孕婦」與「未滿 1 歲嬰兒」，並統計其暴露後預防完成率與結果。",
-   "priority": "中",
-   "timeframe": "1個月",
-   "owner": "疾管署（建議：疫情中心）及地方衛生局",
-   "rationale": "美國因未系統性蒐集懷孕狀態，至今無法掌握孕婦病例總數與預後",
-   "source_ids": [
-    "S1"
-   ]
-  },
-  {
-   "id": "A4",
-   "category": "監測通報",
-   "text": "每週追蹤美國 CDC、賓州衛生部及 PAHO 公布之病例數與我國自美移入情形，並更新我國 2026 年累計病例之公開說明。",
-   "priority": "中",
-   "timeframe": "24小時",
-   "owner": "疾管署（建議：疫情中心）",
-   "rationale": "本次查得之我國最新公開麻疹累計數字停留於 6/2",
-   "source_ids": [
-    "S4",
-    "S11",
-    "S13"
-   ]
-  },
-  {
-   "id": "A5",
-   "category": "邊境檢疫",
-   "text": "於美國直航航班入境動線與航空公司加強宣導：返國 3 週內出現發燒、紅疹等症狀應戴口罩就醫並主動告知旅遊史；入境時有症狀者主動告知檢疫人員。",
-   "priority": "中",
-   "timeframe": "1週",
-   "owner": "疾管署（建議：檢疫單位）",
-   "rationale": "與既有麻疹流行區返國建議一致，配合美國升為第二級加強執行",
-   "source_ids": [
-    "S3",
-    "S2"
-   ]
-  },
-  {
-   "id": "A6",
-   "category": "風險溝通",
-   "text": "針對孕婦、備孕婦女及嬰幼兒家長發布衛教：孕婦與未滿 1 歲嬰兒避免前往美國等流行區；備孕婦女如不確定免疫力，可於孕前諮詢接種 MMR（接種後 4 週內避免懷孕）；6 個月以上未滿 1 歲嬰兒如須前往，行前諮詢自費接種。",
-   "priority": "高",
-   "timeframe": "1週",
-   "owner": "疾管署（建議：公關室會同急性傳染病組）；協同國民健康署",
-   "rationale": "美國孕婦與新生兒死亡報導可能引發詢問，應提供明確可行之指引",
-   "source_ids": [
-    "S3",
-    "S6"
-   ]
-  },
-  {
-   "id": "A7",
-   "category": "風險溝通",
-   "text": "提醒 1966 年（含）以後出生、計劃於年底假期或農曆春節赴美之成人，出國前 2 至 4 週至旅遊醫學門診評估接種 MMR。",
-   "priority": "中",
-   "timeframe": "1週",
-   "owner": "疾管署（建議：公關室）",
-   "rationale": "美國 41% 病例為成人，旅客年齡層暴露機會高",
-   "source_ids": [
-    "S3",
-    "S11"
-   ]
-  },
-  {
-   "id": "A8",
-   "category": "跨部會與國際合作",
-   "text": "研議蒐集或分析我國育齡婦女之麻疹抗體陽性率（例如利用既有血清流行病學資料），評估是否需調整育齡婦女 MMR 接種建議。",
-   "priority": "低",
-   "timeframe": "1個月",
-   "owner": "疾管署（建議：預防接種單位，提報 ACIP 討論）",
-   "rationale": "現行公費 MMR 與產檢以德國麻疹抗體為準，孕婦麻疹免疫缺口未知",
-   "source_ids": [
-    "S6"
-   ]
-  }
- ],
- "decision": {
-  "question": "我國已於 11/17 將美國麻疹旅遊疫情建議提升至第二級警示；是否需針對孕婦、嬰兒與醫界再採取加強措施？",
-  "options": [
-   {
-    "id": "D1",
-    "title": "維持現狀：第二級警示＋既有衛教",
-    "description": "不另採措施，依現行麻疹防治流程處理移入個案。",
-    "pros": [
-     "不需額外資源",
-     "現行接觸者追蹤機制今年運作良好"
+  "event": {
+    "title": "美國麻疹恢復地方性流行，2025 年以來逾百名孕婦感染",
+    "hazard": "麻疹病毒（Measles virus）",
+    "event_location": "美國（以賓州為主）",
+    "event_type": [
+      "呼吸道"
     ],
-    "cons": [
-     "醫界對成人未出疹等非典型表現之警覺可能不足",
-     "孕婦接觸者之暴露後預防時效未事先確認"
-    ],
-    "recommended": false,
-    "owner": "疾管署（建議：疫情中心）",
-    "timeframe": "1週"
-   },
-   {
-    "id": "D2",
-    "title": "加強醫界警覺與孕婦防護整備",
-    "description": "發布致醫界通函、盤點免疫球蛋白庫存與調度流程、於接觸者匡列標記孕婦與嬰兒，並對孕婦及嬰幼兒家長發布專屬衛教（建議事項 A1、A2、A3、A6）。",
-    "pros": [
-     "直接針對最壞情境之起點（延遲診斷、院內暴露）",
-     "成本低，既有人力可執行",
-     "與美國升為第二級之時點一致，利於溝通"
-    ],
-    "cons": [
-     "需跨組室協調",
-     "可能使孕婦詢問與門診諮詢量增加"
-    ],
-    "recommended": true,
-    "owner": "疾管署（建議：急性傳染病組會同疫情中心、公關室）",
-    "timeframe": "1週",
-    "resources": "致醫界通函 1 則、衛教素材 1 組、庫存盤點 1 次；既有人力可支應"
-   },
-   {
-    "id": "D3",
-    "title": "擴大公費 MMR 對象至備孕婦女或赴美旅客",
-    "description": "於 D2 之外，將公費 MMR 提供範圍擴及不具麻疹免疫力之備孕婦女或前往第二級地區之成人。",
-    "pros": [
-     "可實質縮小育齡成人之免疫缺口"
-    ],
-    "cons": [
-     "缺乏我國育齡婦女麻疹抗體陽性率資料，效益無法估計",
-     "涉及疫苗供應、經費與 ACIP 審議，無法於短期內實施",
-     "目前國內無持續傳播，強度與風險等級不相稱"
-    ],
-    "recommended": false,
-    "owner": "疾管署（建議：預防接種單位）",
-    "timeframe": "1個月",
-    "resources": "疫苗採購經費與供應評估"
-   }
+    "news_source_id": "S1",
+    "news_summary": "CIDRAP News 向各州衛生部門查詢後報導，自 2025 年以來美國至少 178 名（內文為 167 名）孕婦感染麻疹，其中賓州 101 例；並指出今年 41% 病例為 20 歲以上成人、賓州 1 名產婦及 2 名新生兒死亡，以及孕婦暴露後預防與治療選項有限。",
+    "taiwan_relevance": "麻疹為我國第二類法定傳染病；我國 2026 年已有 1 例自美國移入之確定病例，且疾管署已於 2026-11-17 將美國麻疹旅遊疫情建議提升至第二級警示。孕婦無法接種 MMR，為感染高危險群。",
+    "triage_decision": "進行完整評估",
+    "triage_reason": "來源為專業傳染病新聞機構、涉及我國已有移入紀錄之法定傳染病與高危險族群（孕婦、嬰兒），且適逢我國剛調升美國旅遊疫情建議等級，故進行完整評估。"
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.cidrap.umn.edu/measles/least-178-pregnant-americans-have-been-infected-measles-2025",
+      "title": "At least 178 pregnant Americans have been infected with measles since 2025",
+      "publisher": "CIDRAP",
+      "published_date": "2026-11-17",
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "全文",
+      "is_news_item": true,
+      "note": "被查證之新聞；使用者貼上全文，並以 curl 讀取原頁比對關鍵句"
+    },
+    {
+      "id": "S2",
+      "url": "https://www.cdc.gov.tw/CountryEpidLevel/ExportJSON",
+      "title": "國際間旅遊疫情建議等級開放資料（JSON）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2026-11-17",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "下載全檔後以程式篩選「麻疹」紀錄；各國現行等級取最新一筆"
+    },
+    {
+      "id": "S3",
+      "url": "https://www.cdc.gov.tw/Bulletin/Detail/rLPw84BE1BElUb8OebRuhA?typeid=9",
+      "title": "國內新增美國及印度麻疹境外移入確定病例各1例 請民眾前往流行地區加強防護",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2026-03-31",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": null
+    },
+    {
+      "id": "S4",
+      "url": "https://www.cdc.gov.tw/Bulletin/Detail/RQMqkQ2-D6sOpVi8dnV75w?typeid=9",
+      "title": "國內新增1起麻疹境外移入致國內感染群聚事件 呼籲民眾如有流行地區旅遊史或接觸史 出現疑似症狀應速就醫並主動告知醫師",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2026-06-02",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "以關鍵字「麻疹」搜尋疾管署新聞稿所得之最新一則；6 月之後未見新的麻疹新聞稿"
+    },
+    {
+      "id": "S5",
+      "url": "https://www.cdc.gov.tw/Category/Page/73T9QxZDqlVYayLyfrBN5Q",
+      "title": "麻疹－疾病介紹",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2018-12-12",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "頁面標示最後更新日期 2018/12/12"
+    },
+    {
+      "id": "S6",
+      "url": "https://www.cdc.gov.tw/Category/Page/OnPyMiYwouZrYhY7noxjKQ",
+      "title": "育齡婦女及外籍配偶之麻疹腮腺炎德國麻疹混合(MMR)疫苗接種建議及實施對象",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": "2019-02-21",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "頁面標示最後更新日期 2019/2/21"
+    },
+    {
+      "id": "S7",
+      "url": "https://www.cdc.gov.tw/Category/MPage/cXOGgsKTJ5MG4SyOAF2fng",
+      "title": "麻疹－重要指引及教材（含「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」「醫院內疑似麻疹個案處置指引114年4月修訂」）",
+      "publisher": "衛生福利部疾病管制署",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "僅讀得指引清單頁；各 PDF 附件下載時回傳網頁而非檔案，指引內文未取得"
+    },
+    {
+      "id": "S8",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/measles",
+      "title": "Measles (fact sheet)",
+      "publisher": "World Health Organization",
+      "published_date": "2026-07-15",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": null
+    },
+    {
+      "id": "S9",
+      "url": "https://www.ecdc.europa.eu/en/measles/facts",
+      "title": "Disease information on measles (factsheet)",
+      "publisher": "European Centre for Disease Prevention and Control",
+      "published_date": "2023-11-28",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "頁面標示 Page last updated 28 November 2023"
+    },
+    {
+      "id": "S10",
+      "url": "https://www.cidrap.umn.edu/measles/2-more-people-die-measles-complications-us-cases-top-5400",
+      "title": "2 more people die of measles complications as US cases top 5,400",
+      "publisher": "CIDRAP",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "與被查證新聞同一發布者，不作為獨立查證來源，僅供疫情概況"
+    },
+    {
+      "id": "S11",
+      "url": "https://www.cdc.gov/measles/data-research/index.html",
+      "title": "Measles Cases and Outbreaks",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "published_date": "2026-11-12",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "頁面載明資料截至 2026-11-12；年齡與住院數字由頁面載入之資料檔（S20）提供"
+    },
+    {
+      "id": "S12",
+      "url": "https://www.cna.com.tw/news/ahel/202611170156.aspx",
+      "title": "疾管署升級美國全境麻疹旅遊警示 孕婦嬰兒避免前往",
+      "publisher": "中央通訊社",
+      "published_date": "2026-11-17",
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "cna.com.tw 無法連線；內容取自搜尋結果摘要（彙整多家媒體對疾管署 11/17 說明之報導）"
+    },
+    {
+      "id": "S13",
+      "url": "https://www.pa.gov/agencies/health/newsroom/pa-department-of-health-confirms-eighth-measles-associated-death",
+      "title": "Pennsylvania Department of Health Confirms Eighth Measles-Associated Death, Provides Statewide Update on Measles Outbreak as Cases Reach 1,589 in 46 Counties",
+      "publisher": "Pennsylvania Department of Health",
+      "published_date": "2026-11-18",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "pa.gov 無法連線；僅取得新聞稿標題與搜尋摘要"
+    },
+    {
+      "id": "S14",
+      "url": "https://www.adn.com/nation-world/2026/11/14/surging-measles-cases-are-forcing-doctors-to-treat-conditions-theyve-never-seen/",
+      "title": "Surging measles cases are forcing doctors to treat conditions they've never seen",
+      "publisher": "Anchorage Daily News",
+      "published_date": "2026-11-14",
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "僅取得搜尋摘要"
+    },
+    {
+      "id": "S15",
+      "url": "https://www.cidrap.umn.edu/measles/national-embarrassment-measles-again-endemic-us",
+      "title": "'A national embarrassment': Measles is again endemic in the US",
+      "publisher": "CIDRAP",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "與被查證新聞同一發布者，不作為獨立查證來源"
+    },
+    {
+      "id": "S16",
+      "url": "https://www.cnbc.com/2026/11/17/us-measles-elimination-status.html",
+      "title": "U.S. officially loses measles elimination status amid ongoing outbreaks",
+      "publisher": "CNBC",
+      "published_date": "2026-11-17",
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "僅取得搜尋摘要；paho.org 無法連線，未讀得 PAHO 正式公告"
+    },
+    {
+      "id": "S17",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31891729/",
+      "title": "Measles in pregnant women: A systematic review of clinical outcomes and a meta-analysis of antibodies seroprevalence",
+      "publisher": "Journal of Infection (PubMed)",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 2,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "pubmed 無法連線；數字取自搜尋結果摘要"
+    },
+    {
+      "id": "S18",
+      "url": "https://www.news-medical.net/news/20261118/What-happens-to-a-baby-when-its-mother-catches-measles-during-pregnancy.aspx",
+      "title": "What happens to a baby when its mother catches measles during pregnancy?",
+      "publisher": "News-Medical",
+      "published_date": "2026-11-18",
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "僅取得搜尋摘要；摘要稱該報告為「美國 CDC 初步監測報告」，CIDRAP 則稱為 Public Health Alerts 報告，原報告未取得"
+    },
+    {
+      "id": "S19",
+      "url": "https://www.powershealth.org/about-us/newsroom/health-library/2026/11/05/new-mothers-death-adds-to-measles-toll-as-pregnancy-warnings-grow",
+      "title": "New Mother's Death Adds to Measles Toll as Pregnancy Warnings Grow",
+      "publisher": "HealthDay（Powers Health 轉載）",
+      "published_date": "2026-11-05",
+      "accessed_date": "2026-11-19",
+      "tier": 3,
+      "retrieval": "搜尋摘要",
+      "is_news_item": false,
+      "note": "僅取得標題與日期；《華盛頓郵報》原報導未取得"
+    },
+    {
+      "id": "S20",
+      "url": "https://www.cdc.gov/wcms/vizdata/measles/measles_hosp.json",
+      "title": "Measles Cases and Outbreaks 頁面資料檔（年齡、接種狀態、住院、死亡）",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "published_date": "2026-11-12",
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "lastUpdated: November 12, 2026；死亡數為 8，與頁面靜態文字之 6 不同"
+    },
+    {
+      "id": "S21",
+      "url": "https://www.cdc.gov/measles/downloads/measles-immune-globulin-post-exposure-prophylaxis.pdf",
+      "title": "Measles Immune Globulin (IG) Post-Exposure Prophylaxis",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": "PDF 全文；文件日期未辨識"
+    },
+    {
+      "id": "S22",
+      "url": "https://www.cdc.gov/measles/hcp/clinical-overview/index.html",
+      "title": "Clinical Overview of Measles",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "published_date": null,
+      "accessed_date": "2026-11-19",
+      "tier": 1,
+      "retrieval": "全文",
+      "is_news_item": false,
+      "note": null
+    }
   ],
-  "recommendation_reason": "整體風險為中，且風險集中於孕婦與嬰兒之高衝擊族群及延遲診斷之院內暴露情境。D2 以低成本措施直接處理這兩個弱點；D3 之政策調整目前缺乏資料支持，建議先以 A8 補足資料後再議。",
-  "triggers": [
-   {
-    "indicator": "我國出現自美國移入之麻疹確定病例",
-    "direction": "升級",
-    "threshold": "評估期間內 2 例以上，或 1 例且造成醫療院所暴露",
-    "monitoring_source": "法定傳染病通報、疾管署新聞稿",
-    "current_status": "2026 年累計 1 例（3 月）"
-   },
-   {
-    "indicator": "我國出現孕婦病例，或接觸者中孕婦／未滿 1 歲嬰兒出現續發",
-    "direction": "升級",
-    "threshold": "1 例",
-    "monitoring_source": "個案疫調與接觸者追蹤",
-    "current_status": "本次未查得孕婦病例；已有未滿 1 歲嬰兒病例"
-   },
-   {
-    "indicator": "同一移入事件出現三代以上傳播或感染源不明之本土病例",
-    "direction": "升級",
-    "threshold": "1 起",
-    "monitoring_source": "疫調、病毒基因定序",
-    "current_status": "未出現（截至 6/2 之公開資料）"
-   },
-   {
-    "indicator": "美國每週新增病例數",
-    "direction": "升級",
-    "threshold": "連續 4 週較前期上升，或擴及國人主要往返之都會區",
-    "monitoring_source": "美國 CDC 每週更新、各州衛生部門",
-    "current_status": "連續 14 週每週逾百例"
-   },
-   {
-    "indicator": "美國每週新增病例數",
-    "direction": "降級",
-    "threshold": "連續 8 週低於百例且我國 3 個月無自美國移入病例",
-    "monitoring_source": "美國 CDC 每週更新、我國法定傳染病通報",
-    "current_status": "未達"
-   }
+  "claims": [
+    {
+      "id": "C1",
+      "text": "自 2025 年以來，美國至少 178 名孕婦感染麻疹。",
+      "importance": "關鍵",
+      "verdict": "部分證實",
+      "verdict_reason": "「逾百名孕婦感染」之量級有獨立來源支持（賓州 101 例；另一份報告統計 2025 年 1 月至 2026 年 9 月共 112 例），但確切數字無法確認：同一篇報導標題寫 178、內文寫 167，內文列舉之各州數字加總為 174，CIDRAP 次日報導又寫 168。此為記者自行向各州彙整之下限，非官方統計。",
+      "evidence": [
+        {
+          "source_id": "S14",
+          "stance": "支持",
+          "quote_or_summary": "搜尋摘要：截至該週五，賓州至少 101 名孕婦確診麻疹，三週內增加 24 例（引州衛生部門）。"
+        },
+        {
+          "source_id": "S18",
+          "stance": "支持",
+          "quote_or_summary": "搜尋摘要：一份涵蓋 2025 年 1 月至 2026 年 9 月之初步監測報告記錄 112 例孕期麻疹及 13 例先天性麻疹。"
+        },
+        {
+          "source_id": "S1",
+          "stance": "背景",
+          "quote_or_summary": "\"At least 167 measles infections have been diagnosed in pregnant people this year and last, according to state health departments contacted by CIDRAP News.\"（與標題 178 不一致）"
+        },
+        {
+          "source_id": "S15",
+          "stance": "背景",
+          "quote_or_summary": "\"As CIDRAP News reported yesterday , there have been at least 168 measles infections in pregnant US women since 2025.\""
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "text": "賓州今年 1,561 例麻疹中有 101 例為孕婦。",
+      "importance": "關鍵",
+      "verdict": "部分證實",
+      "verdict_reason": "孕婦 101 例有獨立媒體引述州衛生部門之數字支持；總病例數 1,561 未找到完全相同之官方數字，但介於賓州衛生部 11 月中旬公布之 1,542（第 7 例死亡時）與 11/18 之 1,589 之間，屬合理。",
+      "evidence": [
+        {
+          "source_id": "S14",
+          "stance": "支持",
+          "quote_or_summary": "搜尋摘要：賓州至少 101 名孕婦確診麻疹（州衛生部門）。"
+        },
+        {
+          "source_id": "S13",
+          "stance": "背景",
+          "quote_or_summary": "新聞稿標題：\"…Cases Reach 1,589 in 46 Counties\"（2026-11-18）；前一則為 1,542 例、46 郡。"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "text": "過去兩年美國通報逾 8,000 例麻疹（Johns Hopkins 追蹤資料）。",
+      "importance": "關鍵",
+      "verdict": "部分證實",
+      "verdict_reason": "美國 CDC 頁面載明 2026 年截至 11/12 為 5,412 例、2025 年全年 2,289 例，合計 7,701 例，略低於 8,000；Johns Hopkins 追蹤採不同納入標準與更新頻率，數字較高（搜尋摘要顯示 2026 年截至 11/13 為 5,739 例），其兩年合計未能直接讀取。量級相符，確切數字依來源而異。",
+      "evidence": [
+        {
+          "source_id": "S11",
+          "stance": "支持",
+          "quote_or_summary": "\"As of November 12, 2026, 5,412 confirmed* measles cases were reported in the United States in 2026.\""
+        },
+        {
+          "source_id": "S11",
+          "stance": "支持",
+          "quote_or_summary": "\"For the full year of 2025, a total of 2,289 confirmed* measles cases were reported in the United States.\""
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "text": "今年美國 41% 之麻疹病例為 20 歲以上成人（美國 CDC 資料）。",
+      "importance": "關鍵",
+      "verdict": "已證實",
+      "verdict_reason": "美國 CDC 頁面資料檔（更新至 2026-11-12）載明 20 歲以上病例為 2,240 例（41%）。",
+      "evidence": [
+        {
+          "source_id": "S20",
+          "stance": "支持",
+          "quote_or_summary": "\"case_age_20_up\": [\"2,240 (41%)\"]；\"total_cases\": [\"5,412\"]"
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "text": "一名 21 歲賓州麻疹女性於本月初居家分娩後死亡；賓州另有 2 名新生兒感染麻疹後死亡。",
+      "importance": "次要",
+      "verdict": "部分證實",
+      "verdict_reason": "2026-11-05 有媒體以「新手母親死亡」為題報導，賓州衛生部亦曾公布 2 例嬰兒死亡；但年齡 21 歲、居家分娩等細節出自《華盛頓郵報》，原文未能取得，賓州衛生部第 6 例死亡新聞稿之搜尋摘要亦未提及分娩。",
+      "evidence": [
+        {
+          "source_id": "S19",
+          "stance": "支持",
+          "quote_or_summary": "標題：\"New Mother's Death Adds to Measles Toll as Pregnancy Warnings Grow\"（2026-11-05）。"
+        },
+        {
+          "source_id": "S13",
+          "stance": "背景",
+          "quote_or_summary": "搜尋摘要：賓州衛生部先前公布 2 例感染麻疹之嬰兒死亡；所有死亡個案均未接種或未達接種年齡。"
+        }
+      ]
+    },
+    {
+      "id": "C6",
+      "text": "美國 CDC 並未追蹤（或公布）孕婦麻疹病例數。",
+      "importance": "次要",
+      "verdict": "部分證實",
+      "verdict_reason": "美國 CDC 麻疹病例頁面及其資料檔僅公布年齡、接種狀態、住院與死亡，未見懷孕狀態欄位，與新聞所述相符；惟 CDC 內部是否蒐集該資料無從確認，另有一份統計 112 例孕期麻疹之報告，其來源說法不一（Public Health Alerts 或美國 CDC 初步監測報告），原報告未取得。",
+      "evidence": [
+        {
+          "source_id": "S20",
+          "stance": "支持",
+          "quote_or_summary": "資料檔欄位為 total_cases、case_age_*、case_unvax_unknown、case_one_mmr、case_two_mmr、hosp_*、total_deaths，無懷孕狀態。"
+        },
+        {
+          "source_id": "S18",
+          "stance": "背景",
+          "quote_or_summary": "搜尋摘要稱「美國 CDC 初步監測報告」記錄 112 例孕期麻疹。"
+        },
+        {
+          "source_id": "S10",
+          "stance": "背景",
+          "quote_or_summary": "\"New Public Health Alerts report spotlights how pregnant women with measles and their babies fare About a fourth of the 112 pregnant women required hospital care not related to labor, and 13 babies were born with measles.\""
+        }
+      ]
+    },
+    {
+      "id": "C7",
+      "text": "孕婦不可接種麻疹疫苗；暴露後 6 日內可給予靜脈注射免疫球蛋白（IVIG）。",
+      "importance": "關鍵",
+      "verdict": "已證實",
+      "verdict_reason": "美國 CDC 暴露後預防文件載明免疫球蛋白須於初次暴露後 6 日內給予，孕婦使用靜脈注射劑型，且 MMR 於孕期為禁忌；ECDC 亦說明一般對象以 72 小時內接種疫苗為首選。",
+      "evidence": [
+        {
+          "source_id": "S21",
+          "stance": "支持",
+          "quote_or_summary": "\"IG needs to be given within 6 days of initial exposure and can be given intramuscularly (IGIM) or intravenously (IGIV).\""
+        },
+        {
+          "source_id": "S21",
+          "stance": "支持",
+          "quote_or_summary": "表格列：\"Pregnant women … IGIV (MMR is contraindicated in pregnancy)\""
+        },
+        {
+          "source_id": "S9",
+          "stance": "支持",
+          "quote_or_summary": "\"Regarding post-exposure prophylaxis, administration of an MCV is the intervention of choice within 72 hours of exposure\""
+        },
+        {
+          "source_id": "S7",
+          "stance": "背景",
+          "quote_or_summary": "我國指引清單列有「疑似麻疹個案接觸者之暴露後預防建議措施114年4月修訂」及肌肉注射免疫球蛋白同意書；內文未取得。"
+        }
+      ]
+    },
+    {
+      "id": "C8",
+      "text": "麻疹會造成「免疫失憶」，使人對原已具免疫力之病原再度易感。",
+      "importance": "次要",
+      "verdict": "已證實",
+      "verdict_reason": "WHO 麻疹實況報導有相同敘述。新聞所稱「可持續達 5 年」及孕婦個案情形，本次未另行查證。",
+      "evidence": [
+        {
+          "source_id": "S8",
+          "stance": "支持",
+          "quote_or_summary": "\"Measles itself also weakens the immune system and can make the body “forget” how to protect itself against infections, leaving children extremely vulnerable.\""
+        }
+      ]
+    },
+    {
+      "id": "C9",
+      "text": "孕婦感染麻疹可能發生肺炎等嚴重併發症與死亡，並增加早產與低出生體重風險。",
+      "importance": "關鍵",
+      "verdict": "已證實",
+      "verdict_reason": "WHO 明列孕婦為重症最高風險族群，並說明孕期感染可致流產、早產與低出生體重；系統性回顧（搜尋摘要）顯示孕婦病例以肺炎為最常見併發症。",
+      "evidence": [
+        {
+          "source_id": "S8",
+          "stance": "支持",
+          "quote_or_summary": "\"If a woman catches measles during pregnancy, this can be dangerous for the mother and can result in miscarriage or her baby being born prematurely with a low birth weight.\""
+        },
+        {
+          "source_id": "S8",
+          "stance": "支持",
+          "quote_or_summary": "\"Unvaccinated young children and pregnant persons are at highest risk of severe measles complications.\""
+        },
+        {
+          "source_id": "S17",
+          "stance": "支持",
+          "quote_or_summary": "搜尋摘要：彙整 1941–2012 年 420 例孕婦病例，18 例死亡（4.3%），肺炎為最常見併發症（17.9%）。"
+        },
+        {
+          "source_id": "S22",
+          "stance": "支持",
+          "quote_or_summary": "\"Measles can also lead to adverse pregnancy outcomes, including pregnancy loss, premature delivery, and low birth weight.\""
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "text": "維生素 A 可用於麻疹兒童，但因流產與胎兒畸形風險，不建議於孕期使用。",
+      "importance": "次要",
+      "verdict": "部分證實",
+      "verdict_reason": "美國 CDC 說明維生素 A 可在醫療人員監督下用於麻疹嬰兒與兒童，WHO 亦提及維生素 A 補充；但「孕期不建議使用」一點，本次讀得之官方頁面未提及，新聞所引之母胎醫學會指引未取得。",
+      "evidence": [
+        {
+          "source_id": "S22",
+          "stance": "支持",
+          "quote_or_summary": "\"vitamin A may be administered to infants and children in the United States with measles under the supervision of a healthcare provider as part of supportive management.\""
+        },
+        {
+          "source_id": "S8",
+          "stance": "支持",
+          "quote_or_summary": "\"Vitamin A supplements may also reduce the number of measles deaths.\""
+        }
+      ]
+    }
+  ],
+  "news_credibility": {
+    "proposed_level": "中",
+    "reason": "CIDRAP 為專業傳染病新聞機構，病例數、年齡分布與暴露後預防等內容經美國 CDC、WHO 全文查證相符；但標題之核心數字為記者自行彙整之下限，且標題（178）與內文（167）不一致，賓州與死亡個案細節僅能部分證實，故評為中。"
+  },
+  "pathogen": {
+    "summary": "麻疹由麻疹病毒引起，人為唯一宿主，經空氣、飛沫或接觸病人鼻咽分泌物傳播，傳染力極強（基本再生數估計 12–18）。兩劑含麻疹疫苗可提供高度保護；無特效抗病毒藥物。未接種之幼兒與孕婦為重症最高風險族群。",
+    "facts": [
+      {
+        "label": "病原與宿主",
+        "value": "麻疹病毒；人為唯一之宿主及傳染窩",
+        "source_ids": [
+          "S5"
+        ]
+      },
+      {
+        "label": "傳播途徑",
+        "value": "空氣、飛沫傳播，或直接接觸病人鼻腔或咽喉分泌物",
+        "source_ids": [
+          "S5",
+          "S8"
+        ]
+      },
+      {
+        "label": "傳染力",
+        "value": "基本再生數（R0）模式估計 12–18",
+        "source_ids": [
+          "S9"
+        ]
+      },
+      {
+        "label": "潛伏期",
+        "value": "前驅症狀於 10–12 天潛伏期後出現",
+        "source_ids": [
+          "S9"
+        ]
+      },
+      {
+        "label": "可傳染期",
+        "value": "出疹前 4 天至出疹後 4 天",
+        "source_ids": [
+          "S8"
+        ]
+      },
+      {
+        "label": "併發症",
+        "value": "中耳炎（7–9%）、肺炎（1–6%）、腹瀉（8%）、感染後腦炎（每 1,000–2,000 例 1 例）；我國資料：約 5–10% 患者產生併發症",
+        "source_ids": [
+          "S9",
+          "S5"
+        ]
+      },
+      {
+        "label": "孕婦",
+        "value": "重症最高風險族群之一；可致流產、早產、低出生體重。系統性回顧 420 例孕婦病例中 4.3% 死亡、17.9% 併發肺炎（搜尋摘要）",
+        "source_ids": [
+          "S8",
+          "S17"
+        ]
+      },
+      {
+        "label": "免疫失憶",
+        "value": "麻疹會削弱免疫系統，使身體「遺忘」原有之防護",
+        "source_ids": [
+          "S8"
+        ]
+      },
+      {
+        "label": "疫苗",
+        "value": "疫苗效力至少 95%；我國常規於出生滿 12 個月及滿 5 歲至入國小前各接種 1 劑 MMR",
+        "source_ids": [
+          "S9",
+          "S5"
+        ]
+      },
+      {
+        "label": "暴露後預防",
+        "value": "暴露後 72 小時內接種含麻疹疫苗為首選；孕婦無法接種活性減毒疫苗",
+        "source_ids": [
+          "S9",
+          "S1"
+        ]
+      },
+      {
+        "label": "嬰兒之被動免疫",
+        "value": "母親具免疫力時，嬰兒出生後可由母體抗體獲得保護",
+        "source_ids": [
+          "S9"
+        ]
+      },
+      {
+        "label": "接觸後感染機率",
+        "value": "未具免疫力之密切接觸者最多 10 人中有 9 人會感染",
+        "source_ids": [
+          "S22"
+        ]
+      },
+      {
+        "label": "孕婦暴露後預防（美國 CDC）",
+        "value": "MMR 為禁忌；無免疫證據之孕婦於暴露後 6 日內給予靜脈注射免疫球蛋白（400 mg/kg）",
+        "source_ids": [
+          "S21"
+        ]
+      }
+    ]
+  },
+  "international": {
+    "summary": [
+      {
+        "text": "美國 CDC：2026 年截至 11/12 共 5,412 例確定病例，96%（5,216 例）與群聚相關，當年新增 43 起群聚；2025 年全年為 2,289 例。",
+        "source_ids": [
+          "S11"
+        ]
+      },
+      {
+        "text": "死亡數有三種口徑：美國 CDC 頁面文字為 6 例、其資料檔為 8 例，各州衛生部門則已通報 10 例；賓州於 11/18 公布第 8 例死亡，累計 1,589 例、46 郡。",
+        "source_ids": [
+          "S11",
+          "S20",
+          "S10",
+          "S13"
+        ]
+      },
+      {
+        "text": "美國近 3 個月（8/16–11/8）累計 2,622 例，已連續 14 週每週新增逾百例，疫情仍在活躍傳播。",
+        "source_ids": [
+          "S12"
+        ]
+      },
+      {
+        "text": "泛美衛生組織（PAHO）於 2026-11-17 宣布美國喪失麻疹消除狀態，玻利維亞與墨西哥亦同；判定依據為同一病毒株持續傳播 12 個月以上。",
+        "source_ids": [
+          "S15",
+          "S16"
+        ]
+      },
+      {
+        "text": "孕婦病例：記者彙整各州資料為至少 167–178 例（2025 年迄今），賓州 101 例；另一份報告統計 112 例孕期麻疹，其中約四分之一需非分娩相關之住院、13 名嬰兒出生即感染。",
+        "source_ids": [
+          "S1",
+          "S10",
+          "S14"
+        ]
+      },
+      {
+        "text": "2026 年美國病例中 20 歲以上成人 2,240 例（41%），2025 年為 29%；賓州則有三分之二為 18 歲以上成人。成人病例住院比例 15%（332／2,240），整體 11%（591／5,412）。",
+        "source_ids": [
+          "S20",
+          "S1"
+        ]
+      },
+      {
+        "text": "2026 年美國病例 96% 為未接種或接種史不明，接種 1 劑與 2 劑者各占 2%。",
+        "source_ids": [
+          "S20"
+        ]
+      },
+      {
+        "text": "其他地區：墨西哥 2026 年截至 3/26 逾 8,000 例；日本截至 6 月初累計 511 例（已逾 2025 年全年 265 例）；孟加拉自 3 月迄 6 月初通報 70,936 例、585 例相關死亡。",
+        "source_ids": [
+          "S3",
+          "S4"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "label": "美國 2026 年確定病例",
+        "value": "5,412 例",
+        "as_of": "2026-11-12",
+        "note": "美國 CDC；2025 年全年 2,289 例",
+        "source_ids": [
+          "S11"
+        ]
+      },
+      {
+        "label": "美國 2026 年麻疹相關死亡",
+        "value": "6–10 例",
+        "as_of": "2026-11-13",
+        "note": "CDC 頁面 6、CDC 資料檔 8、各州通報 10",
+        "source_ids": [
+          "S11",
+          "S20",
+          "S10"
+        ]
+      },
+      {
+        "label": "美國孕婦病例（2025 年迄今）",
+        "value": "至少 167–178 例",
+        "as_of": "2026-11-17",
+        "note": "記者彙整之下限，非官方統計；標題與內文不一致",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "label": "賓州孕婦病例",
+        "value": "101 例",
+        "as_of": "2026-11-13",
+        "note": "州衛生部門",
+        "source_ids": [
+          "S14",
+          "S1"
+        ]
+      },
+      {
+        "label": "20 歲以上成人占比",
+        "value": "41%",
+        "as_of": "2026-11-12",
+        "note": "2,240／5,412；2025 年為 29%",
+        "source_ids": [
+          "S20"
+        ]
+      },
+      {
+        "label": "美國 2026 年住院比例",
+        "value": "11%",
+        "as_of": "2026-11-12",
+        "note": "591／5,412；20 歲以上為 15%",
+        "source_ids": [
+          "S20"
+        ]
+      },
+      {
+        "label": "我國 2026 年麻疹病例",
+        "value": "11 例",
+        "as_of": "2026-06-02",
+        "note": "8 例境外移入（含美國 1 例）、3 例國內感染；6 月後數字未取得",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "date": "2025-03-18",
+        "label": "我國將美國麻疹旅遊疫情建議列為第一級注意",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "date": "2026-03-31",
+        "label": "疾管署公布 1 例自美國（紐約）移入之麻疹確定病例，接觸者 339 名",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "date": "2026-06-02",
+        "label": "疾管署公布境外移入致國內感染群聚，我國當年累計 11 例",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "date": "2026-11-12",
+        "label": "美國 CDC：2026 年累計 5,412 例",
+        "source_ids": [
+          "S11"
+        ]
+      },
+      {
+        "date": "2026-11-17",
+        "label": "PAHO 宣布美國喪失麻疹消除狀態",
+        "source_ids": [
+          "S15",
+          "S16"
+        ]
+      },
+      {
+        "date": "2026-11-17",
+        "label": "我國將美國全境麻疹旅遊疫情建議提升至第二級警示",
+        "source_ids": [
+          "S2",
+          "S12"
+        ]
+      },
+      {
+        "date": "2026-11-17",
+        "label": "CIDRAP 報導美國孕婦麻疹病例（本次查證之新聞）",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "date": "2026-11-18",
+        "label": "賓州公布第 8 例麻疹相關死亡，累計 1,589 例",
+        "source_ids": [
+          "S13"
+        ]
+      }
+    ],
+    "time_series": [],
+    "country_counts": [
+      {
+        "country": "美國",
+        "cases": 5412,
+        "deaths": 8,
+        "period": "2026 年 1 月至 11 月 12 日",
+        "source_ids": [
+          "S11",
+          "S20"
+        ]
+      },
+      {
+        "country": "美國（2025 年）",
+        "cases": 2289,
+        "deaths": null,
+        "period": "2025 年全年",
+        "source_ids": [
+          "S11"
+        ]
+      },
+      {
+        "country": "日本",
+        "cases": 511,
+        "deaths": null,
+        "period": "2026 年 1 月至 6 月初",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ],
+    "external_assessments": [
+      {
+        "text": "PAHO：美國已恢復麻疹地方性傳播，須提出矯正行動計畫方能重新取得消除狀態（媒體報導；PAHO 正式公告未取得）。",
+        "source_ids": [
+          "S15",
+          "S16"
+        ]
+      },
+      {
+        "text": "我國疾管署：美國疫情對我國影響較低，主因幼兒 MMR 兩劑接種率長年維持 97% 以上，且國籍航空空服員及機組員逾 80% 具麻疹免疫力（媒體引述疾管署 11/17 說明）。",
+        "source_ids": [
+          "S12"
+        ]
+      },
+      {
+        "text": "WHO、ECDC 針對美國疫情之旅行建議或風險評估，本次未查得。",
+        "source_ids": [],
+        "is_inference": true
+      }
+    ]
+  },
+  "taiwan": {
+    "notifiable_category": "第二類法定傳染病",
+    "surveillance": [
+      {
+        "text": "麻疹為第二類法定傳染病。",
+        "source_ids": [
+          "S5"
+        ]
+      },
+      {
+        "text": "2026 年截至 6/2 累計 11 例，年齡介於未滿 1 歲至 50 多歲；8 例境外移入（越南、馬來西亞、美國、印度、印尼、吉爾吉斯、日本、泰國各 1 例），3 例國內感染。",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "text": "自美國移入之個案為北部 50 多歲女性，返國後發燒但未出疹，後因疑似腦炎就醫才通報確診，顯示成人非典型表現可能延遲診斷。",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "text": "2026 年 6 月之後之我國麻疹病例數，本次未能取得（傳染病統計資料查詢系統無法連線，疾管署新聞稿 6 月後無麻疹專稿）。",
+        "source_ids": [],
+        "is_inference": true
+      }
+    ],
+    "laboratory": [
+      {
+        "text": "疾管署訂有麻疹病例定義暨防疫檢體採檢送驗事項（清單頁可見，內文未取得）。",
+        "source_ids": [
+          "S7"
+        ]
+      }
+    ],
+    "vectors_hosts": [
+      {
+        "text": "人為唯一宿主，無動物或病媒傳播途徑；國內傳播取決於移入個案與人群免疫缺口。",
+        "source_ids": [
+          "S5"
+        ]
+      }
+    ],
+    "border_travel": [
+      {
+        "text": "美國全境麻疹旅遊疫情建議自 2026-11-17 起為第二級警示（Alert）；先前為 2025-03-18 起之第一級注意。",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "text": "目前共 12 國列第二級警示（含美國、墨西哥、越南、印尼、印度等），34 國列第一級注意（含加拿大、日本）。",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "text": "疾管署建議孕婦及未滿 1 歲嬰幼兒避免前往流行區；1966 年（含）以後出生成人如不確定是否具免疫力，可於出國前 2 至 4 週至旅遊醫學門診評估接種 MMR；返國 3 週內出現疑似症狀應戴口罩就醫並告知旅遊史。",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "text": "國人赴美旅次、年底假期與農曆春節前後之往返人數，本次未取得。",
+        "source_ids": [],
+        "is_inference": true
+      }
+    ],
+    "healthcare": [
+      {
+        "text": "疾管署訂有「疑似麻疹個案接觸者之暴露後預防建議措施」及「醫院內疑似麻疹個案處置指引」（均為 114 年 4 月修訂），並備有肌肉注射免疫球蛋白同意書。",
+        "source_ids": [
+          "S7"
+        ]
+      },
+      {
+        "text": "單一個案之接觸者匡列規模大：2026 年 3 月兩例分別匡列 339 名與 719 名，6 月群聚匡列 491 名。",
+        "source_ids": [
+          "S3",
+          "S4"
+        ]
+      },
+      {
+        "text": "公費 MMR 提供育齡婦女之條件以「德國麻疹抗體陰性」為準（一般育齡婦女、產後補種、外籍配偶），並非依麻疹抗體；孕期產檢亦以德國麻疹抗體為檢測項目。",
+        "source_ids": [
+          "S6"
+        ]
+      },
+      {
+        "text": "我國育齡婦女之麻疹抗體陽性率與免疫球蛋白（IVIG／IMIG）庫存量，本次未查得公開資料。",
+        "source_ids": [],
+        "is_inference": true
+      }
+    ]
+  },
+  "risk_items": [
+    {
+      "id": "R1",
+      "name": "境外移入風險",
+      "kind": "機率",
+      "question": "未來 3 個月內，我國再出現自美國移入之麻疹確定病例之可能性為何？",
+      "evidence": [
+        {
+          "text": "我國 2026 年已有 1 例自美國（紐約）移入之確定病例，當時美國累計約 1,500 例；目前美國已達 5,412 例。",
+          "source_ids": [
+            "S3",
+            "S11"
+          ]
+        },
+        {
+          "text": "美國已連續 14 週每週新增逾百例，並經 PAHO 判定恢復地方性傳播，短期內不會中斷。",
+          "source_ids": [
+            "S12",
+            "S15"
+          ]
+        },
+        {
+          "text": "美國病例 41% 為 20 歲以上成人（2025 年為 29%），旅客年齡層之暴露機會增加；另有 26 例發生於赴美之國際旅客。",
+          "source_ids": [
+            "S20",
+            "S11"
+          ]
+        },
+        {
+          "text": "我國 2026 年境外移入來源分散於 8 國，美國僅占 1 例；整體移入壓力主要仍來自亞洲鄰近國家。",
+          "source_ids": [
+            "S4"
+          ]
+        },
+        {
+          "text": "評估期間涵蓋年底假期至農曆春節前，為往返美國之旅遊與返鄉旺季。",
+          "source_ids": [],
+          "is_inference": true
+        }
+      ],
+      "level_definitions": {
+        "低": "美國疫情侷限於少數州且趨緩，我國當年無自美國移入病例",
+        "中": "美國疫情持續擴大且我國曾有自美國移入病例，評估期間內可能再出現",
+        "高": "我國已接連出現自美國移入病例，或美國疫情擴及國人主要往返之都會區並大幅上升"
+      },
+      "probability": 2,
+      "probability_rationale": "依 ECDC 圖 2.2：國人赴美可能暴露（Q2 是），但整體非高度易感（Q3 否）⇒ 低。文章式判斷因美國疫情為今年 3 月之 3 倍以上且逢旅遊旺季，評為中，兩者並列。",
+      "impact": null,
+      "proposed_level": "中",
+      "strata": [],
+      "confidence": "中",
+      "confidence_reason": "我國移入紀錄、旅遊建議等級與美國 CDC 數字均讀得全文；但缺國人赴美旅次與我國 6 月後病例資料。",
+      "ecdc": {
+        "algorithm": "2.2",
+        "answers": [
+          {
+            "q": "Q2",
+            "answer": "是",
+            "rationale": "美國持續傳播且病例增加，國人往返頻繁並逢旅遊旺季",
+            "source_ids": [
+              "S11",
+              "S12",
+              "S15"
+            ]
+          },
+          {
+            "q": "Q3",
+            "answer": "否",
+            "rationale": "國人整體非高度易感：幼兒 MMR 兩劑接種率 97% 以上",
+            "source_ids": [
+              "S12"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R2",
+      "name": "國內社區流行風險",
+      "kind": "機率",
+      "question": "未來 3 個月內，我國因移入個案而出現持續性社區傳播（三代以上或跨縣市擴散）之可能性為何？",
+      "evidence": [
+        {
+          "text": "我國幼兒 MMR 兩劑接種率長年維持 97% 以上（媒體引述疾管署）。",
+          "source_ids": [
+            "S12"
+          ]
+        },
+        {
+          "text": "2026 年截至 6/2 之 11 例中僅 3 例為國內感染，移入個案引起之群聚規模有限（6 月群聚共 2 例）。",
+          "source_ids": [
+            "S4"
+          ]
+        },
+        {
+          "text": "每例個案皆匡列數百名接觸者並進行健康監測，6 月群聚之續發個案即於監測期間發現。",
+          "source_ids": [
+            "S3",
+            "S4"
+          ]
+        },
+        {
+          "text": "麻疹傳染力極強（R0 12–18），出疹前 4 天即具傳染力；自美國移入之個案未出疹、延至腦炎症狀才確診，顯示非典型成人個案可能造成較長之未察覺暴露。",
+          "source_ids": [
+            "S9",
+            "S8",
+            "S3"
+          ]
+        }
+      ],
+      "level_definitions": {
+        "低": "移入個案僅引起零星或侷限性續發，傳播鏈於接觸者監測下中斷",
+        "中": "同一移入事件出現三代以上傳播或多起無關聯群聚同時發生",
+        "高": "出現無法追溯感染源之本土病例或跨縣市持續傳播"
+      },
+      "probability": 2,
+      "probability_rationale": "依 ECDC 圖 2.1：有傳入途徑（Q1 是）、國內可能暴露（Q2 是），但人群非高度易感（Q3 否）⇒ 低。",
+      "impact": null,
+      "proposed_level": "低",
+      "strata": [
+        {
+          "name": "移入個案引起之侷限性群聚（家戶、職場、醫療院所）",
+          "probability": 3,
+          "proposed_level": "中",
+          "note": "2026 年上半年已發生至少 1 起；3 例國內感染個案"
+        }
+      ],
+      "confidence": "中",
+      "confidence_reason": "我國群聚紀錄來自疾管署全文；接種率數字僅取得媒體摘要，且缺各出生世代（尤其 1981 年後出生成人）之抗體陽性率資料。",
+      "ecdc": {
+        "algorithm": "2.1",
+        "answers": [
+          {
+            "q": "Q1",
+            "answer": "是",
+            "rationale": "今年已有自美國移入之確定病例",
+            "source_ids": [
+              "S3"
+            ]
+          },
+          {
+            "q": "Q2",
+            "answer": "是",
+            "rationale": "每例移入個案皆匡列數百名接觸者，國內人類暴露可能",
+            "source_ids": [
+              "S3",
+              "S4"
+            ]
+          },
+          {
+            "q": "Q3",
+            "answer": "否",
+            "rationale": "幼兒 MMR 兩劑接種率 97% 以上，人群非高度易感",
+            "source_ids": [
+              "S12"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R3",
+      "name": "孕婦及未滿 1 歲嬰兒感染風險",
+      "kind": "機率",
+      "question": "未來 3 個月內，我國出現孕婦或未滿 1 歲嬰兒感染麻疹（含赴美感染或國內續發）之可能性為何？",
+      "evidence": [
+        {
+          "text": "我國 2026 年病例年齡介於未滿 1 歲至 50 多歲，已有未滿 1 歲嬰兒病例。",
+          "source_ids": [
+            "S4"
+          ]
+        },
+        {
+          "text": "孕婦無法接種活性減毒之 MMR；未滿 1 歲嬰兒尚未達常規接種年齡（滿 12 個月接種第 1 劑）。",
+          "source_ids": [
+            "S1",
+            "S5"
+          ]
+        },
+        {
+          "text": "我國公費 MMR 對育齡婦女之提供條件與產檢抗體檢測皆以德國麻疹為準，孕婦個人之麻疹免疫狀態通常未知。",
+          "source_ids": [
+            "S6"
+          ]
+        },
+        {
+          "text": "美國經驗顯示成人病例比例升高時，孕婦病例隨之出現（賓州 101 例孕婦，成人占該州病例三分之二）。",
+          "source_ids": [
+            "S14",
+            "S1"
+          ]
+        },
+        {
+          "text": "疾管署已建議孕婦及未滿 1 歲嬰幼兒避免前往流行區，美國升為第二級後該建議適用於美國全境。",
+          "source_ids": [
+            "S3",
+            "S2"
+          ]
+        },
+        {
+          "text": "美國 CDC 將無免疫證據之孕婦列為免疫球蛋白暴露後預防之優先對象，須於暴露後 6 日內給予。",
+          "source_ids": [
+            "S21"
+          ]
+        }
+      ],
+      "level_definitions": {
+        "低": "國內無持續傳播，孕婦與嬰兒僅可能因個別旅遊暴露或零星接觸而感染",
+        "中": "國內出現群聚且接觸者中含孕婦或嬰兒，或接連出現嬰兒病例",
+        "高": "國內持續傳播，孕婦或嬰兒病例接連發生"
+      },
+      "probability": 1,
+      "probability_rationale": "依 ECDC 圖 2.1（以孕婦及未滿 1 歲嬰兒為評估族群）：有傳入途徑（Q1 是），但此族群暴露不太可能（Q2 否）⇒ 極低。",
+      "impact": 2,
+      "impact_rationale": "依 ECDC 圖 3（此族群）：可能重症（Q5 是），但受影響人數不多（Q6 否）⇒ 低。",
+      "proposed_level": "低",
+      "strata": [],
+      "confidence": "中",
+      "confidence_reason": "臨床風險有 WHO 全文支持；但我國育齡婦女麻疹抗體陽性率、孕婦赴美人數及暴露後預防指引內文均未取得。",
+      "ecdc": {
+        "algorithm": "2.1",
+        "answers": [
+          {
+            "q": "Q1",
+            "answer": "是",
+            "rationale": "今年已有自美國移入之確定病例",
+            "source_ids": [
+              "S3"
+            ]
+          },
+          {
+            "q": "Q2",
+            "answer": "否",
+            "rationale": "國內無持續傳播，且已建議孕婦及未滿 1 歲嬰兒避免前往流行區",
+            "source_ids": [
+              "S3",
+              "S2"
+            ]
+          }
+        ]
+      },
+      "ecdc_impact": {
+        "algorithm": "3",
+        "answers": [
+          {
+            "q": "Q5",
+            "answer": "是",
+            "rationale": "孕婦、嬰兒感染重症、流產、早產與死亡風險高",
+            "source_ids": [
+              "S8",
+              "S22"
+            ]
+          },
+          {
+            "q": "Q6",
+            "answer": "否",
+            "rationale": "此族群預期受影響人數不多",
+            "source_ids": [
+              "S4"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "R4",
+      "name": "衝擊",
+      "kind": "衝擊",
+      "question": "若我國出現自美國移入病例並引起國內續發，對國人健康、醫療與公衛體系及社會之衝擊為何？",
+      "evidence": [
+        {
+          "text": "一般病例約 5–10% 產生併發症（中耳炎、肺炎、腦炎）；兒童致死率估計每 1,000 例未接種兒童 1–3 例。",
+          "source_ids": [
+            "S5",
+            "S10"
+          ]
+        },
+        {
+          "text": "孕婦為重症最高風險族群之一，感染可致流產、早產與低出生體重；系統性回顧中孕婦病例 4.3% 死亡。",
+          "source_ids": [
+            "S8",
+            "S22",
+            "S17"
+          ]
+        },
+        {
+          "text": "美國 2026 年病例住院比例 11%，20 歲以上成人為 15%，未滿 5 歲為 17%。",
+          "source_ids": [
+            "S20"
+          ]
+        },
+        {
+          "text": "有安全有效之疫苗（效力至少 95%），我國幼兒兩劑接種率 97% 以上；無特效抗病毒藥物。",
+          "source_ids": [
+            "S9",
+            "S12",
+            "S1"
+          ]
+        },
+        {
+          "text": "公衛量能負擔重：每例個案匡列 339–719 名接觸者並監測約 3 週。",
+          "source_ids": [
+            "S3",
+            "S4"
+          ]
+        },
+        {
+          "text": "麻疹會削弱既有免疫力，病後一段時間對其他感染之易感性上升。",
+          "source_ids": [
+            "S8"
+          ]
+        },
+        {
+          "text": "美國孕婦與新生兒死亡之報導及我國調升旅遊警示，可能引發民眾（特別是孕婦與嬰幼兒家長）對疫苗與赴美旅遊之詢問增加。",
+          "source_ids": [
+            "S1",
+            "S12"
+          ],
+          "is_inference": true
+        }
+      ],
+      "level_definitions": {
+        "低": "僅零星輕症，接觸者追蹤可由既有量能吸收",
+        "中": "部分族群可能重症，接觸者追蹤與院內感染管制需投入特定整備，社會中度關注",
+        "高": "高風險族群接連出現重症或死亡，或醫療院所發生群聚，量能局部吃緊"
+      },
+      "probability": null,
+      "impact": 1,
+      "impact_rationale": "依 ECDC 圖 3（一般民眾）：重症不太可能（Q5 否）⇒ 極低。文章式判斷因孕婦、嬰兒與免疫不全者可能重症且接觸者追蹤負擔大，整體評為中，兩者並列。",
+      "proposed_level": "中",
+      "strata": [
+        {
+          "name": "孕婦、胎兒、未滿 1 歲嬰兒及免疫不全者",
+          "impact": 2,
+          "proposed_level": "高",
+          "ecdc": {
+            "algorithm": "3",
+            "answers": [
+              {
+                "q": "Q5",
+                "answer": "是",
+                "rationale": "孕婦、嬰兒及免疫不全者可能重症",
+                "source_ids": [
+                  "S8",
+                  "S22"
+                ]
+              },
+              {
+                "q": "Q6",
+                "answer": "否",
+                "rationale": "此族群預期受影響人數不多",
+                "source_ids": [
+                  "S4"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "已完成兩劑接種或具自然免疫之一般民眾",
+          "impact": 1,
+          "proposed_level": "低",
+          "ecdc": {
+            "algorithm": "3",
+            "answers": [
+              {
+                "q": "Q5",
+                "answer": "否",
+                "rationale": "已具免疫者重症不太可能",
+                "source_ids": [
+                  "S9"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "confidence": "中",
+      "confidence_reason": "嚴重度資料來自 WHO、ECDC、美國 CDC 與疾管署全文；孕婦預後系統性回顧與我國接種率僅取得摘要。",
+      "ecdc": {
+        "algorithm": "3",
+        "answers": [
+          {
+            "q": "Q5",
+            "answer": "否",
+            "rationale": "一般民眾多已具免疫（兩劑接種率 97% 以上），重症不太可能",
+            "source_ids": [
+              "S12",
+              "S9"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "overall": {
+    "proposed_level": "低",
+    "summary": "美國麻疹已恢復地方性傳播，2026 年逾 5,400 例且持續擴大，成人病例比例升高並出現逾百名孕婦感染。我國今年已有 1 例自美國移入；依 ECDC 演算法，國人整體非高度易感，境外移入與社區流行機率為低，移入個案引起侷限性群聚之機率為中。依 ECDC 矩陣，一般民眾整體風險為低；孕婦、未滿 1 歲嬰兒及免疫不全者感染機率極低，但一旦感染後果嚴重，為需優先防護之族群。",
+    "key_findings": [
+      "新聞主旨（美國逾百名孕婦感染麻疹、賓州最多）有獨立來源支持，但標題之 178 例與內文 167 例不一致，為記者彙整之下限而非官方統計，新聞可信度為中。",
+      "美國 CDC：2026 年截至 11/12 已 5,412 例（2025 年全年 2,289 例），成人占 41%、住院 11%；PAHO 於 11/17 宣布美國喪失麻疹消除狀態，我國同日將美國全境提升至第二級警示。",
+      "我國 2026 年已有 1 例自美國移入（50 多歲女性、未出疹、以疑似腦炎表現）；依 ECDC 圖 2.2 未來 3 個月再出現自美國移入病例之機率為低（文章式判斷為中，兩者並列）。",
+      "依 ECDC 矩陣，一般民眾整體風險為低；孕婦、未滿 1 歲嬰兒及免疫不全者感染機率極低，但一旦感染後果嚴重，為需優先防護之族群（孕婦無法接種 MMR，且產檢與公費 MMR 均以德國麻疹抗體為準，孕婦之麻疹免疫狀態多屬未知）。",
+      "主要資料缺口：我國 6 月後病例數、育齡婦女麻疹抗體陽性率、免疫球蛋白庫存及暴露後預防指引內文，本次均未取得。"
+    ]
+  },
+  "ihr_annex2": {
+    "perspective": "以事件發生國（美國）之角度套用 IHR 附件二四問題，作為我國研判是否需升級因應之篩檢；非我國之通報義務判定，亦不代表本事件構成國際關注公共衛生緊急事件。",
+    "always_notifiable_disease": false,
+    "questions": [
+      {
+        "key": "serious_impact",
+        "answer": "是",
+        "rationale": "2026 年 5,412 例、住院 591 例（11%）、死亡 6–10 例，並出現孕婦與新生兒死亡，為美國數十年來最大規模疫情。",
+        "source_ids": [
+          "S11",
+          "S20",
+          "S10",
+          "S13"
+        ]
+      },
+      {
+        "key": "unusual_unexpected",
+        "answer": "是",
+        "rationale": "美國自 2000 年宣布消除麻疹後，首度被判定恢復地方性傳播；成人與孕婦病例比例高亦異於以往。",
+        "source_ids": [
+          "S15",
+          "S1"
+        ]
+      },
+      {
+        "key": "international_spread",
+        "answer": "是",
+        "rationale": "已有病例自美國輸出至其他國家（我國 2026 年 3 月 1 例），美國境內亦有 26 例發生於國際旅客；麻疹傳染力極強且美國國際旅運量大。",
+        "source_ids": [
+          "S3",
+          "S11",
+          "S9"
+        ]
+      },
+      {
+        "key": "travel_trade_restriction",
+        "answer": "否",
+        "rationale": "本次未查得任何國家或 WHO 對美國採取旅行或貿易限制；我國措施為旅遊疫情建議（提醒加強防護），非限制。",
+        "source_ids": [
+          "S2"
+        ]
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "kind": "最佳",
+      "description": "美國疫情於冬季趨緩，我國未再出現自美國移入病例，其他國家之移入個案均於接觸者監測下中斷傳播。",
+      "assumptions": [
+        "美國每週新增病例降至百例以下",
+        "赴美旅客行前評估接種比例提高"
+      ],
+      "implied_level": "低",
+      "implications": "維持第二級警示與例行衛教；3 個月無自美移入病例且美國趨緩後可檢討調降。"
+    },
+    {
+      "kind": "最可能",
+      "description": "美國疫情持續，年底假期至農曆春節前後我國出現 1–2 例自美國移入病例，每例匡列數百名接觸者，可能引起家戶或職場之侷限性續發。",
+      "assumptions": [
+        "美國維持每週逾百例新增",
+        "移入個案多為未具免疫力之成人，部分表現不典型"
+      ],
+      "implied_level": "中",
+      "implications": "重點在醫界對成人非典型表現之警覺、接觸者中孕婦與嬰兒之即時辨識與暴露後預防，以及地方衛生局之追蹤量能。"
+    },
+    {
+      "kind": "最壞",
+      "description": "移入個案延遲診斷，於醫療院所（急診、婦產科、兒科）造成暴露，接觸者中含多名孕婦與未滿 1 歲嬰兒並出現續發重症。",
+      "assumptions": [
+        "個案未出疹或未主動告知旅遊史",
+        "院內暴露後才通報",
+        "免疫球蛋白供應或給予時效不足"
+      ],
+      "implied_level": "高",
+      "implications": "需啟動院內群聚處置、優先對孕婦與嬰兒接觸者進行暴露後預防，並同步進行風險溝通以避免恐慌。"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "A1",
+      "category": "醫療整備",
+      "text": "發布致醫界通函（特別是急診、婦產科、兒科與旅遊醫學門診）：具美國等流行區旅遊史之發燒病人，即使未出疹亦應考慮麻疹；孕婦就診時落實 TOCC 詢問，疑似個案依院內處置指引採空氣傳染防護。",
+      "priority": "高",
+      "timeframe": "1週",
+      "owner": "疾管署（建議：急性傳染病組）",
+      "rationale": "我國自美移入個案及美國孕婦病例均有不典型表現；延遲診斷為最壞情境之起點",
+      "source_ids": [
+        "S3",
+        "S1",
+        "S7"
+      ]
+    },
+    {
+      "id": "A2",
+      "category": "醫療整備",
+      "text": "盤點免疫球蛋白（IMIG／IVIG）庫存與調度流程，確認孕婦、未滿 1 歲嬰兒及免疫不全之接觸者可於時效內完成暴露後預防。",
+      "priority": "高",
+      "timeframe": "1週",
+      "owner": "疾管署（建議：急性傳染病組會同整備單位）",
+      "rationale": "孕婦無法以疫苗進行暴露後預防，免疫球蛋白為唯一選項且須於暴露後 6 日內給予",
+      "source_ids": [
+        "S7",
+        "S21"
+      ]
+    },
+    {
+      "id": "A3",
+      "category": "監測通報",
+      "text": "於個案疫調與接觸者匡列表單中明確標記「孕婦」與「未滿 1 歲嬰兒」，並統計其暴露後預防完成率與結果。",
+      "priority": "中",
+      "timeframe": "1個月",
+      "owner": "疾管署（建議：疫情中心）及地方衛生局",
+      "rationale": "美國因未系統性蒐集懷孕狀態，至今無法掌握孕婦病例總數與預後",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "id": "A4",
+      "category": "監測通報",
+      "text": "每週追蹤美國 CDC、賓州衛生部及 PAHO 公布之病例數與我國自美移入情形，並更新我國 2026 年累計病例之公開說明。",
+      "priority": "中",
+      "timeframe": "24小時",
+      "owner": "疾管署（建議：疫情中心）",
+      "rationale": "本次查得之我國最新公開麻疹累計數字停留於 6/2",
+      "source_ids": [
+        "S4",
+        "S11",
+        "S13"
+      ]
+    },
+    {
+      "id": "A5",
+      "category": "邊境檢疫",
+      "text": "於美國直航航班入境動線與航空公司加強宣導：返國 3 週內出現發燒、紅疹等症狀應戴口罩就醫並主動告知旅遊史；入境時有症狀者主動告知檢疫人員。",
+      "priority": "中",
+      "timeframe": "1週",
+      "owner": "疾管署（建議：檢疫單位）",
+      "rationale": "與既有麻疹流行區返國建議一致，配合美國升為第二級加強執行",
+      "source_ids": [
+        "S3",
+        "S2"
+      ]
+    },
+    {
+      "id": "A6",
+      "category": "風險溝通",
+      "text": "針對孕婦、備孕婦女及嬰幼兒家長發布衛教：孕婦與未滿 1 歲嬰兒避免前往美國等流行區；備孕婦女如不確定免疫力，可於孕前諮詢接種 MMR（接種後 4 週內避免懷孕）；6 個月以上未滿 1 歲嬰兒如須前往，行前諮詢自費接種。",
+      "priority": "高",
+      "timeframe": "1週",
+      "owner": "疾管署（建議：公關室會同急性傳染病組）；協同國民健康署",
+      "rationale": "美國孕婦與新生兒死亡報導可能引發詢問，應提供明確可行之指引",
+      "source_ids": [
+        "S3",
+        "S6"
+      ]
+    },
+    {
+      "id": "A7",
+      "category": "風險溝通",
+      "text": "提醒 1966 年（含）以後出生、計劃於年底假期或農曆春節赴美之成人，出國前 2 至 4 週至旅遊醫學門診評估接種 MMR。",
+      "priority": "中",
+      "timeframe": "1週",
+      "owner": "疾管署（建議：公關室）",
+      "rationale": "美國 41% 病例為成人，旅客年齡層暴露機會高",
+      "source_ids": [
+        "S3",
+        "S11"
+      ]
+    },
+    {
+      "id": "A8",
+      "category": "跨部會與國際合作",
+      "text": "研議蒐集或分析我國育齡婦女之麻疹抗體陽性率（例如利用既有血清流行病學資料），評估是否需調整育齡婦女 MMR 接種建議。",
+      "priority": "低",
+      "timeframe": "1個月",
+      "owner": "疾管署（建議：預防接種單位，提報 ACIP 討論）",
+      "rationale": "現行公費 MMR 與產檢以德國麻疹抗體為準，孕婦麻疹免疫缺口未知",
+      "source_ids": [
+        "S6"
+      ]
+    }
+  ],
+  "decision": {
+    "question": "我國已於 11/17 將美國麻疹旅遊疫情建議提升至第二級警示；是否需針對孕婦、嬰兒與醫界再採取加強措施？",
+    "options": [
+      {
+        "id": "D1",
+        "title": "維持現狀：第二級警示＋既有衛教",
+        "description": "不另採措施，依現行麻疹防治流程處理移入個案。",
+        "pros": [
+          "不需額外資源",
+          "現行接觸者追蹤機制今年運作良好"
+        ],
+        "cons": [
+          "醫界對成人未出疹等非典型表現之警覺可能不足",
+          "孕婦接觸者之暴露後預防時效未事先確認"
+        ],
+        "recommended": false,
+        "owner": "疾管署（建議：疫情中心）",
+        "timeframe": "1週"
+      },
+      {
+        "id": "D2",
+        "title": "加強醫界警覺與孕婦防護整備",
+        "description": "發布致醫界通函、盤點免疫球蛋白庫存與調度流程、於接觸者匡列標記孕婦與嬰兒，並對孕婦及嬰幼兒家長發布專屬衛教（建議事項 A1、A2、A3、A6）。",
+        "pros": [
+          "直接針對最壞情境之起點（延遲診斷、院內暴露）",
+          "成本低，既有人力可執行",
+          "與美國升為第二級之時點一致，利於溝通"
+        ],
+        "cons": [
+          "需跨組室協調",
+          "可能使孕婦詢問與門診諮詢量增加"
+        ],
+        "recommended": true,
+        "owner": "疾管署（建議：急性傳染病組會同疫情中心、公關室）",
+        "timeframe": "1週",
+        "resources": "致醫界通函 1 則、衛教素材 1 組、庫存盤點 1 次；既有人力可支應"
+      },
+      {
+        "id": "D3",
+        "title": "擴大公費 MMR 對象至備孕婦女或赴美旅客",
+        "description": "於 D2 之外，將公費 MMR 提供範圍擴及不具麻疹免疫力之備孕婦女或前往第二級地區之成人。",
+        "pros": [
+          "可實質縮小育齡成人之免疫缺口"
+        ],
+        "cons": [
+          "缺乏我國育齡婦女麻疹抗體陽性率資料，效益無法估計",
+          "涉及疫苗供應、經費與 ACIP 審議，無法於短期內實施",
+          "目前國內無持續傳播，強度與風險等級不相稱"
+        ],
+        "recommended": false,
+        "owner": "疾管署（建議：預防接種單位）",
+        "timeframe": "1個月",
+        "resources": "疫苗採購經費與供應評估"
+      }
+    ],
+    "recommendation_reason": "整體風險為中，且風險集中於孕婦與嬰兒之高衝擊族群及延遲診斷之院內暴露情境。D2 以低成本措施直接處理這兩個弱點；D3 之政策調整目前缺乏資料支持，建議先以 A8 補足資料後再議。",
+    "triggers": [
+      {
+        "indicator": "我國出現自美國移入之麻疹確定病例",
+        "direction": "升級",
+        "threshold": "評估期間內 2 例以上，或 1 例且造成醫療院所暴露",
+        "monitoring_source": "法定傳染病通報、疾管署新聞稿",
+        "current_status": "2026 年累計 1 例（3 月）"
+      },
+      {
+        "indicator": "我國出現孕婦病例，或接觸者中孕婦／未滿 1 歲嬰兒出現續發",
+        "direction": "升級",
+        "threshold": "1 例",
+        "monitoring_source": "個案疫調與接觸者追蹤",
+        "current_status": "本次未查得孕婦病例；已有未滿 1 歲嬰兒病例"
+      },
+      {
+        "indicator": "同一移入事件出現三代以上傳播或感染源不明之本土病例",
+        "direction": "升級",
+        "threshold": "1 起",
+        "monitoring_source": "疫調、病毒基因定序",
+        "current_status": "未出現（截至 6/2 之公開資料）"
+      },
+      {
+        "indicator": "美國每週新增病例數",
+        "direction": "升級",
+        "threshold": "連續 4 週較前期上升，或擴及國人主要往返之都會區",
+        "monitoring_source": "美國 CDC 每週更新、各州衛生部門",
+        "current_status": "連續 14 週每週逾百例"
+      },
+      {
+        "indicator": "美國每週新增病例數",
+        "direction": "降級",
+        "threshold": "連續 8 週低於百例且我國 3 個月無自美國移入病例",
+        "monitoring_source": "美國 CDC 每週更新、我國法定傳染病通報",
+        "current_status": "未達"
+      }
+    ]
+  },
+  "limitations": [
+    "網路限制：pa.gov、paho.org、pubmed/pmc、cna.com.tw、nidss.cdc.gov.tw 於本次執行環境無法連線，相關內容（賓州衛生部數字、PAHO 決定、孕婦預後系統性回顧、疾管署 11/17 說明）僅取得搜尋結果摘要，未讀得原文。cdc.gov 需以預設用戶代理讀取，已取得全文。",
+    "疾管署網站之 PDF 附件（暴露後預防建議措施、院內處置指引、2025 年消除狀況報告）下載時回傳網頁而非檔案，內文未取得；我國 MMR 接種率僅有媒體引述之數字。",
+    "我國 2026 年 6 月 2 日之後之麻疹病例數、國人赴美旅次、育齡婦女麻疹抗體陽性率及免疫球蛋白庫存均未取得，境外移入與孕婦感染機率之判斷含推論成分。",
+    "被查證新聞之核心數字為記者向各州彙整之下限，且自身不一致（178／167／列舉加總 174）；美國並無全國性孕婦麻疹病例官方統計可供比對。",
+    "美國死亡數有三種口徑（CDC 頁面文字 6 例、CDC 資料檔 8 例、各州通報 10 例），本報告並列呈現。",
+    "綜合研判由「中」改為「低」：風險矩陣已校正為 ECDC 2019 操作工具圖 4，機率與衝擊改依其圖 2.1／2.2／3 演算法推導（前一版採本工具自訂之 5×5 分級）。圖 2.2 對應「境外移入」、圖 2.1 對應國內傳播類項目，以及矩陣等級對應三級，為本工具之調整。",
+    "本評估依現有資訊判定，將視新增實證適時調整。"
   ]
- },
- "limitations": [
-  "網路限制：pa.gov、paho.org、pubmed/pmc、cna.com.tw、nidss.cdc.gov.tw 於本次執行環境無法連線，相關內容（賓州衛生部數字、PAHO 決定、孕婦預後系統性回顧、疾管署 11/17 說明）僅取得搜尋結果摘要，未讀得原文。cdc.gov 需以預設用戶代理讀取，已取得全文。",
-  "疾管署網站之 PDF 附件（暴露後預防建議措施、院內處置指引、2025 年消除狀況報告）下載時回傳網頁而非檔案，內文未取得；我國 MMR 接種率僅有媒體引述之數字。",
-  "我國 2026 年 6 月 2 日之後之麻疹病例數、國人赴美旅次、育齡婦女麻疹抗體陽性率及免疫球蛋白庫存均未取得，境外移入與孕婦感染機率之判斷含推論成分。",
-  "被查證新聞之核心數字為記者向各州彙整之下限，且自身不一致（178／167／列舉加總 174）；美國並無全國性孕婦麻疹病例官方統計可供比對。",
-  "美國死亡數有三種口徑（CDC 頁面文字 6 例、CDC 資料檔 8 例、各州通報 10 例），本報告並列呈現。",
-  "5×5 矩陣之分級界線與機率量化錨點為本工具自訂，尚未與 ECDC 2019 操作工具原文校正。",
-  "本評估依現有資訊判定，將視新增實證適時調整。"
- ]
 }

@@ -17,20 +17,25 @@ from jinja2 import Environment, select_autoescape
 from markupsafe import Markup, escape
 
 from . import METHODOLOGY_VERSION, __version__
+from .algorithms import ECDC_TREES, HAIRS_I, HAIRS_P
 from .schema import Assessment
 from .scoring import (
     I_LABELS,
     IMPACT_TO_LEVEL3,
     MATRIX_TO_LEVEL3,
     MATRIX_VERSION,
+    CONF_LABELS,
+    I_LABELS_EN,
     P_LABELS,
+    P_LABELS_EN,
     PROBABILITY_TO_LEVEL3,
+    RISK_LEVELS,
     RISK_MATRIX,
     TIER_LABELS,
     apply_audit,
 )
 
-LEVEL_CLASS = {"低": "low", "中": "mod", "高": "high", "極高": "vhigh"}
+LEVEL_CLASS = {"無": "none", "極低": "vlow", "低": "low", "中": "mod", "高": "high", "極高": "vhigh"}
 VERDICT_CLASS = {"已證實": "ok", "部分證實": "partial", "無法證實": "unk", "與官方資訊不符": "bad", "過時": "old"}
 VERDICT_ICON = {"已證實": "i-check", "部分證實": "i-half", "無法證實": "i-question", "與官方資訊不符": "i-cross", "過時": "i-clock"}
 STANCE_CLASS = {"支持": "sup", "反駁": "con", "背景": "ctx"}
@@ -176,6 +181,12 @@ def build_context(a: Assessment) -> dict[str, Any]:
         "src_num": src_num,
         "src_by_id": src_by_id,
         "tier_labels": TIER_LABELS,
+        "conf_labels": CONF_LABELS,
+        "p_labels_en": P_LABELS_EN,
+        "i_labels_en": I_LABELS_EN,
+        "risk_levels": RISK_LEVELS,
+        "hairs_trees": {"probability": HAIRS_P, "impact": HAIRS_I},
+        "ecdc_trees": ECDC_TREES,
         "p_labels": P_LABELS,
         "i_labels": I_LABELS,
         "matrix": RISK_MATRIX,

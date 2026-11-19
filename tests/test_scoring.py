@@ -1,8 +1,10 @@
 import pytest
+from pydantic import ValidationError
 
 from epi_risk_agent.schema import Assessment
 from epi_risk_agent.scoring import (
     IMPACT_TO_LEVEL3,
+    PROBABILITY_TO_LEVEL3,
     MATRIX_TO_LEVEL3,
     RISK_MATRIX,
     apply_audit,
@@ -11,44 +13,54 @@ from epi_risk_agent.scoring import (
 )
 
 
-def band(p, i):
-    s = p * i
-    return "低" if s <= 4 else "中" if s <= 9 else "高" if s <= 15 else "極高"
+# ECDC (2019) Figure 4, transcribed from the published figure (rows = impact,
+# columns = probability None, Very low, Low, Moderate, High).
+FIG4 = {
+    1: ["無", "極低", "低", "低", "中"],     # impact Very low
+    2: ["無", "低", "低", "中", "中"],       # impact Low
+    3: ["無", "低", "中", "中", "高"],       # impact Moderate
+    4: ["無", "中", "中", "高", "極高"],     # impact High
+}
 
 
-@pytest.mark.parametrize("p", range(1, 6))
-@pytest.mark.parametrize("i", range(1, 6))
-def test_matrix_table_matches_documented_banding(p, i):
-    assert RISK_MATRIX[p][i] == band(p, i)
-    assert RISK_MATRIX[p][i] == RISK_MATRIX[i][p]  # symmetric
+@pytest.mark.parametrize("p", range(0, 5))
+@pytest.mark.parametrize("i", range(1, 5))
+def test_matrix_equals_ecdc_figure4(p, i):
+    assert RISK_MATRIX[p][i] == FIG4[i][p]
+    assert matrix_level(p, i) == FIG4[i][p]
+
+
+def test_matrix_has_exactly_20_cells():
+    assert sorted(RISK_MATRIX) == [0, 1, 2, 3, 4]
+    assert all(sorted(RISK_MATRIX[p]) == [1, 2, 3, 4] for p in RISK_MATRIX)
 
 
 def test_matrix_monotonic():
-    order = {"低": 0, "中": 1, "高": 2, "極高": 3}
-    for p in range(1, 6):
-        for i in range(1, 5):
+    order = {"無": 0, "極低": 1, "低": 2, "中": 3, "高": 4, "極高": 5}
+    for p in range(0, 5):
+        for i in range(1, 4):
             assert order[RISK_MATRIX[p][i]] <= order[RISK_MATRIX[p][i + 1]]
-            assert order[RISK_MATRIX[i][p]] <= order[RISK_MATRIX[i + 1][p]]
+    for i in range(1, 5):
+        for p in range(0, 4):
+            assert order[RISK_MATRIX[p][i]] <= order[RISK_MATRIX[p + 1][i]]
 
 
-def test_matrix_rejects_out_of_range():
+@pytest.mark.parametrize("p,i", [(5, 1), (1, 5), (-1, 2), (2, 0)])
+def test_matrix_rejects_out_of_range(p, i):
     with pytest.raises(ValueError):
-        matrix_level(0, 3)
+        matrix_level(p, i)
 
 
 def test_level_mappings():
-    assert MATRIX_TO_LEVEL3 == {"低": "低", "中": "中", "高": "高", "極高": "高"}
-    assert [IMPACT_TO_LEVEL3[i] for i in range(1, 6)] == ["低", "低", "中", "高", "高"]
+    assert MATRIX_TO_LEVEL3 == {"無": "低", "極低": "低", "低": "低", "中": "中", "高": "高", "極高": "高"}
+    assert [IMPACT_TO_LEVEL3[i] for i in range(1, 5)] == ["低", "低", "中", "高"]
+    assert [PROBABILITY_TO_LEVEL3[p] for p in range(0, 5)] == ["低", "低", "低", "中", "高"]
 
 
 def test_reference_articles_reproduced():
-    """The 3-level results of the reference articles are reproducible.
-
-    COVID-19 (2020): import 高 x impact 高 -> 高.  SFTS (2023): 中 x 中 -> 中.
-    """
-    assert MATRIX_TO_LEVEL3[matrix_level(4, 4)] == "高"
+    """COVID-19 (2020): import 高 x impact 高 -> 極高 -> 高.  SFTS (2023): 中 x 中 -> 中."""
+    assert matrix_level(4, 4) == "極高" and MATRIX_TO_LEVEL3[matrix_level(4, 4)] == "高"
     assert MATRIX_TO_LEVEL3[matrix_level(3, 3)] == "中"
-    assert MATRIX_TO_LEVEL3[matrix_level(1, 4)] == "低"
 
 
 def test_example_audit(data):
@@ -59,17 +71,46 @@ def test_example_audit(data):
     assert au.credibility_computed == "中"  # capped by tier-4 news source
     assert au.ihr_yes_count == 1 and not au.ihr_meets_threshold
     assert [c.passes_rules for c in au.claims] == [True] * 5
-    r1 = next(i for i in au.items if i.item_id == "R1")
-    assert r1.impact_inherited and r1.impact == 4
-    # high-exposure stratum: probability 2 -> 低, but matrix risk 2x4 -> 中 (surfaced, not hidden)
-    assert r1.strata_computed[1]["computed_level"] == "低"
-    assert r1.strata_computed[1]["matrix_level"] == "中" and r1.strata_computed[1]["matrix_level3"] == "中"
+    items = {i.item_id: i for i in au.items}
+    r1 = items["R1"]
+    # ECDC Fig 2.2: Q2 否 => 極低; impact inherited from R4 (Fig 3: Q5 是, Q6 否 => 低)
+    assert (r1.probability, r1.impact, r1.impact_inherited) == (1, 2, True)
+    assert r1.ecdc_probability.path_text.endswith("⇒ 極低")
+    assert r1.matrix_level == "低"
+    # high-exposure stratum: Fig 2.2 Q2 是 → Q3 是 → Q4 否 => 中; matrix 中 x 低 => 中 (surfaced)
+    st = r1.strata_computed[1]
+    assert (st["probability"], st["computed_level"], st["matrix_level"]) == (3, "中", "中")
     assert any(i.code == "stratum_higher" for i in au.issues)
+    # impact: ECDC-derived 低 vs article-style proposed 高 -> shown side by side
+    r4 = items["R4"]
+    assert r4.impact == 2 and r4.computed_level == "低" and r4.proposed_level == "高" and not r4.agrees
+    assert any(i.code == "level_mismatch" and i.path == "risk_items[R4]" for i in au.issues)
+    # HAIRS cross-check is derived but never enters the matrix
+    assert au.hairs_probability.label == "中" and au.hairs_impact.label == "中"
     assert sum(1 for i in au.issues if i.severity == "error") == 0
 
 
+def _drop_paths(data):
+    for r in data["risk_items"]:
+        r.pop("ecdc", None)
+        r.pop("ecdc_impact", None)
+        for st in r["strata"]:
+            st.pop("ecdc", None)
+            st.pop("ecdc_impact", None)
+
+
+def test_stated_scores_used_when_no_ecdc_path(data):
+    _drop_paths(data)
+    au = audit(Assessment.model_validate(data))
+    assert sum(1 for i in au.issues if i.code == "ecdc_path_missing") == 4
+    r1 = next(i for i in au.items if i.item_id == "R1")
+    assert r1.ecdc_probability is None and r1.probability == data["risk_items"][0]["probability"]
+
+
 def test_overall_driven_by_highest_probability_item(data):
-    data["risk_items"][1]["probability"] = 4  # R2 community 4 x 4 -> 極高
+    _drop_paths(data)
+    data["risk_items"][1]["probability"] = 4  # R2 community: High x High -> 極高
+    data["risk_items"][3]["impact"] = 4
     au = audit(Assessment.model_validate(data))
     assert au.overall_probability_from == "R2"
     assert au.overall_matrix_level == "極高"
@@ -77,16 +118,50 @@ def test_overall_driven_by_highest_probability_item(data):
 
 
 def test_impact_change_propagates_to_inheriting_items(data):
-    data["risk_items"][3]["impact"] = 5
+    _drop_paths(data)
+    data["risk_items"][3]["impact"] = 4
     data["risk_items"][0]["probability"] = 3
     au = audit(Assessment.model_validate(data))
     r1 = next(i for i in au.items if i.item_id == "R1")
-    assert (r1.probability, r1.impact, r1.matrix_level) == (3, 5, "高")
+    assert (r1.probability, r1.impact, r1.matrix_level) == (3, 4, "高")
     assert r1.computed_level == "中"  # item result = probability alone
+
+
+def test_ecdc_derived_value_wins_and_mismatch_is_warned(data):
+    data["risk_items"][0]["probability"] = 4  # stated High, but path says Q2 否 => 極低
+    au = audit(Assessment.model_validate(data))
+    r1 = next(i for i in au.items if i.item_id == "R1")
+    assert r1.probability == 1 and r1.stated_probability == 4
+    msg = next(i.message for i in au.issues if i.code == "ecdc_mismatch" and i.path == "risk_items[R1]")
+    assert "4（高）" in msg and "1（極低）" in msg
+
+
+def test_uncertain_answer_takes_higher_branch(data):
+    r1 = data["risk_items"][0]
+    r1["ecdc"]["answers"][0]["answer"] = "不確定"  # Q2 uncertain; Q3/Q4 unanswered
+    au = audit(Assessment.model_validate(data))
+    ia = next(i for i in au.items if i.item_id == "R1")
+    assert ia.probability == 4  # precautionary: Q2 是 → Q3 是 → Q4 是 => 高
+    assert ia.ecdc_probability.uncertain == ["Q2"] and ia.ecdc_probability.missing == ["Q3", "Q4"]
+    codes = {i.code for i in au.issues}
+    assert {"ecdc_precautionary", "ecdc_path_incomplete"} <= codes
+
+
+def test_wrong_algorithm_for_item_kind_rejected(data):
+    data["risk_items"][0]["ecdc"]["algorithm"] = "3"
+    with pytest.raises(ValidationError, match="演算法須為"):
+        Assessment.model_validate(data)
+
+
+def test_question_not_in_algorithm_rejected(data):
+    data["risk_items"][0]["ecdc"]["answers"].append({"q": "Q1", "answer": "是", "rationale": "x"})
+    with pytest.raises(ValidationError, match="無此問題"):
+        Assessment.model_validate(data)  # Q1 does not exist in Figure 2.2
 
 
 def test_mismatch_is_surfaced_not_overwritten(data):
     data["risk_items"][0]["proposed_level"] = "高"
+    data["risk_items"][3]["proposed_level"] = "低"
     data["overall"]["proposed_level"] = "中"
     a = apply_audit(Assessment.model_validate(data))
     assert a.risk_items[0].proposed_level == "高"  # untouched

@@ -13,8 +13,11 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import Iterable, Optional
 
+from .algorithms import ECDC_TREES, HAIRS_P, HAIRS_I, evaluate
 from .schema import (
     Assessment,
+    EcdcPath,
+    PathAudit,
     Audit,
     Claim,
     ClaimAudit,
@@ -24,33 +27,39 @@ from .schema import (
     Source,
 )
 
-MATRIX_VERSION = "epi-risk-5x5-v1"
+MATRIX_VERSION = "ecdc-2019-fig4"
 
-P_LABELS = {1: "極低", 2: "低", 3: "中", 4: "高", 5: "極高"}
-I_LABELS = {1: "極低", 2: "低", 3: "中", 4: "高", 5: "極高"}
+# Scales of the ECDC (2019) operational tool.
+P_LABELS = {0: "無", 1: "極低", 2: "低", 3: "中", 4: "高"}  # None, Very low, Low, Moderate, High
+I_LABELS = {1: "極低", 2: "低", 3: "中", 4: "高"}  # Very low, Low, Moderate, High
+P_LABELS_EN = {0: "None", 1: "Very low", 2: "Low", 3: "Moderate", 4: "High"}
+I_LABELS_EN = {1: "Very low", 2: "Low", 3: "Moderate", 4: "High"}
+RISK_LEVELS = ("無", "極低", "低", "中", "高", "極高")  # None .. Very high
 
-# Risk-ranking matrix: rows = probability 1..5, columns = impact 1..5.
-# Written out explicitly (not as a formula) so it can be audited and edited.
-# It equals banding the product P*I as <=4 低, 5-9 中, 10-15 高, >=16 極高;
-# test_scoring.py checks both the table and its symmetry.
+# ECDC (2019) Figure 4 risk-ranking matrix, written out cell by cell.
+# Keys: probability 0..4 (None..High) -> impact 1..4 (Very low..High).
+# test_scoring.py checks all 20 cells against the published figure.
 RISK_MATRIX: dict[int, dict[int, str]] = {
-    1: {1: "低", 2: "低", 3: "低", 4: "低", 5: "中"},
-    2: {1: "低", 2: "低", 3: "中", 4: "中", 5: "高"},
-    3: {1: "低", 2: "中", 3: "中", 4: "高", 5: "高"},
-    4: {1: "低", 2: "中", 3: "高", 4: "極高", 5: "極高"},
-    5: {1: "中", 2: "高", 3: "高", 4: "極高", 5: "極高"},
+    0: {1: "無", 2: "無", 3: "無", 4: "無"},
+    1: {1: "極低", 2: "低", 3: "低", 4: "中"},
+    2: {1: "低", 2: "低", 3: "中", 4: "中"},
+    3: {1: "低", 2: "中", 3: "中", 4: "高"},
+    4: {1: "中", 2: "中", 3: "高", 4: "極高"},
 }
 
-# 4-level matrix output -> 3-level scale used by the Taiwan CDC articles.
-MATRIX_TO_LEVEL3 = {"低": "低", "中": "中", "高": "高", "極高": "高"}
+# --- this tool's mapping onto the 3-level scale of the Taiwan CDC articles ---
+# (an adaptation, not part of ECDC): risk 無/極低/低 -> 低, 中 -> 中, 高/極高 -> 高.
+MATRIX_TO_LEVEL3 = {"無": "低", "極低": "低", "低": "低", "中": "中", "高": "高", "極高": "高"}
+# Item-level 評估結果 (as in the article tables): probability items show the
+# probability of occurrence alone, the 衝擊 row shows impact alone.
+PROBABILITY_TO_LEVEL3 = {0: "低", 1: "低", 2: "低", 3: "中", 4: "高"}
+IMPACT_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高"}
 
-# Item-level 評估結果 (as in the Taiwan CDC article tables): probability items
-# show the probability of occurrence alone, the 衝擊 row shows impact alone.
-PROBABILITY_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"}
-IMPACT_TO_LEVEL3 = {1: "低", 2: "低", 3: "中", 4: "高", 5: "高"}
+# ECDC Box 2 / HAIRS Appendix B confidence wording for the 低/中/高 values.
+CONF_LABELS = {"低": "不足", "中": "尚可", "高": "良好"}
 
 LEVEL3_ORDER = {"低": 0, "中": 1, "高": 2}
-MATRIX_ORDER = {"低": 0, "中": 1, "高": 2, "極高": 3}
+MATRIX_ORDER = {"無": 0, "極低": 1, "低": 2, "中": 3, "高": 4, "極高": 5}
 CONF_ORDER = {"低": 0, "中": 1, "高": 2}
 
 TIER_LABELS = {1: "官方衛生機關/國際組織", 2: "同儕審查文獻", 3: "主流媒體", 4: "社群/未知"}
@@ -60,7 +69,7 @@ REQUIRED_SCENARIOS = ("最佳", "最可能", "最壞")
 
 def matrix_level(p: int, i: int) -> str:
     if p not in RISK_MATRIX or i not in RISK_MATRIX[p]:
-        raise ValueError(f"probability/impact must be 1..5, got P={p}, I={i}")
+        raise ValueError(f"probability must be 0..4 and impact 1..4, got P={p}, I={i}")
     return RISK_MATRIX[p][i]
 
 
@@ -127,9 +136,19 @@ def iter_source_refs(a: Assessment) -> Iterable[tuple[str, str]]:
         for k, b in enumerate(r.evidence):
             for sid in b.source_ids:
                 yield f"risk_items[{r.id}].evidence[{k}]", sid
-        for k, h in enumerate(r.hairs_questions):
-            for sid in h.source_ids:
-                yield f"risk_items[{r.id}].hairs_questions[{k}]", sid
+        paths = [("ecdc", r.ecdc), ("ecdc_impact", r.ecdc_impact)]
+        for k, st in enumerate(r.strata):
+            paths += [(f"strata[{k}].ecdc", st.ecdc), (f"strata[{k}].ecdc_impact", st.ecdc_impact)]
+        for label, path in paths:
+            if path is not None:
+                for ans in path.answers:
+                    for sid in ans.source_ids:
+                        yield f"risk_items[{r.id}].{label}.{ans.q}", sid
+    if a.hairs is not None:
+        for group in ("probability", "impact"):
+            for ans in getattr(a.hairs, group):
+                for sid in ans.source_ids:
+                    yield f"hairs.{group}.{ans.q}", sid
     for q in a.ihr_annex2.questions:
         for sid in q.source_ids:
             yield f"ihr_annex2.{q.key}", sid
@@ -278,48 +297,121 @@ def confidence_caps(item: RiskItem, sources: dict[str, Source]) -> tuple[str, li
     return eff, caps, uncited
 
 
-def audit_items(a: Assessment, sources: dict[str, Source]) -> tuple[list[ItemAudit], Optional[int]]:
+def _eval_path(path: Optional[EcdcPath]) -> Optional[PathAudit]:
+    if path is None:
+        return None
+    tree = ECDC_TREES[path.algorithm]
+    res = evaluate(tree, {x.q: x.answer for x in path.answers})
+    return PathAudit(algorithm=path.algorithm, value=res.value, label=res.label,
+                     path_text=res.path_text(f"ECDC 圖 {path.algorithm}"), uncertain=res.uncertain, missing=res.missing)
+
+
+def _path_issues(pa: Optional[PathAudit], stated: Optional[int], what: str, where: str, labels: dict,
+                 issues: list[Issue], required: bool = True) -> None:
+    if pa is None:
+        if required:
+            issues.append(Issue(severity="info", code="ecdc_path_missing",
+                                message=f"{what}：未填 ECDC 演算法路徑，採用評估者所填分數", path=where))
+        return
+    if pa.missing:
+        issues.append(Issue(severity="warning", code="ecdc_path_incomplete",
+                            message=f"{what}：ECDC 圖 {pa.algorithm} 路徑上 {', '.join(pa.missing)} 未作答，依預防原則取較高風險分支",
+                            path=where))
+    if pa.uncertain:
+        issues.append(Issue(severity="info", code="ecdc_precautionary",
+                            message=f"{what}：{', '.join(pa.uncertain)} 答「不確定」，依 ECDC 預防原則取較高風險分支（{pa.path_text}）",
+                            path=where))
+    if stated is not None and stated != pa.value:
+        issues.append(Issue(severity="warning", code="ecdc_mismatch",
+                            message=f"{what}：評估者所填 {stated}（{labels[stated]}）與 ECDC 圖 {pa.algorithm} 推導 {pa.value}（{pa.label}）不同；計算採推導值（{pa.path_text}）",
+                            path=where))
+
+
+def audit_items(a: Assessment, sources: dict[str, Source], issues: list[Issue]) -> tuple[list[ItemAudit], Optional[int]]:
     impact_items = [r for r in a.risk_items if r.kind == "衝擊"]
-    shared_impact = max((r.impact for r in impact_items if r.impact is not None), default=None)
+    impact_used: dict[str, int] = {}
+    for r in impact_items:
+        pa = _eval_path(r.ecdc)
+        impact_used[r.id] = pa.value if pa else r.impact
+    shared_impact = max(impact_used.values(), default=None)
     out: list[ItemAudit] = []
     for r in a.risk_items:
         eff, caps, uncited = confidence_caps(r, sources)
         strata_out: list[dict] = []
+        where = f"risk_items[{r.id}]"
         if r.kind == "機率":
             # Article convention: a probability item's 評估結果 is the probability
             # of occurrence alone; P x I is reported separately as 矩陣風險.
-            p = r.probability
-            i = r.impact if r.impact is not None else shared_impact
-            inherited = r.impact is None
+            ep = _eval_path(r.ecdc)
+            ei = _eval_path(r.ecdc_impact)
+            _path_issues(ep, r.probability, f"{r.name}（機率）", where, P_LABELS, issues)
+            _path_issues(ei, r.impact, f"{r.name}（衝擊）", where, I_LABELS, issues, required=False)
+            p = ep.value if ep else r.probability
+            if ei:
+                i = ei.value
+            else:
+                i = r.impact if r.impact is not None else shared_impact
+            inherited = ei is None and r.impact is None
             mlev = matrix_level(p, i) if (p is not None and i is not None) else None
             comp = level3_from_probability(p)
-            for s in r.strata:
-                sp = s.probability or p
-                si = s.impact or i
-                st = {"name": s.name, "probability": sp, "impact": si, "computed_level": level3_from_probability(sp),
-                      "proposed_level": s.proposed_level, "matrix_level": None, "matrix_level3": None}
-                if sp and si:
+            for k, st_in in enumerate(r.strata):
+                sep = _eval_path(st_in.ecdc)
+                sei = _eval_path(st_in.ecdc_impact)
+                sw = f"{where}.strata[{k}]"
+                _path_issues(sep, st_in.probability, f"{r.name}／{st_in.name}（機率）", sw, P_LABELS, issues, required=False)
+                _path_issues(sei, st_in.impact, f"{r.name}／{st_in.name}（衝擊）", sw, I_LABELS, issues, required=False)
+                sp = sep.value if sep else (st_in.probability if st_in.probability is not None else p)
+                si = sei.value if sei else (st_in.impact if st_in.impact is not None else i)
+                st = {"name": st_in.name, "probability": sp, "impact": si, "computed_level": level3_from_probability(sp),
+                      "proposed_level": st_in.proposed_level, "matrix_level": None, "matrix_level3": None,
+                      "ecdc_path": sep.path_text if sep else None, "ecdc_impact_path": sei.path_text if sei else None}
+                if sp is not None and si is not None:
                     st["matrix_level"] = matrix_level(sp, si)
                     st["matrix_level3"] = level3_from_matrix(st["matrix_level"])
                 strata_out.append(st)
         else:
+            ep = None
+            ei = _eval_path(r.ecdc)
+            _path_issues(ei, r.impact, f"{r.name}（衝擊）", where, I_LABELS, issues)
             p = None
-            i = r.impact
+            i = impact_used[r.id]
             inherited = False
             mlev = None
             comp = level3_from_impact(i)
-            for s in r.strata:
-                si = s.impact or i
-                strata_out.append({"name": s.name, "impact": si, "computed_level": level3_from_impact(si),
-                                   "proposed_level": s.proposed_level})
+            for k, st_in in enumerate(r.strata):
+                sei = _eval_path(st_in.ecdc)
+                sw = f"{where}.strata[{k}]"
+                _path_issues(sei, st_in.impact, f"{r.name}／{st_in.name}（衝擊）", sw, I_LABELS, issues, required=False)
+                si = sei.value if sei else (st_in.impact if st_in.impact is not None else i)
+                strata_out.append({"name": st_in.name, "impact": si, "computed_level": level3_from_impact(si),
+                                   "proposed_level": st_in.proposed_level, "ecdc_impact_path": sei.path_text if sei else None})
         out.append(ItemAudit(
-            item_id=r.id, probability=p, impact=i, impact_inherited=inherited, matrix_level=mlev,
+            item_id=r.id, probability=p, impact=i, stated_probability=r.probability, stated_impact=r.impact,
+            ecdc_probability=ep, ecdc_impact=ei, impact_inherited=inherited, matrix_level=mlev,
             matrix_level3=level3_from_matrix(mlev) if mlev else None,
             computed_level=comp, proposed_level=r.proposed_level, agrees=(comp == r.proposed_level),
             stated_confidence=r.confidence, effective_confidence=eff, confidence_caps=caps,
             uncited_bullets=uncited, strata_computed=strata_out,
         ))
     return out, shared_impact
+
+
+def audit_hairs(a: Assessment, issues: list[Issue]) -> tuple[Optional[PathAudit], Optional[PathAudit]]:
+    zoonotic = any(t in a.event.event_type for t in ("人畜共通", "新興或不明病原"))
+    if a.hairs is None:
+        if zoonotic:
+            issues.append(Issue(severity="info", code="hairs_missing", message="人畜共通／新興事件建議填寫 HAIRS 演算法（交叉核對）"))
+        return None, None
+    out = []
+    for key, tree, answers in (("probability", HAIRS_P, a.hairs.probability), ("impact", HAIRS_I, a.hairs.impact)):
+        res = evaluate(tree, {x.q: x.answer for x in answers})
+        pa = PathAudit(algorithm=tree.key, value=res.value, label=res.label, path_text=res.path_text(tree.title),
+                       uncertain=res.uncertain, missing=res.missing)
+        if res.missing:
+            issues.append(Issue(severity="warning", code="hairs_path_incomplete",
+                                message=f"{tree.title}：路徑上 {', '.join(res.missing)} 未作答，依預防原則取較高風險分支", path=f"hairs.{key}"))
+        out.append(pa)
+    return out[0], out[1]
 
 
 # ---------------------------------------------------------------------------
@@ -372,7 +464,8 @@ def audit(a: Assessment) -> Audit:
                             message=f"新聞可信度：評估者建議「{a.news_credibility.proposed_level}」，規則計算「{cred_level}」"))
 
     # --- risk items ---------------------------------------------------------
-    item_audits, shared_impact = audit_items(a, sources)
+    item_audits, shared_impact = audit_items(a, sources, issues)
+    hairs_p, hairs_i = audit_hairs(a, issues)
     names = {r.id: r.name for r in a.risk_items}
     for ia in item_audits:
         if not ia.agrees:
@@ -405,7 +498,7 @@ def audit(a: Assessment) -> Audit:
             m3 = st.get("matrix_level3")
             if m3 and LEVEL3_ORDER[m3] > LEVEL3_ORDER[overall_comp]:
                 issues.append(Issue(severity="info", code="stratum_higher",
-                                    message=f"{names[ia.item_id]}：分層「{st['name']}」之矩陣風險（{st['matrix_level']}→{m3}）高於整體（{overall_comp}），決策摘要應明列",
+                                    message=f"{names[ia.item_id]}：分層「{st['name']}」之矩陣風險「{st['matrix_level']}」（三級：{m3}）高於整體（{overall_comp}），決策摘要應明列",
                                     path=f"risk_items[{ia.item_id}]"))
     if not overall_agrees:
         issues.append(Issue(severity="warning", code="overall_mismatch",
@@ -462,10 +555,6 @@ def audit(a: Assessment) -> Audit:
         issues.append(Issue(severity="warning", code="key_findings_count", message=f"重點發現應為 3–5 項（目前 {n_find}）"))
     if not a.limitations:
         issues.append(Issue(severity="warning", code="no_limitations", message="未陳述限制與不確定性"))
-    if any(t in a.event.event_type for t in ("人畜共通", "新興或不明病原")):
-        if not any(r.hairs_questions for r in a.risk_items):
-            issues.append(Issue(severity="info", code="hairs_missing", message="人畜共通/新興事件建議填寫 HAIRS 式篩檢問題"))
-
     gen = _parse_dt(a.generated_at)
     cutoff = _parse_dt(a.data_cutoff)
     reass = _parse_date(a.reassessment_date)
@@ -503,6 +592,8 @@ def audit(a: Assessment) -> Audit:
         ihr_unknown_count=unk,
         ihr_meets_threshold=meets,
         ihr_note=note,
+        hairs_probability=hairs_p,
+        hairs_impact=hairs_i,
         issues=issues,
     )
 

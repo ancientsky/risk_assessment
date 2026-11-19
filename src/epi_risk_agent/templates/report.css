@@ -14,15 +14,21 @@
   --accent-ink: #1c5cab;
   --focus: #2a78d6;
   /* status palette: level colours (always paired with icon + text) */
-  --lv-low: #0ca30c;
+  --lv-none: #898781;
+  --lv-vlow: #0ca30c;
+  --lv-low: #6aa84f;
   --lv-mod: #fab219;
   --lv-high: #ec835a;
   --lv-vhigh: #d03b3b;
-  --lv-low-bg: #e3f4e3;
+  --lv-none-bg: #f2f1ed;
+  --lv-vlow-bg: #e3f4e3;
+  --lv-low-bg: #eef6dc;
   --lv-mod-bg: #fdf1d3;
   --lv-high-bg: #fde6d2;
   --lv-vhigh-bg: #f5c6c6;
-  --lv-low-ink: #0a5c0a;
+  --lv-none-ink: #52514e;
+  --lv-vlow-ink: #0a5c0a;
+  --lv-low-ink: #3d6b1e;
   --lv-mod-ink: #6b4a00;
   --lv-high-ink: #8a3412;
   --lv-vhigh-ink: #8f1f1f;
@@ -49,11 +55,15 @@
     --accent: #3987e5;
     --accent-ink: #86b6ef;
     --focus: #86b6ef;
-    --lv-low-bg: #15301a;
+    --lv-none-bg: #232321;
+    --lv-vlow-bg: #15301a;
+    --lv-none-ink: #c3c2b7;
+    --lv-vlow-ink: #9be09b;
+    --lv-low-bg: #26331a;
     --lv-mod-bg: #3a2f10;
     --lv-high-bg: #3d2614;
     --lv-vhigh-bg: #521c1c;
-    --lv-low-ink: #9be09b;
+    --lv-low-ink: #c5e3a0;
     --lv-mod-ink: #ffd77a;
     --lv-high-ink: #f6b496;
     --lv-vhigh-ink: #f3a3a3;
@@ -80,11 +90,15 @@
   --accent: #3987e5;
   --accent-ink: #86b6ef;
   --focus: #86b6ef;
-  --lv-low-bg: #15301a;
+  --lv-none-bg: #232321;
+  --lv-vlow-bg: #15301a;
+  --lv-none-ink: #c3c2b7;
+  --lv-vlow-ink: #9be09b;
+  --lv-low-bg: #26331a;
   --lv-mod-bg: #3a2f10;
   --lv-high-bg: #3d2614;
   --lv-vhigh-bg: #521c1c;
-  --lv-low-ink: #9be09b;
+  --lv-low-ink: #c5e3a0;
   --lv-mod-ink: #ffd77a;
   --lv-high-ink: #f6b496;
   --lv-vhigh-ink: #f3a3a3;
@@ -150,6 +164,10 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 
 /* ---------- level badges & chips ------------------------------------- */
 .lv { display: inline-flex; align-items: center; gap: 0.35em; font-weight: 700; padding: 0.05em 0.6em; border-radius: 999px; border: 1.5px solid; line-height: 1.6; white-space: nowrap; }
+.lv-none { color: var(--lv-none-ink); background: var(--lv-none-bg); border-color: var(--lv-none); border-style: dashed; }
+.lv-none .ic { color: var(--lv-none); }
+.lv-vlow { color: var(--lv-vlow-ink); background: var(--lv-vlow-bg); border-color: var(--lv-vlow); }
+.lv-vlow .ic { color: var(--lv-vlow); }
 .lv-low { color: var(--lv-low-ink); background: var(--lv-low-bg); border-color: var(--lv-low); }
 .lv-low .ic { color: var(--lv-low); }
 .lv-mod { color: var(--lv-mod-ink); background: var(--lv-mod-bg); border-color: var(--lv-mod); }
@@ -225,6 +243,8 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 .dash > li { position: relative; padding-left: 0.9rem; margin-bottom: 0.3rem; }
 .dash > li::before { content: "-"; position: absolute; left: 0; color: var(--muted); }
 .item-n { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ink); color: var(--surface); font-size: 0.8rem; margin-right: 0.4rem; }
+.algpath { font-size: 0.8rem; color: var(--ink-2); background: var(--surface-2); border-radius: 6px; padding: 0.15rem 0.45rem; margin: 0.25rem 0; }
+.hairs-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.6rem 1.2rem; margin: 0.6rem 0 0.9rem; }
 .mrisk { margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px dashed var(--grid); }
 .strata { list-style: none; padding: 0; margin: 0.4rem 0; font-size: 0.86rem; }
 .strata li { margin: 0.2rem 0; }
@@ -295,6 +315,8 @@ code { font-size: 0.82em; background: var(--surface-2); padding: 0 0.3em; border
 .matrix th[scope="row"] { width: 3.4rem; }
 .matrix .ax { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
 .cell { height: 4.4rem; border-radius: 4px; vertical-align: top; padding: 3px 4px; position: relative; }
+.cell-none { background: var(--lv-none-bg); }
+.cell-vlow { background: var(--lv-vlow-bg); }
 .cell-low { background: var(--lv-low-bg); }
 .cell-mod { background: var(--lv-mod-bg); }
 .cell-high { background: var(--lv-high-bg); background-image: repeating-linear-gradient(45deg, transparent 0 7px, color-mix(in srgb, var(--lv-high) 18%, transparent) 7px 8px); }
@@ -380,8 +402,8 @@ select { font: inherit; font-size: 0.92rem; color: var(--ink); background: var(-
     color-scheme: light;
     --page: #fff; --surface: #fff; --surface-2: #f4f4f2; --ink: #000; --ink-2: #333; --muted: #555;
     --grid: #ccc; --axis: #999; --border: #bbb; --accent: #1c5cab; --accent-ink: #1c5cab;
-    --lv-low-bg: #e3f4e3; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
-    --lv-low-ink: #0a5c0a; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
+    --lv-none-bg: #f2f1ed; --lv-vlow-bg: #e3f4e3; --lv-low-bg: #eef6dc; --lv-mod-bg: #fdf1d3; --lv-high-bg: #fde6d2; --lv-vhigh-bg: #f5c6c6;
+    --lv-none-ink: #52514e; --lv-vlow-ink: #0a5c0a; --lv-low-ink: #3d6b1e; --lv-mod-ink: #6b4a00; --lv-high-ink: #8a3412; --lv-vhigh-ink: #8f1f1f;
     --warn-bg: #fff6dc; --err-bg: #fbe5e5;
   }
   body { font-size: 10.5pt; background: #fff; }

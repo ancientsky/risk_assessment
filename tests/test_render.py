@@ -85,3 +85,39 @@ def test_optional_charts(data):
     data["international"]["country_counts"] = []
     html = _html(data)
     assert 'id="tsChart"' not in html and "各國病例數" not in html
+
+
+def test_matrix_laid_out_like_ecdc_figure4(data):
+    html = _html(data)
+    m = re.search(r'<table class="matrix"[^>]*>(.*?)</table>', html, re.S).group(1)
+    heads = re.findall(r'<th scope="col">(\d)<span class="ax">([^<]+)</span>', m)
+    assert heads == [("0", "無"), ("1", "極低"), ("2", "低"), ("3", "中"), ("4", "高")]
+    rows = re.findall(r'<th scope="row">(\d)<span class="ax">([^<]+)</span>', m)
+    assert rows == [("1", "極低"), ("2", "低"), ("3", "中"), ("4", "高")]
+    first_row = re.findall(r'<span class="cell-lv">([^<]+)</span>', m)[:5]
+    assert first_row == ["無", "極低", "低", "低", "中"]  # impact Very low row of Figure 4
+    for lv, cls in (("無", "none"), ("極低", "vlow"), ("極高", "vhigh")):
+        assert f'<use href="#lvicon-{cls}"/></svg><span>{lv}</span>' in html
+
+
+def test_ecdc_paths_and_hairs_crosscheck_shown(data):
+    html = _html(data)
+    assert "ECDC 圖 2.2：Q2 否 ⇒ 極低" in html
+    assert "ECDC 圖 3：Q5 是 → Q6 否 ⇒ 低" in html
+    assert "交叉核對：UKHSA HAIRS 演算法（不併入矩陣）" in html
+    assert "尚可" in html  # Box 2 / Appendix B wording for confidence 中
+
+
+def test_measles_example_renders_cleanly():
+    from pathlib import Path
+
+    from epi_risk_agent.scoring import apply_audit
+
+    p = Path(__file__).resolve().parents[1] / "examples" / "us-measles-pregnancy-2026" / "assessment.json"
+    a = Assessment.model_validate(json.loads(p.read_text(encoding="utf-8")))
+    au = apply_audit(a).audit
+    assert au.overall_computed_level == "低" and au.overall_agrees
+    assert sum(1 for i in au.issues if i.severity == "error") == 0
+    html = render_html(a)
+    assert "交叉核對：UKHSA HAIRS" not in html  # not zoonotic, no HAIRS block
+    assert not re.search(r"<script\b[^>]*\bsrc=", html)
